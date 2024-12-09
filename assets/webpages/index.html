@@ -1,0 +1,99 @@
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>reCAPTCHA Customization</title>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <style>
+        /* Apply full screen and center the content */
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+        }
+
+        /* Customize reCAPTCHA appearance */
+        .g-recaptcha {
+            transform: scale(1.1); /* Increase size of the widget */
+           
+        }
+    </style>
+</head>
+<body>
+
+    <div class="g-recaptcha"
+         data-sitekey="6LcEpYIqAAAAAAd_y9WwG6DpxpthfSDpyXr5gg_6"
+         data-size="normal"       
+         data-callback="captchaCallback">
+        </div>
+
+    <script>
+        function captchaCallback(response) {
+            if (response) {
+                // Post the CAPTCHA response to Flutter or any desired action
+                if (typeof Captcha !== "undefined") {
+                    Captcha.postMessage("verified");
+                }
+            }
+        }
+    </script>
+
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>reCAPTCHA Customization</title>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <style>
+       
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            background-color: white;
+        }
+
+       
+        .g-recaptcha {
+            transform: scale(1.1); 
+
+            margin-top: 20px; 
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="g-recaptcha"
+         data-sitekey="6LcEpYIqAAAAAAd_y9WwG6DpxpthfSDpyXr5gg_6"
+         data-size="normal"
+         data-callback="captchaCallback">
+    </div>
+
+    <script>
+        function captchaCallback(response) {
+            if (response) {
+
+                if (typeof Captcha !== "undefined") {
+                    Captcha.postMessage("verified");
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>

@@ -80,7 +80,8 @@ class _OTPVerificationPageState extends State<OTPVerificationPage> {
                               fontSize: 24, fontWeight: FontWeight.bold),
                         ),
                         SizedBox(width: screenSize.width * 0.01),
-                        Icon(Icons.verified_outlined, color: blue, size: 30),
+                        const Icon(Icons.verified_outlined,
+                            color: blue, size: 30),
                       ],
                     ),
                     const SizedBox(height: 10),
@@ -135,7 +136,7 @@ class _OTPVerificationPageState extends State<OTPVerificationPage> {
                             ),
                           );
                         },
-                        child: Text(
+                        child: const Text(
                           'Resend code',
                           style: TextStyle(fontSize: 14, color: blue),
                         ),

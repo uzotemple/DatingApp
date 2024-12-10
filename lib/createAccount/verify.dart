@@ -113,15 +113,15 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        const Text(
+                        Text(
                           'Email Verification',
                           style: TextStyle(
                               fontSize: 24, fontWeight: FontWeight.bold),
                         ),
-                        const SizedBox(width: 8),
+                        SizedBox(width: 8),
                         Icon(Icons.verified_outlined, color: blue, size: 24),
                       ],
                     ),
@@ -190,7 +190,7 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
                           developer.log('Response status: $userId');
                           _resendOtp();
                         },
-                        child: Text(
+                        child: const Text(
                           'Resend code ',
                           style: TextStyle(fontSize: 14, color: blue),
                         ),

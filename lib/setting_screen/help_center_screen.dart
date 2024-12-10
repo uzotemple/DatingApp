@@ -16,9 +16,7 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -56,61 +54,94 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
           // const SizedBox(height: 8.0), // Space before the list
           Expanded(
             child: ListView(
-              children: const [
+              children: [
                 ListTile(
                     title: Text(
                   'Popular questions',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
                 )),
                 ListTile(
                     title: Text(
                   'About Zenkonect',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
                 )),
                 ListTile(
                     title: Text(
                   'Profile',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
                 )),
                 ListTile(
                     title: Text(
                   'Profile verification',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
                 )),
                 ListTile(
                     title: Text(
                   'People nearby and search',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
                 )),
                 ListTile(
                     title: Text(
                   'Home',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
                 )),
                 ListTile(
                     title: Text(
                   'Messages',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
                 )),
                 ListTile(
                     title: Text(
                   'Zenkonect premium',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
                 )),
                 ListTile(
                     title: Text(
                   'Credits',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
                 )),
                 ListTile(
                     title: Text(
                   'Photos',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
                 )),
                 ListTile(
                     title: Text(
                   'Settings and privacy',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
                 )),
               ],
             ),
@@ -126,8 +157,11 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
       child: SizedBox(
         height: MediaQuery.of(context).size.height * 0.05,
         child: TextField(
+          style:
+              TextStyle(color: Theme.of(context).textTheme.bodyMedium?.color),
           decoration: InputDecoration(
             filled: true,
+
             fillColor: blue.withOpacity(0.19), // Background color
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(30.0), // Rounded corners
@@ -142,7 +176,13 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
               borderSide: BorderSide.none, // No border when focused
             ),
             hintText: 'Search',
-            prefixIcon: const Icon(Icons.search),
+            hintStyle: TextStyle(
+              color: Theme.of(context).hintColor,
+            ),
+            prefixIcon: Icon(
+              Icons.search,
+              color: Theme.of(context).iconTheme.color,
+            ),
             contentPadding: const EdgeInsets.symmetric(
               vertical: 10.0,
               horizontal: 30.0, // Padding inside the search bar

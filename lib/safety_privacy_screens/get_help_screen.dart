@@ -68,6 +68,8 @@ class _GetHelpState extends State<GetHelp> {
               ),
               const SizedBox(height: 8.0), // Space between label and text field
               TextField(
+                style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyMedium?.color),
                 controller: _emailController,
                 keyboardType:
                     TextInputType.emailAddress, // Set keyboard type to email
@@ -80,6 +82,9 @@ class _GetHelpState extends State<GetHelp> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   hintText: 'Enter your email',
+                  hintStyle: TextStyle(
+                    color: Theme.of(context).hintColor,
+                  ),
                   enabledBorder: OutlineInputBorder(
                     borderSide: const BorderSide(
                         color: Color(0xFF3628DD),
@@ -103,6 +108,8 @@ class _GetHelpState extends State<GetHelp> {
               ),
               const SizedBox(height: 8.0), // Space between label and text field
               TextField(
+                style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyMedium?.color),
                 controller: _messageController,
                 maxLines: 5, // Makes the message field taller
                 decoration: InputDecoration(
@@ -110,6 +117,9 @@ class _GetHelpState extends State<GetHelp> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   hintText: 'Enter your message',
+                  hintStyle: TextStyle(
+                    color: Theme.of(context).hintColor,
+                  ),
                   enabledBorder: OutlineInputBorder(
                     borderSide: const BorderSide(
                         color: Color(0xFF3628DD),

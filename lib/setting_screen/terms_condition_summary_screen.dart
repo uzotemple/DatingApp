@@ -16,9 +16,7 @@ class _TermsAndConditionsSummaryScreenState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -49,10 +47,13 @@ class _TermsAndConditionsSummaryScreenState
             const Divider(
               color: Color(0xFF3628DD),
             ),
-            const Center(
+            Center(
               child: Text(
                 'Zenkonect Terms of Use and Privacy Policy',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
               ),
             ),
             const SizedBox(height: 8.0), // Space before the next text

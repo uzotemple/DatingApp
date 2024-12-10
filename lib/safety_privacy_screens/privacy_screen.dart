@@ -20,9 +20,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
         title: const Text(
           'Privacy',
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
@@ -109,9 +107,12 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
               ),
               const Divider(),
               ListTile(
-                title: const Text(
+                title: Text(
                   'Limit profile views',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
                 ),
                 subtitle: Text(
                   "Only the people you like and visit can see your profile",
@@ -136,7 +137,10 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
                         fontWeight: FontWeight.w600,
                       ),
                 ),
-                trailing: const Icon(Icons.arrow_forward_ios), // Change to icon
+                trailing: Icon(
+                  Icons.arrow_forward_ios,
+                  color: Theme.of(context).iconTheme.color,
+                ), // Change to icon
                 onTap: () {
                   // Handle tap action here
                 },

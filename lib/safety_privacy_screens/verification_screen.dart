@@ -51,16 +51,25 @@ class _VerificationScreenState extends State<VerificationScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const ListTile(
+            ListTile(
               title: Text(
                 'Get verified',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
               ),
               // subtitle: Text(
               //   "Get updates about new messages",
-              //   style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+              //   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              //   fontSize: 12,
+              //   fontWeight: FontWeight.w400,
+              //   ),
               // ),
-              trailing: Icon(Icons.arrow_forward_ios),
+              trailing: Icon(
+                Icons.arrow_forward_ios,
+                color: Theme.of(context).iconTheme.color,
+              ),
             ),
             const Divider(
               height: 1,
@@ -68,13 +77,19 @@ class _VerificationScreenState extends State<VerificationScreen> {
               color: Color(0xFF3628DD),
             ), // Reduced height
             ListTile(
-              title: const Text(
+              title: Text(
                 'Limit messages',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
               ),
-              subtitle: const Text(
+              subtitle: Text(
                 "Turn on to only receive messages from verified users",
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                    ),
               ),
               trailing: Radio(
                 value: 1,
@@ -88,13 +103,19 @@ class _VerificationScreenState extends State<VerificationScreen> {
               color: Color(0xFF3628DD),
             ), // Reduced height
             ListTile(
-              title: const Text(
+              title: Text(
                 'Hide verification details',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
               ),
-              subtitle: const Text(
+              subtitle: Text(
                 "Turn on to hide verification details on your profile",
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                    ),
               ),
               trailing: Radio(
                 value: 2,

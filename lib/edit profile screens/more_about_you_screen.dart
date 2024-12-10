@@ -56,7 +56,10 @@ class _MoreAboutYouScreenState extends State<MoreAboutYouScreen> {
               itemBuilder: (context, index) {
                 return ListTile(
                     title: Text(items[index]),
-                    trailing: const Icon(Icons.arrow_forward_ios),
+                    trailing: Icon(
+                      Icons.arrow_forward_ios,
+                      color: Theme.of(context).iconTheme.color,
+                    ),
                     onTap: () {
                       // Handle item tap
                       // Navigate to different screens based on the tapped item

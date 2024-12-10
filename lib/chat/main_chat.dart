@@ -310,10 +310,13 @@ class _MainchatState extends State<Mainchat> {
                 color: Colors.black, // Ensure unselected text is black
                 fontSize: MediaQuery.of(context).size.width * 0.03,
               ),
-              selectedItemColor:
-                  Colors.black, // Make selected item icon and label black
+              selectedItemColor: Theme.of(context).brightness == Brightness.dark
+                  ? Colors.white // Dark mode, use white
+                  : Colors.black, // Make selected item icon and label black
               unselectedItemColor:
-                  Colors.black, // Make unselected item icon black
+                  Theme.of(context).brightness == Brightness.dark
+                      ? Colors.white // Dark mode, use white
+                      : Colors.black, // Make unselected item icon black
               // selectedItemColor: Colors.blue, // Set the selected label color
               // unselectedItemColor:
               //      Colors.black, // Set the unselected label color

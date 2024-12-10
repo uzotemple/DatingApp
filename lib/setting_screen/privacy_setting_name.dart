@@ -17,9 +17,7 @@ class _PrivacyNameOnSettingsScreenState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -47,18 +45,21 @@ class _PrivacyNameOnSettingsScreenState
           ],
         ),
       ),
-      body: const Column(
+      body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Divider(
+          const Divider(
             color: Color(0xFF3628DD),
           ),
           Padding(
             padding: EdgeInsets.all(10.0),
             child: Text(
               'Name',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
             ),
           )
         ],

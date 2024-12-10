@@ -78,15 +78,19 @@ class _PaymentSettingScreenState extends State<PaymentSettingScreen> {
               child: Column(
                 children: [
                   ListTile(
-                    title: const Text(
+                    title: Text(
                       'Auto refill',
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
                     ),
-                    subtitle: const Text(
+                    subtitle: Text(
                       'Save time! select auto refill to recharge when your balance falls below 200 credits.',
-                      style:
-                          TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                          ),
                     ),
                     trailing: Transform.scale(
                       scale: 0.65,
@@ -122,20 +126,27 @@ class _PaymentSettingScreenState extends State<PaymentSettingScreen> {
                   // Add your navigation or functionality here
                   // print("Zenkonect premium tapped");
                 },
-                child: const Column(
+                child: Column(
                   children: [
                     ListTile(
                       title: Text(
                         'Zenkonect premium:',
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w600),
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
                       ),
                       subtitle: Text(
                         'Terms and conditions',
-                        style: TextStyle(
-                            fontSize: 12, fontWeight: FontWeight.w400),
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w400,
+                            ),
                       ),
-                      trailing: Icon(Icons.arrow_forward_ios, size: 16),
+                      trailing: Icon(
+                        Icons.arrow_forward_ios,
+                        color: Theme.of(context).iconTheme.color,
+                      ),
                     ),
                   ],
                 ),
@@ -156,20 +167,27 @@ class _PaymentSettingScreenState extends State<PaymentSettingScreen> {
                   // Add your navigation or functionality here
                   // print("Credits tapped");
                 },
-                child: const Column(
+                child: Column(
                   children: [
                     ListTile(
                       title: Text(
                         'Credits',
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w600),
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
                       ),
                       subtitle: Text(
                         'Terms and conditions',
-                        style: TextStyle(
-                            fontSize: 12, fontWeight: FontWeight.w400),
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w400,
+                            ),
                       ),
-                      trailing: Icon(Icons.arrow_forward_ios, size: 16),
+                      trailing: Icon(
+                        Icons.arrow_forward_ios,
+                        color: Theme.of(context).iconTheme.color,
+                      ),
                     ),
                   ],
                 ),

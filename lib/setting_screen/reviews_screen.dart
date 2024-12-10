@@ -59,7 +59,6 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
               child: const Icon(
                 Icons.add,
                 size: 30.0,
-                color: Colors.black,
               ),
             ),
           ),
@@ -105,11 +104,13 @@ class __ReviewModalState extends State<_ReviewModal> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Icon(Icons.arrow_back_ios, size: 20),
+                  const Icon(Icons.arrow_back_ios,
+                      size: 20, color: Colors.black),
                   Image.asset('images/reviewsmodal.png', height: 150),
                   GestureDetector(
                     onTap: () => Navigator.pop(context),
-                    child: const Icon(Icons.close, size: 20),
+                    child:
+                        const Icon(Icons.close, size: 20, color: Colors.black),
                   ),
                 ],
               ),
@@ -117,7 +118,10 @@ class __ReviewModalState extends State<_ReviewModal> {
               const Center(
                 child: Text(
                   'Leave us a review!',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.black),
                 ),
               ),
               const SizedBox(height: 20),
@@ -129,8 +133,10 @@ class __ReviewModalState extends State<_ReviewModal> {
                     padding: EdgeInsets.only(right: 8.0),
                     child: Text(
                       'Name:',
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.black),
                     ),
                   ),
                   Expanded(
@@ -171,7 +177,10 @@ class __ReviewModalState extends State<_ReviewModal> {
               // Experience Field
               const Text(
                 "What's your experience with Zenkonect?",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.black),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10.0),
@@ -213,7 +222,10 @@ class __ReviewModalState extends State<_ReviewModal> {
               const Center(
                 child: Text(
                   'Would you give us a 5 star???',
-                  style: TextStyle(fontSize: 11, fontWeight: FontWeight.w400),
+                  style: TextStyle(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black),
                 ),
               ),
               const SizedBox(height: 10),

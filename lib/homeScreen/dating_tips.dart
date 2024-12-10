@@ -45,7 +45,7 @@ class _DatingPictureState extends State<DatingPicture> {
               child: Image.asset('assets/images/robot.png', width: 40),
             ),
             const SizedBox(width: 30), // Add some spacing
-            Text(
+            const Text(
               'Dating Tips',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
@@ -192,10 +192,13 @@ class _DatingPictureState extends State<DatingPicture> {
                 color: Colors.black, // Ensure unselected text is black
                 fontSize: MediaQuery.of(context).size.width * 0.03,
               ),
-              selectedItemColor:
-                  Colors.black, // Make selected item icon and label black
+              selectedItemColor: Theme.of(context).brightness == Brightness.dark
+                  ? Colors.white // Dark mode, use white
+                  : Colors.black, // Make selected item icon and label black
               unselectedItemColor:
-                  Colors.black, // Make unselected item icon black
+                  Theme.of(context).brightness == Brightness.dark
+                      ? Colors.white // Dark mode, use white
+                      : Colors.black, // Make unselected item icon black
               onTap: (index) {
                 // Handle navigation based on the index
                 switch (index) {
@@ -300,7 +303,7 @@ class _DatingTipsPageState extends State<DatingTipsPage> {
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          Divider(thickness: 2, color: blue),
+          const Divider(thickness: 2, color: blue),
           Expanded(
             child: SingleChildScrollView(
               child: Column(
@@ -340,8 +343,8 @@ class _DatingTipsPageState extends State<DatingTipsPage> {
                         return ListTile(
                           title: Text(
                             datingBlue[index],
-                            style:
-                                TextStyle(fontSize: 16, color: blue, height: 1),
+                            style: const TextStyle(
+                                fontSize: 16, color: blue, height: 1),
                           ),
                         );
                       },
@@ -355,8 +358,8 @@ class _DatingTipsPageState extends State<DatingTipsPage> {
                     itemCount: datingTips2.length,
                     itemBuilder: (context, index) {
                       return ListTile(
-                        leading:
-                            Icon(Icons.favorite_border_outlined, color: blue),
+                        leading: const Icon(Icons.favorite_border_outlined,
+                            color: blue),
                         title: Text(
                           datingTips2[index],
                           style: const TextStyle(

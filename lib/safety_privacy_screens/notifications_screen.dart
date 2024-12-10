@@ -21,9 +21,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -54,13 +52,19 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ListTile(
-              title: const Text(
+              title: Text(
                 'Messages',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
               ),
-              subtitle: const Text(
+              subtitle: Text(
                 "Get updates about new messages",
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                    ),
               ),
               trailing: Radio(
                 value: 0,
@@ -74,13 +78,19 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
               color: Color(0xFF3628DD),
             ), // Reduced height
             ListTile(
-              title: const Text(
+              title: Text(
                 'Show online status',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
               ),
-              subtitle: const Text(
+              subtitle: Text(
                 "Get updates about new matches",
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                    ),
               ),
               trailing: Radio(
                 value: 1,
@@ -94,13 +104,19 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
               color: Color(0xFF3628DD),
             ), // Reduced height
             ListTile(
-              title: const Text(
+              title: Text(
                 'Allow public search',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
               ),
-              subtitle: const Text(
+              subtitle: Text(
                 "Liked you",
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                    ),
               ),
               trailing: Radio(
                 value: 2,
@@ -114,13 +130,19 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
               color: Color(0xFF3628DD),
             ), // Reduced height
             ListTile(
-              title: const Text(
+              title: Text(
                 'Profile visitors',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
               ),
-              subtitle: const Text(
+              subtitle: Text(
                 "Get notified when people visit your profile",
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                    ),
               ),
               trailing: Radio(
                 value: 3,
@@ -134,13 +156,19 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
               color: Color(0xFF3628DD),
             ), // Reduced height
             ListTile(
-              title: const Text(
+              title: Text(
                 'Profile tips & freebies',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
               ),
-              subtitle: const Text(
+              subtitle: Text(
                 "Get updates on profile tips & freebies",
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                    ),
               ),
               trailing: Radio(
                 value: 4,
@@ -154,13 +182,19 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
               color: Color(0xFF3628DD),
             ), // Reduced height
             ListTile(
-              title: const Text(
+              title: Text(
                 'Show ads',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
               ),
-              subtitle: const Text(
+              subtitle: Text(
                 "Get updates on profile tips & freebies",
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                    ),
               ),
               trailing: Radio(
                 value: 5,
@@ -174,13 +208,19 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
               color: Color(0xFF3628DD),
             ), // Reduced height
             ListTile(
-              title: const Text(
+              title: Text(
                 'Get notified if your match is using incognito mode ',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
               ),
-              subtitle: const Text(
+              subtitle: Text(
                 "You must use incognito mode for this feature to work",
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                    ),
               ),
               trailing: Radio(
                 value: 6,
@@ -194,13 +234,19 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
               color: Color(0xFF3628DD),
             ), // Reduced height
             ListTile(
-              title: const Text(
+              title: Text(
                 'Left Swipes',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
               ),
-              subtitle: const Text(
+              subtitle: Text(
                 "Get notified when you get a left swipe",
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                    ),
               ),
               trailing: Radio(
                 value: 7,

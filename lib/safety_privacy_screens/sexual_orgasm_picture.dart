@@ -32,7 +32,11 @@ class _SexualOrgasmPicturesScreenState
             Navigator.pop(context);
           },
         ),
-        title: const Text('Sexual organ picture recognition and censoring'),
+        title: const Text('Sexual organ picture recognition and censoring',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w700,
+            )),
         actions: [
           InkWell(
             onTap: () {
@@ -53,13 +57,19 @@ class _SexualOrgasmPicturesScreenState
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ListTile(
-              title: const Text(
+              title: Text(
                 'Block all pictures with sexual organ contents before it is sent',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
               ),
-              subtitle: const Text(
+              subtitle: Text(
                 "Turn on if you don’t want to see pictures with sexual organ content before it is sent",
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                    ),
               ),
               trailing: Radio(
                 value: 0,
@@ -68,13 +78,19 @@ class _SexualOrgasmPicturesScreenState
               ),
             ),
             ListTile(
-              title: const Text(
+              title: Text(
                 'Block but get notified when pictures with sexual organ contents has been sent',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
               ),
-              subtitle: const Text(
+              subtitle: Text(
                 "Turn on if you want to get notified when a picture with sexual organ content has been sent",
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                    ),
               ),
               trailing: Radio(
                 value: 1,
@@ -83,13 +99,19 @@ class _SexualOrgasmPicturesScreenState
               ),
             ),
             ListTile(
-              title: const Text(
+              title: Text(
                 'Don’t block pictures with sexual organ contents',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
               ),
-              subtitle: const Text(
+              subtitle: Text(
                 "I want to receive pictures with sexual organ contents",
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                    ),
               ),
               trailing: Radio(
                 value: 2,

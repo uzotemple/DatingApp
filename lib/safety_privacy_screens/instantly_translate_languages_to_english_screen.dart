@@ -32,7 +32,11 @@ class _InstantlyTranslateOtherLanguageToEnglishScreenState
             Navigator.pop(context);
           },
         ),
-        title: const Text('Instantly translate other languages to English'),
+        title: const Text('Instantly translate other languages to English',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w700,
+            )),
         actions: [
           InkWell(
             onTap: () {
@@ -53,13 +57,19 @@ class _InstantlyTranslateOtherLanguageToEnglishScreenState
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ListTile(
-              title: const Text(
+              title: Text(
                 'Translate other languages to English',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
               ),
-              subtitle: const Text(
+              subtitle: Text(
                 "Turn on to read messages in various languages in English ",
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                    ),
               ),
               trailing: Radio(
                 value: 0,
@@ -68,13 +78,19 @@ class _InstantlyTranslateOtherLanguageToEnglishScreenState
               ),
             ),
             ListTile(
-              title: const Text(
+              title: Text(
                 'Don’t translate other languages to English',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
               ),
               // subtitle: const Text(
               //   "Turn on if you want to get notified when a picture with sexual organ content has been sent",
-              //   style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+              //   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              //  fontSize: 12,
+              //   fontWeight: FontWeight.w400,
+              //  ),
               // ),
               trailing: Radio(
                 value: 1,

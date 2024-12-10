@@ -1,9 +1,7 @@
-import 'package:love_bird/chat/main_chat.dart';
 import 'package:love_bird/config/constants.dart';
 import 'package:love_bird/config/routes.dart';
 import 'package:love_bird/homeScreen/homeScreen.dart';
-import 'package:love_bird/matches/likes.dart';
-import 'package:love_bird/matches/people_nearby.dart';
+
 import 'package:love_bird/safety_privacy_screens/get_help_screen.dart';
 import 'package:love_bird/safety_privacy_screens/incognito_mode.dart';
 import 'package:love_bird/safety_privacy_screens/privacy_screen.dart';
@@ -28,166 +26,188 @@ class _SafetyScreenState extends State<SafetyScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-          title: Row(
-            children: [
-              InkWell(
-                onTap: () {
-                  Navigator.pushNamed(context, geminiBot);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 10.0),
-                  child: Image.asset(
-                    "images/ai.png",
-                  ),
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        title: Row(
+          children: [
+            InkWell(
+              onTap: () {
+                Navigator.pushNamed(context, geminiBot);
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(right: 10.0),
+                child: Image.asset(
+                  "images/ai.png",
                 ),
               ),
-              const SizedBox(width: 45),
-              const Text(
-                'Safety',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-              ),
-            ],
-          ),
-        ),
-        body: ListView(
-          padding: const EdgeInsets.all(15.0),
-          children: [
-            _buildContainer(
-              'images/help.png',
-              'Get help from Zenkonect',
-              'Send us a message if you have any concerns',
-              showArrow: false,
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const GetHelp()),
-                );
-              },
             ),
-            _buildContainer(
-              'images/setting.png',
-              'Control your experience',
-              'Manage who can see or message you',
-              showArrow: true,
-              onTap: () {
-                _showControlExperienceModal(context);
-              },
-            ),
-            _buildContainer(
-              'images/privately.png',
-              'Turn on incognito mode',
-              'Go invisible to browse privately',
-              showArrow: true,
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const IncognitoModeScreen()),
-                );
-              },
-            ),
-            _buildContainer(
-              'images/help.png',
-              'Manage your privacy',
-              'Choose what information you share',
-              showArrow: true,
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const PrivacyScreen()),
-                );
-              },
+            const SizedBox(width: 45),
+            const Text(
+              'Safety',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
           ],
         ),
-        bottomNavigationBar: Padding(
-          padding:
-              const EdgeInsets.only(left: 12.0, right: 12, top: 12, bottom: 22),
-          child: Container(
-            decoration: BoxDecoration(
-              color: const Color.fromRGBO(255, 255, 255, 1),
-              borderRadius: BorderRadius.circular(50),
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(50),
-              child: BottomNavigationBar(
-                type:
-                    BottomNavigationBarType.fixed, // Ensure all items are shown
-                items: [
-                  BottomNavigationBarItem(
-                    icon: Image.asset('assets/images/icons/homeBlack.png',
-                        width: 30),
-                    label: 'Home',
+      ),
+      body: ListView(
+        padding: const EdgeInsets.all(15.0),
+        children: [
+          _buildContainer(
+            'images/help.png',
+            'Get help from Zenkonect',
+            'Send us a message if you have any concerns',
+            showArrow: false,
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const GetHelp()),
+              );
+            },
+          ),
+          _buildContainer(
+            'images/setting.png',
+            'Control your experience',
+            'Manage who can see or message you',
+            showArrow: true,
+            onTap: () {
+              _showControlExperienceModal(context);
+            },
+          ),
+          _buildContainer(
+            'images/privately.png',
+            'Turn on incognito mode',
+            'Go invisible to browse privately',
+            showArrow: true,
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const IncognitoModeScreen()),
+              );
+            },
+          ),
+          _buildContainer(
+            'images/help.png',
+            'Manage your privacy',
+            'Choose what information you share',
+            showArrow: true,
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const PrivacyScreen()),
+              );
+            },
+          ),
+        ],
+      ),
+      bottomNavigationBar: Padding(
+        padding: EdgeInsets.only(
+          left: MediaQuery.of(context).size.width * 0.03, // 3% of screen width
+          right: MediaQuery.of(context).size.width * 0.03,
+          top: MediaQuery.of(context).size.height * 0.01, // 1% of screen height
+          bottom:
+              MediaQuery.of(context).size.height * 0.03, // 3% of screen height
+        ),
+        child: Container(
+          decoration: BoxDecoration(
+            color: const Color.fromRGBO(97, 86, 234, 0.19),
+            borderRadius: BorderRadius.circular(50),
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(50),
+            child: BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              items: [
+                BottomNavigationBarItem(
+                  icon: Image.asset(
+                    'assets/images/icons/homeBlack.png',
+                    width:
+                        MediaQuery.of(context).size.width * 0.08, // 7% of width
+                    height: MediaQuery.of(context).size.width * 0.08,
                   ),
-                  BottomNavigationBarItem(
-                    icon: Image.asset('assets/images/icons/localcon.png',
-                        width: 30),
-                    label: 'People Nearby',
+                  label: 'Home',
+                ),
+                BottomNavigationBarItem(
+                  icon: Image.asset(
+                    'assets/images/icons/localcon.png',
+                    width: MediaQuery.of(context).size.width * 0.08,
+                    height: MediaQuery.of(context).size.width * 0.08,
                   ),
-                  BottomNavigationBarItem(
-                    icon: Image.asset('assets/images/icons/chatIcon.png',
-                        width: 30),
-                    label: 'Chats',
+                  label: 'People Nearby',
+                ),
+                BottomNavigationBarItem(
+                  icon: Image.asset(
+                    'assets/images/icons/chatIcon.png',
+                    width: MediaQuery.of(context).size.width * 0.08,
+                    height: MediaQuery.of(context).size.width * 0.08,
                   ),
-                  BottomNavigationBarItem(
-                    icon: Image.asset('assets/images/icons/matches.png',
-                        width: 30),
-                    label: 'Matches',
+                  label: 'Chats',
+                ),
+                BottomNavigationBarItem(
+                  icon: Image.asset(
+                    'assets/images/icons/matches.png',
+                    width: MediaQuery.of(context).size.width * 0.08,
+                    height: MediaQuery.of(context).size.width * 0.08,
                   ),
-                  BottomNavigationBarItem(
-                    icon: Image.asset('assets/images/icons/blueProfile.png',
-                        width: 30),
-                    label: 'Profile',
+                  label: 'Matches',
+                ),
+                BottomNavigationBarItem(
+                  icon: Image.asset(
+                    'assets/images/icons/blueProfile.png',
+                    width: MediaQuery.of(context).size.width * 0.07,
+                    height: MediaQuery.of(context).size.width * 0.07,
                   ),
-                ],
-                onTap: (index) {
-                  // Handle navigation based on the index
-                  switch (index) {
-                    case 0:
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const HomeScreen()),
-                      );
-                      break;
-                    case 1:
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const PeopleNearbyPage()),
-                      );
-
-                      break;
-                    case 2:
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const Mainchat()),
-                      );
-
-                      break;
-                    case 3:
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const Likes()),
-                      );
-                      break;
-                    case 4:
-                      break;
-                  }
-                },
+                  label: 'Profile',
+                ),
+              ],
+              selectedLabelStyle: TextStyle(
+                color: Colors.black, // Ensure selected text is black
+                fontSize: MediaQuery.of(context).size.width * 0.03,
               ),
+              unselectedLabelStyle: TextStyle(
+                color: Colors.black, // Ensure unselected text is black
+                fontSize: MediaQuery.of(context).size.width * 0.03,
+              ),
+              selectedItemColor: Theme.of(context).brightness == Brightness.dark
+                  ? Colors.white // Dark mode, use white
+                  : Colors.black, // Make selected item icon and label black
+              unselectedItemColor:
+                  Theme.of(context).brightness == Brightness.dark
+                      ? Colors.white // Dark mode, use white
+                      : Colors.black, // Make unselected item icon black
+              onTap: (index) {
+                // Handle navigation based on the index
+                switch (index) {
+                  case 0:
+                    Navigator.pushNamed(context, homeScreen);
+
+                    break;
+                  case 1:
+                    Navigator.pushNamed(context, peopleNearbyPage);
+                    break;
+                  case 2:
+                    Navigator.pushNamed(context, mainchat);
+                    break;
+                  case 3:
+                    Navigator.pushNamed(context, likes);
+                    break;
+                  case 4:
+                    Navigator.pushNamed(context, profile);
+                    break;
+                }
+              },
             ),
           ),
-        ));
+        ),
+      ),
+    );
   }
 
   Widget _buildContainer(String imagePath, String title, String subtitle,
@@ -198,7 +218,6 @@ class _SafetyScreenState extends State<SafetyScreen> {
         margin: const EdgeInsets.symmetric(vertical: 15.0),
         padding: const EdgeInsets.all(16.0),
         decoration: BoxDecoration(
-          color: Colors.white,
           borderRadius: BorderRadius.circular(15),
           border: Border.all(color: blue, width: 2),
         ),
@@ -226,7 +245,6 @@ class _SafetyScreenState extends State<SafetyScreen> {
                       subtitle,
                       style: const TextStyle(
                         fontSize: 12,
-                        color: Colors.black,
                       ),
                     ),
                   ],
@@ -235,8 +253,7 @@ class _SafetyScreenState extends State<SafetyScreen> {
               if (showArrow)
                 const Opacity(
                   opacity: 0.5,
-                  child:
-                      Icon(Icons.arrow_forward_ios, color: Color(0xFF000000)),
+                  child: Icon(Icons.arrow_forward_ios, color: Colors.black),
                 ),
             ],
           ),
@@ -273,9 +290,10 @@ class _SafetyScreenState extends State<SafetyScreen> {
                           onTap: () {
                             Navigator.pop(context);
                           },
-                          child: const Icon(Icons.arrow_back_ios)),
+                          child: const Icon(Icons.arrow_back_ios,
+                              color: Colors.black)),
                       Image.asset("images/who can see your message.png"),
-                      const Icon(Icons.close),
+                      const Icon(Icons.close, color: Colors.black),
                     ],
                   ),
                   const SizedBox(height: 20),
@@ -305,18 +323,22 @@ class _SafetyScreenState extends State<SafetyScreen> {
                   const SizedBox(height: 20),
                   const Text(
                     'If everyone can message you, you’re more likely to get more matches.',
-                    style: TextStyle(fontSize: 11),
+                    style: TextStyle(fontSize: 11, color: Colors.black),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      const Text('(1/4)'),
+                      const Text(
+                        '(1/4)',
+                        style: TextStyle(color: Colors.black),
+                      ),
                       IconButton(
                         onPressed: () {
                           Navigator.pop(context);
                           _showControllExperienceModal(context);
                         },
-                        icon: const Icon(Icons.arrow_forward_ios),
+                        icon: const Icon(Icons.arrow_forward_ios,
+                            color: Colors.black),
                       ),
                     ],
                   ),
@@ -357,15 +379,19 @@ class _SafetyScreenState extends State<SafetyScreen> {
                           onTap: () {
                             Navigator.pop(context);
                           },
-                          child: const Icon(Icons.arrow_back_ios)),
+                          child: const Icon(Icons.arrow_back_ios,
+                              color: Colors.black)),
                       Image.asset("images/who do you want to chat with.png"),
-                      const Icon(Icons.close),
+                      const Icon(Icons.close, color: Colors.black),
                     ],
                   ),
                   const SizedBox(height: 5),
                   const Text(
                     'Who do you want to chat with?',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black),
                   ),
                   const SizedBox(height: 20),
                   CheckboxListTile(
@@ -389,13 +415,16 @@ class _SafetyScreenState extends State<SafetyScreen> {
                   const SizedBox(height: 20),
                   const Text(
                     'When people are verified, it means we’re sure they’re real. This helps us keep Zenkonect safe.',
-                    style: TextStyle(fontSize: 11),
+                    style: TextStyle(fontSize: 11, color: Colors.black),
                   ),
                   const SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      const Text('(2/4)'),
+                      const Text(
+                        '(2/4)',
+                        style: TextStyle(color: Colors.black),
+                      ),
                       IconButton(
                         onPressed: () {
                           Navigator.pop(context);
@@ -442,19 +471,24 @@ class _SafetyScreenState extends State<SafetyScreen> {
                           onTap: () {
                             Navigator.pop(context);
                           },
-                          child: const Icon(Icons.arrow_back_ios)),
+                          child: const Icon(Icons.arrow_back_ios,
+                              color: Colors.black)),
                       Image.asset("images/When should we notify you.png"),
-                      const Icon(Icons.close),
+                      const Icon(Icons.close, color: Colors.black),
                     ],
                   ),
                   const SizedBox(height: 5),
                   const Text(
                     'When should we notify you?',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black),
                   ),
                   const SizedBox(height: 20),
                   CheckboxListTile(
-                    title: const Text('When i get a message'),
+                    title: const Text('When i get a message',
+                        style: TextStyle(color: Colors.black)),
                     value: _allowEveryone2, // Use the state variable
                     onChanged: (bool? value) {
                       setState(() {
@@ -489,13 +523,15 @@ class _SafetyScreenState extends State<SafetyScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      const Text('(3/4)'),
+                      const Text('(3/4)',
+                          style: TextStyle(color: Colors.black)),
                       IconButton(
                         onPressed: () {
                           Navigator.pop(context);
                           _showControllllExperienceModal(context);
                         },
-                        icon: const Icon(Icons.arrow_forward_ios),
+                        icon: const Icon(Icons.arrow_forward_ios,
+                            color: Colors.black),
                       ),
                     ],
                   ),
@@ -536,15 +572,19 @@ class _SafetyScreenState extends State<SafetyScreen> {
                           onTap: () {
                             Navigator.pop(context);
                           },
-                          child: const Icon(Icons.arrow_back_ios)),
+                          child: const Icon(Icons.arrow_back_ios,
+                              color: Colors.black)),
                       Image.asset("images/Want to show when you’re online.png"),
-                      const Icon(Icons.close),
+                      const Icon(Icons.close, color: Colors.black),
                     ],
                   ),
                   const SizedBox(height: 5),
                   const Text(
                     'Want to show when you’re online?',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black),
                   ),
                   const SizedBox(height: 20),
                   CheckboxListTile(
@@ -568,19 +608,23 @@ class _SafetyScreenState extends State<SafetyScreen> {
                   const SizedBox(height: 20),
                   const Text(
                     'If you hide when you’re online, you won’t see when other people are online.',
-                    style: TextStyle(fontSize: 11),
+                    style: TextStyle(fontSize: 11, color: Colors.black),
                   ),
                   const SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      const Text('(4/4)'),
+                      const Text(
+                        '(4/4)',
+                        style: TextStyle(color: Colors.black),
+                      ),
                       IconButton(
                         onPressed: () {
                           Navigator.pop(context);
                           _showControlllllExperienceModal(context);
                         },
-                        icon: const Icon(Icons.arrow_forward_ios),
+                        icon: const Icon(Icons.arrow_forward_ios,
+                            color: Colors.black),
                       ),
                     ],
                   ),
@@ -621,21 +665,25 @@ class _SafetyScreenState extends State<SafetyScreen> {
                           onTap: () {
                             Navigator.pop(context);
                           },
-                          child: const Icon(Icons.arrow_back_ios)),
+                          child: const Icon(Icons.arrow_back_ios,
+                              color: Colors.black)),
                       Image.asset("images/You’re all done!.png"),
-                      const Icon(Icons.close),
+                      const Icon(Icons.close, color: Colors.black),
                     ],
                   ),
                   const SizedBox(height: 5),
                   const Text(
                     'You’re all done!',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black),
                   ),
                   const SizedBox(height: 20),
                   const Center(
                     child: Text(
                       'Great - you’re all set for a better experience. Time to make some meaningful and amazing connections.',
-                      style: TextStyle(fontSize: 11),
+                      style: TextStyle(fontSize: 11, color: Colors.black),
                     ),
                   ),
                   const SizedBox(height: 20),

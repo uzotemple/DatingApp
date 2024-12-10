@@ -54,13 +54,19 @@ class _IncognitoModeOnSettingScreenState
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ListTile(
-              title: const Text(
+              title: Text(
                 'Hide when you’re online',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
               ),
-              subtitle: const Text(
+              subtitle: Text(
                 "People won't be able to see when you’re online. Available with Zenkonect Premium.",
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                    ),
               ),
               trailing: Radio(
                 value: 0,
@@ -69,13 +75,19 @@ class _IncognitoModeOnSettingScreenState
               ),
             ),
             ListTile(
-              title: const Text(
+              title: Text(
                 'Browse profiles privately',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
               ),
-              subtitle: const Text(
+              subtitle: Text(
                 "People won't be able to see when you’re online. Available with Zenkonect Premium.",
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                    ),
               ),
               trailing: Radio(
                 value: 1,
@@ -84,13 +96,19 @@ class _IncognitoModeOnSettingScreenState
               ),
             ),
             ListTile(
-              title: const Text(
+              title: Text(
                 'Hide Zenkonect Premium',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
               ),
-              subtitle: const Text(
+              subtitle: Text(
                 "People won’t know that you’ve got Zenkonect Premium. Available with Zenkonect Premium.",
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                    ),
               ),
               trailing: Radio(
                 value: 2,

@@ -206,9 +206,12 @@ class _EditActiveProfileScreenState extends State<EditActiveProfileScreen> {
                     ],
                   )),
               const SizedBox(height: 10),
-              const Text(
+              Text(
                 "Hailey, 25",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
               ),
               // const SizedBox(height: 20),
               // Additional fields for editing profile (e.g., name, email) can go here
@@ -762,10 +765,13 @@ class _EditActiveProfileScreenState extends State<EditActiveProfileScreen> {
                 color: Colors.black, // Ensure unselected text is black
                 fontSize: MediaQuery.of(context).size.width * 0.03,
               ),
-              selectedItemColor:
-                  Colors.black, // Make selected item icon and label black
+              selectedItemColor: Theme.of(context).brightness == Brightness.dark
+                  ? Colors.white // Dark mode, use white
+                  : Colors.black, // Make selected item icon and label black
               unselectedItemColor:
-                  Colors.black, // Make unselected item icon black
+                  Theme.of(context).brightness == Brightness.dark
+                      ? Colors.white // Dark mode, use white
+                      : Colors.black, // Make unselected item icon black
               onTap: (index) {
                 // Handle navigation based on the index
                 switch (index) {

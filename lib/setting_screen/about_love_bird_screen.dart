@@ -7,9 +7,7 @@ class AboutLoveBirdScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -55,44 +53,47 @@ class AboutLoveBirdScreen extends StatelessWidget {
           ),
           Text(
             'v1.0.43',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-              color: Colors.black.withOpacity(
-                  0.5), // Adjust the opacity value between 0.0 and 1.0
-            ),
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.white.withOpacity(0.7) // Adjust for dark mode
+                      : Colors.black.withOpacity(0.5), // Adjust for light mode
+                ),
           ),
           const SizedBox(
             height: 15,
           ),
           Text(
             'Released on - 12/12/2024',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-              color: Colors.black.withOpacity(
-                  0.5), // Adjust the opacity value between 0.0 and 1.0
-            ),
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.white.withOpacity(0.7) // Adjust for dark mode
+                      : Colors.black.withOpacity(0.5), // Adjust for light mode
+                ),
           ),
           const SizedBox(
             height: 15,
           ),
           Text(
             'branch: release_android_6.0111',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-              color: Colors.black.withOpacity(
-                  0.5), // Adjust the opacity value between 0.0 and 1.0
-            ),
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.white.withOpacity(0.7) // Adjust for dark mode
+                      : Colors.black.withOpacity(0.5), // Adjust for light mode
+                ),
           ),
           const Spacer(),
-          const Padding(
+          Padding(
             padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20),
             child: Center(
               child: Text(
                 'Copyright 2024 Hans Technology, all rights reserved',
-                style: TextStyle(
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                     color: Color(0xFF3628DD)),

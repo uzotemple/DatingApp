@@ -11,9 +11,7 @@ class AboutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -95,9 +93,15 @@ class AboutScreen extends StatelessWidget {
     return ListTile(
       title: Text(
         title,
-        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+            ),
       ),
-      trailing: const Icon(Icons.arrow_forward_ios),
+      trailing: Icon(
+        Icons.arrow_forward_ios,
+        color: Theme.of(context).iconTheme.color,
+      ),
       onTap: () {
         switch (index) {
           case 0:
@@ -136,15 +140,24 @@ class AboutScreen extends StatelessWidget {
         children: [
           Text(
             title,
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
           ),
           Text(
             subtitle,
-            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                ),
           ),
         ],
       ),
-      trailing: const Icon(Icons.arrow_forward_ios),
+      trailing: Icon(
+        Icons.arrow_forward_ios,
+        color: Theme.of(context).iconTheme.color,
+      ),
       onTap: () {
         Navigator.push(
           context,

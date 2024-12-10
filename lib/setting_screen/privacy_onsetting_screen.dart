@@ -53,13 +53,19 @@ class _PrivacyOnSettingsScreenState extends State<PrivacyOnSettingsScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ListTile(
-              title: const Text(
+              title: Text(
                 'Show location',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
               ),
-              subtitle: const Text(
+              subtitle: Text(
                 "Must be on if you want to see how near other users are. No one will know your actual location without your permission.",
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                    ),
               ),
               trailing: Radio(
                 value: 0,
@@ -69,13 +75,19 @@ class _PrivacyOnSettingsScreenState extends State<PrivacyOnSettingsScreen> {
             ),
             const Divider(),
             ListTile(
-              title: const Text(
+              title: Text(
                 'Show online status',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
               ),
-              subtitle: const Text(
+              subtitle: Text(
                 "Must be on if you want to see if other users are currently online.",
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                    ),
               ),
               trailing: Radio(
                 value: 1,
@@ -85,13 +97,19 @@ class _PrivacyOnSettingsScreenState extends State<PrivacyOnSettingsScreen> {
             ),
             const Divider(),
             ListTile(
-              title: const Text(
+              title: Text(
                 'Allow public search',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
               ),
-              subtitle: const Text(
+              subtitle: Text(
                 "People will be able to find your profile when searching the internet.",
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                    ),
               ),
               trailing: Radio(
                 value: 2,
@@ -101,13 +119,19 @@ class _PrivacyOnSettingsScreenState extends State<PrivacyOnSettingsScreen> {
             ),
             const Divider(),
             ListTile(
-              title: const Text(
+              title: Text(
                 'Limit profile views',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
               ),
-              subtitle: const Text(
+              subtitle: Text(
                 "Only the people you like and visit can see your profile",
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                    ),
               ),
               trailing: Radio(
                 value: 3,
@@ -118,24 +142,36 @@ class _PrivacyOnSettingsScreenState extends State<PrivacyOnSettingsScreen> {
             const Divider(),
             // This is the 5th item with no subtitle and an arrow forward icon
             ListTile(
-              title: const Text(
+              title: Text(
                 'Ad and tracker preferences',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
               ),
-              trailing: const Icon(Icons.arrow_forward_ios), // Change to icon
+              trailing: Icon(
+                Icons.arrow_forward_ios,
+                color: Theme.of(context).iconTheme.color,
+              ), // Change to icon
               onTap: () {
                 // Handle tap action here
               },
             ),
             const Divider(),
             ListTile(
-              title: const Text(
+              title: Text(
                 'Show ads',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
               ),
-              subtitle: const Text(
+              subtitle: Text(
                 "You can remove ads if you get Zenkonect Premium",
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                    ),
               ),
               trailing: Radio(
                 value: 5,

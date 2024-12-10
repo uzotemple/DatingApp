@@ -73,21 +73,30 @@ class _PrivacyPreferenceOnSettingsScreenState
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Center(
+            Center(
               child: Text(
                 'Privacy Preference',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
               ),
             ),
             const SizedBox(height: 15),
-            const Text(
+            Text(
               'We and our partners use tracking tools to store and process your data for the purposes below.',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
             ),
             const SizedBox(height: 10),
-            const Text(
+            Text(
               'You can also find the list of tools that are strictly necessary for the app to function, as well as the list of partners that place tools on our behalf. You can change these preferences at any time.',
-              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                  ),
             ),
             const SizedBox(height: 20),
             Expanded(

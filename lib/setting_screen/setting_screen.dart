@@ -26,9 +26,7 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -59,14 +57,17 @@ class SettingsScreen extends StatelessWidget {
         children: [
           const Divider(color: Color(0xFF3628DD)),
           ListTile(
-            title: const Text(
+            title: Text(
               'Basic info',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-              ),
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
             ),
-            trailing: const Icon(Icons.arrow_forward_ios),
+            trailing: Icon(
+              Icons.arrow_forward_ios,
+              color: Theme.of(context).iconTheme.color,
+            ),
             onTap: () {
               // Handle Basic info tap
               Navigator.push(
@@ -78,15 +79,21 @@ class SettingsScreen extends StatelessWidget {
           ),
           const Divider(color: Color(0xFF3628DD)),
           ListTile(
-            title: const Text(
+            title: Text(
               'Account',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-              ),
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
             ),
-            subtitle: const Text('hailey1@ymail.com'),
-            trailing: const Icon(Icons.arrow_forward_ios),
+            subtitle: Text(
+              'hailey1@ymail.com',
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(),
+            ),
+            trailing: Icon(
+              Icons.arrow_forward_ios,
+              color: Theme.of(context).iconTheme.color,
+            ),
             onTap: () {
               // Handle Account tap
               Navigator.push(
@@ -97,14 +104,17 @@ class SettingsScreen extends StatelessWidget {
           ),
           const Divider(color: Color(0xFF3628DD)),
           ListTile(
-            title: const Text(
+            title: Text(
               'Account Preferences',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-              ),
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
             ),
-            trailing: const Icon(Icons.arrow_forward_ios),
+            trailing: Icon(
+              Icons.arrow_forward_ios,
+              color: Theme.of(context).iconTheme.color,
+            ),
             onTap: () {
               // Handle Account Preferences tap
               Navigator.push(
@@ -116,14 +126,17 @@ class SettingsScreen extends StatelessWidget {
           ),
           const Divider(color: Color(0xFF3628DD)),
           ListTile(
-            title: const Text(
+            title: Text(
               'Personalize your experience',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-              ),
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
             ),
-            trailing: const Icon(Icons.arrow_forward_ios),
+            trailing: Icon(
+              Icons.arrow_forward_ios,
+              color: Theme.of(context).iconTheme.color,
+            ),
             onTap: () {
               // Show personalize modal sheet
               _showGetStartedModal(context, 0);
@@ -131,14 +144,17 @@ class SettingsScreen extends StatelessWidget {
           ),
           const Divider(color: Color(0xFF3628DD)),
           ListTile(
-            title: const Text(
+            title: Text(
               'Help Center',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-              ),
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
             ),
-            trailing: const Icon(Icons.arrow_forward_ios),
+            trailing: Icon(
+              Icons.arrow_forward_ios,
+              color: Theme.of(context).iconTheme.color,
+            ),
             onTap: () {
               // Handle Help Center tap
               Navigator.push(
@@ -150,14 +166,17 @@ class SettingsScreen extends StatelessWidget {
           ),
           const Divider(color: Color(0xFF3628DD)),
           ListTile(
-            title: const Text(
+            title: Text(
               'About',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-              ),
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
             ),
-            trailing: const Icon(Icons.arrow_forward_ios),
+            trailing: Icon(
+              Icons.arrow_forward_ios,
+              color: Theme.of(context).iconTheme.color,
+            ),
             onTap: () {
               // Handle About tap
               Navigator.push(
@@ -168,14 +187,17 @@ class SettingsScreen extends StatelessWidget {
           ),
           const Divider(color: Color(0xFF3628DD)),
           ListTile(
-            title: const Text(
+            title: Text(
               'Blocked Users',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-              ),
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
             ),
-            trailing: const Icon(Icons.arrow_forward_ios),
+            trailing: Icon(
+              Icons.arrow_forward_ios,
+              color: Theme.of(context).iconTheme.color,
+            ),
             onTap: () {
               // Handle Blocked Users tap
               Navigator.push(
@@ -187,14 +209,17 @@ class SettingsScreen extends StatelessWidget {
           ),
           const Divider(color: Color(0xFF3628DD)),
           ListTile(
-            title: const Text(
+            title: Text(
               'Reviews',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-              ),
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
             ),
-            trailing: const Icon(Icons.arrow_forward_ios),
+            trailing: Icon(
+              Icons.arrow_forward_ios,
+              color: Theme.of(context).iconTheme.color,
+            ),
             onTap: () {
               // Handle Reviews tap
               Navigator.push(
@@ -323,7 +348,8 @@ class _GetStartedModalState extends State<_GetStartedModal> {
                   ),
                   GestureDetector(
                     onTap: () => Navigator.pop(context),
-                    child: const Icon(Icons.close, size: 20),
+                    child:
+                        const Icon(Icons.close, size: 20, color: Colors.black),
                   ),
                 ],
               ),
@@ -334,8 +360,10 @@ class _GetStartedModalState extends State<_GetStartedModal> {
                     : (widget.modalIndex < 5
                         ? 'Who can message you? ${widget.modalIndex}/4' // Display as (n/4) for modals 2 to 4
                         : 'You’re all done!'), // Last modal specific text
-                style:
-                    const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.black),
               ),
               const SizedBox(height: 15),
               if (widget.modalIndex == 0)
@@ -383,22 +411,27 @@ class _GetStartedModalState extends State<_GetStartedModal> {
                     ),
                     const Text(
                       'If everyone can message you, you’re more likely to get more matches.',
-                      style:
-                          TextStyle(fontSize: 11, fontWeight: FontWeight.w400),
+                      style: TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.black),
                     ),
                     const SizedBox(height: 15),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                            '(${widget.modalIndex}/4)'), // Show progress for modals 2 to 4
+                        Text('(${widget.modalIndex}/4)',
+                            style: const TextStyle(
+                                color: Colors
+                                    .black)), // Show progress for modals 2 to 4
                         InkWell(
                           onTap: () {
                             // Show the next modal
                             _showGetStartedModal(
                                 context, widget.modalIndex + 1);
                           },
-                          child: const Icon(Icons.arrow_forward_ios),
+                          child: const Icon(Icons.arrow_forward_ios,
+                              color: Colors.black),
                         ),
                       ],
                     ),
@@ -410,8 +443,10 @@ class _GetStartedModalState extends State<_GetStartedModal> {
                     const SizedBox(height: 20),
                     const Text(
                       'You’re all done with setup!',
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.black),
                     ),
                     const SizedBox(height: 15),
                     ElevatedButton(

@@ -98,7 +98,7 @@ class _AccountScreenState extends State<AccountScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Divider(
-              color: Color(0xFF3628DD),
+              color: blue,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15.0),
@@ -159,13 +159,12 @@ class _AccountScreenState extends State<AccountScreen> {
                   labelText: 'hailey1@ymail.com',
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(
-                        color: Color(0xFF3628DD),
+                        color: blue,
                         width: 2.0), // Purple color for the underline
                   ),
                   focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(
-                        color: Color(0xFF3628DD),
-                        width: 2.0), // Same color when focused
+                        color: blue, width: 2.0), // Same color when focused
                   ),
                 ),
               ),
@@ -215,7 +214,7 @@ class _AccountScreenState extends State<AccountScreen> {
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w800,
-                  color: Color(0xFF3628DD),
+                  color: blue,
                 ),
               ),
             ),

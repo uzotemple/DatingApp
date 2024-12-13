@@ -119,11 +119,11 @@ class InterestsSelectionScreen extends StatelessWidget {
                     onSelected: (selected) {
                       interestsProvider.toggleInterest(interest);
                     },
-                    selectedColor: const Color.fromRGBO(54, 40, 221, 1),
+                    selectedColor: blue,
                     backgroundColor: Colors.white,
                     shape: const StadiumBorder(
                       side: BorderSide(
-                        color: Color.fromRGBO(54, 40, 221, 1),
+                        color: blue,
                       ),
                     ),
                   );
@@ -134,7 +134,7 @@ class InterestsSelectionScreen extends StatelessWidget {
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromRGBO(54, 40, 221, 1),
+                  backgroundColor: blue,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25.0),
                   ),

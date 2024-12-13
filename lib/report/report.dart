@@ -217,21 +217,39 @@ class _ReportPageState extends State<ReportPage> {
 
   // Function to build each radio button option
   Widget _buildRadioButton(String reason) {
-    return RadioListTile<String>(
+    return ListTile(
       title: Text(
         reason,
         style: Theme.of(context).textTheme.bodyMedium?.copyWith(),
       ),
-      value: reason,
-      groupValue: _selectedReason,
-
-      activeColor: blue,
-      // Default background color (transparent) when not selected
-      onChanged: (String? value) {
-        setState(() {
-          _selectedReason = value;
-        });
-      },
+      trailing: GestureDetector(
+        onTap: () {
+          setState(() {
+            _selectedReason = reason;
+          });
+        },
+        child: Container(
+          width: 24.0,
+          height: 24.0,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(
+              color: _selectedReason == reason ? Colors.blue : Colors.grey,
+              width: 2.0,
+            ),
+            color: _selectedReason == reason
+                ? const Color(0xFF3628DD)
+                : Colors.transparent,
+          ),
+          child: _selectedReason == reason
+              ? const Icon(
+                  Icons.circle,
+                  size: 16.0,
+                  color: Colors.white,
+                )
+              : null,
+        ),
+      ),
     );
   }
 }

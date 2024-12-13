@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:love_bird/config/routes.dart';
+import 'package:love_bird/config/constants.dart';
 
 class BlockedUsersScreen extends StatelessWidget {
   const BlockedUsersScreen({super.key});
@@ -37,8 +38,7 @@ class BlockedUsersScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          const Divider(
-              thickness: 1.0, color: Color(0xFF3628DD)), // Divider at the top
+          const Divider(thickness: 1.0, color: blue), // Divider at the top
           Expanded(
             child: ListView.builder(
               itemCount: 5, // Adjust based on the number of items
@@ -52,8 +52,7 @@ class BlockedUsersScreen extends StatelessWidget {
                       subtitle: 'Unblock',
                     ),
                     const Divider(
-                        thickness: 1.0,
-                        color: Color(0xFF3628DD)), // Divider between items
+                        thickness: 1.0, color: blue), // Divider between items
                   ],
                 );
               },
@@ -92,9 +91,7 @@ class BlockedUsersScreen extends StatelessWidget {
           Text(
             subtitle,
             style: const TextStyle(
-                fontSize: 13,
-                fontWeight: FontWeight.w600,
-                color: Color(0xFF3628DD)),
+                fontSize: 13, fontWeight: FontWeight.w600, color: blue),
           ),
         ],
       ),

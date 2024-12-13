@@ -531,16 +531,19 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
               items: [
                 BottomNavigationBarItem(
                   icon: Image.asset(
-                    'assets/images/icons/homeBlack.png',
-                    width:
-                        MediaQuery.of(context).size.width * 0.08, // 7% of width
+                    Theme.of(context).brightness == Brightness.dark
+                        ? 'assets/images/icons/homeWhite.png'
+                        : 'assets/images/icons/homeBlack.png',
+                    width: MediaQuery.of(context).size.width * 0.08,
                     height: MediaQuery.of(context).size.width * 0.08,
                   ),
                   label: 'Home',
                 ),
                 BottomNavigationBarItem(
                   icon: Image.asset(
-                    'assets/images/icons/localcon.png',
+                    Theme.of(context).brightness == Brightness.dark
+                        ? 'assets/images/icons/locationWhite.png'
+                        : 'assets/images/icons/localcon.png',
                     width: MediaQuery.of(context).size.width * 0.08,
                     height: MediaQuery.of(context).size.width * 0.08,
                   ),
@@ -548,7 +551,9 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                 ),
                 BottomNavigationBarItem(
                   icon: Image.asset(
-                    'assets/images/icons/blueChat.png',
+                    Theme.of(context).brightness == Brightness.dark
+                        ? 'assets/images/icons/blueChat.png'
+                        : 'assets/images/icons/blueChat.png',
                     width: MediaQuery.of(context).size.width * 0.08,
                     height: MediaQuery.of(context).size.width * 0.08,
                   ),
@@ -556,7 +561,9 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                 ),
                 BottomNavigationBarItem(
                   icon: Image.asset(
-                    'assets/images/icons/matches.png',
+                    Theme.of(context).brightness == Brightness.dark
+                        ? 'assets/images/icons/matchWhite.png'
+                        : 'assets/images/icons/matches.png',
                     width: MediaQuery.of(context).size.width * 0.08,
                     height: MediaQuery.of(context).size.width * 0.08,
                   ),
@@ -564,7 +571,9 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                 ),
                 BottomNavigationBarItem(
                   icon: Image.asset(
-                    'assets/images/icons/personIcon.png',
+                    Theme.of(context).brightness == Brightness.dark
+                        ? 'assets/images/icons/profileWhite.png'
+                        : 'assets/images/icons/personIcon.png',
                     width: MediaQuery.of(context).size.width * 0.07,
                     height: MediaQuery.of(context).size.width * 0.07,
                   ),
@@ -998,7 +1007,7 @@ void showFontPopup(BuildContext context) {
           child: Column(
             children: [
               Container(
-                color: const Color.fromRGBO(54, 40, 221, 1),
+                color: blue,
                 width: double.infinity,
                 padding:
                     const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
@@ -1103,7 +1112,7 @@ Widget buildCustomRadioButton(BuildContext context, String title,
           value: title,
           groupValue: groupValue,
           onChanged: onChanged,
-          activeColor: const Color.fromRGBO(54, 40, 221, 1),
+          activeColor: blue,
         ),
       ],
     ),
@@ -1176,7 +1185,7 @@ class _VoiceNoteDialogState extends State<VoiceNoteDialog>
                 child: Center(
                   child: Container(
                     decoration: BoxDecoration(
-                      color: const Color.fromRGBO(54, 40, 221, 1),
+                      color: blue,
                       borderRadius: BorderRadius.circular(40),
                     ),
                     width: 55,

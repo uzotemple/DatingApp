@@ -136,7 +136,7 @@ class _LikesState extends State<Likes> {
                 width: screenSize.width * 0.4,
                 height: screenSize.height * 0.06,
                 decoration: BoxDecoration(
-                  color: const Color.fromRGBO(54, 40, 221, 1),
+                  color: blue,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: const Center(
@@ -192,7 +192,7 @@ class _LikesState extends State<Likes> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
                   ),
-                  backgroundColor: const Color.fromRGBO(54, 40, 221, 1),
+                  backgroundColor: blue,
                 ),
                 child: const Text(
                   'Upgrade to Premium To See More',
@@ -229,16 +229,19 @@ class _LikesState extends State<Likes> {
               items: [
                 BottomNavigationBarItem(
                   icon: Image.asset(
-                    'assets/images/icons/homeBlack.png',
-                    width:
-                        MediaQuery.of(context).size.width * 0.08, // 7% of width
+                    Theme.of(context).brightness == Brightness.dark
+                        ? 'assets/images/icons/homeWhite.png'
+                        : 'assets/images/icons/homeBlack.png',
+                    width: MediaQuery.of(context).size.width * 0.08,
                     height: MediaQuery.of(context).size.width * 0.08,
                   ),
                   label: 'Home',
                 ),
                 BottomNavigationBarItem(
                   icon: Image.asset(
-                    'assets/images/icons/localcon.png',
+                    Theme.of(context).brightness == Brightness.dark
+                        ? 'assets/images/icons/locationWhite.png'
+                        : 'assets/images/icons/localcon.png',
                     width: MediaQuery.of(context).size.width * 0.08,
                     height: MediaQuery.of(context).size.width * 0.08,
                   ),
@@ -246,7 +249,9 @@ class _LikesState extends State<Likes> {
                 ),
                 BottomNavigationBarItem(
                   icon: Image.asset(
-                    'assets/images/icons/chatIcon.png',
+                    Theme.of(context).brightness == Brightness.dark
+                        ? 'assets/images/icons/chatWhite.png'
+                        : 'assets/images/icons/chatIcon.png',
                     width: MediaQuery.of(context).size.width * 0.08,
                     height: MediaQuery.of(context).size.width * 0.08,
                   ),
@@ -254,7 +259,9 @@ class _LikesState extends State<Likes> {
                 ),
                 BottomNavigationBarItem(
                   icon: Image.asset(
-                    'assets/images/icons/blueMatch.png',
+                    Theme.of(context).brightness == Brightness.dark
+                        ? 'assets/images/icons/blueMatch.png'
+                        : 'assets/images/icons/blueMatch.png',
                     width: MediaQuery.of(context).size.width * 0.08,
                     height: MediaQuery.of(context).size.width * 0.08,
                   ),
@@ -262,7 +269,9 @@ class _LikesState extends State<Likes> {
                 ),
                 BottomNavigationBarItem(
                   icon: Image.asset(
-                    'assets/images/icons/personIcon.png',
+                    Theme.of(context).brightness == Brightness.dark
+                        ? 'assets/images/icons/profileWhite.png'
+                        : 'assets/images/icons/personIcon.png',
                     width: MediaQuery.of(context).size.width * 0.07,
                     height: MediaQuery.of(context).size.width * 0.07,
                   ),

@@ -9,6 +9,7 @@ import 'package:love_bird/setting_screen/privacy_onsetting_screen.dart';
 import 'package:love_bird/setting_screen/verification_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:love_bird/config/constants.dart';
 
 class AccountPreferenceScreen extends StatefulWidget {
   const AccountPreferenceScreen({super.key});
@@ -53,7 +54,7 @@ class _AccountPreferenceScreenState extends State<AccountPreferenceScreen> {
       body: ListView(
         padding: const EdgeInsets.all(10.0),
         children: [
-          const Divider(color: Color(0xFF3628DD)),
+          const Divider(color: blue),
           ListTile(
             title: Text(
               'Privacy',
@@ -75,7 +76,7 @@ class _AccountPreferenceScreenState extends State<AccountPreferenceScreen> {
               );
             },
           ),
-          const Divider(color: Color(0xFF3628DD)),
+          const Divider(color: blue),
           ListTile(
             title: Text(
               'Notifications',
@@ -97,7 +98,7 @@ class _AccountPreferenceScreenState extends State<AccountPreferenceScreen> {
               );
             },
           ),
-          const Divider(color: Color(0xFF3628DD)),
+          const Divider(color: blue),
           ListTile(
             title: Text(
               'Verifications',
@@ -119,7 +120,7 @@ class _AccountPreferenceScreenState extends State<AccountPreferenceScreen> {
               );
             },
           ),
-          const Divider(color: Color(0xFF3628DD)),
+          const Divider(color: blue),
           ListTile(
             title: Text(
               'Payment settings',
@@ -141,7 +142,7 @@ class _AccountPreferenceScreenState extends State<AccountPreferenceScreen> {
               );
             },
           ),
-          const Divider(color: Color(0xFF3628DD)),
+          const Divider(color: blue),
           ListTile(
             title: Text(
               'Incognito mode',
@@ -163,7 +164,7 @@ class _AccountPreferenceScreenState extends State<AccountPreferenceScreen> {
               );
             },
           ),
-          const Divider(color: Color(0xFF3628DD)),
+          const Divider(color: blue),
           ListTile(
             title: Text(
               'Sexual organ picture recognition and censoring',
@@ -185,7 +186,7 @@ class _AccountPreferenceScreenState extends State<AccountPreferenceScreen> {
               );
             },
           ),
-          const Divider(color: Color(0xFF3628DD)),
+          const Divider(color: blue),
           ListTile(
             title: Text(
               'Instantly translate other languages to English',
@@ -208,7 +209,7 @@ class _AccountPreferenceScreenState extends State<AccountPreferenceScreen> {
               );
             },
           ),
-          const Divider(color: Color(0xFF3628DD)),
+          const Divider(color: blue),
           // ListTile(
           //   title: const Text(
           //     'Dark mode',
@@ -259,9 +260,9 @@ class _AccountPreferenceScreenState extends State<AccountPreferenceScreen> {
                 onChanged: (value) {
                   themeProvider.toggleTheme(); // Toggle the theme
                 },
-                activeColor: const Color(0xFF3628DD),
+                activeColor: blue,
                 activeTrackColor: Colors.white,
-                inactiveThumbColor: const Color(0xFF3628DD),
+                inactiveThumbColor: blue,
                 inactiveTrackColor: Colors.grey[200],
               ),
             ),
@@ -270,7 +271,7 @@ class _AccountPreferenceScreenState extends State<AccountPreferenceScreen> {
             },
           ),
 
-          const Divider(color: Color(0xFF3628DD)),
+          const Divider(color: blue),
         ],
       ),
     );

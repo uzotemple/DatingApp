@@ -121,6 +121,10 @@ class _UserBioState extends State<UserBio> {
                       (value) => userProvider.updateProfession(value),
                     ),
                     _buildTextField(
+                      'Linkedln Profile link',
+                      (value) => userProvider.updateLinkdln(value),
+                    ),
+                    _buildTextField(
                       'Weight(kg)',
                       (value) => userProvider.updateWeight(value),
                     ),
@@ -302,7 +306,7 @@ class _UserBioState extends State<UserBio> {
                       width: screenSize.width * 0.8,
                       height: screenSize.height * 0.05,
                       decoration: BoxDecoration(
-                        color: const Color.fromRGBO(54, 40, 221, 1),
+                        color: blue,
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: const Center(

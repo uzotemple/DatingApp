@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:love_bird/config/routes.dart';
+import 'package:love_bird/config/constants.dart';
 
 class BasicInfoScreen extends StatelessWidget {
   const BasicInfoScreen({super.key});
@@ -38,7 +39,7 @@ class BasicInfoScreen extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(10.0),
         children: [
-          const Divider(color: Color(0xFF3628DD)),
+          const Divider(color: blue),
           ListTile(
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -67,7 +68,7 @@ class BasicInfoScreen extends StatelessWidget {
               // Navigate to Account Screen
             },
           ),
-          const Divider(color: Color(0xFF3628DD)),
+          const Divider(color: blue),
           ListTile(
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -96,7 +97,7 @@ class BasicInfoScreen extends StatelessWidget {
               // Navigate to Account Screen
             },
           ),
-          const Divider(color: Color(0xFF3628DD)),
+          const Divider(color: blue),
           ListTile(
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -125,7 +126,7 @@ class BasicInfoScreen extends StatelessWidget {
               // Navigate to Account Screen
             },
           ),
-          const Divider(color: Color(0xFF3628DD)),
+          const Divider(color: blue),
           ListTile(
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -154,7 +155,7 @@ class BasicInfoScreen extends StatelessWidget {
               // Navigate to Account Screen
             },
           ),
-          const Divider(color: Color(0xFF3628DD)),
+          const Divider(color: blue),
         ],
       ),
     );

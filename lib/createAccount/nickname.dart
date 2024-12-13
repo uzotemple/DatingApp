@@ -94,9 +94,7 @@ class CreateNickname extends StatelessWidget {
                           decoration: BoxDecoration(
                             color: const Color.fromRGBO(54, 40, 221, 0.19),
                             borderRadius: BorderRadius.circular(6),
-                            border: Border.all(
-                                color: const Color.fromRGBO(54, 40, 221, 1),
-                                width: 1),
+                            border: Border.all(color: blue, width: 1),
                           ),
                           child: Center(
                             child: TextField(
@@ -135,7 +133,7 @@ class CreateNickname extends StatelessWidget {
                   width: screenSize.width * 0.8,
                   height: screenSize.height * 0.05,
                   decoration: BoxDecoration(
-                    color: const Color.fromRGBO(54, 40, 221, 1),
+                    color: blue,
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: const Center(
@@ -272,7 +270,7 @@ class CelebrateYouScreen extends StatelessWidget {
                   width: screenSize.width * 0.8,
                   height: screenSize.height * 0.06,
                   decoration: BoxDecoration(
-                    color: const Color.fromRGBO(54, 40, 221, 1),
+                    color: blue,
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: const Center(
@@ -297,7 +295,7 @@ class CelebrateYouScreen extends StatelessWidget {
       height: 50,
       decoration: BoxDecoration(
         border: Border.all(
-          color: const Color.fromRGBO(54, 40, 221, 1),
+          color: blue,
         ),
         borderRadius: BorderRadius.circular(10),
       ),

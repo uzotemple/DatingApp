@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:love_bird/config/constants.dart';
 
 class AccountDeleteSuccessfulScreen extends StatefulWidget {
   const AccountDeleteSuccessfulScreen({super.key});
@@ -37,7 +38,7 @@ class _AccountDeleteSuccessfulScreenState
             ),
             Center(
               child: Image.asset('images/crying-emoji.gif'),
-              
+
               // Image.network(
               //   'https://media.tenor.com/yoMMbzDjFl4AAAAj/crying-emoji.gif',
               //   fit: BoxFit.cover,
@@ -52,9 +53,7 @@ class _AccountDeleteSuccessfulScreenState
               child: Text(
                 'Account deleted successfully!',
                 style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                    color: Color(0xFF3628DD)),
+                    fontSize: 20, fontWeight: FontWeight.w700, color: blue),
               ),
             ),
             const SizedBox(

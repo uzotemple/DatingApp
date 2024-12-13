@@ -4,6 +4,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:love_bird/config/routes.dart';
 import 'dart:developer' as developer;
+import 'package:love_bird/config/constants.dart';
 
 class LoginProvider with ChangeNotifier {
   final _secureStorage = const FlutterSecureStorage();
@@ -169,7 +170,7 @@ class LoginProvider with ChangeNotifier {
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: Color.fromRGBO(54, 40, 221, 1),
+                    color: blue,
                   ),
                 ),
                 const SizedBox(height: 10),

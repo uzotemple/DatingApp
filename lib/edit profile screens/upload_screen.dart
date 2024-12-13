@@ -72,9 +72,12 @@ class _UploadScreenState extends State<UploadScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const Icon(Icons.arrow_back_ios),
-        elevation: 0,
-        backgroundColor: Colors.white,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
@@ -193,10 +196,19 @@ class _UploadScreenState extends State<UploadScreen> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: TextField(
+        style: TextStyle(color: Theme.of(context).textTheme.bodyMedium?.color),
         obscureText: isPassword,
         decoration: InputDecoration(
           labelText: label,
-          prefixIcon: icon != null ? Icon(icon) : null,
+          labelStyle: TextStyle(
+            color: Theme.of(context).hintColor,
+          ),
+          prefixIcon: icon != null
+              ? Icon(
+                  icon,
+                  color: Theme.of(context).iconTheme.color,
+                )
+              : null,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
             borderSide: BorderSide.none,

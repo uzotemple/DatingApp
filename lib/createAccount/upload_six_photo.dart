@@ -171,9 +171,7 @@ class _UploadPicturesScreenState extends State<UploadPicturesScreen> {
               alignment: Alignment.center,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: uploadedImageCount >= 6
-                      ? const Color.fromRGBO(54, 40, 221, 1)
-                      : Colors.grey,
+                  backgroundColor: uploadedImageCount >= 6 ? blue : Colors.grey,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25.0),
                   ),

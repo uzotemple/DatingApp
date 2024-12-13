@@ -43,7 +43,7 @@ void showAgeRangePicker(
                           itemExtent: 50, // Height of each item
                           onSelectedItemChanged: (index) {
                             setState(() {
-                              _startAge = 20 + index; // Adjust range as needed
+                              _startAge = 18 + index; // Adjust range as needed
                             });
                           },
                           childDelegate: ListWheelChildBuilderDelegate(
@@ -53,11 +53,14 @@ void showAgeRangePicker(
                                   Container(
                                     alignment: Alignment.center,
                                     child: Text(
-                                      (20 + index).toString(),
+                                      (18 + index).toString(),
                                       style: TextStyle(
                                         fontSize: 24,
-                                        color: (20 + index) == _startAge
-                                            ? Colors.black
+                                        color: (18 + index) == _startAge
+                                            ? Theme.of(context)
+                                                .textTheme
+                                                .bodyMedium
+                                                ?.color
                                             : Colors.grey,
                                       ),
                                     ),
@@ -69,7 +72,7 @@ void showAgeRangePicker(
                                 ],
                               );
                             },
-                            childCount: 31, // Total number of items (20 to 50)
+                            childCount: 91, // Total number of items (20 to 50)
                           ),
                         ),
                       ),
@@ -80,7 +83,7 @@ void showAgeRangePicker(
                           itemExtent: 50,
                           onSelectedItemChanged: (index) {
                             setState(() {
-                              _endAge = 20 + index; // Adjust range as needed
+                              _endAge = 18 + index; // Adjust range as needed
                             });
                           },
                           childDelegate: ListWheelChildBuilderDelegate(
@@ -90,11 +93,14 @@ void showAgeRangePicker(
                                   Container(
                                     alignment: Alignment.center,
                                     child: Text(
-                                      (20 + index).toString(),
+                                      (18 + index).toString(),
                                       style: TextStyle(
                                         fontSize: 24,
-                                        color: (20 + index) == _endAge
-                                            ? Colors.black
+                                        color: (18 + index) == _endAge
+                                            ? Theme.of(context)
+                                                .textTheme
+                                                .bodyMedium
+                                                ?.color
                                             : Colors.grey,
                                       ),
                                     ),
@@ -106,7 +112,7 @@ void showAgeRangePicker(
                                 ],
                               );
                             },
-                            childCount: 31, // Total number of items (20 to 50)
+                            childCount: 91, // Total number of items (20 to 50)
                           ),
                         ),
                       ),
@@ -124,7 +130,7 @@ void showAgeRangePicker(
                     width: 240,
                     height: 50,
                     decoration: BoxDecoration(
-                      color: const Color.fromRGBO(54, 40, 221, 1),
+                      color: blue,
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: const Center(
@@ -370,16 +376,26 @@ void showLocationPicker(
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       width: double.infinity,
-                      height: 45,
+                      // height: 45,
                       decoration: BoxDecoration(
-                          border: Border.all(
-                        color: const Color.fromRGBO(54, 40, 221, 1),
-                      )),
+                        borderRadius: BorderRadius.circular(
+                          8,
+                        ),
+                        border: Border.all(
+                          color: blue,
+                        ),
+                      ),
                       child: TextField(
+                        style: TextStyle(
+                            color:
+                                Theme.of(context).textTheme.bodyMedium?.color),
                         controller: cityController,
                         textCapitalization: TextCapitalization.sentences,
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           hintText: 'Enter City',
+                          hintStyle: TextStyle(
+                            color: Theme.of(context).hintColor,
+                          ),
                           border: InputBorder.none,
                         ),
                       ),
@@ -393,16 +409,27 @@ void showLocationPicker(
                         width: double.infinity,
                         decoration: BoxDecoration(
                           border: Border.all(
-                            color: const Color.fromRGBO(54, 40, 221, 1),
-                          ),
+                              color: blue // Use theme primary color for border
+                              ),
+                          borderRadius: BorderRadius.circular(
+                              8), // Optional for rounded corners
                         ),
                         child: DropdownButton2<String>(
+                          style: TextStyle(
+                            color: Theme.of(context)
+                                .textTheme
+                                .bodyMedium
+                                ?.color, // Text color based on theme
+                          ),
                           isExpanded: true,
-                          hint: const Text(
+                          hint: Text(
                             'Enter Country',
                             style: TextStyle(
                               fontSize: 14,
-                              color: Colors.black,
+                              color: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
+                                  ?.color, // Hint text color based on theme
                             ),
                           ),
                           items: items
@@ -410,8 +437,12 @@ void showLocationPicker(
                                     value: item,
                                     child: Text(
                                       item,
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         fontSize: 14,
+                                        color: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium
+                                            ?.color, // Text color based on theme
                                       ),
                                     ),
                                   ))
@@ -427,8 +458,13 @@ void showLocationPicker(
                             height: 40,
                             width: 200,
                           ),
-                          dropdownStyleData: const DropdownStyleData(
+                          dropdownStyleData: DropdownStyleData(
                             maxHeight: 200,
+                            decoration: BoxDecoration(
+                              color: Theme.of(context)
+                                  .scaffoldBackgroundColor, // Background color based on theme
+                              borderRadius: BorderRadius.circular(8),
+                            ),
                           ),
                           menuItemStyleData: const MenuItemStyleData(
                             height: 40,
@@ -447,17 +483,27 @@ void showLocationPicker(
                               child: TextFormField(
                                 expands: true,
                                 maxLines: null,
+                                style: TextStyle(
+                                    color: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium
+                                        ?.color),
                                 controller: textEditingController,
                                 decoration: InputDecoration(
                                   isDense: true,
                                   contentPadding: const EdgeInsets.symmetric(
-                                    horizontal: 10,
-                                    vertical: 8,
-                                  ),
+                                      horizontal: 10, vertical: 8),
                                   hintText: 'Search for an item...',
-                                  hintStyle: const TextStyle(fontSize: 12),
+                                  hintStyle: TextStyle(
+                                    color: Theme.of(context).hintColor,
+                                  ),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(8),
+                                    borderSide: BorderSide(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .primary, // Search field border color based on theme
+                                    ),
                                   ),
                                 ),
                               ),
@@ -478,6 +524,7 @@ void showLocationPicker(
                       ),
                     ),
                   ),
+
                   const SizedBox(height: 120),
                   // Apply Button
                   InkWell(
@@ -500,7 +547,7 @@ void showLocationPicker(
                       width: 240,
                       height: 50,
                       decoration: BoxDecoration(
-                        color: const Color.fromRGBO(54, 40, 221, 1),
+                        color: blue,
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: const Center(
@@ -591,9 +638,9 @@ void showFilterOptions(
                         const Text(
                           'Online now',
                           style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black),
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
 
                         // The actual switch
@@ -631,9 +678,7 @@ void showFilterOptions(
                           child: Text(
                             'More options',
                             style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold),
+                                fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                         ),
                         IconButton(
@@ -659,7 +704,7 @@ void showFilterOptions(
                       width: 240,
                       height: 50,
                       decoration: BoxDecoration(
-                        color: const Color.fromRGBO(54, 40, 221, 1),
+                        color: blue,
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: const Center(
@@ -742,7 +787,9 @@ Widget genderOption(
           child: Text(
             gender,
             style: TextStyle(
-                color: gender == _selectedGender ? Colors.white : Colors.black,
+                color: gender == _selectedGender
+                    ? Colors.white
+                    : Theme.of(context).textTheme.bodyMedium?.color,
                 fontSize: 16,
                 fontWeight: FontWeight.w500),
           ),
@@ -761,14 +808,15 @@ Widget _buildFilterRow(String title, String value) {
       children: [
         Text(
           title,
-          style: const TextStyle(
-              fontSize: 16, color: Colors.black, fontWeight: FontWeight.bold),
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
         Row(
           children: [
             Text(
               value,
-              style: const TextStyle(fontSize: 16, color: Colors.black),
+              style: const TextStyle(
+                fontSize: 16,
+              ),
             ),
             const SizedBox(width: 5),
             Icon(Icons.arrow_forward_ios, size: 14, color: Colors.grey[600]),

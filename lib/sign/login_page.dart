@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:love_bird/config/routes.dart';
 import 'package:love_bird/providers/login_provider.dart';
+import 'package:love_bird/config/constants.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -151,8 +152,7 @@ class _LoginPageState extends State<LoginPage> {
                                 children: [
                                   const Text(
                                     "Don't have an account?",
-                                    style: TextStyle(
-                                        color: Color.fromRGBO(54, 40, 221, 1)),
+                                    style: TextStyle(color: blue),
                                   ),
                                   const SizedBox(width: 5),
                                   InkWell(
@@ -195,7 +195,7 @@ class _LoginPageState extends State<LoginPage> {
                               width: screenSize.width * 0.9,
                               height: screenSize.height * 0.05,
                               decoration: BoxDecoration(
-                                color: const Color.fromRGBO(54, 40, 221, 1),
+                                color: blue,
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               child: const Center(
@@ -247,7 +247,7 @@ class _LoginPageState extends State<LoginPage> {
 //               borderRadius: BorderRadius.circular(20),
 //               boxShadow: const [
 //                 BoxShadow(
-//                   color: Color.fromRGBO(54, 40, 221, 1),
+//                   color: blue,
 //                   spreadRadius: 2,
 //                 ),
 //               ],
@@ -322,7 +322,7 @@ class _LoginPageState extends State<LoginPage> {
               borderRadius: BorderRadius.circular(20),
               boxShadow: const [
                 BoxShadow(
-                  color: Color.fromRGBO(54, 40, 221, 1),
+                  color: blue,
                   spreadRadius: 2,
                 ),
               ],

@@ -6,6 +6,7 @@ import 'package:love_bird/homeScreen/notification.dart';
 import 'package:love_bird/setting_screen/setting_screen.dart';
 import 'package:love_bird/safety_privacy_screens/safety_screen.dart';
 import 'package:love_bird/subscription%20plan/standard_plan.dart';
+import 'package:love_bird/config/constants.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -202,7 +203,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         height: 8,
                         decoration: BoxDecoration(
                           color: _currentPage == index
-                              ? const Color.fromRGBO(54, 40, 221, 1)
+                              ? blue
                               : const Color.fromRGBO(255, 255, 255, 0.54),
                           shape: BoxShape.circle,
                         ),
@@ -346,16 +347,19 @@ class _ProfilePageState extends State<ProfilePage> {
               items: [
                 BottomNavigationBarItem(
                   icon: Image.asset(
-                    'assets/images/icons/homeBlack.png',
-                    width:
-                        MediaQuery.of(context).size.width * 0.08, // 7% of width
+                    Theme.of(context).brightness == Brightness.dark
+                        ? 'assets/images/icons/homeWhite.png'
+                        : 'assets/images/icons/homeBlack.png',
+                    width: MediaQuery.of(context).size.width * 0.08,
                     height: MediaQuery.of(context).size.width * 0.08,
                   ),
                   label: 'Home',
                 ),
                 BottomNavigationBarItem(
                   icon: Image.asset(
-                    'assets/images/icons/localcon.png',
+                    Theme.of(context).brightness == Brightness.dark
+                        ? 'assets/images/icons/locationWhite.png'
+                        : 'assets/images/icons/localcon.png',
                     width: MediaQuery.of(context).size.width * 0.08,
                     height: MediaQuery.of(context).size.width * 0.08,
                   ),
@@ -363,7 +367,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 BottomNavigationBarItem(
                   icon: Image.asset(
-                    'assets/images/icons/chatIcon.png',
+                    Theme.of(context).brightness == Brightness.dark
+                        ? 'assets/images/icons/chatWhite.png'
+                        : 'assets/images/icons/chatIcon.png',
                     width: MediaQuery.of(context).size.width * 0.08,
                     height: MediaQuery.of(context).size.width * 0.08,
                   ),
@@ -371,7 +377,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 BottomNavigationBarItem(
                   icon: Image.asset(
-                    'assets/images/icons/matches.png',
+                    Theme.of(context).brightness == Brightness.dark
+                        ? 'assets/images/icons/matchWhite.png'
+                        : 'assets/images/icons/matches.png',
                     width: MediaQuery.of(context).size.width * 0.08,
                     height: MediaQuery.of(context).size.width * 0.08,
                   ),
@@ -379,7 +387,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 BottomNavigationBarItem(
                   icon: Image.asset(
-                    'assets/images/icons/blueProfile.png',
+                    Theme.of(context).brightness == Brightness.dark
+                        ? 'assets/images/icons/blueProfile.png'
+                        : 'assets/images/icons/blueProfile.png',
                     width: MediaQuery.of(context).size.width * 0.07,
                     height: MediaQuery.of(context).size.width * 0.07,
                   ),
@@ -546,7 +556,9 @@ void _showPopup(BuildContext context) {
             child: Container(
               width: screenWidth * 0.5,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? Colors.black
+                    : Colors.white,
                 borderRadius: BorderRadius.circular(10),
               ),
               padding: const EdgeInsets.symmetric(vertical: 10),
@@ -558,14 +570,22 @@ void _showPopup(BuildContext context) {
                       onPressed: () {
                         showSharePopup(context);
                       },
-                      child: const Row(
+                      child: Row(
                         children: [
-                          Icon(Icons.share, color: Colors.black),
+                          Icon(Icons.share,
+                              color: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
+                                  ?.color),
                           SizedBox(width: 5),
                           Text('Share your profile',
                               textAlign: TextAlign.center,
-                              style:
-                                  TextStyle(fontSize: 17, color: Colors.black)),
+                              style: TextStyle(
+                                  fontSize: 17,
+                                  color: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium
+                                      ?.color)),
                         ],
                       ),
                     ),
@@ -574,14 +594,22 @@ void _showPopup(BuildContext context) {
                       onPressed: () {
                         Navigator.pushNamed(context, '/datingPicture');
                       },
-                      child: const Row(
+                      child: Row(
                         children: [
-                          Icon(Icons.tips_and_updates, color: Colors.black),
+                          Icon(Icons.tips_and_updates,
+                              color: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
+                                  ?.color),
                           SizedBox(width: 5),
                           Text('Dating Tips',
                               textAlign: TextAlign.center,
-                              style:
-                                  TextStyle(fontSize: 17, color: Colors.black)),
+                              style: TextStyle(
+                                  fontSize: 17,
+                                  color: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium
+                                      ?.color)),
                         ],
                       ),
                     ),
@@ -595,14 +623,22 @@ void _showPopup(BuildContext context) {
                                   const EditLowProfileScreen()),
                         );
                       },
-                      child: const Row(
+                      child: Row(
                         children: [
-                          Icon(Icons.edit, color: Colors.black),
+                          Icon(Icons.edit,
+                              color: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
+                                  ?.color),
                           SizedBox(width: 5),
                           Text('Edit profile',
                               textAlign: TextAlign.center,
-                              style:
-                                  TextStyle(fontSize: 17, color: Colors.black)),
+                              style: TextStyle(
+                                  fontSize: 17,
+                                  color: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium
+                                      ?.color)),
                         ],
                       ),
                     ),
@@ -615,13 +651,21 @@ void _showPopup(BuildContext context) {
                               builder: (context) => const LoveBirdPlanPage()),
                         );
                       },
-                      child: const Row(
+                      child: Row(
                         children: [
-                          Icon(Icons.money, color: Colors.black),
+                          Icon(Icons.money,
+                              color: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
+                                  ?.color),
                           SizedBox(width: 5),
                           Text('Plans',
-                              style:
-                                  TextStyle(fontSize: 17, color: Colors.black)),
+                              style: TextStyle(
+                                  fontSize: 17,
+                                  color: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium
+                                      ?.color)),
                         ],
                       ),
                     ),
@@ -634,13 +678,21 @@ void _showPopup(BuildContext context) {
                               builder: (context) => const SafetyScreen()),
                         );
                       },
-                      child: const Row(
+                      child: Row(
                         children: [
-                          Icon(Icons.safety_check, color: Colors.black),
+                          Icon(Icons.safety_check,
+                              color: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
+                                  ?.color),
                           SizedBox(width: 5),
                           Text('Safety',
-                              style:
-                                  TextStyle(fontSize: 17, color: Colors.black)),
+                              style: TextStyle(
+                                  fontSize: 17,
+                                  color: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium
+                                      ?.color)),
                         ],
                       ),
                     ),
@@ -653,13 +705,21 @@ void _showPopup(BuildContext context) {
                               builder: (context) => const SettingsScreen()),
                         );
                       },
-                      child: const Row(
+                      child: Row(
                         children: [
-                          Icon(Icons.settings, color: Colors.black),
+                          Icon(Icons.settings,
+                              color: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
+                                  ?.color),
                           SizedBox(width: 5),
                           Text('Settings',
-                              style:
-                                  TextStyle(fontSize: 17, color: Colors.black)),
+                              style: TextStyle(
+                                  fontSize: 17,
+                                  color: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium
+                                      ?.color)),
                         ],
                       ),
                     ),

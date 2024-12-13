@@ -98,88 +98,79 @@ class NotificationsPage extends StatelessWidget {
     //final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: MediaQuery.of(context).size.width * 0.02,
-            vertical: MediaQuery.of(context).size.height * 0.01,
-          ),
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.arrow_back, size: 30),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  const SizedBox(width: 5),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, chatbotWelcomeScreen);
-                    },
-                    child: Image.asset('assets/images/robot.png'),
-                  ),
-                  const Spacer(),
-                  const Text('Notifications',
-                      style:
-                          TextStyle(fontWeight: FontWeight.w700, fontSize: 20)),
-                  const Spacer(),
-                  const Spacer(),
-                ],
-              ),
-              Expanded(
-                child: ListView(
-                  padding: const EdgeInsets.all(16.0),
-                  children: [
-                    const Divider(thickness: 2, color: Colors.black),
-                    const Text(
-                      'Today',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                    ),
-                    NotificationItem(
-                      assetImage: 'assets/images/homeImage.png',
-                      title: 'New Match Alert!',
-                      message:
-                          'You have got a new match waiting to connect with you. Start a conversation now.',
-                      time: '10:00am',
-                      onDelete: () {
-                        // Handle delete action
-                      },
-                    ),
-                    const Text(
-                      'Yesterday',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                    ),
-                    NotificationItem(
-                      assetImage: 'assets/images/homeImage.png',
-                      title: 'New Match Alert!',
-                      message:
-                          'You have got a new match waiting to connect with you. Start a conversation now.',
-                      time: '10:00am',
-                      onDelete: () {
-                        // Handle delete action
-                      },
-                    ),
-                    NotificationItem(
-                      assetImage: 'assets/images/homeImage.png',
-                      title: 'New Match Alert!',
-                      message:
-                          'You have got a new match waiting to connect with you. Start a conversation now.',
-                      time: '10:00am',
-                      onDelete: () {
-                        // Handle delete action
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, size: 30),
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
+        title: Row(
+          children: [
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, chatbotWelcomeScreen);
+              },
+              child: Image.asset('assets/images/robot.png'),
+            ),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.07,
+            ),
+            const Text('Notifications',
+                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20)),
+          ],
+        ),
+        centerTitle: true,
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: ListView(
+              padding: const EdgeInsets.all(16.0),
+              children: [
+                const Divider(thickness: 2, color: Colors.black),
+                const Text(
+                  'Today',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                ),
+                NotificationItem(
+                  assetImage: 'assets/images/homeImage.png',
+                  title: 'New Match Alert!',
+                  message:
+                      'You have got a new match waiting to connect with you. Start a conversation now.',
+                  time: '10:00am',
+                  onDelete: () {
+                    // Handle delete action
+                  },
+                ),
+                const Text(
+                  'Yesterday',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                ),
+                NotificationItem(
+                  assetImage: 'assets/images/homeImage.png',
+                  title: 'New Match Alert!',
+                  message:
+                      'You have got a new match waiting to connect with you. Start a conversation now.',
+                  time: '10:00am',
+                  onDelete: () {
+                    // Handle delete action
+                  },
+                ),
+                NotificationItem(
+                  assetImage: 'assets/images/homeImage.png',
+                  title: 'New Match Alert!',
+                  message:
+                      'You have got a new match waiting to connect with you. Start a conversation now.',
+                  time: '10:00am',
+                  onDelete: () {
+                    // Handle delete action
+                  },
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

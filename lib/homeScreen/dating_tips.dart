@@ -25,11 +25,11 @@ class _DatingPictureState extends State<DatingPicture> {
     final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black, size: 40),
+          icon: const Icon(
+            Icons.arrow_back,
+          ),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -76,7 +76,7 @@ class _DatingPictureState extends State<DatingPicture> {
                       left: 0, // Positioning to the left side
                       top: screenHeight * 0.02, // Position from the top
                       child: Image.asset(
-                        'assets/images/date.png',
+                        'assets/images/dateNo.png',
                         height: screenHeight * 0.68, // Adjust height
                         fit: BoxFit.fill,
                       ),
@@ -144,16 +144,19 @@ class _DatingPictureState extends State<DatingPicture> {
               items: [
                 BottomNavigationBarItem(
                   icon: Image.asset(
-                    'assets/images/icons/homeBlack.png',
-                    width:
-                        MediaQuery.of(context).size.width * 0.08, // 7% of width
+                    Theme.of(context).brightness == Brightness.dark
+                        ? 'assets/images/icons/homeWhite.png'
+                        : 'assets/images/icons/homeBlack.png',
+                    width: MediaQuery.of(context).size.width * 0.08,
                     height: MediaQuery.of(context).size.width * 0.08,
                   ),
                   label: 'Home',
                 ),
                 BottomNavigationBarItem(
                   icon: Image.asset(
-                    'assets/images/icons/localcon.png',
+                    Theme.of(context).brightness == Brightness.dark
+                        ? 'assets/images/icons/locationWhite.png'
+                        : 'assets/images/icons/localcon.png',
                     width: MediaQuery.of(context).size.width * 0.08,
                     height: MediaQuery.of(context).size.width * 0.08,
                   ),
@@ -161,7 +164,9 @@ class _DatingPictureState extends State<DatingPicture> {
                 ),
                 BottomNavigationBarItem(
                   icon: Image.asset(
-                    'assets/images/icons/chatIcon.png',
+                    Theme.of(context).brightness == Brightness.dark
+                        ? 'assets/images/icons/chatWhite.png'
+                        : 'assets/images/icons/chatIcon.png',
                     width: MediaQuery.of(context).size.width * 0.08,
                     height: MediaQuery.of(context).size.width * 0.08,
                   ),
@@ -169,7 +174,9 @@ class _DatingPictureState extends State<DatingPicture> {
                 ),
                 BottomNavigationBarItem(
                   icon: Image.asset(
-                    'assets/images/icons/matches.png',
+                    Theme.of(context).brightness == Brightness.dark
+                        ? 'assets/images/icons/matchWhite.png'
+                        : 'assets/images/icons/matches.png',
                     width: MediaQuery.of(context).size.width * 0.08,
                     height: MediaQuery.of(context).size.width * 0.08,
                   ),
@@ -177,7 +184,9 @@ class _DatingPictureState extends State<DatingPicture> {
                 ),
                 BottomNavigationBarItem(
                   icon: Image.asset(
-                    'assets/images/icons/blueProfile.png',
+                    Theme.of(context).brightness == Brightness.dark
+                        ? 'assets/images/icons/blueProfile.png'
+                        : 'assets/images/icons/blueProfile.png',
                     width: MediaQuery.of(context).size.width * 0.07,
                     height: MediaQuery.of(context).size.width * 0.07,
                   ),
@@ -300,7 +309,6 @@ class _DatingTipsPageState extends State<DatingTipsPage> {
     final screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor: Colors.white,
       body: Column(
         children: [
           const Divider(thickness: 2, color: blue),
@@ -322,10 +330,12 @@ class _DatingTipsPageState extends State<DatingTipsPage> {
                               Image.asset('assets/images/icons/loveTips.png'),
                           title: Text(
                             datingTips[index],
-                            style: const TextStyle(
-                              fontSize: 16,
-                              color: Colors.black,
-                            ),
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium
+                                ?.copyWith(
+                                  fontSize: 16,
+                                ),
                           ),
                         );
                       },
@@ -362,10 +372,10 @@ class _DatingTipsPageState extends State<DatingTipsPage> {
                             color: blue),
                         title: Text(
                           datingTips2[index],
-                          style: const TextStyle(
-                            fontSize: 16,
-                            color: Colors.black,
-                          ),
+                          style:
+                              Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    fontSize: 16,
+                                  ),
                         ),
                       );
                     },

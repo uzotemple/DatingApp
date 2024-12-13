@@ -70,7 +70,10 @@ class _LanguageYouSpeakScreenState extends State<LanguageYouSpeakScreen> {
                 itemCount: items.length,
                 itemBuilder: (context, index) {
                   return ListTile(
-                    title: Text(items[index]),
+                    title: Text(items[index],
+                        style: TextStyle(
+                            color:
+                                Theme.of(context).textTheme.bodyMedium?.color)),
                     trailing: Checkbox(
                       value: selectedItems[index],
                       onChanged: (bool? value) {

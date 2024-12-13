@@ -820,7 +820,7 @@
 //           child: Column(
 //             children: [
 //               Container(
-//                 color: const Color.fromRGBO(54, 40, 221, 1),
+//                 color: blue,
 //                 width: double.infinity,
 //                 padding:
 //                     const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
@@ -927,7 +927,7 @@
 //           value: title,
 //           groupValue: groupValue,
 //           onChanged: onChanged,
-//           activeColor: const Color.fromRGBO(54, 40, 221, 1),
+//           activeColor: blue,
 //         ),
 //       ],
 //     ),
@@ -997,7 +997,7 @@
 //                 child: Center(
 //                   child: Container(
 //                     decoration: BoxDecoration(
-//                       color: const Color.fromRGBO(54, 40, 221, 1),
+//                       color: blue,
 //                       borderRadius: BorderRadius.circular(40),
 //                     ),
 //                     width: 55,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:love_bird/config/routes.dart';
 import 'package:love_bird/providers/google_signin_provider.dart';
 import 'package:video_player/video_player.dart';
+import 'package:love_bird/config/constants.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -166,7 +167,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         width: screenSize.width * 0.8,
         height: screenSize.height * 0.05,
         decoration: BoxDecoration(
-          color: const Color.fromRGBO(54, 40, 221, 1),
+          color: blue,
           borderRadius: BorderRadius.circular(20),
         ),
         child: const Center(
@@ -196,9 +197,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               Text(
                 "Don't have an account?",
                 style: TextStyle(
-                    color: Color.fromRGBO(54, 40, 221, 1),
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold),
+                    color: blue, fontSize: 18, fontWeight: FontWeight.bold),
               ),
               SizedBox(width: 5),
               Text(
@@ -239,7 +238,7 @@ class SignInButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           boxShadow: const [
             BoxShadow(
-              color: Color.fromRGBO(54, 40, 221, 1),
+              color: blue,
               spreadRadius: 2,
             ),
           ],

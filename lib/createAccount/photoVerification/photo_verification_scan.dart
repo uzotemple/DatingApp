@@ -132,7 +132,7 @@ class _PhotoScreen3State extends State<PhotoScreen3>
                   width: screenSize.width * 0.8,
                   height: screenSize.height * 0.05,
                   decoration: BoxDecoration(
-                    color: const Color.fromRGBO(54, 40, 221, 1),
+                    color: blue,
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: const Center(

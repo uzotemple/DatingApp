@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:love_bird/chat/main_chat.dart';
+import 'package:love_bird/config/constants.dart';
 import 'package:love_bird/edit%20profile%20screens/edit_low_profile_screen.dart';
 import 'package:love_bird/homeScreen/homeScreen.dart';
 import 'package:love_bird/matches/likes.dart';
@@ -261,7 +262,7 @@ class _AvatarState extends State<Avatar> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
                   ),
-                  backgroundColor: const Color.fromRGBO(54, 40, 221, 1),
+                  backgroundColor: blue,
                 ),
                 child: const Text(
                   'Apply',
@@ -509,7 +510,7 @@ class _BackgroundState extends State<Background> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16),
                     ),
-                    backgroundColor: const Color.fromRGBO(54, 40, 221, 1),
+                    backgroundColor: blue,
                   ),
                   child: const Text(
                     'Apply',

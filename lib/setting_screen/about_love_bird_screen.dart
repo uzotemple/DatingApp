@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:love_bird/config/routes.dart';
+import 'package:love_bird/config/constants.dart';
 
 class AboutLoveBirdScreen extends StatelessWidget {
   const AboutLoveBirdScreen({super.key});
@@ -40,7 +41,7 @@ class AboutLoveBirdScreen extends StatelessWidget {
         children: [
           const Divider(
             thickness: 1.0,
-            color: Color(0xFF3628DD),
+            color: blue,
           ),
           const SizedBox(
             height: 100,
@@ -89,14 +90,12 @@ class AboutLoveBirdScreen extends StatelessWidget {
           ),
           const Spacer(),
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20),
+            padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20),
             child: Center(
               child: Text(
                 'Copyright 2024 Hans Technology, all rights reserved',
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xFF3628DD)),
+                    fontSize: 16, fontWeight: FontWeight.w600, color: blue),
               ),
             ),
           ),

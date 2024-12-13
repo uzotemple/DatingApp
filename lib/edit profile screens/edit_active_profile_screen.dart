@@ -264,7 +264,10 @@ class _EditActiveProfileScreenState extends State<EditActiveProfileScreen> {
                                       style: TextStyle(
                                         fontSize: 10,
                                         fontWeight: FontWeight.w700,
-                                        color: Colors.black.withOpacity(0.5),
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onSurface
+                                            .withOpacity(0.5),
                                       ),
                                     ),
                                     const Text(
@@ -272,7 +275,7 @@ class _EditActiveProfileScreenState extends State<EditActiveProfileScreen> {
                                       style: TextStyle(
                                         fontSize: 10,
                                         fontWeight: FontWeight.w700,
-                                        color: Color(0xFF3628DD),
+                                        color: blue,
                                       ),
                                     ),
                                   ],
@@ -312,7 +315,11 @@ class _EditActiveProfileScreenState extends State<EditActiveProfileScreen> {
                                       style: TextStyle(
                                         fontSize: 10,
                                         fontWeight: FontWeight.w700,
-                                        color: Colors.black.withOpacity(0.5),
+                                        color: Theme.of(context).brightness ==
+                                                Brightness.dark
+                                            ? Colors.white.withOpacity(
+                                                0.5) // Adapt for dark mode
+                                            : Colors.black.withOpacity(0.5),
                                       ),
                                     ),
                                     const Text(
@@ -320,7 +327,7 @@ class _EditActiveProfileScreenState extends State<EditActiveProfileScreen> {
                                       style: TextStyle(
                                           fontSize: 10,
                                           fontWeight: FontWeight.w700,
-                                          color: Color(0xFF3628DD)),
+                                          color: blue),
                                     ),
                                   ],
                                 ),
@@ -389,16 +396,16 @@ class _EditActiveProfileScreenState extends State<EditActiveProfileScreen> {
                             const Text(
                               "Get matches faster ",
                               style: TextStyle(
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w400,
-                                  color: Colors.black),
+                                fontSize: 13,
+                                fontWeight: FontWeight.w400,
+                              ),
                             ),
                             const Text(
                               "Use credits to boost your profile to get more likes ",
                               style: TextStyle(
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.w400,
-                                  color: Colors.black),
+                                fontSize: 11,
+                                fontWeight: FontWeight.w400,
+                              ),
                             ),
                           ],
                         ),
@@ -717,16 +724,19 @@ class _EditActiveProfileScreenState extends State<EditActiveProfileScreen> {
               items: [
                 BottomNavigationBarItem(
                   icon: Image.asset(
-                    'assets/images/icons/homeBlack.png',
-                    width:
-                        MediaQuery.of(context).size.width * 0.08, // 7% of width
+                    Theme.of(context).brightness == Brightness.dark
+                        ? 'assets/images/icons/homeWhite.png'
+                        : 'assets/images/icons/homeBlack.png',
+                    width: MediaQuery.of(context).size.width * 0.08,
                     height: MediaQuery.of(context).size.width * 0.08,
                   ),
                   label: 'Home',
                 ),
                 BottomNavigationBarItem(
                   icon: Image.asset(
-                    'assets/images/icons/localcon.png',
+                    Theme.of(context).brightness == Brightness.dark
+                        ? 'assets/images/icons/locationWhite.png'
+                        : 'assets/images/icons/localcon.png',
                     width: MediaQuery.of(context).size.width * 0.08,
                     height: MediaQuery.of(context).size.width * 0.08,
                   ),
@@ -734,7 +744,9 @@ class _EditActiveProfileScreenState extends State<EditActiveProfileScreen> {
                 ),
                 BottomNavigationBarItem(
                   icon: Image.asset(
-                    'assets/images/icons/chatIcon.png',
+                    Theme.of(context).brightness == Brightness.dark
+                        ? 'assets/images/icons/chatWhite.png'
+                        : 'assets/images/icons/chatIcon.png',
                     width: MediaQuery.of(context).size.width * 0.08,
                     height: MediaQuery.of(context).size.width * 0.08,
                   ),
@@ -742,7 +754,9 @@ class _EditActiveProfileScreenState extends State<EditActiveProfileScreen> {
                 ),
                 BottomNavigationBarItem(
                   icon: Image.asset(
-                    'assets/images/icons/matches.png',
+                    Theme.of(context).brightness == Brightness.dark
+                        ? 'assets/images/icons/matchWhite.png'
+                        : 'assets/images/icons/matches.png',
                     width: MediaQuery.of(context).size.width * 0.08,
                     height: MediaQuery.of(context).size.width * 0.08,
                   ),
@@ -750,7 +764,9 @@ class _EditActiveProfileScreenState extends State<EditActiveProfileScreen> {
                 ),
                 BottomNavigationBarItem(
                   icon: Image.asset(
-                    'assets/images/icons/blueProfile.png',
+                    Theme.of(context).brightness == Brightness.dark
+                        ? 'assets/images/icons/blueProfile.png'
+                        : 'assets/images/icons/blueProfile.png',
                     width: MediaQuery.of(context).size.width * 0.07,
                     height: MediaQuery.of(context).size.width * 0.07,
                   ),

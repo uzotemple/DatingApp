@@ -47,7 +47,7 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Divider(color: Color(0xFF3628DD)),
+          const Divider(color: blue),
           const SizedBox(height: 5.0), // Space after the divider
           _buildSearchBar(), // Search bar
           const SizedBox(height: 10.0), // Space after the search bar

@@ -134,7 +134,7 @@ class RelationshipGoalsScreen extends StatelessWidget {
                   Navigator.pushNamed(context, distancePreferenceScreen);
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromRGBO(54, 40, 221, 1),
+                  backgroundColor: blue,
                   foregroundColor: Colors.white,
                   minimumSize: const Size(double.infinity, 50),
                   shape: RoundedRectangleBorder(
@@ -181,7 +181,7 @@ class RelationshipOption extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           boxShadow: const [
             BoxShadow(
-              color: Color.fromRGBO(54, 40, 221, 1),
+              color: blue,
               spreadRadius: 1,
             ),
           ],

@@ -103,7 +103,7 @@ class _CreateAcc1State extends State<CreateAcc1> {
                     child: const Text(
                       'Privacy Policy',
                       style: TextStyle(
-                        color: Color.fromRGBO(54, 40, 221, 1),
+                        color: blue,
                         decoration: TextDecoration.underline,
                       ),
                     ),
@@ -133,9 +133,7 @@ class _CreateAcc1State extends State<CreateAcc1> {
                     width: screenSize.width * 0.8,
                     height: screenSize.height * 0.05,
                     decoration: BoxDecoration(
-                      color: userProvider.agreeToPolicy
-                          ? const Color.fromRGBO(54, 40, 221, 1)
-                          : Colors.grey,
+                      color: userProvider.agreeToPolicy ? blue : Colors.grey,
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: const Center(
@@ -160,7 +158,7 @@ class _CreateAcc1State extends State<CreateAcc1> {
                         TextSpan(
                           text: 'Login',
                           style: TextStyle(
-                            color: Color.fromRGBO(54, 40, 221, 1),
+                            color: blue,
                             fontWeight: FontWeight.bold,
                           ),
                         ),

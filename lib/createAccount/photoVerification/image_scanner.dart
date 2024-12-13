@@ -61,7 +61,7 @@ class PhotoVerificationState extends State<ImageScanner> {
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: Color.fromRGBO(54, 40, 221, 1),
+                    color: blue,
                   ),
                 ),
                 const SizedBox(height: 10),
@@ -251,7 +251,7 @@ class PhotoVerificationState extends State<ImageScanner> {
                   width: screenSize.width * 0.8,
                   height: screenSize.height * 0.05,
                   decoration: BoxDecoration(
-                    color: const Color.fromRGBO(54, 40, 221, 1),
+                    color: blue,
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: const Center(

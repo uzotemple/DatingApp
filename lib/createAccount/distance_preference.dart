@@ -104,7 +104,7 @@ class DistancePreferenceScreen extends StatelessWidget {
                             min: 1,
                             max: 100,
                             divisions: 100,
-                            activeColor: const Color.fromRGBO(54, 40, 221, 1),
+                            activeColor: blue,
                             inactiveColor: Colors.grey[300],
                             label: distanceProvider.currentSliderValue == 100
                                 ? 'Unlimited'
@@ -128,7 +128,7 @@ class DistancePreferenceScreen extends StatelessWidget {
                     Navigator.pushNamed(context, interestsSelectionScreen);
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromRGBO(54, 40, 221, 1),
+                    backgroundColor: blue,
                     foregroundColor: Colors.white,
                     minimumSize: const Size(double.infinity, 50),
                     shape: RoundedRectangleBorder(

@@ -131,7 +131,7 @@ class _OnboardingScreenTwoState extends State<OnboardingScreenTwo> {
                                         // height: 90,
                                         child: DecoratedBox(
                                           decoration: const BoxDecoration(
-                                            color: Color(0xFF3628DD),
+                                            color: blue,
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(
                                                     10)), // Curved edges
@@ -260,7 +260,7 @@ class _OnboardingScreenTwoState extends State<OnboardingScreenTwo> {
               clipper: CurvedTopContainerClipper(),
               child: Container(
                 decoration: const BoxDecoration(
-                  color: Color(0xFF3628DD),
+                  color: blue,
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(30),
                       topRight: Radius.circular(30)),
@@ -366,7 +366,7 @@ class _OnboardingScreenTwoState extends State<OnboardingScreenTwo> {
                                   style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.w400,
-                                    color: Color(0xFF3628DD),
+                                    color: blue,
                                   ),
                                 ),
                               ),

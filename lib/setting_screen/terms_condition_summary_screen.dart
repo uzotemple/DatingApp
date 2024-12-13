@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:love_bird/config/constants.dart';
 
 class TermsAndConditionsSummaryScreen extends StatefulWidget {
   const TermsAndConditionsSummaryScreen({super.key});
@@ -45,7 +46,7 @@ class _TermsAndConditionsSummaryScreenState
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Divider(
-              color: Color(0xFF3628DD),
+              color: blue,
             ),
             Center(
               child: Text(

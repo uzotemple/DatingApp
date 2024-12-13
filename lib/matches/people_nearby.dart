@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:love_bird/config/constants.dart';
 import 'package:love_bird/config/routes.dart';
 
 import 'package:love_bird/homeScreen/homescreen.dart';
@@ -126,16 +126,19 @@ class PeopleNearbyPage extends StatelessWidget {
               items: [
                 BottomNavigationBarItem(
                   icon: Image.asset(
-                    'assets/images/icons/homeBlack.png',
-                    width:
-                        MediaQuery.of(context).size.width * 0.08, // 7% of width
+                    Theme.of(context).brightness == Brightness.dark
+                        ? 'assets/images/icons/homeWhite.png'
+                        : 'assets/images/icons/homeBlack.png',
+                    width: MediaQuery.of(context).size.width * 0.08,
                     height: MediaQuery.of(context).size.width * 0.08,
                   ),
                   label: 'Home',
                 ),
                 BottomNavigationBarItem(
                   icon: Image.asset(
-                    'assets/images/icons/localcon.png',
+                    Theme.of(context).brightness == Brightness.dark
+                        ? 'assets/images/icons/locationWhite.png'
+                        : 'assets/images/icons/localcon.png',
                     width: MediaQuery.of(context).size.width * 0.08,
                     height: MediaQuery.of(context).size.width * 0.08,
                   ),
@@ -143,7 +146,9 @@ class PeopleNearbyPage extends StatelessWidget {
                 ),
                 BottomNavigationBarItem(
                   icon: Image.asset(
-                    'assets/images/icons/chatIcon.png',
+                    Theme.of(context).brightness == Brightness.dark
+                        ? 'assets/images/icons/chatWhite.png'
+                        : 'assets/images/icons/chatIcon.png',
                     width: MediaQuery.of(context).size.width * 0.08,
                     height: MediaQuery.of(context).size.width * 0.08,
                   ),
@@ -151,7 +156,9 @@ class PeopleNearbyPage extends StatelessWidget {
                 ),
                 BottomNavigationBarItem(
                   icon: Image.asset(
-                    'assets/images/icons/matches.png',
+                    Theme.of(context).brightness == Brightness.dark
+                        ? 'assets/images/icons/matchWhite.png'
+                        : 'assets/images/icons/matches.png',
                     width: MediaQuery.of(context).size.width * 0.08,
                     height: MediaQuery.of(context).size.width * 0.08,
                   ),
@@ -159,7 +166,9 @@ class PeopleNearbyPage extends StatelessWidget {
                 ),
                 BottomNavigationBarItem(
                   icon: Image.asset(
-                    'assets/images/icons/personIcon.png',
+                    Theme.of(context).brightness == Brightness.dark
+                        ? 'assets/images/icons/profileWhite.png'
+                        : 'assets/images/icons/personIcon.png',
                     width: MediaQuery.of(context).size.width * 0.07,
                     height: MediaQuery.of(context).size.width * 0.07,
                   ),
@@ -218,7 +227,7 @@ class PeopleNearbyPage extends StatelessWidget {
         width: screenSize.width * 0.4,
         height: screenSize.height * 0.06,
         decoration: BoxDecoration(
-          color: const Color.fromRGBO(54, 40, 221, 1),
+          color: blue,
           borderRadius: BorderRadius.circular(10),
         ),
         child: Center(

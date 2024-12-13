@@ -70,10 +70,13 @@ class _MoreOptionsState extends State<MoreOptions> {
 
                   // Checkbox list
                   CheckboxListTile(
-                    title: const Text(
+                    title: Text(
                       'Straight',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        color: Theme.of(context).textTheme.bodyMedium?.color,
+                      ),
                     ),
                     value: selectedCheckboxIndex == 0,
                     onChanged: (bool? value) {
@@ -81,14 +84,20 @@ class _MoreOptionsState extends State<MoreOptions> {
                         selectedCheckboxIndex = value! ? 0 : -1;
                       });
                     },
-                    activeColor: const Color.fromRGBO(54, 40, 221, 1),
+                    activeColor: blue,
                     checkColor: Colors.white,
+                    side: const BorderSide(
+                      color: blue,
+                      width: 1,
+                    ),
                   ),
                   CheckboxListTile(
-                    title: const Text(
+                    title: Text(
                       'Open minded',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).textTheme.bodyMedium?.color,
+                          fontSize: 16),
                     ),
                     value: selectedCheckboxIndex == 1,
                     onChanged: (bool? value) {
@@ -96,14 +105,21 @@ class _MoreOptionsState extends State<MoreOptions> {
                         selectedCheckboxIndex = value! ? 1 : -1;
                       });
                     },
-                    activeColor: const Color.fromRGBO(54, 40, 221, 1),
+                    activeColor: blue,
                     checkColor: Colors.white,
+                    side: const BorderSide(
+                      color: blue,
+                      width: 1,
+                    ),
                   ),
+
                   CheckboxListTile(
-                    title: const Text(
+                    title: Text(
                       'Bisexual',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: Theme.of(context).textTheme.bodyMedium?.color),
                     ),
                     value: selectedCheckboxIndex == 2,
                     onChanged: (bool? value) {
@@ -111,14 +127,20 @@ class _MoreOptionsState extends State<MoreOptions> {
                         selectedCheckboxIndex = value! ? 2 : -1;
                       });
                     },
-                    activeColor: const Color.fromRGBO(54, 40, 221, 1),
+                    activeColor: blue,
                     checkColor: Colors.white,
+                    side: const BorderSide(
+                      color: blue,
+                      width: 1,
+                    ),
                   ),
                   CheckboxListTile(
-                    title: const Text(
+                    title: Text(
                       'Gay/Lesbian',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).textTheme.bodyMedium?.color,
+                          fontSize: 16),
                     ),
                     value: selectedCheckboxIndex == 3,
                     onChanged: (bool? value) {
@@ -126,8 +148,12 @@ class _MoreOptionsState extends State<MoreOptions> {
                         selectedCheckboxIndex = value! ? 3 : -1;
                       });
                     },
-                    activeColor: const Color.fromRGBO(54, 40, 221, 1),
+                    activeColor: blue,
                     checkColor: Colors.white,
+                    side: const BorderSide(
+                      color: blue,
+                      width: 1,
+                    ),
                   ),
                   const SizedBox(height: 20),
 
@@ -402,7 +428,7 @@ class _MoreOptionsState extends State<MoreOptions> {
                   width: screenSize.width * 0.6,
                   height: screenSize.height * 0.05,
                   decoration: BoxDecoration(
-                    color: const Color.fromRGBO(54, 40, 221, 1),
+                    color: blue,
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: const Center(
@@ -613,22 +639,33 @@ class _MoreOptionsState extends State<MoreOptions> {
       BuildContext context, Function(String, String) onHeightRangeSelected) {
     List<String> heightValues = [
       "No minimum",
+      "Lower than 130cm",
+      "130cm (4'3\")",
+      "140cm (4'7\")",
       "150cm (5'0\")",
       "160cm (5'3\")",
       "170cm (5'7\")",
       "180cm (5'11\")",
       "190cm (6'3\")",
+      "200 cm (6'7\")",
+      "210 cm (6'11\")",
       "219cm (7'3\")",
+      "Higher than 219cm",
+      "No minimum"
     ];
 
     List<String> heightValues2 = [
       "No maximum",
+      "Higher than 219cm",
       "219cm (7'3\")",
       "190cm (6'3\")",
       "180cm (5'11\")",
       "170cm (5'7\")",
       "160cm (5'3\")",
       "150cm (5'0\")",
+      "140cm (4'7\")",
+      "130cm (4'3\")",
+      "Lower than 130cm",
     ];
     String selectedMinHeight = "No minimum"; // Default value for min
     String selectedMaxHeight = "No maximum"; // Default value for max
@@ -704,7 +741,10 @@ class _MoreOptionsState extends State<MoreOptions> {
                                               fontSize: 18,
                                               color: heightValues[index] ==
                                                       selectedMinHeight
-                                                  ? Colors.black
+                                                  ? Theme.of(context)
+                                                      .textTheme
+                                                      .bodyMedium
+                                                      ?.color
                                                   : Colors.grey,
                                             ),
                                           ),
@@ -742,7 +782,10 @@ class _MoreOptionsState extends State<MoreOptions> {
                                               fontSize: 18,
                                               color: heightValues2[index] ==
                                                       selectedMaxHeight
-                                                  ? Colors.black
+                                                  ? Theme.of(context)
+                                                      .textTheme
+                                                      .bodyMedium
+                                                      ?.color
                                                   : Colors.grey,
                                             ),
                                           ),
@@ -895,10 +938,15 @@ class _MoreOptionsState extends State<MoreOptions> {
                       Column(
                         children: [
                           CheckboxListTile(
-                            title: const Text(
+                            title: Text(
                               'Open to chat',
                               style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 16),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                  color: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium
+                                      ?.color),
                             ),
                             value: selectedCheckboxIndex == 0,
                             onChanged: (bool? value) {
@@ -906,21 +954,26 @@ class _MoreOptionsState extends State<MoreOptions> {
                                 selectedCheckboxIndex = value! ? 0 : -1;
                               });
                             },
-                            activeColor: const Color.fromRGBO(54, 40, 221, 1),
+                            activeColor: blue,
                             checkColor: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
                             ),
                             side: const BorderSide(
-                              color: Color.fromRGBO(54, 40, 221, 1),
+                              color: blue,
                               width: 1,
                             ),
                           ),
                           CheckboxListTile(
-                            title: const Text(
+                            title: Text(
                               'Here to Date',
                               style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 16),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                  color: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium
+                                      ?.color),
                             ),
                             value: selectedCheckboxIndex == 1,
                             onChanged: (bool? value) {
@@ -928,21 +981,26 @@ class _MoreOptionsState extends State<MoreOptions> {
                                 selectedCheckboxIndex = value! ? 1 : -1;
                               });
                             },
-                            activeColor: const Color.fromRGBO(54, 40, 221, 1),
+                            activeColor: blue,
                             checkColor: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
                             ),
                             side: const BorderSide(
-                              color: Color.fromRGBO(54, 40, 221, 1),
+                              color: blue,
                               width: 1,
                             ),
                           ),
                           CheckboxListTile(
-                            title: const Text(
+                            title: Text(
                               'Casual',
                               style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 16),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                  color: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium
+                                      ?.color),
                             ),
                             value: selectedCheckboxIndex == 2,
                             onChanged: (bool? value) {
@@ -950,21 +1008,26 @@ class _MoreOptionsState extends State<MoreOptions> {
                                 selectedCheckboxIndex = value! ? 2 : -1;
                               });
                             },
-                            activeColor: const Color.fromRGBO(54, 40, 221, 1),
+                            activeColor: blue,
                             checkColor: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
                             ),
                             side: const BorderSide(
-                              color: Color.fromRGBO(54, 40, 221, 1),
+                              color: blue,
                               width: 1,
                             ),
                           ),
                           CheckboxListTile(
-                            title: const Text(
+                            title: Text(
                               'Ready for a Relationship',
                               style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 16),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                  color: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium
+                                      ?.color),
                             ),
                             value: selectedCheckboxIndex == 3,
                             onChanged: (bool? value) {
@@ -972,13 +1035,13 @@ class _MoreOptionsState extends State<MoreOptions> {
                                 selectedCheckboxIndex = value! ? 3 : -1;
                               });
                             },
-                            activeColor: const Color.fromRGBO(54, 40, 221, 1),
+                            activeColor: blue,
                             checkColor: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
                             ),
                             side: const BorderSide(
-                              color: Color.fromRGBO(54, 40, 221, 1),
+                              color: blue,
                               width: 1,
                             ),
                           ),
@@ -1131,8 +1194,14 @@ class _MoreOptionsState extends State<MoreOptions> {
                         ].map((starSign) {
                           return CheckboxListTile(
                             title: Text(starSign,
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 16)),
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                  color: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium
+                                      ?.color,
+                                )),
                             value: selectedStarSign == starSign,
                             onChanged: (bool? value) {
                               setState(() {
@@ -1140,13 +1209,13 @@ class _MoreOptionsState extends State<MoreOptions> {
                                 selectedStarSign = value! ? starSign : null;
                               });
                             },
-                            activeColor: const Color.fromRGBO(54, 40, 221, 1),
+                            activeColor: blue,
                             checkColor: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
                             ),
                             side: const BorderSide(
-                              color: Color.fromRGBO(54, 40, 221, 1),
+                              color: blue,
                               width: 2,
                             ),
                           );
@@ -1313,9 +1382,14 @@ class _MoreOptionsState extends State<MoreOptions> {
                           ].map((language) {
                             return CheckboxListTile(
                               title: Text(language,
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16)),
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                    color: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium
+                                        ?.color,
+                                  )),
                               value: selectedLanguages.contains(language),
                               onChanged: (bool? value) {
                                 setState(() {
@@ -1328,13 +1402,13 @@ class _MoreOptionsState extends State<MoreOptions> {
                                   }
                                 });
                               },
-                              activeColor: const Color.fromRGBO(54, 40, 221, 1),
+                              activeColor: blue,
                               checkColor: Colors.white,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               side: const BorderSide(
-                                color: Color.fromRGBO(54, 40, 221, 1),
+                                color: blue,
                                 width: 2,
                               ),
                             );
@@ -1375,9 +1449,14 @@ class _MoreOptionsState extends State<MoreOptions> {
                           ].map((language) {
                             return CheckboxListTile(
                               title: Text(language,
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16)),
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                    color: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium
+                                        ?.color,
+                                  )),
                               value: selectedLanguages.contains(language),
                               onChanged: (bool? value) {
                                 setState(() {
@@ -1390,13 +1469,13 @@ class _MoreOptionsState extends State<MoreOptions> {
                                   }
                                 });
                               },
-                              activeColor: const Color.fromRGBO(54, 40, 221, 1),
+                              activeColor: blue,
                               checkColor: Colors.white,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               side: const BorderSide(
-                                color: Color.fromRGBO(54, 40, 221, 1),
+                                color: blue,
                                 width: 2,
                               ),
                             );
@@ -1535,11 +1614,13 @@ class _MoreOptionsState extends State<MoreOptions> {
 
                       // Checkbox ListTiles with rounded borders and single-selection logic
                       CheckboxListTile(
-                        title: const Text(
+                        title: Text(
                           'Would like them someday',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
+                            color:
+                                Theme.of(context).textTheme.bodyMedium?.color,
                           ),
                         ),
                         value: selectedCheckboxIndex == 0,
@@ -1548,22 +1629,24 @@ class _MoreOptionsState extends State<MoreOptions> {
                             selectedCheckboxIndex = value! ? 0 : -1;
                           });
                         },
-                        activeColor: const Color.fromRGBO(54, 40, 221, 1),
+                        activeColor: blue,
                         checkColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
                         side: const BorderSide(
-                          color: Color.fromRGBO(54, 40, 221, 1),
+                          color: blue,
                           width: 1,
                         ),
                       ),
                       CheckboxListTile(
-                        title: const Text(
+                        title: Text(
                           'Already has children',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
+                            color:
+                                Theme.of(context).textTheme.bodyMedium?.color,
                           ),
                         ),
                         value: selectedCheckboxIndex == 1,
@@ -1572,22 +1655,24 @@ class _MoreOptionsState extends State<MoreOptions> {
                             selectedCheckboxIndex = value! ? 1 : -1;
                           });
                         },
-                        activeColor: const Color.fromRGBO(54, 40, 221, 1),
+                        activeColor: blue,
                         checkColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
                         side: const BorderSide(
-                          color: Color.fromRGBO(54, 40, 221, 1),
+                          color: blue,
                           width: 1,
                         ),
                       ),
                       CheckboxListTile(
-                        title: const Text(
+                        title: Text(
                           'Doesn’t want them',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
+                            color:
+                                Theme.of(context).textTheme.bodyMedium?.color,
                           ),
                         ),
                         value: selectedCheckboxIndex == 2,
@@ -1596,13 +1681,13 @@ class _MoreOptionsState extends State<MoreOptions> {
                             selectedCheckboxIndex = value! ? 2 : -1;
                           });
                         },
-                        activeColor: const Color.fromRGBO(54, 40, 221, 1),
+                        activeColor: blue,
                         checkColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
                         side: const BorderSide(
-                          color: Color.fromRGBO(54, 40, 221, 1),
+                          color: blue,
                           width: 1,
                         ),
                       ),
@@ -1738,11 +1823,13 @@ class _MoreOptionsState extends State<MoreOptions> {
 
                       // Checkbox ListTiles with rounded borders and single-selection logic
                       CheckboxListTile(
-                        title: const Text(
+                        title: Text(
                           'Cat(s)',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
+                            color:
+                                Theme.of(context).textTheme.bodyMedium?.color,
                           ),
                         ),
                         value: selectedCheckboxIndex == 0,
@@ -1751,22 +1838,24 @@ class _MoreOptionsState extends State<MoreOptions> {
                             selectedCheckboxIndex = value! ? 0 : -1;
                           });
                         },
-                        activeColor: const Color.fromRGBO(54, 40, 221, 1),
+                        activeColor: blue,
                         checkColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
                         side: const BorderSide(
-                          color: Color.fromRGBO(54, 40, 221, 1),
+                          color: blue,
                           width: 1,
                         ),
                       ),
                       CheckboxListTile(
-                        title: const Text(
+                        title: Text(
                           'Dog(s)',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
+                            color:
+                                Theme.of(context).textTheme.bodyMedium?.color,
                           ),
                         ),
                         value: selectedCheckboxIndex == 1,
@@ -1775,22 +1864,24 @@ class _MoreOptionsState extends State<MoreOptions> {
                             selectedCheckboxIndex = value! ? 1 : -1;
                           });
                         },
-                        activeColor: const Color.fromRGBO(54, 40, 221, 1),
+                        activeColor: blue,
                         checkColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
                         side: const BorderSide(
-                          color: Color.fromRGBO(54, 40, 221, 1),
+                          color: blue,
                           width: 1,
                         ),
                       ),
                       CheckboxListTile(
-                        title: const Text(
+                        title: Text(
                           'Doesn’t want Multiple',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
+                            color:
+                                Theme.of(context).textTheme.bodyMedium?.color,
                           ),
                         ),
                         value: selectedCheckboxIndex == 2,
@@ -1799,23 +1890,25 @@ class _MoreOptionsState extends State<MoreOptions> {
                             selectedCheckboxIndex = value! ? 2 : -1;
                           });
                         },
-                        activeColor: const Color.fromRGBO(54, 40, 221, 1),
+                        activeColor: blue,
                         checkColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
                         side: const BorderSide(
-                          color: Color.fromRGBO(54, 40, 221, 1),
+                          color: blue,
                           width: 1,
                         ),
                       ),
 
                       CheckboxListTile(
-                        title: const Text(
+                        title: Text(
                           'Other',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
+                            color:
+                                Theme.of(context).textTheme.bodyMedium?.color,
                           ),
                         ),
                         value: selectedCheckboxIndex == 3,
@@ -1824,23 +1917,25 @@ class _MoreOptionsState extends State<MoreOptions> {
                             selectedCheckboxIndex = value! ? 3 : -1;
                           });
                         },
-                        activeColor: const Color.fromRGBO(54, 40, 221, 1),
+                        activeColor: blue,
                         checkColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
                         side: const BorderSide(
-                          color: Color.fromRGBO(54, 40, 221, 1),
+                          color: blue,
                           width: 1,
                         ),
                       ),
 
                       CheckboxListTile(
-                        title: const Text(
+                        title: Text(
                           'None',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
+                            color:
+                                Theme.of(context).textTheme.bodyMedium?.color,
                           ),
                         ),
                         value: selectedCheckboxIndex == 4,
@@ -1849,13 +1944,13 @@ class _MoreOptionsState extends State<MoreOptions> {
                             selectedCheckboxIndex = value! ? 4 : -1;
                           });
                         },
-                        activeColor: const Color.fromRGBO(54, 40, 221, 1),
+                        activeColor: blue,
                         checkColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
                         side: const BorderSide(
-                          color: Color.fromRGBO(54, 40, 221, 1),
+                          color: blue,
                           width: 1,
                         ),
                       ),
@@ -1990,11 +2085,13 @@ class _MoreOptionsState extends State<MoreOptions> {
 
                       // Checkbox ListTiles with rounded borders and single-selection logic
                       CheckboxListTile(
-                        title: const Text(
+                        title: Text(
                           'Smoking',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
+                            color:
+                                Theme.of(context).textTheme.bodyMedium?.color,
                           ),
                         ),
                         value: selectedCheckboxIndex == 0,
@@ -2003,22 +2100,24 @@ class _MoreOptionsState extends State<MoreOptions> {
                             selectedCheckboxIndex = value! ? 0 : -1;
                           });
                         },
-                        activeColor: const Color.fromRGBO(54, 40, 221, 1),
+                        activeColor: blue,
                         checkColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
                         side: const BorderSide(
-                          color: Color.fromRGBO(54, 40, 221, 1),
+                          color: blue,
                           width: 1,
                         ),
                       ),
                       CheckboxListTile(
-                        title: const Text(
+                        title: Text(
                           'Non- Smoking',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
+                            color:
+                                Theme.of(context).textTheme.bodyMedium?.color,
                           ),
                         ),
                         value: selectedCheckboxIndex == 1,
@@ -2027,13 +2126,13 @@ class _MoreOptionsState extends State<MoreOptions> {
                             selectedCheckboxIndex = value! ? 1 : -1;
                           });
                         },
-                        activeColor: const Color.fromRGBO(54, 40, 221, 1),
+                        activeColor: blue,
                         checkColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
                         side: const BorderSide(
-                          color: Color.fromRGBO(54, 40, 221, 1),
+                          color: blue,
                           width: 1,
                         ),
                       ),
@@ -2169,11 +2268,13 @@ class _MoreOptionsState extends State<MoreOptions> {
 
                       // Checkbox ListTiles with rounded borders and single-selection logic
                       CheckboxListTile(
-                        title: const Text(
+                        title: Text(
                           'Socially',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
+                            color:
+                                Theme.of(context).textTheme.bodyMedium?.color,
                           ),
                         ),
                         value: selectedCheckboxIndex == 0,
@@ -2182,22 +2283,24 @@ class _MoreOptionsState extends State<MoreOptions> {
                             selectedCheckboxIndex = value! ? 0 : -1;
                           });
                         },
-                        activeColor: const Color.fromRGBO(54, 40, 221, 1),
+                        activeColor: blue,
                         checkColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
                         side: const BorderSide(
-                          color: Color.fromRGBO(54, 40, 221, 1),
+                          color: blue,
                           width: 1,
                         ),
                       ),
                       CheckboxListTile(
-                        title: const Text(
+                        title: Text(
                           'Never',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
+                            color:
+                                Theme.of(context).textTheme.bodyMedium?.color,
                           ),
                         ),
                         value: selectedCheckboxIndex == 1,
@@ -2206,22 +2309,24 @@ class _MoreOptionsState extends State<MoreOptions> {
                             selectedCheckboxIndex = value! ? 1 : -1;
                           });
                         },
-                        activeColor: const Color.fromRGBO(54, 40, 221, 1),
+                        activeColor: blue,
                         checkColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
                         side: const BorderSide(
-                          color: Color.fromRGBO(54, 40, 221, 1),
+                          color: blue,
                           width: 1,
                         ),
                       ),
                       CheckboxListTile(
-                        title: const Text(
+                        title: Text(
                           'Other',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
+                            color:
+                                Theme.of(context).textTheme.bodyMedium?.color,
                           ),
                         ),
                         value: selectedCheckboxIndex == 2,
@@ -2230,22 +2335,24 @@ class _MoreOptionsState extends State<MoreOptions> {
                             selectedCheckboxIndex = value! ? 2 : -1;
                           });
                         },
-                        activeColor: const Color.fromRGBO(54, 40, 221, 1),
+                        activeColor: blue,
                         checkColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
                         side: const BorderSide(
-                          color: Color.fromRGBO(54, 40, 221, 1),
+                          color: blue,
                           width: 1,
                         ),
                       ),
                       CheckboxListTile(
-                        title: const Text(
+                        title: Text(
                           "No, they're Sober",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
+                            color:
+                                Theme.of(context).textTheme.bodyMedium?.color,
                           ),
                         ),
                         value: selectedCheckboxIndex == 3,
@@ -2254,13 +2361,13 @@ class _MoreOptionsState extends State<MoreOptions> {
                             selectedCheckboxIndex = value! ? 3 : -1;
                           });
                         },
-                        activeColor: const Color.fromRGBO(54, 40, 221, 1),
+                        activeColor: blue,
                         checkColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
                         side: const BorderSide(
-                          color: Color.fromRGBO(54, 40, 221, 1),
+                          color: blue,
                           width: 1,
                         ),
                       ),
@@ -2398,11 +2505,13 @@ class _MoreOptionsState extends State<MoreOptions> {
 
                       // Checkbox ListTiles with rounded borders and single-selection logic
                       CheckboxListTile(
-                        title: const Text(
+                        title: Text(
                           'High School',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
+                            color:
+                                Theme.of(context).textTheme.bodyMedium?.color,
                           ),
                         ),
                         value: selectedCheckboxIndex == 0,
@@ -2411,22 +2520,24 @@ class _MoreOptionsState extends State<MoreOptions> {
                             selectedCheckboxIndex = value! ? 0 : -1;
                           });
                         },
-                        activeColor: const Color.fromRGBO(54, 40, 221, 1),
+                        activeColor: blue,
                         checkColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
                         side: const BorderSide(
-                          color: Color.fromRGBO(54, 40, 221, 1),
+                          color: blue,
                           width: 1,
                         ),
                       ),
                       CheckboxListTile(
-                        title: const Text(
+                        title: Text(
                           'In College',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
+                            color:
+                                Theme.of(context).textTheme.bodyMedium?.color,
                           ),
                         ),
                         value: selectedCheckboxIndex == 1,
@@ -2435,22 +2546,24 @@ class _MoreOptionsState extends State<MoreOptions> {
                             selectedCheckboxIndex = value! ? 1 : -1;
                           });
                         },
-                        activeColor: const Color.fromRGBO(54, 40, 221, 1),
+                        activeColor: blue,
                         checkColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
                         side: const BorderSide(
-                          color: Color.fromRGBO(54, 40, 221, 1),
+                          color: blue,
                           width: 1,
                         ),
                       ),
                       CheckboxListTile(
-                        title: const Text(
+                        title: Text(
                           'Finished College',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
+                            color:
+                                Theme.of(context).textTheme.bodyMedium?.color,
                           ),
                         ),
                         value: selectedCheckboxIndex == 2,
@@ -2459,22 +2572,24 @@ class _MoreOptionsState extends State<MoreOptions> {
                             selectedCheckboxIndex = value! ? 2 : -1;
                           });
                         },
-                        activeColor: const Color.fromRGBO(54, 40, 221, 1),
+                        activeColor: blue,
                         checkColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
                         side: const BorderSide(
-                          color: Color.fromRGBO(54, 40, 221, 1),
+                          color: blue,
                           width: 1,
                         ),
                       ),
                       CheckboxListTile(
-                        title: const Text(
+                        title: Text(
                           "In grad School",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
+                            color:
+                                Theme.of(context).textTheme.bodyMedium?.color,
                           ),
                         ),
                         value: selectedCheckboxIndex == 3,
@@ -2483,22 +2598,24 @@ class _MoreOptionsState extends State<MoreOptions> {
                             selectedCheckboxIndex = value! ? 3 : -1;
                           });
                         },
-                        activeColor: const Color.fromRGBO(54, 40, 221, 1),
+                        activeColor: blue,
                         checkColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
                         side: const BorderSide(
-                          color: Color.fromRGBO(54, 40, 221, 1),
+                          color: blue,
                           width: 1,
                         ),
                       ),
                       CheckboxListTile(
-                        title: const Text(
+                        title: Text(
                           "Finished Graduate degree or higher",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
+                            color:
+                                Theme.of(context).textTheme.bodyMedium?.color,
                           ),
                         ),
                         value: selectedCheckboxIndex == 4,
@@ -2507,13 +2624,13 @@ class _MoreOptionsState extends State<MoreOptions> {
                             selectedCheckboxIndex = value! ? 4 : -1;
                           });
                         },
-                        activeColor: const Color.fromRGBO(54, 40, 221, 1),
+                        activeColor: blue,
                         checkColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
                         side: const BorderSide(
-                          color: Color.fromRGBO(54, 40, 221, 1),
+                          color: blue,
                           width: 1,
                         ),
                       ),
@@ -2650,11 +2767,13 @@ class _MoreOptionsState extends State<MoreOptions> {
 
                       // Checkbox ListTiles with rounded borders and single-selection logic
                       CheckboxListTile(
-                        title: const Text(
+                        title: Text(
                           'Atheist',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
+                            color:
+                                Theme.of(context).textTheme.bodyMedium?.color,
                           ),
                         ),
                         value: selectedCheckboxIndex == 0,
@@ -2663,22 +2782,24 @@ class _MoreOptionsState extends State<MoreOptions> {
                             selectedCheckboxIndex = value! ? 0 : -1;
                           });
                         },
-                        activeColor: const Color.fromRGBO(54, 40, 221, 1),
+                        activeColor: blue,
                         checkColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
                         side: const BorderSide(
-                          color: Color.fromRGBO(54, 40, 221, 1),
+                          color: blue,
                           width: 1,
                         ),
                       ),
                       CheckboxListTile(
-                        title: const Text(
+                        title: Text(
                           'Christian',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
+                            color:
+                                Theme.of(context).textTheme.bodyMedium?.color,
                           ),
                         ),
                         value: selectedCheckboxIndex == 1,
@@ -2687,22 +2808,24 @@ class _MoreOptionsState extends State<MoreOptions> {
                             selectedCheckboxIndex = value! ? 1 : -1;
                           });
                         },
-                        activeColor: const Color.fromRGBO(54, 40, 221, 1),
+                        activeColor: blue,
                         checkColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
                         side: const BorderSide(
-                          color: Color.fromRGBO(54, 40, 221, 1),
+                          color: blue,
                           width: 1,
                         ),
                       ),
                       CheckboxListTile(
-                        title: const Text(
+                        title: Text(
                           'Muslim',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
+                            color:
+                                Theme.of(context).textTheme.bodyMedium?.color,
                           ),
                         ),
                         value: selectedCheckboxIndex == 2,
@@ -2711,22 +2834,24 @@ class _MoreOptionsState extends State<MoreOptions> {
                             selectedCheckboxIndex = value! ? 2 : -1;
                           });
                         },
-                        activeColor: const Color.fromRGBO(54, 40, 221, 1),
+                        activeColor: blue,
                         checkColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
                         side: const BorderSide(
-                          color: Color.fromRGBO(54, 40, 221, 1),
+                          color: blue,
                           width: 1,
                         ),
                       ),
                       CheckboxListTile(
-                        title: const Text(
+                        title: Text(
                           "Other",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
+                            color:
+                                Theme.of(context).textTheme.bodyMedium?.color,
                           ),
                         ),
                         value: selectedCheckboxIndex == 3,
@@ -2735,13 +2860,13 @@ class _MoreOptionsState extends State<MoreOptions> {
                             selectedCheckboxIndex = value! ? 3 : -1;
                           });
                         },
-                        activeColor: const Color.fromRGBO(54, 40, 221, 1),
+                        activeColor: blue,
                         checkColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
                         side: const BorderSide(
-                          color: Color.fromRGBO(54, 40, 221, 1),
+                          color: blue,
                           width: 1,
                         ),
                       ),
@@ -2878,11 +3003,12 @@ class _MoreOptionsState extends State<MoreOptions> {
 
                     // Checkbox ListTiles with rounded borders and single-selection logic
                     CheckboxListTile(
-                      title: const Text(
+                      title: Text(
                         'Single',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
+                          color: Theme.of(context).textTheme.bodyMedium?.color,
                         ),
                       ),
                       value: selectedCheckboxIndex == 0,
@@ -2891,22 +3017,23 @@ class _MoreOptionsState extends State<MoreOptions> {
                           selectedCheckboxIndex = value! ? 0 : -1;
                         });
                       },
-                      activeColor: const Color.fromRGBO(54, 40, 221, 1),
+                      activeColor: blue,
                       checkColor: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
                       side: const BorderSide(
-                        color: Color.fromRGBO(54, 40, 221, 1),
+                        color: blue,
                         width: 1,
                       ),
                     ),
                     CheckboxListTile(
-                      title: const Text(
+                      title: Text(
                         'Taken',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
+                          color: Theme.of(context).textTheme.bodyMedium?.color,
                         ),
                       ),
                       value: selectedCheckboxIndex == 1,
@@ -2915,22 +3042,23 @@ class _MoreOptionsState extends State<MoreOptions> {
                           selectedCheckboxIndex = value! ? 1 : -1;
                         });
                       },
-                      activeColor: const Color.fromRGBO(54, 40, 221, 1),
+                      activeColor: blue,
                       checkColor: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
                       side: const BorderSide(
-                        color: Color.fromRGBO(54, 40, 221, 1),
+                        color: blue,
                         width: 1,
                       ),
                     ),
                     CheckboxListTile(
-                      title: const Text(
+                      title: Text(
                         'Muslim',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
+                          color: Theme.of(context).textTheme.bodyMedium?.color,
                         ),
                       ),
                       value: selectedCheckboxIndex == 2,
@@ -2939,22 +3067,23 @@ class _MoreOptionsState extends State<MoreOptions> {
                           selectedCheckboxIndex = value! ? 2 : -1;
                         });
                       },
-                      activeColor: const Color.fromRGBO(54, 40, 221, 1),
+                      activeColor: blue,
                       checkColor: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
                       side: const BorderSide(
-                        color: Color.fromRGBO(54, 40, 221, 1),
+                        color: blue,
                         width: 1,
                       ),
                     ),
                     CheckboxListTile(
-                      title: const Text(
+                      title: Text(
                         "Other",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
+                          color: Theme.of(context).textTheme.bodyMedium?.color,
                         ),
                       ),
                       value: selectedCheckboxIndex == 3,
@@ -2963,13 +3092,13 @@ class _MoreOptionsState extends State<MoreOptions> {
                           selectedCheckboxIndex = value! ? 3 : -1;
                         });
                       },
-                      activeColor: const Color.fromRGBO(54, 40, 221, 1),
+                      activeColor: blue,
                       checkColor: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
                       side: const BorderSide(
-                        color: Color.fromRGBO(54, 40, 221, 1),
+                        color: blue,
                         width: 1,
                       ),
                     ),
@@ -3107,11 +3236,12 @@ class _MoreOptionsState extends State<MoreOptions> {
 
                     // Checkbox ListTiles with rounded borders and single-selection logic
                     CheckboxListTile(
-                      title: const Text(
+                      title: Text(
                         'Extrovert',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
+                          color: Theme.of(context).textTheme.bodyMedium?.color,
                         ),
                       ),
                       value: selectedCheckboxIndex == 0,
@@ -3120,22 +3250,23 @@ class _MoreOptionsState extends State<MoreOptions> {
                           selectedCheckboxIndex = value! ? 0 : -1;
                         });
                       },
-                      activeColor: const Color.fromRGBO(54, 40, 221, 1),
+                      activeColor: blue,
                       checkColor: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
                       side: const BorderSide(
-                        color: Color.fromRGBO(54, 40, 221, 1),
+                        color: blue,
                         width: 1,
                       ),
                     ),
                     CheckboxListTile(
-                      title: const Text(
+                      title: Text(
                         'Introvert',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
+                          color: Theme.of(context).textTheme.bodyMedium?.color,
                         ),
                       ),
                       value: selectedCheckboxIndex == 1,
@@ -3144,22 +3275,23 @@ class _MoreOptionsState extends State<MoreOptions> {
                           selectedCheckboxIndex = value! ? 1 : -1;
                         });
                       },
-                      activeColor: const Color.fromRGBO(54, 40, 221, 1),
+                      activeColor: blue,
                       checkColor: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
                       side: const BorderSide(
-                        color: Color.fromRGBO(54, 40, 221, 1),
+                        color: blue,
                         width: 1,
                       ),
                     ),
                     CheckboxListTile(
-                      title: const Text(
+                      title: Text(
                         'Somewhere in between',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
+                          color: Theme.of(context).textTheme.bodyMedium?.color,
                         ),
                       ),
                       value: selectedCheckboxIndex == 2,
@@ -3168,13 +3300,13 @@ class _MoreOptionsState extends State<MoreOptions> {
                           selectedCheckboxIndex = value! ? 2 : -1;
                         });
                       },
-                      activeColor: const Color.fromRGBO(54, 40, 221, 1),
+                      activeColor: blue,
                       checkColor: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
                       side: const BorderSide(
-                        color: Color.fromRGBO(54, 40, 221, 1),
+                        color: blue,
                         width: 1,
                       ),
                     ),
@@ -3330,13 +3462,13 @@ class _MoreOptionsState extends State<MoreOptions> {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                           borderSide: const BorderSide(
-                            color: Color(0xFF3628DD),
+                            color: blue,
                           ),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                           borderSide: const BorderSide(
-                            color: Color(0xFF3628DD),
+                            color: blue,
                           ),
                         ),
                       ),

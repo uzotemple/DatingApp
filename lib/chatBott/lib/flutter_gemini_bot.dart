@@ -7,6 +7,7 @@ import 'package:love_bird/chatBott/lib/models/chat_model.dart';
 import 'package:love_bird/chatBott/lib/services/gemini_ai_api.dart';
 import 'package:love_bird/chatBott/lib/utils/constants.dart';
 import 'package:love_bird/chatBott/lib/utils/helper_widgets.dart';
+import 'package:love_bird/config/constants.dart';
 
 class FlutterGeminiChat extends StatefulWidget {
   const FlutterGeminiChat({
@@ -340,13 +341,13 @@ class _FlutterGeminiChatState extends State<FlutterGeminiChat> {
                 labelStyle: const TextStyle(fontSize: 12),
                 enabledBorder: OutlineInputBorder(
                   borderSide: const BorderSide(
-                    color: Color.fromRGBO(54, 40, 221, 1),
+                    color: blue,
                   ),
                   borderRadius: BorderRadius.circular(5),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderSide: const BorderSide(
-                    color: Color.fromRGBO(54, 40, 221, 1),
+                    color: blue,
                   ),
                   borderRadius: BorderRadius.circular(5),
                 ),
@@ -422,7 +423,7 @@ class _FlutterGeminiChatState extends State<FlutterGeminiChat> {
             },
             child: const Icon(
               Icons.send_rounded,
-              color: Color.fromRGBO(54, 40, 221, 1),
+              color: blue,
               size: 30,
             ),
           ),
@@ -448,7 +449,7 @@ class _FlutterGeminiChatState extends State<FlutterGeminiChat> {
 //           width: 100,
 //           height: 400,
 //           decoration: const BoxDecoration(
-//             color: Color(0xFF3628DD), // Background color
+//             color: blue, // Background color
 //           ),
 //           child: Padding(
 //               padding: const EdgeInsets.all(10.0),
@@ -457,7 +458,7 @@ class _FlutterGeminiChatState extends State<FlutterGeminiChat> {
 //                   Expanded(
 //                     flex: 2,
 //                     child: Container(
-//                       color: const Color.fromRGBO(54, 40, 221, 1),
+//                       color: blue,
 //                       child: Padding(
 //                         padding:
 //                             const EdgeInsets.only(top: 20, left: 5, right: 5),

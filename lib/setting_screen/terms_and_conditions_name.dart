@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:love_bird/config/routes.dart';
+import 'package:love_bird/config/constants.dart';
 
 class TermsAndConditionsNameScreen extends StatefulWidget {
   const TermsAndConditionsNameScreen({super.key});
@@ -47,10 +48,10 @@ class _TermsAndConditionsNameScreenState
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           const Divider(
-            color: Color(0xFF3628DD),
+            color: blue,
           ),
           Padding(
-            padding: EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(10.0),
             child: Text(
               'Name',
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(

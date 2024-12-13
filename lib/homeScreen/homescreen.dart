@@ -341,16 +341,19 @@ class _HomeScreenState extends State<HomeScreen> {
               items: [
                 BottomNavigationBarItem(
                   icon: Image.asset(
-                    'assets/images/icons/home.png',
-                    width:
-                        MediaQuery.of(context).size.width * 0.08, // 7% of width
+                    Theme.of(context).brightness == Brightness.dark
+                        ? 'assets/images/icons/home.png'
+                        : 'assets/images/icons/home.png',
+                    width: MediaQuery.of(context).size.width * 0.08,
                     height: MediaQuery.of(context).size.width * 0.08,
                   ),
                   label: 'Home',
                 ),
                 BottomNavigationBarItem(
                   icon: Image.asset(
-                    'assets/images/icons/localcon.png',
+                    Theme.of(context).brightness == Brightness.dark
+                        ? 'assets/images/icons/locationWhite.png'
+                        : 'assets/images/icons/localcon.png',
                     width: MediaQuery.of(context).size.width * 0.08,
                     height: MediaQuery.of(context).size.width * 0.08,
                   ),
@@ -358,7 +361,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 BottomNavigationBarItem(
                   icon: Image.asset(
-                    'assets/images/icons/chatIcon.png',
+                    Theme.of(context).brightness == Brightness.dark
+                        ? 'assets/images/icons/chatWhite.png'
+                        : 'assets/images/icons/chatIcon.png',
                     width: MediaQuery.of(context).size.width * 0.08,
                     height: MediaQuery.of(context).size.width * 0.08,
                   ),
@@ -366,7 +371,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 BottomNavigationBarItem(
                   icon: Image.asset(
-                    'assets/images/icons/matches.png',
+                    Theme.of(context).brightness == Brightness.dark
+                        ? 'assets/images/icons/matchWhite.png'
+                        : 'assets/images/icons/matches.png',
                     width: MediaQuery.of(context).size.width * 0.08,
                     height: MediaQuery.of(context).size.width * 0.08,
                   ),
@@ -374,7 +381,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 BottomNavigationBarItem(
                   icon: Image.asset(
-                    'assets/images/icons/personIcon.png',
+                    Theme.of(context).brightness == Brightness.dark
+                        ? 'assets/images/icons/profileWhite.png'
+                        : 'assets/images/icons/personIcon.png',
                     width: MediaQuery.of(context).size.width * 0.07,
                     height: MediaQuery.of(context).size.width * 0.07,
                   ),
@@ -382,20 +391,18 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
               selectedLabelStyle: TextStyle(
-                // Ensure selected text is black
                 fontSize: MediaQuery.of(context).size.width * 0.03,
               ),
               unselectedLabelStyle: TextStyle(
-                // Ensure unselected text is black
                 fontSize: MediaQuery.of(context).size.width * 0.03,
               ),
               selectedItemColor: Theme.of(context).brightness == Brightness.dark
-                  ? Colors.white // Dark mode, use white
-                  : Colors.black, // Make selected item icon and label black
+                  ? Colors.white
+                  : Colors.black,
               unselectedItemColor:
                   Theme.of(context).brightness == Brightness.dark
-                      ? Colors.white // Dark mode, use white
-                      : Colors.black, // Make unselected item icon black
+                      ? Colors.white
+                      : Colors.black,
               onTap: (index) {
                 // Handle navigation based on the index
                 switch (index) {
@@ -460,14 +467,12 @@ void showExtraViewsPopup(BuildContext context) {
                 style: TextStyle(
                   fontSize: screenHeight * 0.025, // 2.5% of screen height
                   fontWeight: FontWeight.bold,
-                  color: Colors.black,
                 ),
               ),
               Text(
                 'Be seen by more people and get up to 6x more likes.',
                 style: TextStyle(
                   fontSize: screenHeight * 0.022, // 2.2% of screen height
-                  color: Colors.black,
                 ),
               ),
               SizedBox(height: screenHeight * 0.03), // 3% of screen height
@@ -529,7 +534,9 @@ void showExtraViewsPopup(BuildContext context) {
                   child: Text(
                     'Get Zenkonect Standard Plan',
                     style: TextStyle(
-                      color: Colors.black,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white
+                          : Colors.black,
                       fontSize: screenHeight * 0.02, // 2% of screen height
                       fontWeight: FontWeight.bold,
                     ),
@@ -544,7 +551,9 @@ void showExtraViewsPopup(BuildContext context) {
                 child: Text(
                   'Maybe Later',
                   style: TextStyle(
-                    color: Colors.black,
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.white
+                        : Colors.black,
                     fontWeight: FontWeight.bold,
                     fontSize: screenHeight * 0.018, // 1.8% of screen height
                   ),
@@ -920,7 +929,9 @@ void _showSmallPopup(BuildContext context) {
                   0.4, // Set the width of your popup
 
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? Colors.black
+                    : Colors.white,
                 borderRadius: BorderRadius.circular(10),
               ),
               padding: const EdgeInsets.all(16),
@@ -932,27 +943,51 @@ void _showSmallPopup(BuildContext context) {
                         onPressed: () {
                           showBlockPopup(context);
                         },
-                        child: const Row(
+                        child: Row(
                           children: [
-                            Icon(Icons.block, color: Colors.black),
+                            Icon(
+                              Icons.block,
+                              color: Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? Colors.white
+                                  : Colors.black,
+                            ),
                             SizedBox(width: 5),
                             Text('Block',
                                 style: TextStyle(
-                                    fontSize: 17, color: Colors.black))
+                                  fontSize: 17,
+                                  color: Theme.of(context).brightness ==
+                                          Brightness.dark
+                                      ? Colors.white
+                                      : Colors.black,
+                                ))
                           ],
                         )),
-                    const Divider(thickness: 2),
+                    Divider(
+                        thickness: 2,
+                        color: Theme.of(context).textTheme.bodyMedium?.color),
                     TextButton(
                         onPressed: () {
                           Navigator.pushNamed(context, '/reportPage');
                         },
-                        child: const Row(
+                        child: Row(
                           children: [
-                            Icon(Icons.report, color: Colors.black),
+                            Icon(
+                              Icons.report,
+                              color: Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? Colors.white
+                                  : Colors.black,
+                            ),
                             SizedBox(width: 5),
                             Text('Report',
                                 style: TextStyle(
-                                    fontSize: 17, color: Colors.black))
+                                  fontSize: 17,
+                                  color: Theme.of(context).brightness ==
+                                          Brightness.dark
+                                      ? Colors.white
+                                      : Colors.black,
+                                ))
                           ],
                         )),
                   ],

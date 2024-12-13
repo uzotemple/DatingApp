@@ -95,7 +95,7 @@ class _FindingPeopleNearByState extends State<FindingPeopleNearBy>
               style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: Color(0xFF3628DD),
+                color: blue,
               ),
             ),
           ],

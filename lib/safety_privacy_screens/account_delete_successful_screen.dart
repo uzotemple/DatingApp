@@ -48,15 +48,19 @@
 
 import 'package:flutter/material.dart';
 
+import '../config/constants.dart';
+
 class AccountDeleteSuccessfulScreen extends StatefulWidget {
   const AccountDeleteSuccessfulScreen({super.key});
 
   @override
   // ignore: library_private_types_in_public_api
-  _AccountDeleteSuccessfulScreenState createState() => _AccountDeleteSuccessfulScreenState();
+  _AccountDeleteSuccessfulScreenState createState() =>
+      _AccountDeleteSuccessfulScreenState();
 }
 
-class _AccountDeleteSuccessfulScreenState extends State<AccountDeleteSuccessfulScreen> {
+class _AccountDeleteSuccessfulScreenState
+    extends State<AccountDeleteSuccessfulScreen> {
   bool marketingPermission = false;
 
   @override
@@ -71,13 +75,22 @@ class _AccountDeleteSuccessfulScreenState extends State<AccountDeleteSuccessfulS
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Add your UI elements here
-            Text('We hate to see you leave', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),),
-            Text('Account deleted successfully!', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: Color(0xFF3628DD)),),
-             Text('You can come back anytime!', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),),
+            Text(
+              'We hate to see you leave',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+            ),
+            Text(
+              'Account deleted successfully!',
+              style: TextStyle(
+                  fontSize: 20, fontWeight: FontWeight.w700, color: blue),
+            ),
+            Text(
+              'You can come back anytime!',
+              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+            ),
           ],
         ),
       ),
     );
   }
 }
-

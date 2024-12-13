@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:love_bird/config/constants.dart';
 import 'package:love_bird/config/routes.dart';
 
 class VerificationScreen extends StatefulWidget {
@@ -74,7 +75,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
             const Divider(
               height: 1,
               thickness: 1,
-              color: Color(0xFF3628DD),
+              color: blue,
             ), // Reduced height
             ListTile(
               title: Text(
@@ -100,7 +101,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
             const Divider(
               height: 1,
               thickness: 1,
-              color: Color(0xFF3628DD),
+              color: blue,
             ), // Reduced height
             ListTile(
               title: Text(
@@ -126,7 +127,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
             const Divider(
               height: 1,
               thickness: 1,
-              color: Color(0xFF3628DD),
+              color: blue,
             ), // Reduced height
           ],
         ),

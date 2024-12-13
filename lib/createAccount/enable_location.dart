@@ -140,7 +140,7 @@ class _EnableLocationScreenState extends State<EnableLocationScreen> {
                         'assets/images/location.png',
                         height: 200,
                         width: 200,
-                        color: const Color.fromRGBO(54, 40, 221, 1),
+                        color: blue,
                       ),
                     ),
 
@@ -150,7 +150,7 @@ class _EnableLocationScreenState extends State<EnableLocationScreen> {
                       style: TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
-                        color: Color.fromRGBO(54, 40, 221, 1),
+                        color: blue,
                       ),
                     ),
 
@@ -161,7 +161,7 @@ class _EnableLocationScreenState extends State<EnableLocationScreen> {
                       'You need to enable location to use the Zenkonect app',
                       style: TextStyle(
                         fontSize: 15,
-                        color: Color.fromRGBO(54, 40, 221, 1),
+                        color: blue,
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -174,7 +174,7 @@ class _EnableLocationScreenState extends State<EnableLocationScreen> {
                   _requestLocationPermission();
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromRGBO(54, 40, 221, 1),
+                  backgroundColor: blue,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(21),
                   ),

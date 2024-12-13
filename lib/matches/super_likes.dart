@@ -162,7 +162,7 @@ class _SuperLikesState extends State<SuperLikes> {
                 width: screenSize.width * 0.4,
                 height: screenSize.height * 0.06,
                 decoration: BoxDecoration(
-                  color: const Color.fromRGBO(54, 40, 221, 1),
+                  color: blue,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: const Center(
@@ -198,7 +198,7 @@ class _SuperLikesState extends State<SuperLikes> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
                   ),
-                  backgroundColor: const Color.fromRGBO(54, 40, 221, 1),
+                  backgroundColor: blue,
                 ),
                 child: const Text(
                   'Upgrade to Premium To See More',
@@ -235,16 +235,19 @@ class _SuperLikesState extends State<SuperLikes> {
               items: [
                 BottomNavigationBarItem(
                   icon: Image.asset(
-                    'assets/images/icons/homeBlack.png',
-                    width:
-                        MediaQuery.of(context).size.width * 0.08, // 7% of width
+                    Theme.of(context).brightness == Brightness.dark
+                        ? 'assets/images/icons/homeWhite.png'
+                        : 'assets/images/icons/homeBlack.png',
+                    width: MediaQuery.of(context).size.width * 0.08,
                     height: MediaQuery.of(context).size.width * 0.08,
                   ),
                   label: 'Home',
                 ),
                 BottomNavigationBarItem(
                   icon: Image.asset(
-                    'assets/images/icons/localcon.png',
+                    Theme.of(context).brightness == Brightness.dark
+                        ? 'assets/images/icons/locationWhite.png'
+                        : 'assets/images/icons/localcon.png',
                     width: MediaQuery.of(context).size.width * 0.08,
                     height: MediaQuery.of(context).size.width * 0.08,
                   ),
@@ -252,7 +255,9 @@ class _SuperLikesState extends State<SuperLikes> {
                 ),
                 BottomNavigationBarItem(
                   icon: Image.asset(
-                    'assets/images/icons/chatIcon.png',
+                    Theme.of(context).brightness == Brightness.dark
+                        ? 'assets/images/icons/chatWhite.png'
+                        : 'assets/images/icons/chatIcon.png',
                     width: MediaQuery.of(context).size.width * 0.08,
                     height: MediaQuery.of(context).size.width * 0.08,
                   ),
@@ -260,7 +265,9 @@ class _SuperLikesState extends State<SuperLikes> {
                 ),
                 BottomNavigationBarItem(
                   icon: Image.asset(
-                    'assets/images/icons/blueMatch.png',
+                    Theme.of(context).brightness == Brightness.dark
+                        ? 'assets/images/icons/blueMatch.png'
+                        : 'assets/images/icons/blueMatch.png',
                     width: MediaQuery.of(context).size.width * 0.08,
                     height: MediaQuery.of(context).size.width * 0.08,
                   ),
@@ -268,7 +275,9 @@ class _SuperLikesState extends State<SuperLikes> {
                 ),
                 BottomNavigationBarItem(
                   icon: Image.asset(
-                    'assets/images/icons/personIcon.png',
+                    Theme.of(context).brightness == Brightness.dark
+                        ? 'assets/images/icons/profileWhite.png'
+                        : 'assets/images/icons/personIcon.png',
                     width: MediaQuery.of(context).size.width * 0.07,
                     height: MediaQuery.of(context).size.width * 0.07,
                   ),
@@ -467,6 +476,9 @@ void showLikeSort(BuildContext context) {
       return Align(
         alignment: Alignment.bottomCenter, // Align the dialog to the bottom
         child: Dialog(
+          backgroundColor: Theme.of(context).brightness == Brightness.dark
+              ? Colors.black
+              : Colors.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20), // Rounded corners
           ),
@@ -484,82 +496,102 @@ void showLikeSort(BuildContext context) {
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 16)),
                       CheckboxListTile(
-                        title: const Text('All Likes',
+                        title: Text('All Likes',
                             style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 16)),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium
+                                    ?.color)),
                         value: allLikes,
                         onChanged: (bool? value) {
                           setState(() {
                             allLikes = value ?? false;
                           });
                         },
-                        activeColor: const Color.fromRGBO(54, 40, 221, 1),
+                        activeColor: blue,
                         checkColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
                         side: const BorderSide(
-                          color: Color.fromRGBO(54, 40, 221, 1),
+                          color: blue,
                           width: 2,
                         ),
                       ),
                       CheckboxListTile(
-                        title: const Text('New Likes',
+                        title: Text('New Likes',
                             style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 16)),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium
+                                    ?.color)),
                         value: newLikes,
                         onChanged: (bool? value) {
                           setState(() {
                             newLikes = value ?? false;
                           });
                         },
-                        activeColor: const Color.fromRGBO(54, 40, 221, 1),
+                        activeColor: blue,
                         checkColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
                         side: const BorderSide(
-                          color: Color.fromRGBO(54, 40, 221, 1),
+                          color: blue,
                           width: 2,
                         ),
                       ),
                       CheckboxListTile(
-                        title: const Text('Online',
+                        title: Text('Online',
                             style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 16)),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium
+                                    ?.color)),
                         value: online,
                         onChanged: (bool? value) {
                           setState(() {
                             online = value ?? false;
                           });
                         },
-                        activeColor: const Color.fromRGBO(54, 40, 221, 1),
+                        activeColor: blue,
                         checkColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
                         side: const BorderSide(
-                          color: Color.fromRGBO(54, 40, 221, 1),
+                          color: blue,
                           width: 2,
                         ),
                       ),
                       CheckboxListTile(
-                        title: const Text('Near You',
+                        title: Text('Near You',
                             style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 16)),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium
+                                    ?.color)),
                         value: nearYou,
                         onChanged: (bool? value) {
                           setState(() {
                             nearYou = value ?? false;
                           });
                         },
-                        activeColor: const Color.fromRGBO(54, 40, 221, 1),
+                        activeColor: blue,
                         checkColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
                         side: const BorderSide(
-                          color: Color.fromRGBO(54, 40, 221, 1),
+                          color: blue,
                           width: 2,
                         ),
                       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:love_bird/config/constants.dart';
 import 'package:love_bird/config/routes.dart';
 
 class NotificationsScreen extends StatefulWidget {
@@ -75,7 +76,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
             const Divider(
               height: 1,
               thickness: 1,
-              color: Color(0xFF3628DD),
+              color: blue,
             ), // Reduced height
             ListTile(
               title: Text(
@@ -101,7 +102,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
             const Divider(
               height: 1,
               thickness: 1,
-              color: Color(0xFF3628DD),
+              color: blue,
             ), // Reduced height
             ListTile(
               title: Text(
@@ -127,7 +128,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
             const Divider(
               height: 1,
               thickness: 1,
-              color: Color(0xFF3628DD),
+              color: blue,
             ), // Reduced height
             ListTile(
               title: Text(
@@ -153,7 +154,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
             const Divider(
               height: 1,
               thickness: 1,
-              color: Color(0xFF3628DD),
+              color: blue,
             ), // Reduced height
             ListTile(
               title: Text(
@@ -179,7 +180,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
             const Divider(
               height: 1,
               thickness: 1,
-              color: Color(0xFF3628DD),
+              color: blue,
             ), // Reduced height
             ListTile(
               title: Text(
@@ -205,7 +206,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
             const Divider(
               height: 1,
               thickness: 1,
-              color: Color(0xFF3628DD),
+              color: blue,
             ), // Reduced height
             ListTile(
               title: Text(
@@ -231,7 +232,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
             const Divider(
               height: 1,
               thickness: 1,
-              color: Color(0xFF3628DD),
+              color: blue,
             ), // Reduced height
             ListTile(
               title: Text(
@@ -257,7 +258,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
             const Divider(
               height: 1,
               thickness: 1,
-              color: Color(0xFF3628DD),
+              color: blue,
             ), // Reduced height
           ],
         ),

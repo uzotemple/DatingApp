@@ -158,7 +158,7 @@ class _OnboardingScreenThreeState extends State<OnboardingScreenThree> {
                         style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.w700,
-                            color: Color(0xFF3628DD)),
+                            color: blue),
                       ),
                       const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 16.0),
@@ -187,7 +187,7 @@ class _OnboardingScreenThreeState extends State<OnboardingScreenThree> {
               clipper: CurvedTopContainerClipper(),
               child: Container(
                 decoration: const BoxDecoration(
-                  color: Color(0xFF3628DD),
+                  color: blue,
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(30),
                       topRight: Radius.circular(30)),
@@ -279,7 +279,7 @@ class _OnboardingScreenThreeState extends State<OnboardingScreenThree> {
                                   style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.w400,
-                                    color: Color(0xFF3628DD),
+                                    color: blue,
                                   ),
                                 ),
                               ),

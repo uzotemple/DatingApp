@@ -60,8 +60,7 @@ class _PrivacyPreferenceOnSettingsScreenState
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
-                  color:
-                      Color(0xFF3628DD), // Adjust color based on your app theme
+                  color: blue, // Adjust color based on your app theme
                 ),
               ),
             ),
@@ -154,8 +153,7 @@ class _PrivacyPreferenceOnSettingsScreenState
                       foregroundColor: Colors.white,
                       backgroundColor: const Color(0xFF958CFA), // Text color
                       side: const BorderSide(
-                          color: Color(0xFF3628DD),
-                          width: 1), // Border color and width
+                          color: blue, width: 1), // Border color and width
                       shape: RoundedRectangleBorder(
                         borderRadius:
                             BorderRadius.circular(20.0), // Rounded corners
@@ -248,13 +246,11 @@ class _PrivacyPreferenceOnSettingsScreenState
               ),
             ),
           ),
-          const Divider(color: Color(0xFF3628DD)), // Add a Divider here
+          const Divider(color: blue), // Add a Divider here
           const Text(
             'View Details',
             style: TextStyle(
-                fontSize: 8,
-                color: Color(0xFF3628DD),
-                fontWeight: FontWeight.w400),
+                fontSize: 8, color: blue, fontWeight: FontWeight.w400),
           ),
         ],
       ),

@@ -87,14 +87,12 @@ class _GetHelpState extends State<GetHelp> {
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderSide: const BorderSide(
-                        color: Color(0xFF3628DD),
-                        width: 2.0), // Border color when enabled
+                        color: blue, width: 2.0), // Border color when enabled
                     borderRadius: BorderRadius.circular(10),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderSide: const BorderSide(
-                        color: Color(0xFF3628DD),
-                        width: 2.0), // Border color when focused
+                        color: blue, width: 2.0), // Border color when focused
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
@@ -122,14 +120,12 @@ class _GetHelpState extends State<GetHelp> {
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderSide: const BorderSide(
-                        color: Color(0xFF3628DD),
-                        width: 2.0), // Border color when enabled
+                        color: blue, width: 2.0), // Border color when enabled
                     borderRadius: BorderRadius.circular(10),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderSide: const BorderSide(
-                        color: Color(0xFF3628DD),
-                        width: 2.0), // Border color when focused
+                        color: blue, width: 2.0), // Border color when focused
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
@@ -144,14 +140,11 @@ class _GetHelpState extends State<GetHelp> {
                         ? 'Attached: $_attachedFileName'
                         : 'Attach a screenshot',
                     style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        color: Color(0xFF3628DD)),
+                        fontSize: 16, fontWeight: FontWeight.w600, color: blue),
                   ),
                   const SizedBox(width: 3.0),
                   IconButton(
-                    icon:
-                        const Icon(Icons.attach_file, color: Color(0xFF3628DD)),
+                    icon: const Icon(Icons.attach_file, color: blue),
                     onPressed:
                         _attachFile, // Call the function to attach a file
                   ),
@@ -206,7 +199,7 @@ class _GetHelpState extends State<GetHelp> {
                         TextSpan(
                           text: 'Terms and Conditions',
                           style: const TextStyle(
-                            color: Color(0xFF3628DD), // Link color
+                            color: blue, // Link color
                             decoration: TextDecoration.underline,
                           ),
                           recognizer: TapGestureRecognizer()
@@ -222,7 +215,7 @@ class _GetHelpState extends State<GetHelp> {
                         TextSpan(
                           text: 'Privacy Policy',
                           style: const TextStyle(
-                            color: Color(0xFF3628DD), // Link color
+                            color: blue, // Link color
                             decoration: TextDecoration.underline,
                           ),
                           recognizer: TapGestureRecognizer()

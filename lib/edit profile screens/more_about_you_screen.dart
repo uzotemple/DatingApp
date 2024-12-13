@@ -55,7 +55,10 @@ class _MoreAboutYouScreenState extends State<MoreAboutYouScreen> {
               itemCount: items.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                    title: Text(items[index]),
+                    title: Text(
+                      items[index],
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(),
+                    ),
                     trailing: Icon(
                       Icons.arrow_forward_ios,
                       color: Theme.of(context).iconTheme.color,
@@ -156,12 +159,18 @@ class _MoreAboutYouScreenState extends State<MoreAboutYouScreen> {
             const Center(
               child: Text(
                 "Interest",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.black),
               ),
             ),
             const Text(
               "Connect with people who are into what you’re into",
-              style: TextStyle(fontSize: 10, fontWeight: FontWeight.w500),
+              style: TextStyle(
+                  fontSize: 10,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black),
             ),
             Row(
               children: [
@@ -179,7 +188,9 @@ class _MoreAboutYouScreenState extends State<MoreAboutYouScreen> {
                         child: Text(
                           "#beer",
                           style: TextStyle(
-                              fontSize: 11, fontWeight: FontWeight.w500),
+                              fontSize: 11,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.black),
                         ),
                       ),
                     ),
@@ -197,7 +208,9 @@ class _MoreAboutYouScreenState extends State<MoreAboutYouScreen> {
                       child: Text(
                         "#fashion",
                         style: TextStyle(
-                            fontSize: 11, fontWeight: FontWeight.w500),
+                            fontSize: 11,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black),
                       ),
                     ),
                   ),
@@ -261,12 +274,18 @@ class _MoreAboutYouScreenState extends State<MoreAboutYouScreen> {
             const Center(
               child: Text(
                 "Instagram",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.black),
               ),
             ),
             const Text(
               "Let people see your recent instagram post on your profile. Adding instagram won’t share your username.",
-              style: TextStyle(fontSize: 10, fontWeight: FontWeight.w500),
+              style: TextStyle(
+                  fontSize: 10,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black),
             ),
             const SizedBox(
               height: 10,
@@ -290,7 +309,9 @@ class _MoreAboutYouScreenState extends State<MoreAboutYouScreen> {
                           child: Text(
                             "+",
                             style: TextStyle(
-                                fontSize: 11, fontWeight: FontWeight.w500),
+                                fontSize: 11,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black),
                           ),
                         ),
                       ),
@@ -310,7 +331,9 @@ class _MoreAboutYouScreenState extends State<MoreAboutYouScreen> {
                           child: Text(
                             "+",
                             style: TextStyle(
-                                fontSize: 11, fontWeight: FontWeight.w500),
+                                fontSize: 11,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black),
                           ),
                         ),
                       ),
@@ -330,7 +353,9 @@ class _MoreAboutYouScreenState extends State<MoreAboutYouScreen> {
                           child: Text(
                             "+",
                             style: TextStyle(
-                                fontSize: 11, fontWeight: FontWeight.w500),
+                                fontSize: 11,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black),
                           ),
                         ),
                       ),
@@ -429,8 +454,7 @@ class _MoreAboutYouScreenState extends State<MoreAboutYouScreen> {
                   children: [
                     const TabBar(
                       indicatorColor: Colors.transparent, // Hide the indicator
-                      labelColor:
-                          Color(0xFF3628DD), // Color of the selected tab text
+                      labelColor: blue, // Color of the selected tab text
                       unselectedLabelColor:
                           Colors.black, // Color of the unselected tab text
                       tabs: [
@@ -544,14 +568,20 @@ class _MoreAboutYouScreenState extends State<MoreAboutYouScreen> {
             padding: EdgeInsets.symmetric(horizontal: 15.0),
             child: Text(
               "You’ll see your interest appear here",
-              style: TextStyle(fontSize: 19, fontWeight: FontWeight.w700),
+              style: TextStyle(
+                  fontSize: 19,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.black),
             ),
           ),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 15.0),
             child: Text(
               "Pick interest from the categories above to help make a great match!",
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+              style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black),
             ),
           ),
           const SizedBox(height: 40),
@@ -630,7 +660,10 @@ class _MoreAboutYouScreenState extends State<MoreAboutYouScreen> {
               child: const Center(
                 child: Text(
                   "#chinese",
-                  style: TextStyle(fontSize: 11, fontWeight: FontWeight.w500),
+                  style: TextStyle(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black),
                 ),
               ),
             ),
@@ -647,7 +680,10 @@ class _MoreAboutYouScreenState extends State<MoreAboutYouScreen> {
               child: const Center(
                 child: Text(
                   "#cheesecake",
-                  style: TextStyle(fontSize: 11, fontWeight: FontWeight.w500),
+                  style: TextStyle(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black),
                 ),
               ),
             ),
@@ -664,7 +700,10 @@ class _MoreAboutYouScreenState extends State<MoreAboutYouScreen> {
               child: const Center(
                 child: Text(
                   "#pizza",
-                  style: TextStyle(fontSize: 11, fontWeight: FontWeight.w500),
+                  style: TextStyle(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black),
                 ),
               ),
             ),
@@ -681,7 +720,10 @@ class _MoreAboutYouScreenState extends State<MoreAboutYouScreen> {
               child: const Center(
                 child: Text(
                   "#icecream",
-                  style: TextStyle(fontSize: 11, fontWeight: FontWeight.w500),
+                  style: TextStyle(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black),
                 ),
               ),
             ),

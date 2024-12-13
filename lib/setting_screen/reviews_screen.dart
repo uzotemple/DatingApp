@@ -67,7 +67,7 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
       body: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Divider(color: Color(0xFF3628DD)),
+          Divider(color: blue),
         ],
       ),
     );

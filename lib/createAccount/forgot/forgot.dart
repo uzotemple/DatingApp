@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:love_bird/config/routes.dart';
+import 'package:love_bird/config/constants.dart';
 
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({super.key});
@@ -104,7 +105,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   width: screenSize.width * 0.8,
                   height: screenSize.height * 0.05,
                   decoration: BoxDecoration(
-                    color: const Color.fromRGBO(54, 40, 221, 1),
+                    color: blue,
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: const Center(

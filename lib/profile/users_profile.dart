@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:love_bird/chat/chat_screen.dart';
-
+import 'package:love_bird/config/constants.dart';
 import 'package:love_bird/config/routes.dart';
 
 import 'package:love_bird/homeScreen/homescreen.dart';
@@ -151,7 +151,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                             height: 8,
                             decoration: BoxDecoration(
                               color: _currentPage == index
-                                  ? const Color.fromRGBO(54, 40, 221, 1)
+                                  ? blue
                                   : const Color.fromRGBO(255, 255, 255, 0.54),
                               shape: BoxShape.circle,
                             ),
@@ -339,16 +339,19 @@ class _UserProfilePageState extends State<UserProfilePage> {
               items: [
                 BottomNavigationBarItem(
                   icon: Image.asset(
-                    'assets/images/icons/home.png',
-                    width:
-                        MediaQuery.of(context).size.width * 0.08, // 7% of width
+                    Theme.of(context).brightness == Brightness.dark
+                        ? 'assets/images/icons/home.png'
+                        : 'assets/images/icons/home.png',
+                    width: MediaQuery.of(context).size.width * 0.08,
                     height: MediaQuery.of(context).size.width * 0.08,
                   ),
                   label: 'Home',
                 ),
                 BottomNavigationBarItem(
                   icon: Image.asset(
-                    'assets/images/icons/localcon.png',
+                    Theme.of(context).brightness == Brightness.dark
+                        ? 'assets/images/icons/locationWhite.png'
+                        : 'assets/images/icons/localcon.png',
                     width: MediaQuery.of(context).size.width * 0.08,
                     height: MediaQuery.of(context).size.width * 0.08,
                   ),
@@ -356,7 +359,9 @@ class _UserProfilePageState extends State<UserProfilePage> {
                 ),
                 BottomNavigationBarItem(
                   icon: Image.asset(
-                    'assets/images/icons/chatIcon.png',
+                    Theme.of(context).brightness == Brightness.dark
+                        ? 'assets/images/icons/chatWhite.png'
+                        : 'assets/images/icons/chatIcon.png',
                     width: MediaQuery.of(context).size.width * 0.08,
                     height: MediaQuery.of(context).size.width * 0.08,
                   ),
@@ -364,7 +369,9 @@ class _UserProfilePageState extends State<UserProfilePage> {
                 ),
                 BottomNavigationBarItem(
                   icon: Image.asset(
-                    'assets/images/icons/matches.png',
+                    Theme.of(context).brightness == Brightness.dark
+                        ? 'assets/images/icons/matchWhite.png'
+                        : 'assets/images/icons/matches.png',
                     width: MediaQuery.of(context).size.width * 0.08,
                     height: MediaQuery.of(context).size.width * 0.08,
                   ),
@@ -372,7 +379,9 @@ class _UserProfilePageState extends State<UserProfilePage> {
                 ),
                 BottomNavigationBarItem(
                   icon: Image.asset(
-                    'assets/images/icons/personIcon.png',
+                    Theme.of(context).brightness == Brightness.dark
+                        ? 'assets/images/icons/profileWhite.png'
+                        : 'assets/images/icons/personIcon.png',
                     width: MediaQuery.of(context).size.width * 0.07,
                     height: MediaQuery.of(context).size.width * 0.07,
                   ),
@@ -471,7 +480,9 @@ void _showSmallPopup(BuildContext context) {
                   0.4, // Set the width of your popup
 
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? Colors.black
+                    : Colors.white,
                 borderRadius: BorderRadius.circular(10),
               ),
               padding: const EdgeInsets.all(16),
@@ -483,27 +494,51 @@ void _showSmallPopup(BuildContext context) {
                         onPressed: () {
                           showBlockPopup(context);
                         },
-                        child: const Row(
+                        child: Row(
                           children: [
-                            Icon(Icons.block, color: Colors.black),
+                            Icon(
+                              Icons.block,
+                              color: Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? Colors.white
+                                  : Colors.black,
+                            ),
                             SizedBox(width: 5),
                             Text('Block',
                                 style: TextStyle(
-                                    fontSize: 17, color: Colors.black))
+                                  fontSize: 17,
+                                  color: Theme.of(context).brightness ==
+                                          Brightness.dark
+                                      ? Colors.white
+                                      : Colors.black,
+                                ))
                           ],
                         )),
-                    const Divider(thickness: 2),
+                    Divider(
+                        thickness: 2,
+                        color: Theme.of(context).textTheme.bodyMedium?.color),
                     TextButton(
                         onPressed: () {
                           Navigator.pushNamed(context, '/reportPage');
                         },
-                        child: const Row(
+                        child: Row(
                           children: [
-                            Icon(Icons.report, color: Colors.black),
+                            Icon(
+                              Icons.report,
+                              color: Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? Colors.white
+                                  : Colors.black,
+                            ),
                             SizedBox(width: 5),
                             Text('Report',
                                 style: TextStyle(
-                                    fontSize: 17, color: Colors.black))
+                                  fontSize: 17,
+                                  color: Theme.of(context).brightness ==
+                                          Brightness.dark
+                                      ? Colors.white
+                                      : Colors.black,
+                                ))
                           ],
                         )),
                   ],

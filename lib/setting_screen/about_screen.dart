@@ -4,6 +4,7 @@ import 'package:love_bird/setting_screen/privacy_setting_name.dart';
 import 'package:love_bird/setting_screen/terms_and_conditions_name.dart';
 import 'package:love_bird/setting_screen/terms_condition_summary_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:love_bird/config/constants.dart';
 
 class AboutScreen extends StatelessWidget {
   const AboutScreen({super.key});
@@ -39,8 +40,7 @@ class AboutScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          const Divider(
-              color: Color(0xFF3628DD)), // Divider at the top of the first item
+          const Divider(color: blue), // Divider at the top of the first item
           Expanded(
             child: ListView.builder(
               itemCount: 4, // Total number of items
@@ -74,8 +74,7 @@ class AboutScreen extends StatelessWidget {
                         : _buildItem(
                             title: title, context: context, index: index),
                     const Divider(
-                        thickness: 1.0,
-                        color: Color(0xFF3628DD)), // Divider between items
+                        thickness: 1.0, color: blue), // Divider between items
                   ],
                 );
               },

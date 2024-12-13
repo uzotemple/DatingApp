@@ -37,7 +37,7 @@ class _ChatbotWelcomeScreenState extends State<ChatbotWelcomeScreen> {
                     width: screenWidth,
                     height: screenHeight * 0.6,
                     decoration: const BoxDecoration(
-                      color: Color(0xFF3628DD), // Background color
+                      color: blue, // Background color
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
@@ -46,7 +46,7 @@ class _ChatbotWelcomeScreenState extends State<ChatbotWelcomeScreen> {
                           Expanded(
                             flex: 2,
                             child: Container(
-                              color: const Color.fromRGBO(54, 40, 221, 1),
+                              color: blue,
                               child: Padding(
                                 padding: const EdgeInsets.only(
                                     top: 20, left: 5, right: 5),
@@ -137,7 +137,7 @@ class _ChatbotWelcomeScreenState extends State<ChatbotWelcomeScreen> {
                     padding: const EdgeInsets.all(14),
                     child: Container(
                       decoration: BoxDecoration(
-                        color: const Color.fromRGBO(54, 40, 221, 1),
+                        color: blue,
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Padding(

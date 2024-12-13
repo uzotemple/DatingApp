@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:love_bird/config/routes.dart';
 import 'dart:async';
+import 'package:love_bird/config/constants.dart';
 
 class NewPassword extends StatefulWidget {
   const NewPassword({super.key});
@@ -41,7 +42,7 @@ class _NewPasswordState extends State<NewPassword> {
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: Color.fromRGBO(54, 40, 221, 1),
+                    color: blue,
                   ),
                 ),
                 const SizedBox(height: 10),
@@ -122,7 +123,7 @@ class _NewPasswordState extends State<NewPassword> {
                 width: screenSize.width * 0.8,
                 height: screenSize.height * 0.05,
                 decoration: BoxDecoration(
-                  color: const Color.fromRGBO(54, 40, 221, 1),
+                  color: blue,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: const Center(

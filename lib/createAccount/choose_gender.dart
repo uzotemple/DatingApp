@@ -94,7 +94,7 @@ class Gender extends StatelessWidget {
                   width: screenSize.width * 0.8,
                   height: screenSize.height * 0.05,
                   decoration: BoxDecoration(
-                    color: const Color.fromRGBO(54, 40, 221, 1),
+                    color: blue,
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: const Center(
@@ -122,13 +122,11 @@ class Gender extends StatelessWidget {
         width: screenSize.width * 0.8,
         height: screenSize.height * 0.05,
         decoration: BoxDecoration(
-          color: genderProvider.selectedGender == value
-              ? const Color.fromRGBO(54, 40, 221, 1)
-              : Colors.white,
+          color: genderProvider.selectedGender == value ? blue : Colors.white,
           borderRadius: BorderRadius.circular(20),
           boxShadow: const [
             BoxShadow(
-              color: Color.fromRGBO(54, 40, 221, 1),
+              color: blue,
               spreadRadius: 1,
             ),
           ],

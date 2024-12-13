@@ -12,9 +12,7 @@ class PurchaseCreditsPage extends StatelessWidget {
     final screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
         leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
@@ -176,6 +174,7 @@ class CreditOption extends StatelessWidget {
             height: screenSize.height * 0.2,
             padding: const EdgeInsets.only(top: 40, bottom: 20),
             decoration: BoxDecoration(
+              color: Colors.white,
               border: Border.all(
                 color: blue,
                 width: 2.0,
@@ -188,9 +187,9 @@ class CreditOption extends StatelessWidget {
                 Text(
                   price,
                   style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black),
                 ),
                 SizedBox(height: screenSize.width * 0.009),
                 Text(

@@ -167,7 +167,7 @@ class _PhotoVerificationOneState extends State<PhotoVerificationOne> {
                       width: screenSize.width * 0.8,
                       height: screenSize.height * 0.05,
                       decoration: BoxDecoration(
-                        color: const Color.fromRGBO(54, 40, 221, 1),
+                        color: blue,
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: const Center(
@@ -341,7 +341,7 @@ class _GestureVerificationScreenState extends State<GestureVerificationScreen> {
               // Verify button
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromRGBO(54, 40, 221, 1),
+                  backgroundColor: blue,
                   foregroundColor: Colors.white,
                   minimumSize: const Size(double.infinity, 50),
                   shape: RoundedRectangleBorder(

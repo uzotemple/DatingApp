@@ -6,7 +6,7 @@ class UserBioProvider extends ChangeNotifier {
   String profession = '';
   String weight = '';
   String height = '';
-
+  String? linkdln = '';
   String? country;
   String city = '';
   String? educationLevel = '';
@@ -234,6 +234,11 @@ class UserBioProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void updateLinkdln(String? newLinkdln) {
+    linkdln = newLinkdln;
+    notifyListeners();
+  }
+
   void updateCountry(String? newCountry) {
     country = newCountry;
     notifyListeners();
@@ -266,6 +271,7 @@ class UserBioProvider extends ChangeNotifier {
     weight = '';
     height = '';
     country = '';
+    linkdln = '';
     city = '';
     educationLevel = '';
     bio = '';

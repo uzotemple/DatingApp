@@ -93,181 +93,195 @@ class PhotoVerificationState extends State<ImageScanner> {
     final screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 50.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: 15,
-              child: Stack(
-                children: [
-                  ClipRRect(
-                    borderRadius:
-                        BorderRadius.circular(10.0), // Outer rounded corners
-                    child: Container(
-                      color: blue.withOpacity(0.19), // Background color
-                    ),
-                  ),
-                  // Inner progress bar
-                  ClipRRect(
-                    borderRadius:
-                        BorderRadius.circular(10.0), // Inner rounded corners
-                    child: Container(
-                      width: MediaQuery.of(context).size.width *
-                          0.8, // Set width to represent progress
-                      color: blue, // Progress color
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 20),
-            const Text(
-              'Don’t worry, users won’t see these pictures.',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
-            ),
-            const SizedBox(height: 20),
-            Center(
-              child: GestureDetector(
-                onTap: _scanImage,
-                child: Image.asset(
-                  'images/scanner.png', // Path to your circular scanner icon image
-                  width: 150,
-                  height: 150,
-                  fit: BoxFit.fill, // Ensures the image covers the circle
-                ),
-              ),
-            ),
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal:
+                MediaQuery.of(context).size.width * 0.05, // 5% of screen width
+            vertical: MediaQuery.of(context).size.height * 0.03,
+          ),
+          child: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        height: 15,
+                        child: Stack(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(
+                                  10.0), // Outer rounded corners
+                              child: Container(
+                                color:
+                                    blue.withOpacity(0.19), // Background color
+                              ),
+                            ),
+                            // Inner progress bar
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(
+                                  10.0), // Inner rounded corners
+                              child: Container(
+                                width: MediaQuery.of(context).size.width *
+                                    0.8, // Set width to represent progress
+                                color: blue, // Progress color
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      const Text(
+                        'Don’t worry, users won’t see these pictures.',
+                        style: TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.w600),
+                      ),
+                      const SizedBox(height: 20),
+                      Center(
+                        child: GestureDetector(
+                          onTap: _scanImage,
+                          child: Image.asset(
+                            'images/scanner.png', // Path to your circular scanner icon image
+                            width: 150,
+                            height: 150,
+                            fit: BoxFit
+                                .fill, // Ensures the image covers the circle
+                          ),
+                        ),
+                      ),
 
-            const SizedBox(height: 20),
+                      const SizedBox(height: 20),
 
-            // Display scanned images in a similar layout with SizedBox and decoration
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // Top center image with decoration
-                if (_scannedImages.isNotEmpty)
-                  SizedBox(
-                    width: screenSize.width * 0.30,
-                    height: screenSize.width * 0.33,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: blue.withOpacity(
-                            0.09), // Background color for the container
-                        borderRadius:
-                            BorderRadius.circular(20), // Rounded corners
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.2),
-                            blurRadius: 1,
-                            offset: const Offset(0, 1),
+                      // Display scanned images in a similar layout with SizedBox and decoration
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          // Top center image with decoration
+                          if (_scannedImages.isNotEmpty)
+                            SizedBox(
+                              width: screenSize.width * 0.30,
+                              height: screenSize.width * 0.33,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: blue.withOpacity(
+                                      0.09), // Background color for the container
+                                  borderRadius: BorderRadius.circular(
+                                      20), // Rounded corners
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.2),
+                                      blurRadius: 1,
+                                      offset: const Offset(0, 1),
+                                    ),
+                                  ],
+                                ),
+                                padding: const EdgeInsets.all(
+                                    8.0), // Padding inside the container
+                                child: ClipOval(
+                                  child: Image.file(
+                                    _scannedImages[0],
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                            ),
+
+                          const SizedBox(height: 20),
+
+                          // Bottom row with two images with decoration
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              if (_scannedImages.length > 1)
+                                SizedBox(
+                                  width: screenSize.width * 0.30,
+                                  height: screenSize.width * 0.33,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: blue.withOpacity(0.09),
+                                      borderRadius: BorderRadius.circular(20),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.2),
+                                          blurRadius: 1,
+                                          offset: const Offset(0, 1),
+                                        ),
+                                      ],
+                                    ),
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: ClipOval(
+                                      child: Image.file(
+                                        _scannedImages[1],
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              if (_scannedImages.length > 2)
+                                SizedBox(
+                                  width: screenSize.width * 0.30,
+                                  height: screenSize.width * 0.33,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: blue.withOpacity(0.09),
+                                      borderRadius: BorderRadius.circular(20),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.2),
+                                          blurRadius: 1,
+                                          offset: const Offset(0, 1),
+                                        ),
+                                      ],
+                                    ),
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: ClipOval(
+                                      child: Image.file(
+                                        _scannedImages[2],
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                            ],
                           ),
                         ],
                       ),
-                      padding: const EdgeInsets.all(
-                          8.0), // Padding inside the container
-                      child: ClipOval(
-                        child: Image.file(
-                          _scannedImages[0],
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
+
+                      // Submit button
+                    ],
                   ),
-
-                const SizedBox(height: 20),
-
-                // Bottom row with two images with decoration
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    if (_scannedImages.length > 1)
-                      SizedBox(
-                        width: screenSize.width * 0.30,
-                        height: screenSize.width * 0.33,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: blue.withOpacity(0.09),
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.2),
-                                blurRadius: 1,
-                                offset: const Offset(0, 1),
-                              ),
-                            ],
-                          ),
-                          padding: const EdgeInsets.all(8.0),
-                          child: ClipOval(
-                            child: Image.file(
-                              _scannedImages[1],
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                      ),
-                    if (_scannedImages.length > 2)
-                      SizedBox(
-                        width: screenSize.width * 0.30,
-                        height: screenSize.width * 0.33,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: blue.withOpacity(0.09),
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.2),
-                                blurRadius: 1,
-                                offset: const Offset(0, 1),
-                              ),
-                            ],
-                          ),
-                          padding: const EdgeInsets.all(8.0),
-                          child: ClipOval(
-                            child: Image.file(
-                              _scannedImages[2],
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                      ),
-                  ],
                 ),
-              ],
-            ),
-
-            const Spacer(),
-
-            // Submit button
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: InkWell(
-                onTap: () {
-                  _showSubmissionDialog(); // Show dialog on submit
-                },
-                child: Container(
-                  width: screenSize.width * 0.8,
-                  height: screenSize.height * 0.05,
-                  decoration: BoxDecoration(
-                    color: blue,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: const Center(
-                    child: Text(
-                      'Submit',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: InkWell(
+                  onTap: () {
+                    _showSubmissionDialog(); // Show dialog on submit
+                  },
+                  child: Container(
+                    width: screenSize.width * 0.8,
+                    height: screenSize.height * 0.05,
+                    decoration: BoxDecoration(
+                      color: blue,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: const Center(
+                      child: Text(
+                        'Submit',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500),
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-            const SizedBox(height: 20),
-          ],
+            ],
+          ),
         ),
       ),
     );

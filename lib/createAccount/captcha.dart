@@ -41,81 +41,79 @@ class _CaptchaState extends State<Captcha> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
         body: SafeArea(
             child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: MediaQuery.of(context).size.width * 0.05,
-                vertical: MediaQuery.of(context).size.height * 0.03,
+      children: [
+        Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: MediaQuery.of(context).size.width * 0.05,
+            vertical: MediaQuery.of(context).size.height * 0.03,
+          ),
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: 15,
+              child: Stack(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(10.0),
+                    child: Container(
+                      color: blue.withOpacity(0.19),
+                    ),
+                  ),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(10.0),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * 0.1,
+                      color: blue,
+                    ),
+                  ),
+                ],
               ),
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      height: 15,
-                      child: Stack(
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(10.0),
-                            child: Container(
-                              color: blue.withOpacity(0.19),
-                            ),
-                          ),
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(10.0),
-                            child: Container(
-                              width: MediaQuery.of(context).size.width * 0.1,
-                              color: blue,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.04,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        const Text(
-                          "Verify you're human",
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          textAlign: TextAlign.start,
-                        ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.03,
-                        ),
-                        Image.asset('assets/images/two.png'),
-                      ],
-                    ),
-                    const Text(
-                      "Please solve this captcha so we know you are real",
-                      textAlign: TextAlign.start,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.black,
-                      ),
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.02,
-                    ),
-                  ]),
             ),
             SizedBox(
-                height: MediaQuery.of(context).size.height * 0.7,
-                width: MediaQuery.of(context).size.width * 0.96,
-                child: WebViewWidget(
-                  controller: _controller,
-                )),
-          ],
-        )));
+              height: MediaQuery.of(context).size.height * 0.04,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const Text(
+                  "Verify you're human",
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.start,
+                ),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.03,
+                ),
+                Image.asset('assets/images/two.png'),
+              ],
+            ),
+            const Text(
+              "Please solve this captcha so we know you are real",
+              textAlign: TextAlign.start,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
+                color: Colors.black,
+              ),
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.02,
+            ),
+          ]),
+        ),
+        SizedBox(
+            height: MediaQuery.of(context).size.height * 0.6,
+            width: MediaQuery.of(context).size.width * 0.96,
+            child: WebViewWidget(
+              controller: _controller,
+            )),
+      ],
+    )));
   }
 
   @override

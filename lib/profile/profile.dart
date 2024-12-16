@@ -577,7 +577,7 @@ void _showPopup(BuildContext context) {
                                   .textTheme
                                   .bodyMedium
                                   ?.color),
-                          SizedBox(width: 5),
+                          const SizedBox(width: 5),
                           Text('Share your profile',
                               textAlign: TextAlign.center,
                               style: TextStyle(
@@ -601,7 +601,7 @@ void _showPopup(BuildContext context) {
                                   .textTheme
                                   .bodyMedium
                                   ?.color),
-                          SizedBox(width: 5),
+                          const SizedBox(width: 5),
                           Text('Dating Tips',
                               textAlign: TextAlign.center,
                               style: TextStyle(
@@ -630,7 +630,7 @@ void _showPopup(BuildContext context) {
                                   .textTheme
                                   .bodyMedium
                                   ?.color),
-                          SizedBox(width: 5),
+                          const SizedBox(width: 5),
                           Text('Edit profile',
                               textAlign: TextAlign.center,
                               style: TextStyle(
@@ -658,7 +658,7 @@ void _showPopup(BuildContext context) {
                                   .textTheme
                                   .bodyMedium
                                   ?.color),
-                          SizedBox(width: 5),
+                          const SizedBox(width: 5),
                           Text('Plans',
                               style: TextStyle(
                                   fontSize: 17,
@@ -685,7 +685,7 @@ void _showPopup(BuildContext context) {
                                   .textTheme
                                   .bodyMedium
                                   ?.color),
-                          SizedBox(width: 5),
+                          const SizedBox(width: 5),
                           Text('Safety',
                               style: TextStyle(
                                   fontSize: 17,
@@ -712,7 +712,7 @@ void _showPopup(BuildContext context) {
                                   .textTheme
                                   .bodyMedium
                                   ?.color),
-                          SizedBox(width: 5),
+                          const SizedBox(width: 5),
                           Text('Settings',
                               style: TextStyle(
                                   fontSize: 17,

@@ -184,9 +184,11 @@ class _FlutterGeminiChatState extends State<FlutterGeminiChat> {
           ),
           ListTile(
             onTap: () {
-              setState(() {
-                widget.chatList.removeAt(index);
-              });
+              if (mounted) {
+                setState(() {
+                  widget.chatList.removeAt(index);
+                });
+              }
               Navigator.pop(context);
             },
             leading: const Icon(Icons.delete),
@@ -194,11 +196,13 @@ class _FlutterGeminiChatState extends State<FlutterGeminiChat> {
           ),
           ListTile(
             onTap: () {
-              setState(() {
-                questionController.text = widget.chatList[index].message;
-                questionController.selection = TextSelection.fromPosition(
-                    TextPosition(offset: questionController.text.length));
-              });
+              if (mounted) {
+                setState(() {
+                  questionController.text = widget.chatList[index].message;
+                  questionController.selection = TextSelection.fromPosition(
+                      TextPosition(offset: questionController.text.length));
+                });
+              }
               Navigator.pop(context);
             },
             leading: const Icon(Icons.add),
@@ -354,7 +358,9 @@ class _FlutterGeminiChatState extends State<FlutterGeminiChat> {
               ),
               controller: questionController,
               onChanged: (value) {
-                setState(() {});
+                if (mounted) {
+                  setState(() {});
+                }
               },
             ),
           ),
@@ -366,21 +372,22 @@ class _FlutterGeminiChatState extends State<FlutterGeminiChat> {
             onTap: () async {
               var question = questionController.text;
               if (question.isEmpty) return; // Prevent empty messages
+              if (mounted) {
+                setState(() {
+                  widget.chatList.add(ChatModel(
+                    chat: 0,
+                    message: question,
+                    time: "${DateTime.now().hour}:${DateTime.now().second}",
+                  ));
 
-              setState(() {
-                widget.chatList.add(ChatModel(
-                  chat: 0,
-                  message: question,
-                  time: "${DateTime.now().hour}:${DateTime.now().second}",
-                ));
-
-                widget.chatList.add(ChatModel(
-                  chatType: ChatType.loading,
-                  chat: 1,
-                  message: "",
-                  time: "",
-                ));
-              });
+                  widget.chatList.add(ChatModel(
+                    chatType: ChatType.loading,
+                    chat: 1,
+                    message: "",
+                    time: "",
+                  ));
+                });
+              }
 
               FocusScope.of(context).unfocus();
               try {
@@ -402,24 +409,25 @@ class _FlutterGeminiChatState extends State<FlutterGeminiChat> {
                 messages: messages,
                 apiKey: widget.apiKey,
               );
-
-              setState(() {
-                widget.chatList.removeLast();
-                if (response.statusCode == 200) {
-                  widget.chatList.add(ChatModel(
-                    chat: 1,
-                    message: responseString,
-                    time: "${DateTime.now().hour}:${DateTime.now().second}",
-                  ));
-                } else {
-                  widget.chatList.add(ChatModel(
-                    chat: 0,
-                    chatType: ChatType.error,
-                    message: widget.errorMessage,
-                    time: "${DateTime.now().hour}:${DateTime.now().second}",
-                  ));
-                }
-              });
+              if (mounted) {
+                setState(() {
+                  widget.chatList.removeLast();
+                  if (response.statusCode == 200) {
+                    widget.chatList.add(ChatModel(
+                      chat: 1,
+                      message: responseString,
+                      time: "${DateTime.now().hour}:${DateTime.now().second}",
+                    ));
+                  } else {
+                    widget.chatList.add(ChatModel(
+                      chat: 0,
+                      chatType: ChatType.error,
+                      message: widget.errorMessage,
+                      time: "${DateTime.now().hour}:${DateTime.now().second}",
+                    ));
+                  }
+                });
+              }
             },
             child: const Icon(
               Icons.send_rounded,

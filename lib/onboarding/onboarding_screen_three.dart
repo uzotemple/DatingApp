@@ -12,6 +12,7 @@ class OnboardingScreenThree extends StatefulWidget {
 class _OnboardingScreenThreeState extends State<OnboardingScreenThree> {
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
     return Scaffold(
       body: Stack(
         children: [
@@ -197,97 +198,95 @@ class _OnboardingScreenThreeState extends State<OnboardingScreenThree> {
                 width: MediaQuery.of(context).size.width,
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisAlignment:
-                          MainAxisAlignment.center, // Center content vertically
-                      children: [
-                        const SizedBox(height: 15),
-                        const Padding(
-                          padding: EdgeInsets.all(10.0),
-                          child: Text(
-                            'Find Your Perfect Match Today',
-                            style: TextStyle(
-                              fontSize: 36,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white, // Text color
-                            ),
-                            textAlign: TextAlign.center, // Center align text
-                          ),
-                        ),
-                        const SizedBox(height: 10), // Space between text
-                        const Text(
-                          'Discover real connections with Zenkonect’s intelligent match making algorithm. Start swiping to find your perfect match today.',
+                  child: Column(
+                    mainAxisAlignment:
+                        MainAxisAlignment.center, // Center content vertically
+                    children: [
+                      const SizedBox(height: 15),
+                      const Padding(
+                        padding: EdgeInsets.all(10.0),
+                        child: Text(
+                          'Find Your Perfect Match Today',
                           style: TextStyle(
-                              fontSize: 20, color: Colors.white), // Text color
-                          textAlign: TextAlign.center,
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white, // Text color
+                          ),
+                          textAlign: TextAlign.center, // Center align text
                         ),
-                        const SizedBox(height: 35), // Space before button
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Image.asset("images/Rectangle 12.png"),
-                            ),
-                            Image.asset("images/Rectangle 12.png"),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Image.asset("images/Rectangle 10.png"),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 50), // Space before button
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            SizedBox(
-                              width: 140,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  Navigator.pushNamed(context, signUpRoute);
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  foregroundColor: Colors.black,
-                                  backgroundColor:
-                                      const Color(0xFFD2CFFB), // Text color
-                                  elevation: 3,
-                                ),
-                                child: const Text(
-                                  'Skip',
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w400,
-                                  ),
+                      ),
+                      // Space between text
+                      const Text(
+                        'Discover real connections with Zenkonect’s intelligent match making algorithm. Start swiping to find your perfect match today.',
+                        style: TextStyle(
+                            fontSize: 18, color: Colors.white), // Text color
+                        textAlign: TextAlign.center,
+                      ),
+                      const Spacer(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Image.asset("images/Rectangle 12.png"),
+                          ),
+                          Image.asset("images/Rectangle 12.png"),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Image.asset("images/Rectangle 10.png"),
+                          ),
+                        ],
+                      ),
+                      const Spacer(), // Space before button
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          SizedBox(
+                            width: screenSize.width * 0.35,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.pushNamed(context, signUpRoute);
+                              },
+                              style: ElevatedButton.styleFrom(
+                                foregroundColor: Colors.black,
+                                backgroundColor:
+                                    const Color(0xFFD2CFFB), // Text color
+                                elevation: 3,
+                              ),
+                              child: const Text(
+                                'Skip',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w400,
                                 ),
                               ),
                             ),
-                            SizedBox(
-                              width: 140,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  Navigator.pushNamed(context, signUpRoute);
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  foregroundColor: Colors.black,
-                                  backgroundColor:
-                                      const Color(0xFFFFFFFF), // Text color
-                                  elevation: 3,
-                                ),
-                                child: const Text(
-                                  'Continue',
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w400,
-                                    color: blue,
-                                  ),
+                          ),
+                          SizedBox(
+                            width: screenSize.width * 0.35,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.pushNamed(context, signUpRoute);
+                              },
+                              style: ElevatedButton.styleFrom(
+                                foregroundColor: Colors.black,
+                                backgroundColor:
+                                    const Color(0xFFFFFFFF), // Text color
+                                elevation: 3,
+                              ),
+                              child: const Text(
+                                'Continue',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w400,
+                                  color: blue,
                                 ),
                               ),
                             ),
-                          ],
-                        ),
-                      ],
-                    ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
               ),

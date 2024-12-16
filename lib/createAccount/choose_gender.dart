@@ -16,76 +16,84 @@ class Gender extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal:
+          padding: EdgeInsets.only(
+            right: MediaQuery.of(context).size.width * 0.05,
+            left:
                 MediaQuery.of(context).size.width * 0.05, // 5% of screen width
-            vertical: MediaQuery.of(context).size.height *
-                0.03, // 5% of screen height
+            top: MediaQuery.of(context).size.height * 0.03,
+            bottom: MediaQuery.of(context).size.height * 0.05,
           ),
           child: Column(
             children: [
-              SizedBox(
-                width: screenSize.width,
-                height: screenSize.height * 0.02,
-                child: Stack(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(10.0),
-                      child: Container(
-                        color: blue.withOpacity(0.19),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        width: screenSize.width,
+                        height: screenSize.height * 0.02,
+                        child: Stack(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(10.0),
+                              child: Container(
+                                color: blue.withOpacity(0.19),
+                              ),
+                            ),
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(10.0),
+                              child: Container(
+                                width: screenSize.width * 0.3,
+                                color: blue,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(10.0),
-                      child: Container(
-                        width: screenSize.width * 0.3,
-                        color: blue,
+                      SizedBox(
+                        height: screenSize.width * 0.046,
                       ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: screenSize.width * 0.046,
-              ),
-              Row(children: [
-                const Text(
-                  'Be True To Yourself',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
+                      Row(children: [
+                        const Text(
+                          'Be True To Yourself',
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
+                        Image.asset('assets/images/star.png', width: 30),
+                      ]),
+                      SizedBox(
+                        height: screenSize.height * 0.03,
+                      ),
+                      const Text(
+                        'Choose the gender that best represents you.',
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
+                      ),
+                      const Text(
+                        ' Authenticity is the key to meaningful connections.',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                      SizedBox(
+                        height: screenSize.height * 0.06,
+                      ),
+                      buildGenderOption('Man', 1, screenSize, genderProvider),
+                      SizedBox(
+                        height: screenSize.height * 0.04,
+                      ),
+                      buildGenderOption('Woman', 2, screenSize, genderProvider),
+                      SizedBox(
+                        height: screenSize.height * 0.04,
+                      ),
+                      buildGenderOption("I'd Prefer Not to Say", 3, screenSize,
+                          genderProvider),
+                    ],
                   ),
                 ),
-                Image.asset('assets/images/star.png', width: 30),
-              ]),
-              SizedBox(
-                height: screenSize.height * 0.03,
               ),
-              const Text(
-                'Choose the gender that best represents you.',
-                style: TextStyle(
-                  fontSize: 16,
-                ),
-              ),
-              const Text(
-                ' Authenticity is the key to meaningful connections.',
-                style: TextStyle(fontSize: 16),
-              ),
-              SizedBox(
-                height: screenSize.height * 0.06,
-              ),
-              buildGenderOption('Man', 1, screenSize, genderProvider),
-              SizedBox(
-                height: screenSize.height * 0.04,
-              ),
-              buildGenderOption('Woman', 2, screenSize, genderProvider),
-              SizedBox(
-                height: screenSize.height * 0.04,
-              ),
-              buildGenderOption(
-                  "I'd Prefer Not to Say", 3, screenSize, genderProvider),
-              const Spacer(),
               InkWell(
                 onTap: () {
                   Navigator.pushNamed(context, relationshipGoalsScreen);

@@ -503,7 +503,7 @@ void _showSmallPopup(BuildContext context) {
                                   ? Colors.white
                                   : Colors.black,
                             ),
-                            SizedBox(width: 5),
+                            const SizedBox(width: 5),
                             Text('Block',
                                 style: TextStyle(
                                   fontSize: 17,
@@ -530,7 +530,7 @@ void _showSmallPopup(BuildContext context) {
                                   ? Colors.white
                                   : Colors.black,
                             ),
-                            SizedBox(width: 5),
+                            const SizedBox(width: 5),
                             Text('Report',
                                 style: TextStyle(
                                   fontSize: 17,

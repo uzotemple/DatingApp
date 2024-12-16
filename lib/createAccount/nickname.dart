@@ -13,15 +13,16 @@ class CreateNickname extends StatelessWidget {
     final screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.only(
             right: MediaQuery.of(context).size.width * 0.05,
             left:
                 MediaQuery.of(context).size.width * 0.05, // 5% of screen width
-            top: MediaQuery.of(context).size.height *
-                0.03, // 5% of screen height
+            top: MediaQuery.of(context).size.height * 0.03,
+            bottom: MediaQuery.of(context).size.height *
+                0.05, // 5% of screen height
           ),
           child: Column(
             children: [
@@ -158,15 +159,17 @@ class CelebrateYouScreen extends StatelessWidget {
     final screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.only(
             right: MediaQuery.of(context).size.width * 0.05,
             left:
                 MediaQuery.of(context).size.width * 0.05, // 5% of screen width
-            top: MediaQuery.of(context).size.height *
-                0.02, // 5% of screen height
+            top: MediaQuery.of(context).size.height * 0.02,
+            // 5% of screen width
+            bottom: MediaQuery.of(context).size.height *
+                0.05, // 5% of screen height
           ),
           child: Column(
             children: [
@@ -203,7 +206,7 @@ class CelebrateYouScreen extends StatelessWidget {
                         ),
                       ),
 
-                      const SizedBox(height: 40),
+                      SizedBox(height: screenSize.height * 0.04),
                       // Title
                       const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -224,7 +227,7 @@ class CelebrateYouScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 30),
+                      SizedBox(height: screenSize.height * 0.035),
                       // Birthday Cake Image
                       Image.asset(
                         'assets/images/cake.png',
@@ -232,7 +235,7 @@ class CelebrateYouScreen extends StatelessWidget {
                         fit: BoxFit.contain,
                       ),
                       SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.03,
+                        height: MediaQuery.of(context).size.height * 0.04,
                       ),
                       // Date Fields
                       Row(

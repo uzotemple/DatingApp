@@ -35,8 +35,6 @@ class _PhotoVerificationOneState extends State<PhotoVerificationOne> {
         const PopupMenuItem<ImageSource>(
           value: ImageSource.gallery,
           child: SizedBox(
-            width: 120,
-            height: 20,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -50,8 +48,6 @@ class _PhotoVerificationOneState extends State<PhotoVerificationOne> {
         const PopupMenuItem<ImageSource>(
           value: ImageSource.camera,
           child: SizedBox(
-            width: 100,
-            height: 20,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -77,84 +73,132 @@ class _PhotoVerificationOneState extends State<PhotoVerificationOne> {
     final screenSize = MediaQuery.of(context).size;
     // bool isTapped = true;
     return Scaffold(
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 50.0),
+        body: SafeArea(
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal:
+              MediaQuery.of(context).size.width * 0.05, // 5% of screen width
+          vertical:
+              MediaQuery.of(context).size.height * 0.03, // 5% of screen height
+        ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
-              width: screenSize.width,
-              height: 15,
-              child: Stack(
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(10.0),
-                    child: Container(
-                      color: blue.withOpacity(0.19),
-                    ),
-                  ),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(10.0),
-                    child: Container(
-                      width: screenSize.width * 0.8,
-                      color: blue,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 25),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  'Photo Verification',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(width: 5),
-                Image.asset('assets/images/verify.png', height: 40),
-              ],
-            ),
-            const SizedBox(height: 15),
-            Stack(
-              children: [
-                Center(
-                  child: CircleAvatar(
-                    radius: 80,
-                    backgroundImage: firstImage != null
-                        ? FileImage(firstImage)
-                        : const AssetImage('assets/your_image.png')
-                            as ImageProvider,
-                  ),
-                ),
-                Positioned(
-                  bottom: 20,
-                  left: 210,
-                  child: GestureDetector(
-                    onTap: () => _showImageSourceMenu(context),
-                    child: Container(
-                      height: 40,
-                      width: 40, // Adjust height for a better tap area
-                      decoration: BoxDecoration(
-                        color: const Color.fromRGBO(197, 202, 227, 1),
-                        borderRadius: BorderRadius.circular(30),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    SizedBox(
+                      width: screenSize.width,
+                      height: screenSize.height * 0.02,
+                      child: Stack(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(10.0),
+                            child: Container(
+                              color: blue.withOpacity(0.19),
+                            ),
+                          ),
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(10.0),
+                            child: Container(
+                              width: screenSize.width * 0.8,
+                              color: blue,
+                            ),
+                          ),
+                        ],
                       ),
-                      child: const Center(
-                          child: Icon(Icons.camera_alt, color: Colors.black)),
                     ),
-                  ),
+                    SizedBox(
+                      height: screenSize.width * 0.046,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          'Photo Verification',
+                          style: TextStyle(
+                              fontSize: 24, fontWeight: FontWeight.bold),
+                        ),
+                        const SizedBox(width: 5),
+                        Image.asset('assets/images/verify.png', height: 40),
+                      ],
+                    ),
+                    const SizedBox(height: 15),
+                    // Stack(
+                    //   children: [
+                    //     Center(
+                    //       child: CircleAvatar(
+                    //         radius: 80,
+                    //         backgroundImage: firstImage != null
+                    //             ? FileImage(firstImage)
+                    //             : const AssetImage('assets/your_image.png')
+                    //                 as ImageProvider,
+                    //       ),
+                    //     ),
+                    //     Positioned(
+                    //       bottom: 0,
+                    //       right: 0,
+                    //       child: GestureDetector(
+                    //         onTap: () => _showImageSourceMenu(context),
+                    //         child: Container(
+                    //           decoration: BoxDecoration(
+                    //             color: const Color.fromRGBO(197, 202, 227, 1),
+                    //             shape: BoxShape.circle,
+                    //           ),
+                    //           child: const Center(
+                    //               child: Icon(Icons.camera_alt,
+                    //                   color: Colors.black)),
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
+                    Stack(
+                      children: [
+                        CircleAvatar(
+                          radius: 80,
+                          backgroundImage: firstImage != null
+                              ? FileImage(firstImage)
+                              : const AssetImage('assets/your_image.png')
+                                  as ImageProvider,
+                        ),
+                        // Show the camera icon on the bottom right
+                        Positioned(
+                          bottom: 0,
+                          right: 0,
+                          child: GestureDetector(
+                            onTap: () => _showImageSourceMenu(context),
+                            child: Container(
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Color.fromRGBO(197, 202, 227, 1),
+                              ),
+                              child: const Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Icon(
+                                  Icons.camera_alt,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    const SizedBox(height: 15),
+                    const Center(
+                      child: Text(
+                        'Prove you’re the real you, with selfies. If the pics match your profile, we’ll give you a blue tick to show off your new verified status. And we’ll keep the selfies just between us.',
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.w500),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            const SizedBox(height: 15),
-            const Center(
-              child: Text(
-                'Prove you’re the real you, with selfies. If the pics match your profile, we’ll give you a blue tick to show off your new verified status. And we’ll keep the selfies just between us.',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                textAlign: TextAlign.center,
               ),
             ),
-            const SizedBox(height: 200),
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: Column(
@@ -167,7 +211,7 @@ class _PhotoVerificationOneState extends State<PhotoVerificationOne> {
                       width: screenSize.width * 0.8,
                       height: screenSize.height * 0.05,
                       decoration: BoxDecoration(
-                        color: blue,
+                        color: const Color.fromRGBO(54, 40, 221, 1),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: const Center(
@@ -215,7 +259,7 @@ class _PhotoVerificationOneState extends State<PhotoVerificationOne> {
           ],
         ),
       ),
-    );
+    ));
   }
 }
 
@@ -233,112 +277,128 @@ class _GestureVerificationScreenState extends State<GestureVerificationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding:
-            const EdgeInsets.only(right: 20.0, left: 20, top: 50.0, bottom: 10),
-        child: SingleChildScrollView(
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal:
+                MediaQuery.of(context).size.width * 0.05, // 5% of screen width
+            vertical: MediaQuery.of(context).size.height * 0.03,
+          ),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Progress bar at the top
-              SizedBox(
-                width: MediaQuery.of(context).size.width,
-                height: 15,
-                child: Stack(
-                  children: [
-                    ClipRRect(
-                      borderRadius:
-                          BorderRadius.circular(10.0), // Outer rounded corners
-                      child: Container(
-                        color: blue.withOpacity(0.19), // Background color
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Progress bar at the top
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        height: 15,
+                        child: Stack(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(
+                                  10.0), // Outer rounded corners
+                              child: Container(
+                                color:
+                                    blue.withOpacity(0.19), // Background color
+                              ),
+                            ),
+                            // Inner progress bar
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(
+                                  10.0), // Inner rounded corners
+                              child: Container(
+                                  width: MediaQuery.of(context).size.width *
+                                      0.8, // Set width to represent progress
+                                  color: blue // Progress color
+                                  ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    // Inner progress bar
-                    ClipRRect(
-                      borderRadius:
-                          BorderRadius.circular(10.0), // Inner rounded corners
-                      child: Container(
-                          width: MediaQuery.of(context).size.width *
-                              0.8, // Set width to represent progress
-                          color: blue // Progress color
-                          ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 25),
-              const Text(
-                "Copy these gestures to verify your photo.",
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
-              ),
-              const SizedBox(height: 25),
-              // Gesture verification images
-              Container(
-                padding: const EdgeInsets.all(16.0),
-                decoration: BoxDecoration(
-                  color: const Color.fromRGBO(
-                      232, 232, 255, 1), // Background color for the image area
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: const Column(
-                  children: [
-                    // Front-facing image
-                    Center(
-                      child: Column(
-                        children: [
-                          CircleAvatar(
-                            radius: 50,
-                            backgroundImage: AssetImage(
-                                'assets/images/front.png' // Replace with your image URL
+                      const SizedBox(height: 25),
+                      const Text(
+                        "Copy these gestures to verify your photo.",
+                        style: TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.w600),
+                      ),
+                      const SizedBox(height: 25),
+                      // Gesture verification images
+                      Container(
+                        padding: const EdgeInsets.all(16.0),
+                        decoration: BoxDecoration(
+                          color: const Color.fromRGBO(232, 232, 255,
+                              1), // Background color for the image area
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: const Column(
+                          children: [
+                            // Front-facing image
+                            Center(
+                              child: Column(
+                                children: [
+                                  CircleAvatar(
+                                    radius: 50,
+                                    backgroundImage: AssetImage(
+                                        'assets/images/front.png' // Replace with your image URL
+                                        ),
+                                  ),
+                                  SizedBox(height: 8),
+                                  Text("Front",
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold)),
+                                ],
+                              ),
+                            ),
+                            SizedBox(height: 20),
+                            // Side-facing images (Left & Right)
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Column(
+                                  children: [
+                                    CircleAvatar(
+                                      radius: 50,
+                                      backgroundImage: AssetImage(
+                                        'assets/images/left2.png', // Replace with your image URL
+                                      ),
+                                    ),
+                                    SizedBox(height: 8),
+                                    Text("Left",
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold)),
+                                  ],
                                 ),
-                          ),
-                          SizedBox(height: 8),
-                          Text("Front",
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold)),
-                        ],
+                                Column(
+                                  children: [
+                                    CircleAvatar(
+                                      radius: 50,
+                                      backgroundImage: AssetImage(
+                                        'assets/images/right.png', // Replace with your image URL
+                                      ),
+                                    ),
+                                    SizedBox(height: 8),
+                                    Text("Right",
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold)),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    SizedBox(height: 20),
-                    // Side-facing images (Left & Right)
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Column(
-                          children: [
-                            CircleAvatar(
-                              radius: 50,
-                              backgroundImage: AssetImage(
-                                'assets/images/left2.png', // Replace with your image URL
-                              ),
-                            ),
-                            SizedBox(height: 8),
-                            Text("Left",
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold)),
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            CircleAvatar(
-                              radius: 50,
-                              backgroundImage: AssetImage(
-                                'assets/images/right.png', // Replace with your image URL
-                              ),
-                            ),
-                            SizedBox(height: 8),
-                            Text("Right",
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold)),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
+
+                      // Verify button
+                    ],
+                  ),
                 ),
               ),
-              const SizedBox(height: 150),
-              // Verify button
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: blue,

@@ -48,6 +48,7 @@ void main() {
   );
 }
 
+//qwewe@gmail.com  123qweQWE@
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -61,7 +62,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Zenkonect',
-      initialRoute: firstScreen,
+      initialRoute: homeScreen,
       routes: routes,
       // themeMode: ThemeMode.system,
       theme: lightTheme,

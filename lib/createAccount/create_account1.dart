@@ -34,6 +34,7 @@ class _CreateAcc1State extends State<CreateAcc1> {
     final screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(

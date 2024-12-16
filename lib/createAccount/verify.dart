@@ -100,6 +100,7 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
     final userId = accountProvider.userId;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(),
       body: Padding(
         padding: EdgeInsets.symmetric(

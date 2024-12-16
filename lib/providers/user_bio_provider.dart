@@ -23,6 +23,7 @@ class UserBioProvider extends ChangeNotifier {
   ];
 
   List<String> countries = [
+    'People nearby',
     'Afghanistan',
     'Albania',
     'Algeria',
@@ -217,6 +218,8 @@ class UserBioProvider extends ChangeNotifier {
     'Yemen',
     'Zambia',
     'Zimbabwe',
+    'Vatican City',
+    'Palestine'
   ];
 
   void updateProfession(String newProfession) {

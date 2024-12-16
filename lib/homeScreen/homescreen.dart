@@ -448,7 +448,6 @@ void showExtraViewsPopup(BuildContext context) {
           left: screenWidth * 0.05, // 5% of screen width
           right: screenWidth * 0.05,
         ),
-        height: screenHeight * 0.4, // 40% of screen height
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -952,7 +951,7 @@ void _showSmallPopup(BuildContext context) {
                                   ? Colors.white
                                   : Colors.black,
                             ),
-                            SizedBox(width: 5),
+                            const SizedBox(width: 5),
                             Text('Block',
                                 style: TextStyle(
                                   fontSize: 17,
@@ -979,7 +978,7 @@ void _showSmallPopup(BuildContext context) {
                                   ? Colors.white
                                   : Colors.black,
                             ),
-                            SizedBox(width: 5),
+                            const SizedBox(width: 5),
                             Text('Report',
                                 style: TextStyle(
                                   fontSize: 17,

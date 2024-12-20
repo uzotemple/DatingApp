@@ -24,16 +24,6 @@ class _UserBioState extends State<UserBio> {
     'Vocational Training',
     'Postgraduate Education',
   ];
-  final List<String> items = [
-    'A_Item1',
-    'A_Item2',
-    'A_Item3',
-    'A_Item4',
-    'B_Item1',
-    'B_Item2',
-    'B_Item3',
-    'B_Item4',
-  ];
 
   String? selectedValue;
   final TextEditingController textEditingController = TextEditingController();
@@ -110,7 +100,7 @@ class _UserBioState extends State<UserBio> {
 
                 const Text(
                   "Enter your Bio Data And Find Your Perfect Match",
-                  style: TextStyle(fontSize: 16, color: Colors.black),
+                  style: TextStyle(fontSize: 16),
                 ),
                 SizedBox(height: screenSize.height * 0.02),
                 Form(
@@ -138,7 +128,6 @@ class _UserBioState extends State<UserBio> {
                         const Text(
                           'Country',
                           style: TextStyle(
-                            color: Colors.black,
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                           ),
@@ -167,8 +156,12 @@ class _UserBioState extends State<UserBio> {
                                         value: item,
                                         child: Text(
                                           item,
-                                          style: const TextStyle(
+                                          style: TextStyle(
                                             fontSize: 14,
+                                            color: Theme.of(context)
+                                                .textTheme
+                                                .bodyMedium
+                                                ?.color, // Text color based on theme
                                           ),
                                         ),
                                       ))
@@ -177,14 +170,20 @@ class _UserBioState extends State<UserBio> {
                               onChanged: (value) {
                                 userProvider.updateCountry(value);
                               },
+                              dropdownStyleData: DropdownStyleData(
+                                maxHeight: 200,
+                                decoration: BoxDecoration(
+                                  color: Theme.of(context)
+                                      .scaffoldBackgroundColor, // Background color based on theme
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                              ),
                               buttonStyleData: const ButtonStyleData(
                                 padding: EdgeInsets.symmetric(horizontal: 16),
                                 height: 40,
                                 width: 200,
                               ),
-                              dropdownStyleData: const DropdownStyleData(
-                                maxHeight: 200,
-                              ),
+
                               menuItemStyleData: const MenuItemStyleData(
                                 height: 40,
                               ),
@@ -200,18 +199,25 @@ class _UserBioState extends State<UserBio> {
                                     left: 8,
                                   ),
                                   child: TextFormField(
+                                    style: TextStyle(
+                                        color: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium
+                                            ?.color),
                                     expands: true,
                                     maxLines: null,
                                     controller: textEditingController,
                                     decoration: InputDecoration(
                                       isDense: true,
                                       hintText: 'Search for an item...',
+                                      hintStyle: TextStyle(
+                                          color: Theme.of(context).hintColor,
+                                          fontSize: 12),
                                       contentPadding:
                                           const EdgeInsets.symmetric(
                                         horizontal: 10,
                                         vertical: 8,
                                       ),
-                                      hintStyle: const TextStyle(fontSize: 12),
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(8),
                                       ),
@@ -250,7 +256,6 @@ class _UserBioState extends State<UserBio> {
                           const Text(
                             'Education Level',
                             style: TextStyle(
-                              color: Colors.black,
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
                             ),
@@ -268,13 +273,21 @@ class _UserBioState extends State<UserBio> {
                             ),
                             child: DropdownButton<String>(
                               value: selectedLevel,
+
                               // hint: Text('Select Education Level'),
                               isExpanded:
                                   true, // Makes the dropdown take full width
                               items: educationLevels.map((String level) {
                                 return DropdownMenuItem<String>(
                                   value: level,
-                                  child: Text(level),
+                                  child: Text(
+                                    level,
+                                    style: TextStyle(
+                                        color: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium
+                                            ?.color),
+                                  ),
                                 );
                               }).toList(),
 
@@ -283,7 +296,9 @@ class _UserBioState extends State<UserBio> {
                                   selectedLevel = newValue;
                                 });
                               },
-                              underline: Container(), // Removes the underline
+                              underline: Container(),
+                              dropdownColor:
+                                  Theme.of(context).scaffoldBackgroundColor,
                             ),
                           ),
                         ],
@@ -343,13 +358,14 @@ class _UserBioState extends State<UserBio> {
           Text(
             label,
             style: const TextStyle(
-              color: Colors.black,
               fontSize: 16,
               fontWeight: FontWeight.bold,
             ),
           ),
           SizedBox(height: screenSize.height * 0.01),
           TextField(
+            style:
+                TextStyle(color: Theme.of(context).textTheme.bodyMedium?.color),
             onChanged: onChanged,
             obscureText: isPassword && !showPassword,
             decoration: InputDecoration(
@@ -381,6 +397,8 @@ class _UserBioState extends State<UserBio> {
                 horizontal: 16.0,
               ),
               hintText: label == 'Bio' ? 'Eg: Fun and Interesing' : null,
+              hintStyle: TextStyle(
+                  color: Theme.of(context).textTheme.bodyMedium?.color),
             ),
           ),
         ],

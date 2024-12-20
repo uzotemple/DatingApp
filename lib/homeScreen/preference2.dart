@@ -1352,6 +1352,13 @@ class _MoreOptionsState extends State<MoreOptions> {
                         children: [
                           ...[
                             'English',
+                            'Hausa',
+                            'Yoruba',
+                            'Igbo',
+                            'Fulfulde',
+                            'Ibibio',
+                            'Kanuri',
+                            'Tiv',
                             'Spanish',
                             'Mandarin',
                             'Hindi',
@@ -1371,9 +1378,6 @@ class _MoreOptionsState extends State<MoreOptions> {
                             'Urdu',
                             'Punjabi',
                             'Javanese',
-                            'Yoruba',
-                            'Hausa',
-                            'Igbo',
                             'Fula',
                             'Zulu',
                             'Thai',
@@ -1524,9 +1528,8 @@ class _MoreOptionsState extends State<MoreOptions> {
                         child: InkWell(
                           onTap: () {
                             Navigator.pop(context);
-                            // Apply selected preference action here
-                            // For example, you can print selected languages
-                            print('Selected Languages: $selectedLanguages');
+
+                            // print('Selected Languages: $selectedLanguages');
                           },
                           child: Container(
                             width: screenSize.width * 0.45,
@@ -2506,7 +2509,7 @@ class _MoreOptionsState extends State<MoreOptions> {
                       // Checkbox ListTiles with rounded borders and single-selection logic
                       CheckboxListTile(
                         title: Text(
-                          'High School',
+                          'None',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
@@ -2532,7 +2535,7 @@ class _MoreOptionsState extends State<MoreOptions> {
                       ),
                       CheckboxListTile(
                         title: Text(
-                          'In College',
+                          'Primary Education',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
@@ -2558,7 +2561,7 @@ class _MoreOptionsState extends State<MoreOptions> {
                       ),
                       CheckboxListTile(
                         title: Text(
-                          'Finished College',
+                          'Secondary Education',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
@@ -2584,7 +2587,7 @@ class _MoreOptionsState extends State<MoreOptions> {
                       ),
                       CheckboxListTile(
                         title: Text(
-                          "In grad School",
+                          "A level",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
@@ -2610,7 +2613,7 @@ class _MoreOptionsState extends State<MoreOptions> {
                       ),
                       CheckboxListTile(
                         title: Text(
-                          "Finished Graduate degree or higher",
+                          'Vocational Training',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
@@ -2635,6 +2638,58 @@ class _MoreOptionsState extends State<MoreOptions> {
                         ),
                       ),
 
+                      CheckboxListTile(
+                        title: Text(
+                          'Undergraduate Education',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            color:
+                                Theme.of(context).textTheme.bodyMedium?.color,
+                          ),
+                        ),
+                        value: selectedCheckboxIndex == 5,
+                        onChanged: (bool? value) {
+                          setState(() {
+                            selectedCheckboxIndex = value! ? 4 : -1;
+                          });
+                        },
+                        activeColor: blue,
+                        checkColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        side: const BorderSide(
+                          color: blue,
+                          width: 1,
+                        ),
+                      ),
+                      CheckboxListTile(
+                        title: Text(
+                          'Postgraduate Education',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            color:
+                                Theme.of(context).textTheme.bodyMedium?.color,
+                          ),
+                        ),
+                        value: selectedCheckboxIndex == 6,
+                        onChanged: (bool? value) {
+                          setState(() {
+                            selectedCheckboxIndex = value! ? 4 : -1;
+                          });
+                        },
+                        activeColor: blue,
+                        checkColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        side: const BorderSide(
+                          color: blue,
+                          width: 1,
+                        ),
+                      ),
                       const SizedBox(height: 30),
                       Padding(
                         padding: const EdgeInsets.all(10),

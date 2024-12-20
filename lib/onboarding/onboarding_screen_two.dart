@@ -277,7 +277,7 @@ class _OnboardingScreenTwoState extends State<OnboardingScreenTwo> {
                             fontSize: 18, color: Colors.white), // Text color
                         textAlign: TextAlign.center,
                       ),
-                      Spacer(),
+                      const Spacer(),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [

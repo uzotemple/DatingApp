@@ -65,7 +65,6 @@ class CreateNickname extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
-                            color: Colors.black,
                           ),
                         ),
                         const SizedBox(width: 10),
@@ -77,7 +76,6 @@ class CreateNickname extends StatelessWidget {
                         'Create a unique nickname that represents you, it’s how others will know and remember you.',
                         style: TextStyle(
                           fontSize: 16,
-                          color: Colors.black,
                         ),
                       ),
                       SizedBox(
@@ -99,14 +97,14 @@ class CreateNickname extends StatelessWidget {
                           ),
                           child: Center(
                             child: TextField(
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
+                                style: TextStyle(
+                                  color: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium
+                                      ?.color,
                                   fontSize: 25,
-                                  color:
-                                      Colors.black, // Blue color for input text
-                                  fontWeight:
-                                      FontWeight.bold, // Bold input text
                                 ),
+                                textAlign: TextAlign.center,
                                 decoration: const InputDecoration(
                                   hintText: 'Nickname',
                                   border: InputBorder.none,
@@ -216,7 +214,6 @@ class CelebrateYouScreen extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.bold,
-                              color: Colors.black,
                             ),
                           ),
                           SizedBox(width: 10),
@@ -304,13 +301,18 @@ class CelebrateYouScreen extends StatelessWidget {
       ),
       child: Center(
         child: TextField(
+          style:
+              TextStyle(color: Theme.of(context).textTheme.bodyMedium?.color),
           textAlign: TextAlign.center,
           decoration: InputDecoration(
             hintText: hint,
             border: InputBorder.none,
-            hintStyle: const TextStyle(
+            hintStyle: TextStyle(
               fontSize: 18,
-              color: Color.fromRGBO(56, 53, 53, 1),
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? const Color.fromARGB(
+                      255, 185, 182, 182) // Dark mode, use white
+                  : const Color.fromRGBO(56, 53, 53, 1),
             ),
           ),
           keyboardType: TextInputType.number,

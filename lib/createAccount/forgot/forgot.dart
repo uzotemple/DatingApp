@@ -22,74 +22,59 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     final screenSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.black),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_outlined, size: 30),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
-      resizeToAvoidBottomInset: true, // This line helps prevent overflow
+      resizeToAvoidBottomInset: false, // This line helps prevent overflow
       body: Padding(
-        padding: const EdgeInsets.all(1),
+        padding: EdgeInsets.only(
+            top: screenSize.height * 0.03,
+            bottom: screenSize.height * 0.03,
+            left: screenSize.width * 0.07,
+            right: screenSize.width * 0.06),
         child: Column(
           children: [
             Expanded(
               child: SingleChildScrollView(
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(
-                    minHeight: screenSize
-                        .height, // Make the ConstrainedBox at least screen height
-                  ),
-                  child: IntrinsicHeight(
-                    child: Column(
+                child: Column(
+                  children: [
+                    Row(
                       children: [
-                        Expanded(
-                          child: SingleChildScrollView(
-                            padding: EdgeInsets.only(
-                                top: screenSize.height * 0.03,
-                                bottom: screenSize.height * 0.03,
-                                left: screenSize.width * 0.07,
-                                right: screenSize.width * 0.06),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  children: [
-                                    const Text(
-                                      'Reset Your Password',
-                                      style: TextStyle(
-                                        fontSize: 22,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                    SizedBox(width: screenSize.width * 0.02),
-                                    const Icon(Icons.key_sharp)
-                                  ],
-                                ),
-                                SizedBox(height: screenSize.height * 0.012),
-                                const Text(
-                                  "Please enter your email and we will send an OTP code in the next step to reset your password",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 16,
-                                      color: Colors.black),
-                                ),
-                                SizedBox(height: screenSize.height * 0.042),
-                                Form(
-                                  key: _formKey,
-                                  child: Column(
-                                    children: [
-                                      _buildTextField('Email', emailController,
-                                          Icons.email),
-                                      // _buildTextField('Password', passwordController, Icons.lock, true),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
+                        const Text(
+                          'Reset Your Password',
+                          style: TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
+                        SizedBox(width: screenSize.width * 0.02),
+                        const Icon(Icons.key_sharp)
                       ],
                     ),
-                  ),
+                    SizedBox(height: screenSize.height * 0.012),
+                    const Text(
+                      "Please enter your email and we will send an OTP code in the next step to reset your password",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 16,
+                      ),
+                    ),
+                    SizedBox(height: screenSize.height * 0.042),
+                    Form(
+                      key: _formKey,
+                      child: Column(
+                        children: [
+                          _buildTextField(
+                              'Email', emailController, Icons.email),
+                          // _buildTextField('Password', passwordController, Icons.lock, true),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -134,25 +119,27 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           Text(
             label,
             style: const TextStyle(
-              color: Colors.black,
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
           ),
           SizedBox(height: screenSize.height * 0.009),
           TextField(
+            style:
+                TextStyle(color: Theme.of(context).textTheme.bodyMedium?.color),
             controller: controller,
             obscureText: isPassword && !showPassword,
             decoration: InputDecoration(
               fillColor: const Color.fromRGBO(54, 40, 221, 0.1),
               prefixIcon: icon != null
-                  ? Icon(icon, color: Colors.black, size: 20)
+                  ? Icon(icon,
+                      color: Theme.of(context).iconTheme.color, size: 20)
                   : null,
               suffixIcon: isPassword
                   ? IconButton(
                       icon: Icon(
                         showPassword ? Icons.visibility : Icons.visibility_off,
-                        color: Colors.black,
+                        color: Theme.of(context).iconTheme.color,
                       ),
                       onPressed: () {
                         setState(() {

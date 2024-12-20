@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:love_bird/chat/chat_screen.dart';
-
 import 'package:love_bird/chat/liveChat.dart';
 import 'package:love_bird/config/constants.dart';
 import 'package:love_bird/config/routes.dart';

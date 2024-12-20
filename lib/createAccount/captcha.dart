@@ -98,7 +98,6 @@ class _CaptchaState extends State<Captcha> {
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w400,
-                color: Colors.black,
               ),
             ),
             SizedBox(

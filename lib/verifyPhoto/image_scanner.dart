@@ -5,8 +5,8 @@ import 'dart:io';
 
 import 'package:love_bird/config/routes.dart';
 
-class ImageScanner extends StatefulWidget {
-  const ImageScanner({
+class ImageScannerAfter extends StatefulWidget {
+  const ImageScannerAfter({
     super.key,
   });
 
@@ -14,7 +14,7 @@ class ImageScanner extends StatefulWidget {
   PhotoVerificationState createState() => PhotoVerificationState();
 }
 
-class PhotoVerificationState extends State<ImageScanner> {
+class PhotoVerificationState extends State<ImageScannerAfter> {
   final List<File> _scannedImages = []; // Stores the three scanned images
   final ImagePicker _picker = ImagePicker(); // Image picker instance
 
@@ -83,7 +83,7 @@ class PhotoVerificationState extends State<ImageScanner> {
     Future.delayed(const Duration(seconds: 2), () {
       if (mounted) {
         Navigator.pop(context);
-        Navigator.pushNamed(context, enableLocationScreen);
+        Navigator.pushNamed(context, homeScreen);
       }
     });
   }

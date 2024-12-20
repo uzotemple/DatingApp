@@ -49,7 +49,7 @@ class _NewPasswordState extends State<NewPassword> {
                 const Text(
                   "Please wait....\nYou will be redirected to the Login page",
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 12),
+                  style: TextStyle(fontSize: 12, color: Colors.black),
                 ),
                 const SizedBox(height: 20),
                 const CircularProgressIndicator(),
@@ -72,9 +72,12 @@ class _NewPasswordState extends State<NewPassword> {
     final screenSize = MediaQuery.of(context).size;
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          iconTheme: const IconThemeData(color: Colors.black),
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back_outlined, size: 30),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
         ),
         body: Column(children: [
           Expanded(
@@ -91,13 +94,17 @@ class _NewPasswordState extends State<NewPassword> {
                             fontSize: 22, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(width: screenSize.width * 0.01),
-                      const Icon(Icons.lock)
+                      const Icon(
+                        Icons.lock,
+                      )
                     ],
                   ),
                   SizedBox(height: screenSize.height * 0.01),
                   const Text(
                     "Create your new password and save",
-                    style: TextStyle(fontSize: 16, color: Colors.black),
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
                   ),
                   SizedBox(height: screenSize.height * 0.047),
                   Form(
@@ -117,7 +124,9 @@ class _NewPasswordState extends State<NewPassword> {
             padding: const EdgeInsets.all(18),
             child: GestureDetector(
               onTap: () {
-                _showSubmissionDialog();
+                if (_formKey.currentState!.validate()) {
+                  _showSubmissionDialog();
+                }
               },
               child: Container(
                 width: screenSize.width * 0.8,
@@ -147,25 +156,56 @@ class _NewPasswordState extends State<NewPassword> {
           Text(
             label,
             style: const TextStyle(
-              color: Colors.black,
               fontSize: 18,
               fontWeight: FontWeight.w700,
             ),
           ),
           const SizedBox(height: 8),
-          TextField(
+          TextFormField(
+            style: TextStyle(
+              color: Theme.of(context).textTheme.bodyMedium?.color,
+            ),
             controller: controller,
             obscureText: isPassword && !showPassword,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return '$label cannot be empty';
+              }
+
+              if (isPassword) {
+                if (value.length < 9) {
+                  return 'Password must be at least 9 characters long';
+                }
+                if (!RegExp(r'[a-z]').hasMatch(value)) {
+                  return 'Password must contain at least one lowercase letter';
+                }
+                if (!RegExp(r'[A-Z]').hasMatch(value)) {
+                  return 'Password must contain at least one uppercase letter';
+                }
+                if (!RegExp(r'\d').hasMatch(value)) {
+                  return 'Password must contain at least one number';
+                }
+                if (!RegExp(r'[!@#$%^&*(),.?":{}|<>]').hasMatch(value)) {
+                  return 'Password must contain at least one special character';
+                }
+                if (value.contains(' ')) {
+                  return 'Password must not contain spaces';
+                }
+              }
+
+              return null;
+            },
             decoration: InputDecoration(
               fillColor: const Color.fromRGBO(54, 40, 221, 0.1),
               prefixIcon: icon != null
-                  ? Icon(icon, color: Colors.black, size: 20)
+                  ? Icon(icon,
+                      color: Theme.of(context).iconTheme.color, size: 20)
                   : null,
               suffixIcon: isPassword
                   ? IconButton(
                       icon: Icon(
                         showPassword ? Icons.visibility : Icons.visibility_off,
-                        color: Colors.black,
+                        color: Theme.of(context).iconTheme.color,
                       ),
                       onPressed: () {
                         setState(() {

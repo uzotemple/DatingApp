@@ -59,7 +59,6 @@ class Gender extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
-                            color: Colors.black,
                           ),
                         ),
                         Image.asset('assets/images/star.png', width: 30),

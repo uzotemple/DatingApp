@@ -16,9 +16,10 @@ import 'package:love_bird/createAccount/interest.dart';
 import 'package:love_bird/createAccount/distance_preference.dart';
 import 'package:love_bird/createAccount/nickname.dart';
 import 'package:love_bird/createAccount/choose_gender.dart';
+import 'package:love_bird/createAccount/photoVerification/photo_verification_one.dart';
 import 'package:love_bird/createAccount/photoVerification/photo_verification_scan.dart';
 import 'package:love_bird/createAccount/photoVerification/image_scanner.dart';
-import 'package:love_bird/createAccount/photoVerification/photo_verification_one.dart';
+
 import 'package:love_bird/createAccount/relationship.dart';
 import 'package:love_bird/createAccount/upload_six_photo.dart';
 import 'package:love_bird/createAccount/user_bio.dart';
@@ -42,6 +43,9 @@ import 'package:love_bird/providers/ip_address.dart';
 import 'package:love_bird/sign/login_page.dart';
 import 'package:love_bird/sign/sign.dart';
 import 'package:love_bird/createAccount/captcha.dart';
+import 'package:love_bird/verifyPhoto/image_scanner.dart';
+import 'package:love_bird/verifyPhoto/photo_verification_one.dart';
+import 'package:love_bird/verifyPhoto/photo_verification_scan.dart';
 
 // Define route names as constants
 const createAccountRoute = "/createAccount";
@@ -64,10 +68,15 @@ const interestsSelectionScreen = "/interestsSelectionScreen";
 const findingPeople = "/findingPeople";
 const uploadPicturesScreen = "/uploadPicturesScreen";
 const photoVerificationOne = "/PhotoVerificationOne";
+const photoVerificationOneAfter = "/PhotoVerificationOneAfter";
+
 const chatbotWelcomeScreen = "/chatbotWelcomeScreen";
 const gestureVerificationScreen = "/gestureVerificationScreen";
+const gestureVerificationScreenAfter = "/gestureVerificationScreenAfter";
 const photoScreen3 = "/photoScreen3";
+const photoScreen3After = "/photoScreen3After";
 const imageScanner = "/imageScanner";
+const imageScannerAfter = "/imageScannerAfter";
 const enableLocationScreen = "/enableLocationScreen";
 const findingPeopleNearBy = "/findingPeopleNearBy";
 const userBio = "/userBio";
@@ -134,4 +143,8 @@ final routes = <String, Widget Function(BuildContext)>{
   storyExamplePage: (_) => const StoryExamplePage(),
   userProfilePage: (_) => const UserProfilePage(),
   chatBotScreen: (_) => const ChatBotScreen(),
+  photoVerificationOneAfter: (_) => const PhotoVerificationOneAfter(),
+  photoScreen3After: (_) => const PhotoScreen3After(),
+  imageScannerAfter: (_) => const ImageScannerAfter(),
+  gestureVerificationScreenAfter: (_) => const GestureVerificationScreenAfter(),
 };

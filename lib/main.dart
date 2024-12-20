@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:love_bird/chatBot/chatbot_config_provider.dart';
 import 'package:love_bird/chatBot/font_size_provider.dart';
-
 import 'package:love_bird/config/routes.dart';
-import 'package:love_bird/config/theme.dart';
 import 'package:love_bird/providers/birthday_provider.dart';
 import 'package:love_bird/providers/chat_provider.dart';
 import 'package:love_bird/providers/create_account_provider.dart';
@@ -48,7 +46,6 @@ void main() {
   );
 }
 
-//qwewe@gmail.com  123qweQWE@
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -64,48 +61,9 @@ class MyApp extends StatelessWidget {
       title: 'Zenkonect',
       initialRoute: homeScreen,
       routes: routes,
-      // themeMode: ThemeMode.system,
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: themeProvider.themeMode,
-      // theme: ThemeData(
-      //   primaryColor: Colors.white,
-      //   scaffoldBackgroundColor: Colors.white,
-      //   appBarTheme: const AppBarTheme(
-      //     backgroundColor: Colors.white,
-      //     iconTheme: IconThemeData(color: Colors.black),
-      //     titleTextStyle: TextStyle(
-      //       color: Colors.black,
-      //     ),
-      //   ),
-      //   textTheme: const TextTheme(
-      //     bodyMedium: TextStyle(color: Colors.black),
-      //   ),
-      //   colorScheme: ColorScheme.fromSwatch().copyWith(
-      //     secondary: blue,
-      //     brightness: Brightness.light,
-      //   ),
-      // ),
-      // darkTheme: ThemeData(
-      //   primaryColor: Colors.black,
-      //   scaffoldBackgroundColor: Colors.black,
-      //   appBarTheme: const AppBarTheme(
-      //     backgroundColor: Colors.black,
-      //     iconTheme: IconThemeData(color: Colors.white),
-      //     titleTextStyle: TextStyle(
-      //       color: Colors.white,
-      //     ),
-      //   ),
-      //   textTheme: const TextTheme(
-      //     bodyMedium: TextStyle(color: Colors.white),
-      //   ),
-      //   colorScheme: ColorScheme.fromSwatch().copyWith(
-      //     secondary: blue,
-      //     brightness: Brightness.dark,
-      //   ),
-      // ),
-
-      //123qweQWE%,
     );
   }
 }

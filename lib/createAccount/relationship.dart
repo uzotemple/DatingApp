@@ -12,7 +12,6 @@ class RelationshipGoalsScreen extends StatelessWidget {
     final goalProvider = Provider.of<GoalProvider>(context);
 
     return Scaffold(
-      backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
           children: [
@@ -196,6 +195,7 @@ class RelationshipOption extends StatelessWidget {
               Text(
                 label,
                 style: const TextStyle(
+                  color: Colors.black,
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),

@@ -74,21 +74,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   Widget _buildContent(Size screenSize) {
     final screenSize = MediaQuery.of(context).size;
-    return SingleChildScrollView(
-      child: Padding(
-        padding: EdgeInsets.symmetric(
-            horizontal: screenSize.width * 0.04,
-            vertical: screenSize.height * 0.06),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            _buildHeader(screenSize),
-            _buildSignInOptions(screenSize),
-            SizedBox(width: screenSize.width * 0.02),
-            _buildSignUpOption(),
-          ],
+    return Column(
+      children: [
+        Expanded(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: screenSize.width * 0.04,
+                  vertical: screenSize.height * 0.06),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  _buildHeader(screenSize),
+                  _buildSignInOptions(screenSize),
+                ],
+              ),
+            ),
+          ),
         ),
-      ),
+        _buildSignUpOption(),
+      ],
     );
   }
 
@@ -105,7 +110,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         const Text(
           'Zenkonect',
           style: TextStyle(
-            fontSize: 24,
+            fontSize: 28,
             fontFamily: 'Kaushan Script',
             color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -127,6 +132,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget _buildSignInOptions(Size screenSize) {
     return Column(
       children: [
+        SizedBox(height: screenSize.height * 0.06),
         SignInButton(
           imagePath: 'assets/images/icons/icons8-google-48.png',
           label: 'Continue with Google',
@@ -134,25 +140,36 @@ class _SignUpScreenState extends State<SignUpScreen> {
             await handleGoogleSignIn();
           },
         ),
-        SizedBox(height: screenSize.height * 0.036),
-        SignInButton(
-          imagePath: 'assets/images/icons/icons8-apple-50.png',
-          label: 'Continue with Apple',
-          onPressed: () {},
+        // SizedBox(height: screenSize.height * 0.036),
+        // SignInButton(
+        //   imagePath: 'assets/images/icons/icons8-apple-50.png',
+        //   label: 'Continue with Apple',
+        //   onPressed: () {},
+        // ),
+        // SizedBox(height: screenSize.height * 0.036),
+        // SignInButton(
+        //   imagePath: 'assets/images/icons/x.png',
+        //   label: 'Continue with X',
+        //   onPressed: () {},
+        // ),
+        // SizedBox(height: screenSize.height * 0.036),
+        // SignInButton(
+        //   imagePath: 'assets/images/icons/facebook.png',
+        //   label: 'Continue with Facebook',
+        //   onPressed: () {},
+        // ),
+        //  SizedBox(height: screenSize.height * 0.16),
+        SizedBox(height: screenSize.height * 0.06),
+        const Text(
+          'OR',
+          style: TextStyle(
+            fontSize: 30,
+            fontFamily: 'Kaushan Script',
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
         ),
-        SizedBox(height: screenSize.height * 0.036),
-        SignInButton(
-          imagePath: 'assets/images/icons/x.png',
-          label: 'Continue with X',
-          onPressed: () {},
-        ),
-        SizedBox(height: screenSize.height * 0.036),
-        SignInButton(
-          imagePath: 'assets/images/icons/facebook.png',
-          label: 'Continue with Facebook',
-          onPressed: () {},
-        ),
-        SizedBox(height: screenSize.height * 0.16),
+        SizedBox(height: screenSize.height * 0.06),
         _buildLoginButton(screenSize),
       ],
     );
@@ -186,7 +203,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
         padding: EdgeInsets.only(
             left: screenSize.height * 0.03,
             right: screenSize.height * 0.03,
-            top: screenSize.height * 0.06),
+            top: screenSize.height * 0.06,
+            bottom: screenSize.height * 0.06),
         child: InkWell(
           onTap: () {
             Navigator.pushNamed(context, createAccountRoute);

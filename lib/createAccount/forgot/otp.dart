@@ -54,9 +54,12 @@ class _OTPVerificationPageState extends State<OTPVerificationPage> {
     final screenSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.black),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_outlined, size: 30),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: Padding(
         padding: EdgeInsets.only(
@@ -102,6 +105,11 @@ class _OTPVerificationPageState extends State<OTPVerificationPage> {
                           ),
                           alignment: Alignment.center,
                           child: TextField(
+                            style: TextStyle(
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium
+                                    ?.color),
                             textAlign: TextAlign.center,
                             maxLength: 1,
                             keyboardType: TextInputType.number,

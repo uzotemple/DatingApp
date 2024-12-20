@@ -17,8 +17,9 @@ class UserBioProvider extends ChangeNotifier {
     'None',
     'Primary Education',
     'Secondary Education',
-    'Higher Education',
     'Vocational Training',
+    'A level',
+    'Undergraduate Education',
     'Postgraduate Education',
   ];
 

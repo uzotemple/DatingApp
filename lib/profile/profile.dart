@@ -128,11 +128,18 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
         centerTitle: true,
         actions: [
+          // IconButton(
+          //   icon: Image.asset('assets/images/icons/verblue.png',
+          //       width: 30, height: 30),
+          //   onPressed: () {
+          //     verify(context);
+          //   },
+          // ),
           IconButton(
-            icon: Image.asset('assets/images/icons/verblue.png',
+            icon: Image.asset('assets/images/redCheck.png',
                 width: 30, height: 30),
             onPressed: () {
-              verify(context);
+              Navigator.pushNamed(context, photoVerificationOneAfter);
             },
           ),
           IconButton(

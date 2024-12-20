@@ -189,6 +189,7 @@ class _LoginPageState extends State<LoginPage> {
                         emailController.text,
                         passwordController.text,
                       );
+                      // _showSubmissionDialog(context);
                     }
                   },
                   child: Container(
@@ -302,6 +303,46 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ],
       ),
+    );
+  }
+
+  void _showSubmissionDialog(BuildContext context) {
+    showDialog(
+      barrierDismissible: true,
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Image.asset('assets/images/icons/loginIcon.png'),
+                const SizedBox(height: 20),
+                const Text(
+                  'Login Successful!',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: blue,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                const Text(
+                  "Please wait....\nYou will be redirected to the homepage",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 16, color: Colors.black),
+                ),
+                const SizedBox(height: 20),
+                const CircularProgressIndicator(),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

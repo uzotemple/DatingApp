@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
 class UserBioProvider extends ChangeNotifier {
@@ -283,8 +285,31 @@ class UserBioProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Method to save data (to be integrated with backend)
   Future<void> saveToDatabase() async {
-    // Add database saving logic here
+    const String apiUrl = "http://localhost:7001/profile/initial-addition";
+
+    try {
+      final response = await http.post(
+        Uri.parse(apiUrl),
+        body: jsonEncode({
+          "profession": profession,
+          "weight": double.tryParse(weight) ?? 0, // Ensure numeric value
+          "height": double.tryParse(height) ?? 0, // Ensure numeric value
+          "country": country,
+          "city": city,
+          "bio": bio,
+          "educationLevel": educationLevel,
+        }),
+      );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        print("User bio saved successfully.");
+      } else {
+        print("Failed to save user bio: ${response.statusCode}");
+        print(response.body);
+      }
+    } catch (error) {
+      print("Error saving user bio: $error");
+    }
   }
 }

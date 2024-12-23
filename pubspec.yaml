@@ -61,6 +61,7 @@ dependencies:
   flutter_gemini_bot: ^0.0.4
   story: ^1.1.0
   flutter_story: ^1.0.1
+  dio: ^5.7.0
   
 
   

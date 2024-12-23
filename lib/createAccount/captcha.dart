@@ -32,7 +32,7 @@ class _CaptchaState extends State<Captcha> {
         'Captcha',
         onMessageReceived: (JavaScriptMessage message) {
           if (message.message == 'verified') {
-            Navigator.pushReplacementNamed(context, '/userBio');
+            Navigator.pushReplacementNamed(context, '/loginCreate');
           }
         },
       );

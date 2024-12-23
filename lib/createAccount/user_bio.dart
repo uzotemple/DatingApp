@@ -314,8 +314,14 @@ class _UserBioState extends State<UserBio> {
                 // Sign Up Button
                 Center(
                   child: GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, createNickname);
+                    onTap: () async {
+                      if (_formKey.currentState?.validate() ?? false) {
+                        // Call saveToDatabase when the form is valid
+                        // await userProvider.saveToDatabase();
+                        // Optionally navigate to another screen after submission
+                        Navigator.pushNamed(context, createNickname);
+                      }
+                      // Navigator.pushNamed(context, createNickname);
                     },
                     child: Container(
                       width: screenSize.width * 0.8,

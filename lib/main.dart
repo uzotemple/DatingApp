@@ -10,6 +10,7 @@ import 'package:love_bird/providers/gender_provider.dart';
 import 'package:love_bird/providers/image_provider.dart';
 import 'package:love_bird/providers/interest_provider.dart';
 import 'package:love_bird/providers/ip_address.dart';
+import 'package:love_bird/providers/login_create.dart';
 import 'package:love_bird/providers/login_provider.dart';
 import 'package:love_bird/providers/nickname_provider.dart';
 import 'package:love_bird/providers/otp_provider.dart';
@@ -40,6 +41,7 @@ void main() {
         ChangeNotifierProvider(create: (_) => OtpVerificationProvider()),
         ChangeNotifierProvider(create: (_) => ResendProvider()),
         ChangeNotifierProvider(create: (_) => IpAddressProvider()),
+        ChangeNotifierProvider(create: (_) => LoginCreateProvider()),
       ],
       child: const MyApp(),
     ),
@@ -59,7 +61,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Zenkonect',
-      initialRoute: homeScreen,
+      initialRoute: firstScreen,
       routes: routes,
       theme: lightTheme,
       darkTheme: darkTheme,

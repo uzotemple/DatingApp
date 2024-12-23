@@ -14,6 +14,7 @@ import 'package:love_bird/createAccount/forgot/newPassword.dart';
 import 'package:love_bird/createAccount/forgot/otp.dart';
 import 'package:love_bird/createAccount/interest.dart';
 import 'package:love_bird/createAccount/distance_preference.dart';
+import 'package:love_bird/createAccount/login_create.dart';
 import 'package:love_bird/createAccount/nickname.dart';
 import 'package:love_bird/createAccount/choose_gender.dart';
 import 'package:love_bird/createAccount/photoVerification/photo_verification_one.dart';
@@ -24,6 +25,7 @@ import 'package:love_bird/createAccount/relationship.dart';
 import 'package:love_bird/createAccount/upload_six_photo.dart';
 import 'package:love_bird/createAccount/user_bio.dart';
 import 'package:love_bird/createAccount/verify.dart';
+import 'package:love_bird/edit%20profile%20screens/edit_low_profile_screen.dart';
 import 'package:love_bird/homeScreen/dating_tips.dart';
 import 'package:love_bird/homeScreen/homeScreen.dart';
 import 'package:love_bird/homeScreen/notification.dart';
@@ -97,6 +99,8 @@ const storyPage = "/storyPage";
 const storyExamplePage = "/storyExamplePage";
 const userProfilePage = "/userProfilePage";
 const chatBotScreen = "/chatBotScreen";
+const loginCreate = "/loginCreate";
+const editLowProfileScreen = "/editLowProfileScreen";
 
 // Map each route to the respective widget
 final routes = <String, Widget Function(BuildContext)>{
@@ -147,4 +151,6 @@ final routes = <String, Widget Function(BuildContext)>{
   photoScreen3After: (_) => const PhotoScreen3After(),
   imageScannerAfter: (_) => const ImageScannerAfter(),
   gestureVerificationScreenAfter: (_) => const GestureVerificationScreenAfter(),
+  loginCreate: (_) => const LoginCreate(),
+  editLowProfileScreen: (_) => const EditLowProfileScreen()
 };

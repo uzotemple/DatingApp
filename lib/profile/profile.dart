@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:love_bird/config/routes.dart';
-import 'package:love_bird/edit%20profile%20screens/edit_low_profile_screen.dart';
+
 import 'package:love_bird/homeScreen/homeScreen.dart';
 import 'package:love_bird/homeScreen/notification.dart';
 import 'package:love_bird/setting_screen/setting_screen.dart';
@@ -623,12 +623,7 @@ void _showPopup(BuildContext context) {
                     SizedBox(height: screenHeight * 0.03),
                     TextButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  const EditLowProfileScreen()),
-                        );
+                        Navigator.pushNamed(context, '/editLowProfileScreen');
                       },
                       child: Row(
                         children: [

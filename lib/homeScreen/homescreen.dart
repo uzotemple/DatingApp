@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:love_bird/chat/chat_screen.dart';
-
 import 'package:love_bird/config/routes.dart';
-import 'package:love_bird/creditPages/purchase_credits_page.dart';
 import 'package:love_bird/config/constants.dart';
 import 'package:love_bird/homeScreen/notification.dart';
 import 'package:love_bird/homeScreen/preference.dart';
@@ -448,7 +446,6 @@ void showExtraViewsPopup(BuildContext context) {
           left: screenWidth * 0.05, // 5% of screen width
           right: screenWidth * 0.05,
         ),
-        height: screenHeight * 0.4, // 40% of screen height
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -463,14 +460,14 @@ void showExtraViewsPopup(BuildContext context) {
               ),
               SizedBox(height: screenHeight * 0.01), // 1% of screen height
               Text(
-                'Extra Views',
+                'Extra Features',
                 style: TextStyle(
                   fontSize: screenHeight * 0.025, // 2.5% of screen height
                   fontWeight: FontWeight.bold,
                 ),
               ),
               Text(
-                'Be seen by more people and get up to 6x more likes.',
+                'Get Access to amazing features',
                 style: TextStyle(
                   fontSize: screenHeight * 0.022, // 2.2% of screen height
                 ),
@@ -484,7 +481,8 @@ void showExtraViewsPopup(BuildContext context) {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const PurchaseCreditsPage(),
+                        builder: (context) =>
+                            const LoveBirdPlanPage(initialTabIndex: 1),
                       ),
                     );
                   },
@@ -495,7 +493,7 @@ void showExtraViewsPopup(BuildContext context) {
                     ),
                   ),
                   child: Text(
-                    'Get Extra Views For 150 Credits',
+                    'Get Zenkonect Standard Plan',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: screenHeight * 0.02, // 2% of screen height
@@ -504,6 +502,35 @@ void showExtraViewsPopup(BuildContext context) {
                   ),
                 ),
               ),
+              //  SizedBox(height: screenHeight * 0.03), // 3% of screen height
+              // Padding(
+              //   padding: EdgeInsets.symmetric(
+              //       horizontal: screenWidth * 0.04), // 4% of screen width
+              //   child: ElevatedButton(
+              //     onPressed: () {
+              //       Navigator.push(
+              //         context,
+              //         MaterialPageRoute(
+              //           builder: (context) => const PurchaseCreditsPage(),
+              //         ),
+              //       );
+              //     },
+              //     style: ElevatedButton.styleFrom(
+              //       backgroundColor: blue,
+              //       padding: EdgeInsets.symmetric(
+              //         vertical: screenHeight * 0.02, // 2% of screen height
+              //       ),
+              //     ),
+              //     child: Text(
+              //       'Get Extra Views For 150 Credits',
+              //       style: TextStyle(
+              //         color: Colors.white,
+              //         fontSize: screenHeight * 0.02, // 2% of screen height
+              //         fontWeight: FontWeight.bold,
+              //       ),
+              //     ),
+              //   ),
+              // ),
               SizedBox(height: screenHeight * 0.015), // 1.5% of screen height
               Text(
                 'OR',
@@ -522,7 +549,9 @@ void showExtraViewsPopup(BuildContext context) {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const LoveBirdPlanPage()),
+                        builder: (context) =>
+                            const LoveBirdPlanPage(initialTabIndex: 2),
+                      ),
                     );
                   },
                   style: OutlinedButton.styleFrom(
@@ -532,7 +561,7 @@ void showExtraViewsPopup(BuildContext context) {
                     side: const BorderSide(color: blue, width: 2),
                   ),
                   child: Text(
-                    'Get Zenkonect Standard Plan',
+                    'Get Zenkonect Premium Plan',
                     style: TextStyle(
                       color: Theme.of(context).brightness == Brightness.dark
                           ? Colors.white

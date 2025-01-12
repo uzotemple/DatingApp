@@ -20,7 +20,8 @@ class InterestsProvider extends ChangeNotifier {
     'Board games',
     'Technology',
     'Fashion',
-    'Motorcycling'
+    'Motorcycling',
+    'Others'
   ];
 
   final List<String> _selectedInterests = [];
@@ -47,6 +48,7 @@ class InterestsProvider extends ChangeNotifier {
     'Technology': 'assets/images/icons/interest/technology.png',
     'Fashion': 'assets/images/icons/interest/fashion.png',
     'Motorcycling': 'assets/images/icons/interest/motorcycling.png',
+    'Others': 'assets/images/icons/interest/motorcycling.png',
   };
 
   List<String> get interests => _interests;

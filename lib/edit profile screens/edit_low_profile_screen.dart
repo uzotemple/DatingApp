@@ -1,9 +1,16 @@
 import 'package:love_bird/config/routes.dart';
-import 'package:love_bird/edit%20profile%20screens/edit_active_profile_screen.dart';
+// import 'package:love_bird/edit%20profile%20screens/edit_active_profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:love_bird/config/constants.dart';
+import 'package:love_bird/edit%20profile%20screens/image_upload/image_grid.dart';
+
+import 'package:love_bird/edit%20profile%20screens/more_about_you_screen.dart';
+// import 'package:love_bird/edit%20profile%20screens/upload_screen.dart';
+import 'package:love_bird/edit%20profile%20screens/your_activity_screen.dart';
+
+import 'image_upload/image_picker.dart';
 
 class EditLowProfileScreen extends StatefulWidget {
   const EditLowProfileScreen({super.key});
@@ -51,6 +58,60 @@ class _EditLowProfileScreenState extends State<EditLowProfileScreen> {
         const SnackBar(content: Text('Image uploaded successfully!')),
       );
     }
+  }
+
+  final List<File?> _images = [];
+  final ImagePickerHelper _imagePickerHelper = ImagePickerHelper();
+
+  Future<void> _addImage(ImageSource source) async {
+    File? image = await _imagePickerHelper.pickImage(source);
+    if (image != null) {
+      setState(() {
+        _images.add(image);
+      });
+    }
+  }
+
+  void _deleteImage(int index) {
+    setState(() {
+      _images.removeAt(index);
+    });
+  }
+
+  void _setAsProfile(int index) {
+    // Logic to set the image as profile picture
+    print('Image at $index set as profile picture');
+  }
+
+  String? _selectedLocation;
+  String? _selectedGender;
+  String? _selectedReason;
+  final TextEditingController _bioController = TextEditingController();
+  int _bioLength = 0;
+
+  final List<String> _locations = ['Location 1', 'Location 2', 'Location 3'];
+  final List<String> _genders = ['Male', 'Female'];
+  final List<String> _reasons = [
+    'Open to chat',
+    'Casual',
+    'Here to date',
+    'Ready for a relationship'
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    _bioController.addListener(() {
+      setState(() {
+        _bioLength = _bioController.text.length;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _bioController.dispose(); // Dispose of the controller
+    super.dispose();
   }
 
   @override
@@ -175,6 +236,7 @@ class _EditLowProfileScreenState extends State<EditLowProfileScreen> {
                                   break;
                                 case 2:
                                   // Add Photo logic here
+                                  _pickImage();
                                   break;
                                 case 3:
                                   // Add Video logic here
@@ -294,46 +356,54 @@ class _EditLowProfileScreenState extends State<EditLowProfileScreen> {
                     padding: const EdgeInsets.symmetric(horizontal: 15.0),
                     child: Row(
                       children: [
-                        SizedBox(
-                          width: 120,
-                          height: 35,
-                          child: DecoratedBox(
-                            decoration: BoxDecoration(
-                              color: blue.withOpacity(0.19),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Row(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(15.0),
-                                  child: Image.asset("images/edit profile.png"),
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Your activity",
-                                      style: TextStyle(
-                                        fontSize: 10,
-                                        fontWeight: FontWeight.w700,
-                                        color: Theme.of(context).brightness ==
-                                                Brightness.dark
-                                            ? Colors.white.withOpacity(
-                                                0.5) // Adapt for dark mode
-                                            : Colors.black.withOpacity(0.5),
-                                      ),
-                                    ),
-                                    const Text(
-                                      "Low",
-                                      style: TextStyle(
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const YourActivityScreen()),
+                            );
+                          },
+                          child: SizedBox(
+                            width: 120,
+                            height: 35,
+                            child: DecoratedBox(
+                              decoration: BoxDecoration(
+                                color: blue.withOpacity(0.19),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(15.0),
+                                    child:
+                                        Image.asset("images/edit profile.png"),
+                                  ),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Your activity",
+                                        style: TextStyle(
                                           fontSize: 10,
                                           fontWeight: FontWeight.w700,
-                                          color: Colors.red),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                          color: Colors.black.withOpacity(0.5),
+                                        ),
+                                      ),
+                                      const Text(
+                                        "Low",
+                                        style: TextStyle(
+                                            fontSize: 10,
+                                            fontWeight: FontWeight.w700,
+                                            color: Colors.red),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -368,11 +438,7 @@ class _EditLowProfileScreenState extends State<EditLowProfileScreen> {
                                       style: TextStyle(
                                         fontSize: 10,
                                         fontWeight: FontWeight.w700,
-                                        color: Theme.of(context).brightness ==
-                                                Brightness.dark
-                                            ? Colors.white.withOpacity(
-                                                0.5) // Adapt for dark mode
-                                            : Colors.black.withOpacity(0.5),
+                                        color: Colors.black.withOpacity(0.5),
                                       ),
                                     ),
                                     const Text(
@@ -380,7 +446,7 @@ class _EditLowProfileScreenState extends State<EditLowProfileScreen> {
                                       style: TextStyle(
                                           fontSize: 10,
                                           fontWeight: FontWeight.w700,
-                                          color: blue),
+                                          color: Color(0xFF3628DD)),
                                     ),
                                   ],
                                 ),
@@ -395,7 +461,8 @@ class _EditLowProfileScreenState extends State<EditLowProfileScreen> {
               ),
               // Big Rectangle at the center of the screen
               Padding(
-                padding: const EdgeInsets.all(40.0),
+                padding: const EdgeInsets.only(
+                    top: 40.0, left: 40.0, right: 40.0, bottom: 10.0),
                 child: SizedBox(
                   width: MediaQuery.of(context).size.width,
                   height: 150,
@@ -449,16 +516,16 @@ class _EditLowProfileScreenState extends State<EditLowProfileScreen> {
                             const Text(
                               "Get matches faster ",
                               style: TextStyle(
-                                fontSize: 13,
-                                fontWeight: FontWeight.w400,
-                              ),
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.black),
                             ),
                             const Text(
                               "Use credits to boost your profile to get more likes ",
                               style: TextStyle(
-                                fontSize: 11,
-                                fontWeight: FontWeight.w400,
-                              ),
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.black),
                             ),
                           ],
                         ),
@@ -468,273 +535,91 @@ class _EditLowProfileScreenState extends State<EditLowProfileScreen> {
                 ),
               ),
               // images
-              // Padding(
-              //   padding: const EdgeInsets.symmetric(horizontal: 15.0),
-              //   child: SingleChildScrollView(
-              //     scrollDirection: Axis.horizontal,
-              //     child: Row(
-              //       children: [
-              //         Stack(
-              //           children: [
-              //             Image.asset(
-              //               "images/profile picture.png",
-              //               // width: 135, // You can adjust the size of the image here
-              //               // height: 135,
-              //             ),
-              //             Positioned(
-              //               top: 0,
-              //               right: 0,
-              //               child: InkWell(
-              //                 onTap: () {},
-              //                 child: const Icon(
-              //                   Icons.more_vert, // The icon you want to place
-              //                   size: 30,
-              //                   color: Colors
-              //                       .white, // You can change the color and size as needed
-              //                 ),
-              //               ),
-              //             ),
-              //           ],
-              //         ),
-              //         // Second image
-              //         const SizedBox(width: 15),
-              //         Stack(
-              //           children: [
-              //             Image.asset(
-              //               "images/profile picture2.png",
-              //               // width: 135, // You can adjust the size of the image here
-              //               // height: 135,
-              //             ),
-              //             Positioned(
-              //               top: 0,
-              //               right: 0,
-              //               child: InkWell(
-              //                 onTap: () {},
-              //                 child: const Icon(
-              //                   Icons.more_vert, // The icon you want to place
-              //                   size: 30,
-              //                   color: Colors
-              //                       .white, // You can change the color and size as needed
-              //                 ),
-              //               ),
-              //             ),
-              //           ],
-              //         ),
-              //         // Third image
-              //         const SizedBox(width: 15),
-              //         Stack(
-              //           children: [
-              //             Image.asset(
-              //               "images/profile picture3.png",
-              //               // width: 135, // You can adjust the size of the image here
-              //               // height: 135,
-              //             ),
-              //             Positioned(
-              //               top: 0,
-              //               right: 0,
-              //               child: InkWell(
-              //                 onTap: () {},
-              //                 child: const Icon(
-              //                   Icons.more_vert, // The icon you want to place
-              //                   size: 30,
-              //                   color: Colors
-              //                       .white, // You can change the color and size as needed
-              //                 ),
-              //               ),
-              //             ),
-              //           ],
-              //         ),
-              //       ],
-              //     ),
-              //   ),
-              // ),
 
-              // images
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      Stack(
-                        children: [
-                          Image.asset(
-                            "images/profile picture.png",
-                            // width: 135, // You can adjust the size of the image here
-                            // height: 135,
-                          ),
-                          Positioned(
-                            top: 0,
-                            right: 0,
-                            child: PopupMenuButton<String>(
-                              icon: const Icon(
-                                Icons.more_vert, // The icon you want to place
-                                size: 30,
-                                color: Colors
-                                    .white, // You can change the color and size as needed
-                              ),
-                              onSelected: (value) {
-                                if (value == 'setProfile') {
-                                  // Handle setting as profile picture
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                        content:
-                                            Text("Set as Profile Picture")),
-                                  );
-                                } else if (value == 'delete') {
-                                  // Handle delete action
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(content: Text("Deleted")),
-                                  );
-                                }
-                              },
-                              itemBuilder: (BuildContext context) {
-                                return [
-                                  const PopupMenuItem<String>(
-                                    value: 'setProfile',
-                                    child: Text("Set as Profile Picture"),
-                                  ),
-                                  const PopupMenuItem<String>(
-                                    value: 'delete',
-                                    child: Row(
-                                      children: [
-                                        Icon(Icons.delete, color: Colors.red),
-                                        SizedBox(
-                                            width:
-                                                8), // Spacing between icon and text
-                                        Text("Delete"),
-                                      ],
-                                    ),
-                                  ),
-                                ];
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                      // Second image
-                      const SizedBox(width: 15),
-                      Stack(
-                        children: [
-                          Image.asset(
-                            "images/profile picture2.png",
-                            // width: 135, // You can adjust the size of the image here
-                            // height: 135,
-                          ),
-                          Positioned(
-                            top: 0,
-                            right: 0,
-                            child: PopupMenuButton<String>(
-                              icon: const Icon(
-                                Icons.more_vert,
-                                size: 30,
-                                color: Colors.white,
-                              ),
-                              onSelected: (value) {
-                                if (value == 'setProfile') {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                        content:
-                                            Text("Set as Profile Picture")),
-                                  );
-                                } else if (value == 'delete') {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(content: Text("Deleted")),
-                                  );
-                                }
-                              },
-                              itemBuilder: (BuildContext context) {
-                                return [
-                                  const PopupMenuItem<String>(
-                                    value: 'setProfile',
-                                    child: Text("Set as Profile Picture"),
-                                  ),
-                                  const PopupMenuItem<String>(
-                                    value: 'delete',
-                                    child: Row(
-                                      children: [
-                                        Icon(Icons.delete, color: Colors.red),
-                                        SizedBox(width: 8),
-                                        Text("Delete"),
-                                      ],
-                                    ),
-                                  ),
-                                ];
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                      // Third image
-                      const SizedBox(width: 15),
-                      Stack(
-                        children: [
-                          Image.asset(
-                            "images/profile picture3.png",
-                            // width: 135, // You can adjust the size of the image here
-                            // height: 135,
-                          ),
-                          Positioned(
-                            top: 0,
-                            right: 0,
-                            child: PopupMenuButton<String>(
-                              icon: const Icon(
-                                Icons.more_vert,
-                                size: 30,
-                                color: Colors.white,
-                              ),
-                              onSelected: (value) {
-                                if (value == 'setProfile') {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                        content:
-                                            Text("Set as Profile Picture")),
-                                  );
-                                } else if (value == 'delete') {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(content: Text("Deleted")),
-                                  );
-                                }
-                              },
-                              itemBuilder: (BuildContext context) {
-                                return [
-                                  const PopupMenuItem<String>(
-                                    value: 'setProfile',
-                                    child: Text("Set as Profile Picture"),
-                                  ),
-                                  const PopupMenuItem<String>(
-                                    value: 'delete',
-                                    child: Row(
-                                      children: [
-                                        Icon(Icons.delete, color: Colors.red),
-                                        SizedBox(width: 8),
-                                        Text("Delete"),
-                                      ],
-                                    ),
-                                  ),
-                                ];
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+                padding: const EdgeInsets.all(10.0),
+                child: ImageGrid(
+                    images: _images,
+                    onDelete: _deleteImage,
+                    onSetAsProfile: _setAsProfile),
+              ),
+              ElevatedButton(
+                onPressed: () => _addImage(ImageSource.gallery),
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: blue, // Text color
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 12.0, horizontal: 20.0),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20), // Rounded corners
                   ),
+                  elevation: 5, // Shadow effect
+                ),
+                child: const Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.camera_alt,
+                        size: 20, color: Colors.white), // Icon before text
+                    SizedBox(width: 8), // Spacing between icon and text
+                    Text(
+                      'Click to Upload',
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                  ],
                 ),
               ),
 
-              const SizedBox(height: 30),
+              const SizedBox(height: 15),
+              _buildTextField("Email", Icons.email),
+              _buildTextField("Password", Icons.lock, isPassword: true),
+              _buildTextField("Username", null),
+              _buildTextField("Height", null),
+              const SizedBox(height: 15),
+              // Form Fields
+              _buildTextField2("Weight (kg)"),
+              _buildTextField2("Profession", isPassword2: true),
+              _buildDropdownField("Location", _locations, _selectedLocation,
+                  (newValue) {
+                setState(() {
+                  _selectedLocation = newValue;
+                });
+              }),
+              _buildTextField2(
+                "University",
+              ),
+              _buildDropdownField("Gender", _genders, _selectedGender,
+                  (newValue) {
+                setState(() {
+                  _selectedGender = newValue;
+                });
+              }),
+              _buildTextField2(
+                "Birthday",
+              ),
+              _buildTextField2(
+                "Phone Number",
+              ),
+              _buildDropdownField("Why you’re here", _reasons, _selectedReason,
+                  (newValue) {
+                setState(() {
+                  _selectedReason = newValue;
+                });
+              }),
+              _buildBioField(), // Updated bio field
+
               Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: SizedBox(
                   width: MediaQuery.of(context).size.width,
                   child: ElevatedButton(
                     onPressed: () {
+                      // Handle the button press
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                                const EditActiveProfileScreen()),
+                          builder: (context) => const MoreAboutYouScreen(),
+                        ),
                       );
                     },
                     style: ElevatedButton.styleFrom(
@@ -743,11 +628,12 @@ class _EditLowProfileScreenState extends State<EditLowProfileScreen> {
                       textStyle: const TextStyle(fontSize: 18),
                     ),
                     child: const Text(
-                      'Continue',
+                      'Save and Continue',
                       style: TextStyle(
-                          color: Color(0xFFFFFFFF),
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500),
+                        color: Color(0xFFFFFFFF),
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                 ),
@@ -866,6 +752,111 @@ class _EditLowProfileScreenState extends State<EditLowProfileScreen> {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildTextField(String label, IconData? icon,
+      {bool isPassword = false}) {
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: TextField(
+        obscureText: isPassword,
+        decoration: InputDecoration(
+          labelText: label,
+          prefixIcon: icon != null ? Icon(icon) : null,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide.none,
+          ),
+          filled: true,
+          fillColor: blue.withOpacity(0.19),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTextField2(String label, {bool isPassword2 = false}) {
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: SizedBox(
+        height: 35,
+        child: TextField(
+          textCapitalization: TextCapitalization.sentences,
+          // obscureText: isPassword,
+          decoration: InputDecoration(
+            labelText: label,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide.none,
+            ),
+            filled: true,
+            fillColor: blue.withOpacity(0.19),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDropdownField(String label, List<String> items,
+      String? selectedValue, Function(String?) onChanged) {
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: DropdownButtonFormField<String>(
+        decoration: InputDecoration(
+          labelText: label,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide.none,
+          ),
+          filled: true,
+          fillColor: blue.withOpacity(0.19),
+        ),
+        value: selectedValue,
+        onChanged: onChanged,
+        items: items.map((String value) {
+          return DropdownMenuItem<String>(
+            value: value,
+            child: Text(value),
+          );
+        }).toList(),
+        isExpanded: true,
+      ),
+    );
+  }
+
+  //Bio data
+
+  Widget _buildBioField() {
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          TextField(
+            controller: _bioController,
+            maxLength: 400,
+            maxLines: 3,
+            textCapitalization: TextCapitalization.sentences,
+            decoration: InputDecoration(
+              labelText: "Bio",
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide.none,
+              ),
+              filled: true,
+              fillColor: blue.withOpacity(0.19),
+            ),
+          ),
+          const SizedBox(height: 8.0),
+          Align(
+            alignment: Alignment.centerRight,
+            child: Text(
+              '$_bioLength/400',
+              style: const TextStyle(color: Colors.grey),
+            ),
+          ),
+        ],
       ),
     );
   }

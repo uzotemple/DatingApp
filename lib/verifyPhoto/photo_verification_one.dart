@@ -7,14 +7,15 @@ import 'package:love_bird/config/routes.dart';
 import 'package:love_bird/providers/image_provider.dart';
 import 'package:provider/provider.dart';
 
-class PhotoVerificationOne extends StatefulWidget {
-  const PhotoVerificationOne({super.key});
+class PhotoVerificationOneAfter extends StatefulWidget {
+  const PhotoVerificationOneAfter({super.key});
 
   @override
-  _PhotoVerificationOneState createState() => _PhotoVerificationOneState();
+  _PhotoVerificationOneAfterState createState() =>
+      _PhotoVerificationOneAfterState();
 }
 
-class _PhotoVerificationOneState extends State<PhotoVerificationOne> {
+class _PhotoVerificationOneAfterState extends State<PhotoVerificationOneAfter> {
   final ImagePicker _picker = ImagePicker();
 
   // Image picker logic
@@ -205,7 +206,8 @@ class _PhotoVerificationOneState extends State<PhotoVerificationOne> {
                 children: [
                   InkWell(
                     onTap: () {
-                      Navigator.pushNamed(context, gestureVerificationScreen);
+                      Navigator.pushNamed(
+                          context, gestureVerificationScreenAfter);
                     },
                     child: Container(
                       width: screenSize.width * 0.8,
@@ -224,7 +226,7 @@ class _PhotoVerificationOneState extends State<PhotoVerificationOne> {
                   const SizedBox(height: 15), // Add spacing between buttons
                   InkWell(
                     onTap: () {
-                      Navigator.pushNamed(context, enableLocationScreen);
+                      Navigator.pushNamed(context, homeScreen);
                       // setState(() {
                       //   // Update the isTapped state to change color
                       //   isTapped = !isTapped;
@@ -263,17 +265,18 @@ class _PhotoVerificationOneState extends State<PhotoVerificationOne> {
   }
 }
 
-class GestureVerificationScreen extends StatefulWidget {
-  const GestureVerificationScreen({
+class GestureVerificationScreenAfter extends StatefulWidget {
+  const GestureVerificationScreenAfter({
     super.key,
   });
 
   @override
-  State<GestureVerificationScreen> createState() =>
-      _GestureVerificationScreenState();
+  State<GestureVerificationScreenAfter> createState() =>
+      _GestureVerificationScreenAfterState();
 }
 
-class _GestureVerificationScreenState extends State<GestureVerificationScreen> {
+class _GestureVerificationScreenAfterState
+    extends State<GestureVerificationScreenAfter> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -412,7 +415,7 @@ class _GestureVerificationScreenState extends State<GestureVerificationScreen> {
                   ),
                 ),
                 onPressed: () {
-                  Navigator.pushNamed(context, photoScreen3);
+                  Navigator.pushNamed(context, photoScreen3After);
                 },
                 child: const Text(
                   "Verify",

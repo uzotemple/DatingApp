@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:love_bird/providers/auth_provider.dart';
+import 'package:love_bird/providers/login_create.dart';
 import 'package:provider/provider.dart';
 import 'package:love_bird/config/routes.dart';
-import 'package:love_bird/providers/login_provider.dart';
+
 import 'package:love_bird/config/constants.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class LoginCreate extends StatefulWidget {
+  const LoginCreate({super.key});
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _LoginCreateState createState() => _LoginCreateState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginCreateState extends State<LoginCreate> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -20,7 +22,9 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-    final loginProvider = Provider.of<LoginProvider>(context);
+    final loginProvider = Provider.of<LoginCreateProvider>(context);
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+//final loginProvider = Provider.of<LoginProvider>(context, listen: false);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -183,12 +187,18 @@ class _LoginPageState extends State<LoginPage> {
                 child: GestureDetector(
                   onTap: () {
                     if (_formKey.currentState!.validate()) {
+                      // loginProvider.handleLogin(
+                      //   context,
+                      //   _formKey,
+                      //   emailController.text,
+                      //   passwordController.text,
+                      // );
                       loginProvider.handleLogin(
-                        context,
-                        _formKey,
-                        emailController.text,
-                        passwordController.text,
-                      );
+                          context,
+                          _formKey,
+                          emailController.text,
+                          passwordController.text,
+                          authProvider);
                       // _showSubmissionDialog(context);
                     }
                   },

@@ -100,6 +100,7 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
     final userId = accountProvider.userId;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(),
       body: Padding(
         padding: EdgeInsets.symmetric(
@@ -145,6 +146,11 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
                           ),
                           alignment: Alignment.center,
                           child: TextField(
+                            style: TextStyle(
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium
+                                    ?.color),
                             textAlign: TextAlign.center,
                             maxLength: 1,
                             keyboardType: TextInputType.number,

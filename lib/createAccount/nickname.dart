@@ -13,15 +13,16 @@ class CreateNickname extends StatelessWidget {
     final screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.only(
             right: MediaQuery.of(context).size.width * 0.05,
             left:
                 MediaQuery.of(context).size.width * 0.05, // 5% of screen width
-            top: MediaQuery.of(context).size.height *
-                0.03, // 5% of screen height
+            top: MediaQuery.of(context).size.height * 0.03,
+            bottom: MediaQuery.of(context).size.height *
+                0.05, // 5% of screen height
           ),
           child: Column(
             children: [
@@ -64,7 +65,6 @@ class CreateNickname extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
-                            color: Colors.black,
                           ),
                         ),
                         const SizedBox(width: 10),
@@ -76,7 +76,6 @@ class CreateNickname extends StatelessWidget {
                         'Create a unique nickname that represents you, it’s how others will know and remember you.',
                         style: TextStyle(
                           fontSize: 16,
-                          color: Colors.black,
                         ),
                       ),
                       SizedBox(
@@ -98,14 +97,14 @@ class CreateNickname extends StatelessWidget {
                           ),
                           child: Center(
                             child: TextField(
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
+                                style: TextStyle(
+                                  color: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium
+                                      ?.color,
                                   fontSize: 25,
-                                  color:
-                                      Colors.black, // Blue color for input text
-                                  fontWeight:
-                                      FontWeight.bold, // Bold input text
                                 ),
+                                textAlign: TextAlign.center,
                                 decoration: const InputDecoration(
                                   hintText: 'Nickname',
                                   border: InputBorder.none,
@@ -158,15 +157,17 @@ class CelebrateYouScreen extends StatelessWidget {
     final screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.only(
             right: MediaQuery.of(context).size.width * 0.05,
             left:
                 MediaQuery.of(context).size.width * 0.05, // 5% of screen width
-            top: MediaQuery.of(context).size.height *
-                0.02, // 5% of screen height
+            top: MediaQuery.of(context).size.height * 0.02,
+            // 5% of screen width
+            bottom: MediaQuery.of(context).size.height *
+                0.05, // 5% of screen height
           ),
           child: Column(
             children: [
@@ -203,7 +204,7 @@ class CelebrateYouScreen extends StatelessWidget {
                         ),
                       ),
 
-                      const SizedBox(height: 40),
+                      SizedBox(height: screenSize.height * 0.04),
                       // Title
                       const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -213,7 +214,6 @@ class CelebrateYouScreen extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.bold,
-                              color: Colors.black,
                             ),
                           ),
                           SizedBox(width: 10),
@@ -224,7 +224,7 @@ class CelebrateYouScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 30),
+                      SizedBox(height: screenSize.height * 0.035),
                       // Birthday Cake Image
                       Image.asset(
                         'assets/images/cake.png',
@@ -232,7 +232,7 @@ class CelebrateYouScreen extends StatelessWidget {
                         fit: BoxFit.contain,
                       ),
                       SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.03,
+                        height: MediaQuery.of(context).size.height * 0.04,
                       ),
                       // Date Fields
                       Row(
@@ -301,13 +301,18 @@ class CelebrateYouScreen extends StatelessWidget {
       ),
       child: Center(
         child: TextField(
+          style:
+              TextStyle(color: Theme.of(context).textTheme.bodyMedium?.color),
           textAlign: TextAlign.center,
           decoration: InputDecoration(
             hintText: hint,
             border: InputBorder.none,
-            hintStyle: const TextStyle(
+            hintStyle: TextStyle(
               fontSize: 18,
-              color: Color.fromRGBO(56, 53, 53, 1),
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? const Color.fromARGB(
+                      255, 185, 182, 182) // Dark mode, use white
+                  : const Color.fromRGBO(56, 53, 53, 1),
             ),
           ),
           keyboardType: TextInputType.number,

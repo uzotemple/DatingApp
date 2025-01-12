@@ -34,6 +34,7 @@ class _CreateAcc1State extends State<CreateAcc1> {
     final screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(
@@ -65,7 +66,7 @@ class _CreateAcc1State extends State<CreateAcc1> {
                       SizedBox(height: screenSize.height * 0.01),
                       const Text(
                         "Create your account in seconds, we'll help you find your perfect match",
-                        style: TextStyle(fontSize: 16, color: Colors.black),
+                        style: TextStyle(fontSize: 16),
                       ),
                       SizedBox(height: screenSize.height * 0.03),
                       Form(
@@ -96,6 +97,7 @@ class _CreateAcc1State extends State<CreateAcc1> {
                   Checkbox(
                     value: userProvider.agreeToPolicy,
                     onChanged: userProvider.toggleAgreeToPolicy,
+                    side: const BorderSide(color: blue, width: 2),
                   ),
                   const Text("I agree to Zenkonect "),
                   InkWell(
@@ -120,12 +122,12 @@ class _CreateAcc1State extends State<CreateAcc1> {
                                 name: 'UserInput');
                             developer.log('');
 
-                            // userProvider.updateEmail(_emailController.text);
-                            // userProvider
-                            //     .updatePassword(_passwordController.text);
-                            // userProvider.saveToDatabase(context);
+                            userProvider.updateEmail(_emailController.text);
+                            userProvider
+                                .updatePassword(_passwordController.text);
+                            userProvider.saveToDatabase(context);
 
-                            Navigator.pushNamed(context, verifyEmailRoute);
+                            // Navigator.pushNamed(context, verifyEmailRoute);
                           }
                         }
                       : null,
@@ -190,7 +192,6 @@ class _CreateAcc1State extends State<CreateAcc1> {
           Text(
             label,
             style: const TextStyle(
-              color: Colors.black,
               fontSize: 16,
               fontWeight: FontWeight.bold,
             ),
@@ -198,6 +199,8 @@ class _CreateAcc1State extends State<CreateAcc1> {
           const SizedBox(height: 8),
           TextFormField(
             controller: controller,
+            style:
+                TextStyle(color: Theme.of(context).textTheme.bodyMedium?.color),
             obscureText: isPassword && !showPassword,
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -208,19 +211,55 @@ class _CreateAcc1State extends State<CreateAcc1> {
                       .hasMatch(value)) {
                 return 'Enter a valid email';
               }
-              if (isPassword && value.length < 8) {
-                return 'Password must be at least 8 characters \n Must contain a lower case letter \n Must contain a higher case letter \n must contain a special character';
+              // if (isPassword) {
+              //   if (value.length < 9) {
+              //     return 'Password must be at least 9 characters long';
+              //   }
+              //   if (!RegExp(r'[a-z]').hasMatch(value)) {
+              //     return 'Password must contain at least one lowercase letter';
+              //   }
+              //   if (!RegExp(r'[A-Z]').hasMatch(value)) {
+              //     return 'Password must contain at least one uppercase letter';
+              //   }
+              //   if (!RegExp(r'\d').hasMatch(value)) {
+              //     return 'Password must contain at least one number';
+              //   }
+              //   if (!RegExp(r'[!@#$%^&*(),.?":{}|<>]').hasMatch(value)) {
+              //     return 'Password must contain at least one special character';
+              //   }
+              // }
+              if (isPassword) {
+                if (value.length < 9) {
+                  return 'Password must be at least 9 characters long';
+                }
+                if (!RegExp(r'[a-z]').hasMatch(value)) {
+                  return 'Password must contain at least one lowercase letter';
+                }
+                if (!RegExp(r'[A-Z]').hasMatch(value)) {
+                  return 'Password must contain at least one uppercase letter';
+                }
+                if (!RegExp(r'\d').hasMatch(value)) {
+                  return 'Password must contain at least one number';
+                }
+                if (!RegExp(r'[!@#$%^&*(),.?":{}|<>]').hasMatch(value)) {
+                  return 'Password must contain at least one special character';
+                }
+                if (value.contains(' ')) {
+                  return 'Password must not contain spaces';
+                }
               }
+
               return null;
             },
             decoration: InputDecoration(
               fillColor: const Color.fromRGBO(54, 40, 221, 0.1),
-              prefixIcon: Icon(icon, color: Colors.black, size: 20),
+              prefixIcon: Icon(icon,
+                  color: Theme.of(context).iconTheme.color, size: 20),
               suffixIcon: isPassword
                   ? IconButton(
                       icon: Icon(
                         showPassword ? Icons.visibility : Icons.visibility_off,
-                        color: Colors.black,
+                        color: Theme.of(context).iconTheme.color,
                       ),
                       onPressed: () {
                         setState(() {

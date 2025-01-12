@@ -68,7 +68,9 @@ class DistancePreferenceScreen extends StatelessWidget {
                       SizedBox(height: screenSize.height * 0.01),
                       const Text(
                         'Select your preferred distance range to discover matches conveniently. We\'ll help you find love close by.',
-                        style: TextStyle(fontSize: 16, color: Colors.black),
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
                       ),
                       SizedBox(height: screenSize.height * 0.04),
 
@@ -87,9 +89,9 @@ class DistancePreferenceScreen extends StatelessWidget {
                                     ? 'Unlimited'
                                     : '${distanceProvider.currentSliderValue.toInt()} km',
                                 style: const TextStyle(
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.black),
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.w500,
+                                ),
                               );
                             },
                           ),

@@ -33,16 +33,28 @@ class _UploadPicturesScreenState extends State<UploadPicturesScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               ListTile(
-                leading: const Icon(Icons.photo_library),
-                title: const Text('Pick from gallery'),
+                leading: Icon(
+                  Icons.photo_library,
+                  color: Theme.of(context).iconTheme.color,
+                ),
+                title: Text(
+                  'Pick from gallery',
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(),
+                ),
                 onTap: () {
                   Navigator.pop(context);
                   _pickImage(index, ImageSource.gallery);
                 },
               ),
               ListTile(
-                leading: const Icon(Icons.camera_alt),
-                title: const Text('Take a photo'),
+                leading: Icon(
+                  Icons.camera_alt,
+                  color: Theme.of(context).iconTheme.color,
+                ),
+                title: Text(
+                  'Take a photo',
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(),
+                ),
                 onTap: () {
                   Navigator.pop(context);
                   _pickImage(index, ImageSource.camera);
@@ -177,7 +189,7 @@ class _UploadPicturesScreenState extends State<UploadPicturesScreen> {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor:
-                        uploadedImageCount >= 6 ? blue : Colors.grey,
+                        uploadedImageCount == 0 ? blue : Colors.grey,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(25.0),
                     ),

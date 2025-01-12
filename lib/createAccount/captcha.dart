@@ -32,7 +32,7 @@ class _CaptchaState extends State<Captcha> {
         'Captcha',
         onMessageReceived: (JavaScriptMessage message) {
           if (message.message == 'verified') {
-            Navigator.pushReplacementNamed(context, '/userBio');
+            Navigator.pushReplacementNamed(context, '/loginCreate');
           }
         },
       );
@@ -98,7 +98,6 @@ class _CaptchaState extends State<Captcha> {
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w400,
-                color: Colors.black,
               ),
             ),
             SizedBox(

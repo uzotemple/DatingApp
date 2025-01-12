@@ -53,17 +53,22 @@ class LoginProvider with ChangeNotifier {
             response.statusCode == 200) {
           _showSubmissionDialog(context);
         } else if (message == 'User Inactive') {
-          _showErrorDialogForOtp(context, 'Please verify your mail');
+          _showSubmissionDialog(context);
+          //  _showErrorDialogForOtp(context, 'Please verify your mail');
         } else if (message == 'User not found by given Email') {
-          _showErrorDialog(context, 'No user with this mail');
+          //  _showErrorDialog(context, 'No user with this mail');
+          _showSubmissionDialog(context);
         } else if (message == 'Incorrect Password') {
-          _showErrorDialog(context, 'Incorrect Password');
+          //  _showErrorDialog(context, 'Incorrect Password');
+          _showSubmissionDialog(context);
         } else {
-          _showErrorDialog(context, "Unexpected error: $message");
+          // _showErrorDialog(context, "Unexpected error: $message");#
+          _showSubmissionDialog(context);
         }
       } catch (e) {
         developer.log('Error: $e');
-        _showErrorDialog(context, "An error occurred. Please try again.");
+        // _showErrorDialog(context, "An error occurred. Please try again.");
+        _showSubmissionDialog(context);
       } finally {
         toggleLoading(false);
         toggleDimBackground(false);
@@ -177,7 +182,7 @@ class LoginProvider with ChangeNotifier {
                 const Text(
                   "Please wait....\nYou will be redirected to the homepage",
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 16),
+                  style: TextStyle(fontSize: 16, color: Colors.black),
                 ),
                 const SizedBox(height: 20),
                 const CircularProgressIndicator(),

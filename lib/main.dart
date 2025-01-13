@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:love_bird/chatBot/chatbot_config_provider.dart';
 import 'package:love_bird/chatBot/font_size_provider.dart';
 import 'package:love_bird/config/routes.dart';
+import 'package:love_bird/providers/auth_provider.dart';
 import 'package:love_bird/providers/birthday_provider.dart';
 import 'package:love_bird/providers/chat_provider.dart';
 import 'package:love_bird/providers/create_account_provider.dart';
@@ -42,12 +43,14 @@ void main() {
         ChangeNotifierProvider(create: (_) => ResendProvider()),
         ChangeNotifierProvider(create: (_) => IpAddressProvider()),
         ChangeNotifierProvider(create: (_) => LoginCreateProvider()),
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
       ],
       child: const MyApp(),
     ),
   );
 }
 
+//123qweQWE@
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -61,7 +64,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Zenkonect',
-      initialRoute: firstScreen,
+      initialRoute: homeScreen,
       routes: routes,
       theme: lightTheme,
       darkTheme: darkTheme,

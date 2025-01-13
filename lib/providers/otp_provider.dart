@@ -32,8 +32,9 @@ class OtpVerificationProvider extends ChangeNotifier {
         final responseData = jsonDecode(response.body);
         developer.log('OTP verified successfully: ${responseData['message']}',
             name: 'OtpProvider');
-        Navigator.pushNamed(context, homeScreen);
-        //  Navigator.pushNamed(context, captchaVerificationPage);
+        // Navigator.pushNamed(context, loginCreate);
+
+        Navigator.pushNamed(context, captchaVerificationPage);
       } else if (response.statusCode == 400) {
         //No user is present for the given OTP
         final responseData = jsonDecode(response.body);

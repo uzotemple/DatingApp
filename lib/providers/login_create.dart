@@ -1,13 +1,293 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:love_bird/config/routes.dart';
 import 'dart:developer' as developer;
 import 'package:love_bird/config/constants.dart';
+import 'package:love_bird/providers/auth_provider.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class LoginCreateProvider with ChangeNotifier {
-  final _secureStorage = const FlutterSecureStorage();
+  final FlutterSecureStorage _secureStorage = const FlutterSecureStorage();
+  String profession = '';
+  String weight = '';
+  String height = '';
+  String? linkdln = '';
+  String? country;
+  String city = '';
+  String? educationLevel = '';
+  String bio = '';
+  bool agreeToPolicy = false;
+
+  final List<String> educationLevels = [
+    'NONE',
+    'Primary Education',
+    'Secondary Education',
+    'Vocational Training',
+    'A level',
+    'Undergraduate Education',
+    'Postgraduate Education',
+  ];
+
+  List<String> countries = [
+    'People nearby',
+    'Afghanistan',
+    'Albania',
+    'Algeria',
+    'Andorra',
+    'Angola',
+    'Antigua and Barbuda',
+    'Argentina',
+    'Armenia',
+    'Australia',
+    'Austria',
+    'Azerbaijan',
+    'Bahamas',
+    'Bahrain',
+    'Bangladesh',
+    'Barbados',
+    'Belarus',
+    'Belgium',
+    'Belize',
+    'Benin',
+    'Bhutan',
+    'Bolivia',
+    'Bosnia and Herzegovina',
+    'Botswana',
+    'Brazil',
+    'Brunei',
+    'Bulgaria',
+    'Burkina Faso',
+    'Burundi',
+    'Cabo Verde',
+    'Cambodia',
+    'Cameroon',
+    'Canada',
+    'Central African Republic',
+    'Chad',
+    'Chile',
+    'China',
+    'Colombia',
+    'Comoros',
+    'Congo, Democratic Republic of the',
+    'Congo, Republic of the',
+    'Costa Rica',
+    'Croatia',
+    'Cuba',
+    'Cyprus',
+    'Czech Republic',
+    'Denmark',
+    'Djibouti',
+    'Dominica',
+    'Dominican Republic',
+    'Ecuador',
+    'Egypt',
+    'El Salvador',
+    'Equatorial Guinea',
+    'Eritrea',
+    'Estonia',
+    'Eswatini',
+    'Ethiopia',
+    'Fiji',
+    'Finland',
+    'France',
+    'Gabon',
+    'Gambia',
+    'Georgia',
+    'Germany',
+    'Ghana',
+    'Greece',
+    'Grenada',
+    'Guatemala',
+    'Guinea',
+    'Guinea-Bissau',
+    'Guyana',
+    'Haiti',
+    'Honduras',
+    'Hungary',
+    'Iceland',
+    'India',
+    'Indonesia',
+    'Iran',
+    'Iraq',
+    'Ireland',
+    'Israel',
+    'Italy',
+    'Jamaica',
+    'Japan',
+    'Jordan',
+    'Kazakhstan',
+    'Kenya',
+    'Kiribati',
+    'Korea, North',
+    'Korea, South',
+    'Kuwait',
+    'Kyrgyzstan',
+    'Laos',
+    'Latvia',
+    'Lebanon',
+    'Lesotho',
+    'Liberia',
+    'Libya',
+    'Liechtenstein',
+    'Lithuania',
+    'Luxembourg',
+    'Madagascar',
+    'Malawi',
+    'Malaysia',
+    'Maldives',
+    'Mali',
+    'Malta',
+    'Marshall Islands',
+    'Mauritania',
+    'Mauritius',
+    'Mexico',
+    'Micronesia',
+    'Moldova',
+    'Monaco',
+    'Mongolia',
+    'Montenegro',
+    'Morocco',
+    'Mozambique',
+    'Myanmar',
+    'Namibia',
+    'Nauru',
+    'Nepal',
+    'Netherlands',
+    'New Zealand',
+    'Nicaragua',
+    'Niger',
+    'Nigeria',
+    'North Macedonia',
+    'Norway',
+    'Oman',
+    'Pakistan',
+    'Palau',
+    'Palestine',
+    'Panama',
+    'Papua New Guinea',
+    'Paraguay',
+    'Peru',
+    'Philippines',
+    'Poland',
+    'Portugal',
+    'Qatar',
+    'Romania',
+    'Russia',
+    'Rwanda',
+    'Saint Kitts and Nevis',
+    'Saint Lucia',
+    'Saint Vincent and the Grenadines',
+    'Samoa',
+    'San Marino',
+    'Sao Tome and Principe',
+    'Saudi Arabia',
+    'Senegal',
+    'Serbia',
+    'Seychelles',
+    'Sierra Leone',
+    'Singapore',
+    'Slovakia',
+    'Slovenia',
+    'Solomon Islands',
+    'Somalia',
+    'South Africa',
+    'South Sudan',
+    'Spain',
+    'Sri Lanka',
+    'Sudan',
+    'Suriname',
+    'Sweden',
+    'Switzerland',
+    'Syria',
+    'Taiwan',
+    'Tajikistan',
+    'Tanzania',
+    'Thailand',
+    'Togo',
+    'Tonga',
+    'Trinidad and Tobago',
+    'Tunisia',
+    'Turkey',
+    'Turkmenistan',
+    'Tuvalu',
+    'Uganda',
+    'Ukraine',
+    'United Arab Emirates',
+    'United Kingdom',
+    'United States',
+    'Uruguay',
+    'Uzbekistan',
+    'Vanuatu',
+    'Vatican City',
+    'Venezuela',
+    'Vietnam',
+    'Yemen',
+    'Zambia',
+    'Zimbabwe',
+    'Vatican City',
+    'Palestine'
+  ];
+
+  void updateProfession(String newProfession) {
+    profession = newProfession;
+    notifyListeners();
+  }
+
+  void updateWeight(String newWeight) {
+    weight = newWeight;
+    notifyListeners();
+  }
+
+  void updateHeight(String newHeight) {
+    height = newHeight;
+    notifyListeners();
+  }
+
+  void updateLinkdln(String? newLinkdln) {
+    linkdln = newLinkdln;
+    notifyListeners();
+  }
+
+  void updateCountry(String? newCountry) {
+    country = newCountry;
+    notifyListeners();
+  }
+
+  void updateCity(String newCity) {
+    city = newCity;
+    notifyListeners();
+  }
+
+  void updateEducationlevel(String newEducationlevel) {
+    educationLevel = newEducationlevel;
+    notifyListeners();
+  }
+
+  void updateBio(String newBio) {
+    bio = newBio;
+    notifyListeners();
+  }
+  // Additional update methods for other fields...
+
+  void toggleAgreeToPolicy(bool? newValue) {
+    agreeToPolicy = newValue ?? false;
+    notifyListeners();
+  }
+
+  // Method to reset fields after form submission
+  void resetFields() {
+    profession = '';
+    weight = '';
+    height = '';
+    country = '';
+    linkdln = '';
+    city = '';
+    educationLevel = '';
+    bio = '';
+    agreeToPolicy = false;
+    notifyListeners();
+  }
 
   bool _showLoading = false;
   bool _dimBackground = false;
@@ -33,7 +313,7 @@ class LoginCreateProvider with ChangeNotifier {
   }
 
   Future<void> handleLogin(BuildContext context, GlobalKey<FormState> formKey,
-      String email, String password) async {
+      String email, String password, AuthProvider authProvider) async {
     if (formKey.currentState!.validate()) {
       toggleDimBackground(true);
 
@@ -51,39 +331,44 @@ class LoginCreateProvider with ChangeNotifier {
         if (response.statusCode == 202 ||
             response.statusCode == 201 ||
             response.statusCode == 200) {
-          final String accessToken = responseBody['accessToken'];
-          await _saveToken(accessToken);
-          _showSubmissionDialog(context);
+          // Extract access token from response body
+          final accessToken = responseBody['accessToken'];
+          // final userId = responseBody['userId'];
+
+          // Extract refresh token from cookies
+          final cookies = response.headers['set-cookie'];
+          developer.log('Set-Cookie Header: $cookies');
+
+          final refreshToken = _extractRefreshToken(response.headers);
+
+          if (accessToken != null && refreshToken != null) {
+            // Securely store tokens
+            await _storeTokens(accessToken, refreshToken);
+
+            // Notify AuthProvider of token updates
+            await authProvider.loadTokens();
+
+            _showSubmissionDialog(context);
+          } else {
+            _showErrorDialog(context, "Failed to retrieve tokens");
+          }
         } else if (message == 'User Inactive') {
-          // _showSubmissionDialog(context);
           _showErrorDialogForOtp(context, 'Please verify your mail');
         } else if (message == 'User not found by given Email') {
           _showErrorDialog(context, 'No user with this mail');
-          //_showSubmissionDialog(context);
         } else if (message == 'Incorrect Password') {
           _showErrorDialog(context, 'Incorrect Password');
-          // _showSubmissionDialog(context);
         } else {
-          _showErrorDialog(context, "Unexpected error: $message");
-          //  _showSubmissionDialog(context);
+          _showErrorDialog(context, "Error: $message");
         }
       } catch (e) {
         developer.log('Error: $e');
         _showErrorDialog(context, "An error occurred. Please try again.");
-        // _showSubmissionDialog(context);
       } finally {
         toggleLoading(false);
         toggleDimBackground(false);
       }
     }
-  }
-
-  Future<void> _saveToken(String accessToken) async {
-    await _secureStorage.write(key: 'accessToken', value: accessToken);
-  }
-
-  Future<String?> getAccessToken() async {
-    return await _secureStorage.read(key: 'accessToken');
   }
 
   Future<http.Response> _loginUser(String email, String password) async {
@@ -96,6 +381,23 @@ class LoginCreateProvider with ChangeNotifier {
         'password': password,
       }),
     );
+  }
+
+  String? _extractRefreshToken(Map<String, String> headers) {
+    final cookies = headers['set-cookie'];
+    if (cookies != null) {
+      // Update regex to match the new cookie name
+      final refreshToken =
+          RegExp(r'local.bg-refresh-mgmt=([^;]+)').firstMatch(cookies);
+      return refreshToken?.group(1);
+    }
+    return null;
+  }
+
+  Future<void> _storeTokens(String accessToken, String refreshToken) async {
+    // Store tokens securely
+    await _secureStorage.write(key: 'accessToken', value: accessToken);
+    await _secureStorage.write(key: 'refreshToken', value: refreshToken);
   }
 
   void _showSubmissionDialog(BuildContext context) {
@@ -180,137 +482,3 @@ class LoginCreateProvider with ChangeNotifier {
     );
   }
 }
-
-// recent one from chatgpt just incase the above does not work
-// import 'dart:convert';
-// import 'package:flutter/material.dart';
-// import 'package:http/http.dart' as http;
-// import 'package:flutter_secure_storage/flutter_secure_storage.dart'; // For storing tokens securely
-
-// class LoginProvider with ChangeNotifier {
-//   bool _showLoading = false;
-//   final _storage = FlutterSecureStorage(); // Secure storage for tokens
-
-//   bool get showLoading => _showLoading;
-
-//   void toggleLoading(bool value) {
-//     _showLoading = value;
-//     notifyListeners();
-//   }
-
-//   Future<void> handleLogin(BuildContext context, GlobalKey<FormState> formKey,
-//       String email, String password) async {
-//     if (formKey.currentState!.validate()) {
-//       toggleLoading(true);
-//       try {
-//         final response = await _loginUser(email, password);
-//         if (response.statusCode == 200) {
-//           // Parse and save tokens
-//           var responseBody = json.decode(response.body);
-//           await _saveTokens(responseBody['accessToken'], responseBody['refreshToken']);
-          
-//           // Redirect user after successful login
-//           Navigator.pushReplacementNamed(context, '/home'); // Home screen route
-//         } else {
-//           // Handle failure (invalid credentials, etc.)
-//           _showErrorDialog(context, "Login failed. Check your credentials.");
-//         }
-//       } catch (e) {
-//         _showErrorDialog(context, "An error occurred. Please try again.");
-//       } finally {
-//         toggleLoading(false);
-//       }
-//     }
-//   }
-
-//   Future<http.Response> _loginUser(String email, String password) async {
-//     const String url = 'http://localhost:7001/auth/login';
-//     final response = await http.post(
-//       Uri.parse(url),
-//       headers: {'Content-Type': 'application/json'},
-//       body: jsonEncode({
-//         'entrypoint': email,
-//         'password': password,
-//       }),
-//     );
-//     return response;
-//   }
-
-//   // Save tokens securely
-//   Future<void> _saveTokens(String accessToken, String refreshToken) async {
-//     await _storage.write(key: 'accessToken', value: accessToken);
-//     await _storage.write(key: 'refreshToken', value: refreshToken);
-//   }
-
-//   // Show error dialog
-//   void _showErrorDialog(BuildContext context, String message) {
-//     showDialog(
-//       context: context,
-//       builder: (BuildContext context) {
-//         return AlertDialog(
-//           title: Text('Error'),
-//           content: Text(message),
-//           actions: [
-//             TextButton(
-//               onPressed: () => Navigator.pop(context),
-//               child: Text('OK'),
-//             ),
-//           ],
-//         );
-//       },
-//     );
-//   }
-
-//   // Fetch and refresh access token when expired
-//   Future<String?> _getNewAccessToken() async {
-//     final refreshToken = await _storage.read(key: 'refreshToken');
-//     if (refreshToken == null) {
-//       return null;
-//     }
-
-//     final response = await _refreshToken(refreshToken);
-
-//     if (response.statusCode == 200) {
-//       var responseBody = json.decode(response.body);
-//       await _saveTokens(responseBody['accessToken'], responseBody['refreshToken']);
-//       return responseBody['accessToken'];
-//     }
-//     return null;
-//   }
-
-//   Future<http.Response> _refreshToken(String refreshToken) async {
-//     const String url = 'http://localhost:7001/auth/refresh-token';
-//     final response = await http.post(
-//       Uri.parse(url),
-//       headers: {'Content-Type': 'application/json'},
-//       body: jsonEncode({'refreshToken': refreshToken}),
-//     );
-//     return response;
-//   }
-
-//   // Make authenticated API request
-//   Future<http.Response> _makeAuthenticatedRequest(String url) async {
-//     String? accessToken = await _storage.read(key: 'accessToken');
-//     if (accessToken == null) {
-//       return http.Response('Unauthorized', 401);
-//     }
-
-//     final response = await http.get(
-//       Uri.parse(url),
-//       headers: {'Authorization': 'Bearer $accessToken'},
-//     );
-
-//     // If the access token expired, attempt to refresh it
-//     if (response.statusCode == 401) {
-//       accessToken = await _getNewAccessToken();
-//       if (accessToken == null) {
-//         return http.Response('Unauthorized', 401);
-//       }
-//       return await http.get(
-//         Uri.parse(url),
-//         headers: {'Authorization': 'Bearer $accessToken'},
-//       );
-//     }
-//     return response;
-//   }
-// }

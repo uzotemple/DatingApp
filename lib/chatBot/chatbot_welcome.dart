@@ -16,6 +16,7 @@ class _ChatbotWelcomeScreenState extends State<ChatbotWelcomeScreen> {
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
+
     final fontSizeProvider = Provider.of<FontSizeProvider>(context);
 
     return Scaffold(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:love_bird/config/constants.dart';
-import 'package:love_bird/config/routes.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:love_bird/providers/auth_provider.dart';
 
 import 'package:love_bird/providers/user_bio_provider.dart';
 import 'package:provider/provider.dart';
@@ -42,6 +42,8 @@ class _UserBioState extends State<UserBio> {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     final userProvider = Provider.of<UserBioProvider>(context);
+
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
 
     return Scaffold(
       body: SafeArea(
@@ -316,10 +318,7 @@ class _UserBioState extends State<UserBio> {
                   child: GestureDetector(
                     onTap: () async {
                       if (_formKey.currentState?.validate() ?? false) {
-                        // Call saveToDatabase when the form is valid
-                        // await userProvider.saveToDatabase();
-                        // Optionally navigate to another screen after submission
-                        Navigator.pushNamed(context, createNickname);
+                        userProvider.createProfile(context, authProvider);
                       }
                       // Navigator.pushNamed(context, createNickname);
                     },

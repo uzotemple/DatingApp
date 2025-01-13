@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:love_bird/chat/main_chat.dart';
 import 'package:love_bird/config/constants.dart';
+import 'package:love_bird/config/routes.dart';
 import 'package:love_bird/edit%20profile%20screens/edit_low_profile_screen.dart';
 import 'package:love_bird/homeScreen/homeScreen.dart';
 import 'package:love_bird/matches/likes.dart';
 import 'package:love_bird/matches/people_nearby.dart';
 
-class VideoCallScreen extends StatelessWidget {
+class VideoCallScreen extends StatefulWidget {
   final String name;
   final String profileImage;
   final String callDuration;
@@ -21,6 +22,11 @@ class VideoCallScreen extends StatelessWidget {
   });
 
   @override
+  State<VideoCallScreen> createState() => _VideoCallScreenState();
+}
+
+class _VideoCallScreenState extends State<VideoCallScreen> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
@@ -29,8 +35,8 @@ class VideoCallScreen extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image:
-                    AssetImage(backgroundImage), // Use the selected background
+                image: AssetImage(
+                    widget.backgroundImage), // Use the selected background
 
                 fit: BoxFit.cover,
               ),
@@ -43,7 +49,7 @@ class VideoCallScreen extends StatelessWidget {
               right: 0,
               child: Column(children: [
                 Text(
-                  name,
+                  widget.name,
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 22,
@@ -52,7 +58,7 @@ class VideoCallScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  callDuration,
+                  widget.callDuration,
                   style: TextStyle(
                     color: Colors.white.withOpacity(0.8),
                     fontSize: 16,
@@ -70,7 +76,7 @@ class VideoCallScreen extends StatelessWidget {
                 SizedBox(
                   height: 180,
                   width: 180,
-                  child: Image.asset(profileImage),
+                  child: Image.asset(widget.profileImage),
                 ),
                 const SizedBox(height: 20),
               ],
@@ -241,9 +247,12 @@ class Avatar extends StatefulWidget {
 }
 
 class _AvatarState extends State<Avatar> {
+  int _currentIndex = 2;
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
@@ -278,8 +287,12 @@ class _AvatarState extends State<Avatar> {
         ),
       ),
       bottomNavigationBar: Padding(
-        padding:
-            const EdgeInsets.only(left: 12.0, right: 12, top: 12, bottom: 22),
+        padding: EdgeInsets.only(
+          left: screenWidth * 0.03, // 3% of screen width
+          right: screenWidth * 0.03,
+          top: screenHeight * 0.01, // 1% of screen height
+          bottom: screenHeight * 0.03, // 3% of screen height
+        ),
         child: Container(
           decoration: BoxDecoration(
             color: const Color.fromRGBO(97, 86, 234, 0.19),
@@ -289,65 +302,66 @@ class _AvatarState extends State<Avatar> {
             borderRadius: BorderRadius.circular(50),
             child: BottomNavigationBar(
               type: BottomNavigationBarType.fixed,
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              currentIndex: _currentIndex,
               items: [
                 BottomNavigationBarItem(
-                  icon: Image.asset('assets/images/icons/homeBlack.png',
-                      width: 40),
+                  icon: Icon(Icons.home, size: screenWidth * 0.08),
                   label: 'Home',
                 ),
                 BottomNavigationBarItem(
-                  icon: Image.asset('assets/images/icons/localcon.png',
-                      width: 30),
-                  label: 'Location',
+                  icon: Icon(Icons.location_on, size: screenWidth * 0.08),
+                  label: 'People Nearby',
                 ),
                 BottomNavigationBarItem(
-                  icon: Image.asset('assets/images/icons/blueChat.png',
-                      width: 30),
+                  icon: Icon(Icons.chat, size: screenWidth * 0.08),
                   label: 'Chats',
                 ),
                 BottomNavigationBarItem(
-                  icon:
-                      Image.asset('assets/images/icons/matches.png', width: 30),
+                  icon: Icon(Icons.favorite, size: screenWidth * 0.08),
                   label: 'Matches',
                 ),
                 BottomNavigationBarItem(
-                  icon: Image.asset('assets/images/icons/personIcon.png',
-                      width: 30),
+                  icon: Icon(Icons.person, size: screenWidth * 0.08),
                   label: 'Profile',
                 ),
               ],
+              selectedLabelStyle: TextStyle(
+                color: Colors.black, // Ensure selected text is black
+                fontSize: MediaQuery.of(context).size.width * 0.03,
+              ),
+              unselectedLabelStyle: TextStyle(
+                color: Colors.black, // Ensure unselected text is black
+                fontSize: MediaQuery.of(context).size.width * 0.03,
+              ),
+              selectedItemColor:
+                  blue, // Make selected item icon and label black
+              unselectedItemColor:
+                  Theme.of(context).brightness == Brightness.dark
+                      ? Colors.white // Dark mode, use white
+                      : Colors.black, // Make unselected item icon black
               onTap: (index) {
-                // Handle navigation based on the index
+                setState(() {
+                  _currentIndex = index; // Update the current index.
+                });
                 switch (index) {
                   case 0:
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const HomeScreen()),
-                    );
+                    Navigator.pushNamed(context, homeScreen);
+
                     break;
                   case 1:
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const PeopleNearbyPage()),
-                    );
+                    Navigator.pushNamed(context, peopleNearbyPage);
                     break;
                   case 2:
-                    // Navigate to Chats
+                    Navigator.pushNamed(context, mainchat);
                     break;
                   case 3:
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Likes()),
-                    );
+                    Navigator.pushNamed(context, likes);
                     break;
                   case 4:
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const EditLowProfileScreen()),
-                    );
+                    Navigator.pushNamed(context, profile);
+                    break;
                 }
               },
             ),

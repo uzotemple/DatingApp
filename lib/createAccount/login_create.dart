@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:love_bird/providers/auth_provider.dart';
 import 'package:love_bird/providers/login_create.dart';
 import 'package:provider/provider.dart';
 import 'package:love_bird/config/routes.dart';
@@ -22,6 +23,8 @@ class _LoginCreateState extends State<LoginCreate> {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     final loginProvider = Provider.of<LoginCreateProvider>(context);
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+//final loginProvider = Provider.of<LoginProvider>(context, listen: false);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -184,12 +187,18 @@ class _LoginCreateState extends State<LoginCreate> {
                 child: GestureDetector(
                   onTap: () {
                     if (_formKey.currentState!.validate()) {
+                      // loginProvider.handleLogin(
+                      //   context,
+                      //   _formKey,
+                      //   emailController.text,
+                      //   passwordController.text,
+                      // );
                       loginProvider.handleLogin(
-                        context,
-                        _formKey,
-                        emailController.text,
-                        passwordController.text,
-                      );
+                          context,
+                          _formKey,
+                          emailController.text,
+                          passwordController.text,
+                          authProvider);
                       // _showSubmissionDialog(context);
                     }
                   },

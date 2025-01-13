@@ -122,12 +122,12 @@ class _CreateAcc1State extends State<CreateAcc1> {
                                 name: 'UserInput');
                             developer.log('');
 
-                            // userProvider.updateEmail(_emailController.text);
-                            // userProvider
-                            //     .updatePassword(_passwordController.text);
-                            // userProvider.saveToDatabase(context);
+                            userProvider.updateEmail(_emailController.text);
+                            userProvider
+                                .updatePassword(_passwordController.text);
+                            userProvider.saveToDatabase(context);
 
-                            Navigator.pushNamed(context, verifyEmailRoute);
+                            // Navigator.pushNamed(context, verifyEmailRoute);
                           }
                         }
                       : null,

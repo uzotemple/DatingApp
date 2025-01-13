@@ -47,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
     "It’s okay to take a break if you need one—self-care is just as important as finding love.",
     "Remember, the right person is out there—sometimes it just takes a little time to find them. Keep being yourself!",
   ];
-
+  int _currentIndex = 0;
   String currentMessage = '';
   Timer? popupTimer;
 
@@ -152,6 +152,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       //   backgroundColor: Colors.white,
       appBar: AppBar(
@@ -286,31 +288,29 @@ class _HomeScreenState extends State<HomeScreen> {
             //   ],
             // ),
             Expanded(
-              child: SingleChildScrollView(
-                child: Center(
-                  child: Column(
-                    children: [
-                      ProfileInfo(
-                        profiles: [
-                          {
-                            'imageUrl': 'assets/images/homeImage.png',
-                            'name': 'John Doe, 25',
-                            'location': 'New York, USA',
-                          },
-                          {
-                            'imageUrl': 'assets/images/homeImage.png',
-                            'name': 'Jane Smith, 22',
-                            'location': 'Los Angeles, USA',
-                          },
-                          {
-                            'imageUrl': 'assets/images/homeImage.png',
-                            'name': 'Chris Johnson, 30',
-                            'location': 'Chicago, USA',
-                          },
-                        ],
-                      ),
-                    ],
-                  ),
+              child: Center(
+                child: Column(
+                  children: [
+                    ProfileInfo(
+                      profiles: [
+                        {
+                          'imageUrl': 'assets/images/homeImage.png',
+                          'name': 'John Doe, 25',
+                          'location': 'New York, USA',
+                        },
+                        {
+                          'imageUrl': 'assets/images/homeImage.png',
+                          'name': 'Jane Smith, 22',
+                          'location': 'Los Angeles, USA',
+                        },
+                        {
+                          'imageUrl': 'assets/images/homeImage.png',
+                          'name': 'Chris Johnson, 30',
+                          'location': 'Chicago, USA',
+                        },
+                      ],
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -319,11 +319,10 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       bottomNavigationBar: Padding(
         padding: EdgeInsets.only(
-          left: MediaQuery.of(context).size.width * 0.03, // 3% of screen width
-          right: MediaQuery.of(context).size.width * 0.03,
-          top: MediaQuery.of(context).size.height * 0.01, // 1% of screen height
-          bottom:
-              MediaQuery.of(context).size.height * 0.03, // 3% of screen height
+          left: screenWidth * 0.03, // 3% of screen width
+          right: screenWidth * 0.03,
+          top: screenHeight * 0.01, // 1% of screen height
+          bottom: screenHeight * 0.03, // 3% of screen height
         ),
         child: Container(
           decoration: BoxDecoration(
@@ -336,73 +335,47 @@ class _HomeScreenState extends State<HomeScreen> {
               type: BottomNavigationBarType.fixed,
               backgroundColor: Colors.transparent,
               elevation: 0,
+              currentIndex: _currentIndex,
               items: [
                 BottomNavigationBarItem(
-                  icon: Image.asset(
-                    Theme.of(context).brightness == Brightness.dark
-                        ? 'assets/images/icons/home.png'
-                        : 'assets/images/icons/home.png',
-                    width: MediaQuery.of(context).size.width * 0.08,
-                    height: MediaQuery.of(context).size.width * 0.08,
-                  ),
+                  icon: Icon(Icons.home, size: screenWidth * 0.08),
                   label: 'Home',
                 ),
                 BottomNavigationBarItem(
-                  icon: Image.asset(
-                    Theme.of(context).brightness == Brightness.dark
-                        ? 'assets/images/icons/locationWhite.png'
-                        : 'assets/images/icons/localcon.png',
-                    width: MediaQuery.of(context).size.width * 0.08,
-                    height: MediaQuery.of(context).size.width * 0.08,
-                  ),
+                  icon: Icon(Icons.location_on, size: screenWidth * 0.08),
                   label: 'People Nearby',
                 ),
                 BottomNavigationBarItem(
-                  icon: Image.asset(
-                    Theme.of(context).brightness == Brightness.dark
-                        ? 'assets/images/icons/chatWhite.png'
-                        : 'assets/images/icons/chatIcon.png',
-                    width: MediaQuery.of(context).size.width * 0.08,
-                    height: MediaQuery.of(context).size.width * 0.08,
-                  ),
+                  icon: Icon(Icons.chat, size: screenWidth * 0.08),
                   label: 'Chats',
                 ),
                 BottomNavigationBarItem(
-                  icon: Image.asset(
-                    Theme.of(context).brightness == Brightness.dark
-                        ? 'assets/images/icons/matchWhite.png'
-                        : 'assets/images/icons/matches.png',
-                    width: MediaQuery.of(context).size.width * 0.08,
-                    height: MediaQuery.of(context).size.width * 0.08,
-                  ),
+                  icon: Icon(Icons.favorite, size: screenWidth * 0.08),
                   label: 'Matches',
                 ),
                 BottomNavigationBarItem(
-                  icon: Image.asset(
-                    Theme.of(context).brightness == Brightness.dark
-                        ? 'assets/images/icons/profileWhite.png'
-                        : 'assets/images/icons/personIcon.png',
-                    width: MediaQuery.of(context).size.width * 0.07,
-                    height: MediaQuery.of(context).size.width * 0.07,
-                  ),
+                  icon: Icon(Icons.person, size: screenWidth * 0.08),
                   label: 'Profile',
                 ),
               ],
               selectedLabelStyle: TextStyle(
+                color: Colors.black, // Ensure selected text is black
                 fontSize: MediaQuery.of(context).size.width * 0.03,
               ),
               unselectedLabelStyle: TextStyle(
+                color: Colors.black, // Ensure unselected text is black
                 fontSize: MediaQuery.of(context).size.width * 0.03,
               ),
-              selectedItemColor: Theme.of(context).brightness == Brightness.dark
-                  ? Colors.white
-                  : Colors.black,
+              selectedItemColor:
+                  blue, // Make selected item icon and label black
               unselectedItemColor:
                   Theme.of(context).brightness == Brightness.dark
-                      ? Colors.white
-                      : Colors.black,
+                      ? Colors.white // Dark mode, use white
+                      : Colors.black, // Make unselected item icon black
               onTap: (index) {
-                // Handle navigation based on the index
+                setState(() {
+                  _currentIndex = index; // Update the current index.
+                });
                 switch (index) {
                   case 0:
                     Navigator.pushNamed(context, homeScreen);
@@ -669,6 +642,9 @@ class _ProfileInfoState extends State<ProfileInfo> {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Stack(
       children: [
         SizedBox(
@@ -823,7 +799,8 @@ class _ProfileInfoState extends State<ProfileInfo> {
           bottom: 0,
           child: Container(
             width: MediaQuery.of(context).size.width * 0.9,
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            padding: EdgeInsets.symmetric(
+                vertical: MediaQuery.of(context).size.height * 0.01),
             color: Colors.black.withOpacity(0.5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -835,9 +812,9 @@ class _ProfileInfoState extends State<ProfileInfo> {
                     children: [
                       Text(
                         widget.profiles[_currentIndex]['name']!,
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: Colors.white,
-                          fontSize: 18,
+                          fontSize: screenWidth * 0.04,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -846,16 +823,14 @@ class _ProfileInfoState extends State<ProfileInfo> {
                       ),
                       Text(
                         widget.profiles[_currentIndex]['location']!,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                        ),
+                        style: TextStyle(
+                            color: Colors.white, fontSize: screenWidth * 0.03),
                       ),
                     ],
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.02),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -912,7 +887,8 @@ class _ProfileInfoState extends State<ProfileInfo> {
           ),
         ),
         Positioned(
-          bottom: 170,
+          bottom: screenHeight * 0.2,
+          // bottom: 170,
           right: 10,
           child: InkWell(
             onTap: () {

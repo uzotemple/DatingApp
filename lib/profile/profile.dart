@@ -18,7 +18,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
-
+  int _currentIndex = 4;
   @override
   void initState() {
     super.initState();
@@ -334,11 +334,10 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
       bottomNavigationBar: Padding(
         padding: EdgeInsets.only(
-          left: MediaQuery.of(context).size.width * 0.03, // 3% of screen width
-          right: MediaQuery.of(context).size.width * 0.03,
-          top: MediaQuery.of(context).size.height * 0.01, // 1% of screen height
-          bottom:
-              MediaQuery.of(context).size.height * 0.03, // 3% of screen height
+          left: screenWidth * 0.03, // 3% of screen width
+          right: screenWidth * 0.03,
+          top: screenHeight * 0.01, // 1% of screen height
+          bottom: screenHeight * 0.03, // 3% of screen height
         ),
         child: Container(
           decoration: BoxDecoration(
@@ -351,55 +350,26 @@ class _ProfilePageState extends State<ProfilePage> {
               type: BottomNavigationBarType.fixed,
               backgroundColor: Colors.transparent,
               elevation: 0,
+              currentIndex: _currentIndex,
               items: [
                 BottomNavigationBarItem(
-                  icon: Image.asset(
-                    Theme.of(context).brightness == Brightness.dark
-                        ? 'assets/images/icons/homeWhite.png'
-                        : 'assets/images/icons/homeBlack.png',
-                    width: MediaQuery.of(context).size.width * 0.08,
-                    height: MediaQuery.of(context).size.width * 0.08,
-                  ),
+                  icon: Icon(Icons.home, size: screenWidth * 0.08),
                   label: 'Home',
                 ),
                 BottomNavigationBarItem(
-                  icon: Image.asset(
-                    Theme.of(context).brightness == Brightness.dark
-                        ? 'assets/images/icons/locationWhite.png'
-                        : 'assets/images/icons/localcon.png',
-                    width: MediaQuery.of(context).size.width * 0.08,
-                    height: MediaQuery.of(context).size.width * 0.08,
-                  ),
+                  icon: Icon(Icons.location_on, size: screenWidth * 0.08),
                   label: 'People Nearby',
                 ),
                 BottomNavigationBarItem(
-                  icon: Image.asset(
-                    Theme.of(context).brightness == Brightness.dark
-                        ? 'assets/images/icons/chatWhite.png'
-                        : 'assets/images/icons/chatIcon.png',
-                    width: MediaQuery.of(context).size.width * 0.08,
-                    height: MediaQuery.of(context).size.width * 0.08,
-                  ),
+                  icon: Icon(Icons.chat, size: screenWidth * 0.08),
                   label: 'Chats',
                 ),
                 BottomNavigationBarItem(
-                  icon: Image.asset(
-                    Theme.of(context).brightness == Brightness.dark
-                        ? 'assets/images/icons/matchWhite.png'
-                        : 'assets/images/icons/matches.png',
-                    width: MediaQuery.of(context).size.width * 0.08,
-                    height: MediaQuery.of(context).size.width * 0.08,
-                  ),
+                  icon: Icon(Icons.favorite, size: screenWidth * 0.08),
                   label: 'Matches',
                 ),
                 BottomNavigationBarItem(
-                  icon: Image.asset(
-                    Theme.of(context).brightness == Brightness.dark
-                        ? 'assets/images/icons/blueProfile.png'
-                        : 'assets/images/icons/blueProfile.png',
-                    width: MediaQuery.of(context).size.width * 0.07,
-                    height: MediaQuery.of(context).size.width * 0.07,
-                  ),
+                  icon: Icon(Icons.person, size: screenWidth * 0.08),
                   label: 'Profile',
                 ),
               ],
@@ -411,15 +381,16 @@ class _ProfilePageState extends State<ProfilePage> {
                 color: Colors.black, // Ensure unselected text is black
                 fontSize: MediaQuery.of(context).size.width * 0.03,
               ),
-              selectedItemColor: Theme.of(context).brightness == Brightness.dark
-                  ? Colors.white // Dark mode, use white
-                  : Colors.black, // Make selected item icon and label black
+              selectedItemColor:
+                  blue, // Make selected item icon and label black
               unselectedItemColor:
                   Theme.of(context).brightness == Brightness.dark
                       ? Colors.white // Dark mode, use white
                       : Colors.black, // Make unselected item icon black
               onTap: (index) {
-                // Handle navigation based on the index
+                setState(() {
+                  _currentIndex = index; // Update the current index.
+                });
                 switch (index) {
                   case 0:
                     Navigator.pushNamed(context, homeScreen);

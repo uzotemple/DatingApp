@@ -1,6 +1,9 @@
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:love_bird/config/routes.dart';
+import 'api_helper.dart';
+import 'auth_provider.dart';
+import 'dart:developer' as developer;
+import 'dart:convert';
 
 class UserBioProvider extends ChangeNotifier {
   // Fields for user information
@@ -285,31 +288,148 @@ class UserBioProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> saveToDatabase() async {
-    const String apiUrl = "http://localhost:7001/profile/initial-addition";
-
+  Future<void> createProfile(
+      BuildContext context, AuthProvider authProvider) async {
     try {
-      final response = await http.post(
-        Uri.parse(apiUrl),
-        body: jsonEncode({
-          "profession": profession,
-          "weight": double.tryParse(weight) ?? 0, // Ensure numeric value
-          "height": double.tryParse(height) ?? 0, // Ensure numeric value
-          "country": country,
-          "city": city,
-          "bio": bio,
-          "educationLevel": educationLevel,
-        }),
+      // Define API request details
+      const url = 'http://localhost:7001/profile/initial-addition';
+      const method =
+          'POST'; // Consider using a constant or enum for HTTP methods
+      final headers = {'Content-Type': 'application/json'};
+
+      // API request body
+      final body = {
+        "profession": profession,
+        "weight": double.tryParse(weight) ?? 0, // Ensure numeric value
+        "height": double.tryParse(height) ?? 0, // Ensure numeric value
+        "country": country,
+        "city": city,
+        "bio": bio,
+        //"educationLevel": educationLevel,
+        "educationLevel": 'None'
+      };
+
+      // Send the request using makeApiRequest
+      final response = await makeApiRequest(
+        url,
+        method,
+        headers,
+        authProvider,
+        body: body,
       );
 
+      // Check for successful response
       if (response.statusCode == 200 || response.statusCode == 201) {
-        print("User bio saved successfully.");
+        developer.log('Profile created successfully: ${response.body}');
+        Navigator.pushNamed(context, createNickname);
       } else {
-        print("Failed to save user bio: ${response.statusCode}");
-        print(response.body);
+        final Map<String, dynamic> responseBody = jsonDecode(response.body);
+        final errorMessage = responseBody['message'] ?? 'Unknown error';
+
+        //  Print and log the error
+        developer.log(
+            'Failed to create profile. Status code: ${response.statusCode}, Error: $errorMessage');
+
+        _showErrorDialog(context, "Error: $errorMessage");
+        throw Exception(
+            'Failed to create profile. Status code: ${response.statusCode}, Response: ${response.body}');
+
+        //  return;
       }
-    } catch (error) {
-      print("Error saving user bio: $error");
+    } catch (e) {
+      developer.log('Error creating profile: $e');
+      _showErrorDialog(context, "An error occurred. Please try again.");
     }
   }
+
+  void _showErrorDialog(BuildContext context, String message) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Error', style: TextStyle(color: Colors.black)),
+          content: Text(message, style: TextStyle(color: Colors.black)),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
 }
+
+//   Future<void> saveToDatabase() async {
+//     const String apiUrl = "http://localhost:7001/profile/initial-addition";
+
+//     try {
+//       final response = await http.post(
+//         Uri.parse(apiUrl),
+//         body: jsonEncode({
+//           "profession": profession,
+//           "weight": double.tryParse(weight) ?? 0, // Ensure numeric value
+//           "height": double.tryParse(height) ?? 0, // Ensure numeric value
+//           "country": country,
+//           "city": city,
+//           "bio": bio,
+//           "educationLevel": educationLevel,
+//         }),
+//       );
+
+//       if (response.statusCode == 200 || response.statusCode == 201) {
+//         print("User bio saved successfully.");
+//       } else {
+//         print("Failed to save user bio: ${response.statusCode}");
+//         print(response.body);
+//       }
+//     } catch (error) {
+//       print("Error saving user bio: $error");
+//     }
+//   }
+// }
+
+
+
+// class ProfileProvider with ChangeNotifier {
+//   Future<void> createProfile(AuthProvider authProvider) async {
+//     try {
+//       // Define API request details
+//       final url = 'http://localhost:7001/profile/initial-addition';
+//       final method =
+//           'POST'; // Consider using a constant or enum for HTTP methods
+//       final headers = {'Content-Type': 'application/json'};
+
+//       // API request body
+//       final body = {
+//         "profession": 'Developer',
+//         "weight": 75,
+//         "height": 180,
+//         "country": 'USA',
+//         "city": 'New York',
+//         "bio": 'I love codes!',
+//         "educationLevel": 'None',
+//       };
+
+//       // Send the request using makeApiRequest
+//       final response = await makeApiRequest(
+//         url,
+//         method,
+//         headers,
+//         authProvider,
+//         body: body,
+//       );
+
+//       // Check for successful response
+//       if (response.statusCode == 200 || response.statusCode == 201) {
+//         developer.log('Profile created successfully: ${response.body}');
+//       } else {
+//         throw Exception(
+//             'Failed to create profile. Status code: ${response.statusCode}, Response: ${response.body}');
+//       }
+//     } catch (e) {
+//       developer.log('Error creating profile: $e');
+//     }
+//   }
+// }

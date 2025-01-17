@@ -156,6 +156,33 @@ class BasicInfoScreen extends StatelessWidget {
             },
           ),
           const Divider(color: blue),
+          ListTile(
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Change Password',
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                ),
+              ],
+            ),
+            trailing: InkWell(
+              onTap: () {
+                Navigator.pushNamed(context, updatePassword);
+              },
+              child: Icon(
+                Icons.arrow_forward_ios,
+                color: Theme.of(context).iconTheme.color,
+              ),
+            ),
+            onTap: () {
+              // Navigate to Account Screen
+            },
+          ),
+          const Divider(color: blue),
         ],
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:love_bird/config/routes.dart';
+
+import 'package:love_bird/providers/auth_provider.dart';
 import 'package:love_bird/providers/gender_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:love_bird/config/constants.dart';
@@ -12,6 +13,8 @@ class Gender extends StatelessWidget {
     final screenSize = MediaQuery.of(context).size;
     final genderProvider =
         Provider.of<GenderProvider>(context); // Access the provider
+
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
 
     return Scaffold(
       body: SafeArea(
@@ -79,23 +82,35 @@ class Gender extends StatelessWidget {
                       SizedBox(
                         height: screenSize.height * 0.06,
                       ),
-                      buildGenderOption('Man', 1, screenSize, genderProvider),
+                      buildGenderOption('Male', 1, screenSize, genderProvider),
                       SizedBox(
                         height: screenSize.height * 0.04,
                       ),
-                      buildGenderOption('Woman', 2, screenSize, genderProvider),
+                      buildGenderOption(
+                          'Female', 2, screenSize, genderProvider),
                       SizedBox(
                         height: screenSize.height * 0.04,
                       ),
-                      buildGenderOption("I'd Prefer Not to Say", 3, screenSize,
-                          genderProvider),
+                      buildGenderOption(
+                          "Others", 3, screenSize, genderProvider),
                     ],
                   ),
                 ),
               ),
               InkWell(
                 onTap: () {
-                  Navigator.pushNamed(context, relationshipGoalsScreen);
+                  if (genderProvider.selectedGender == 0) {
+                    // Display SnackBar if no gender is selected
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content:
+                            Text('Please select a gender before proceeding.'),
+                        duration: Duration(seconds: 2),
+                      ),
+                    );
+                  } else {
+                    genderProvider.updateGender(context, authProvider);
+                  }
                 },
                 child: Container(
                   width: screenSize.width * 0.8,

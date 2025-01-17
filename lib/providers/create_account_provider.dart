@@ -30,7 +30,7 @@ class CreateAccountProvider extends ChangeNotifier {
   Future<void> saveToDatabase(
     BuildContext context,
   ) async {
-    final url = Uri.parse("http://localhost:7001/auth/register");
+    final url = Uri.parse("http://138.68.150.48:7001/auth/register");
 
     try {
       final response = await http.post(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:love_bird/providers/auth_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:love_bird/config/routes.dart';
 import 'package:love_bird/providers/login_provider.dart';
@@ -21,6 +22,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     final loginProvider = Provider.of<LoginProvider>(context);
+    final authProvider = Provider.of<AuthProvider>(context);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -184,12 +186,12 @@ class _LoginPageState extends State<LoginPage> {
                   onTap: () {
                     if (_formKey.currentState!.validate()) {
                       loginProvider.handleLogin(
-                        context,
-                        _formKey,
-                        emailController.text,
-                        passwordController.text,
-                      );
-                      // _showSubmissionDialog(context);
+                          context,
+                          _formKey,
+                          emailController.text,
+                          passwordController.text,
+                          authProvider,
+                          false);
                     }
                   },
                   child: Container(

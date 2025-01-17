@@ -8,7 +8,7 @@ class IpAddressProvider extends ChangeNotifier {
   String? get ipAddress => _ipAddress;
 
   Future<void> fetchIpAddress() async {
-    final url = Uri.parse('http://localhost:7001/auth/remote-address');
+    final url = Uri.parse('http://138.68.150.48:7001/auth/remote-address');
 
     try {
       final response = await http.get(url);

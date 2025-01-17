@@ -62,6 +62,8 @@ dependencies:
   story: ^1.1.0
   flutter_story: ^1.0.1
   dio: ^5.7.0
+  url_launcher: ^6.3.1
+  mime: ^1.0.6
   
 
   

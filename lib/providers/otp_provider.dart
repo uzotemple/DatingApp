@@ -10,7 +10,7 @@ class OtpVerificationProvider extends ChangeNotifier {
 
   Future<void> verifyOtp(
       BuildContext context, String otp, String userId) async {
-    final url = Uri.parse("http://localhost:7001/auth/verify-otp")
+    final url = Uri.parse("http://138.68.150.48:7001/auth/verify-otp")
         .replace(queryParameters: {"userId": userId});
 
     isLoading = true;

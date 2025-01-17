@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:love_bird/config/constants.dart';
 import 'package:love_bird/config/routes.dart';
 
-import 'package:love_bird/homeScreen/homescreen.dart';
 import 'package:love_bird/homeScreen/preference.dart';
 
 import 'package:love_bird/matches/people_nearby.dart';
+import 'package:love_bird/modals/extra_sheet.dart';
 
 import 'dart:ui';
 
@@ -132,7 +132,7 @@ class _ProfilevisitsState extends State<Profilevisits> {
             ),
           ]),
           SizedBox(height: screenSize.height * 0.025),
-          Expanded(child: PeopleNearbyGrid(premuimPackage: premuimPackage)),
+          Expanded(child: ProfileVisistsGrid(premuimPackage: premuimPackage)),
           if (premuimPackage == false)
             SizedBox(
               width: screenSize.width * 0.7,
@@ -250,10 +250,10 @@ class _ProfilevisitsState extends State<Profilevisits> {
 }
 
 // People Nearby Grid
-class PeopleNearbyGrid extends StatelessWidget {
+class ProfileVisistsGrid extends StatelessWidget {
   final bool premuimPackage;
 
-  PeopleNearbyGrid({super.key, required this.premuimPackage});
+  ProfileVisistsGrid({super.key, required this.premuimPackage});
 
   final List<User> users = [
     User(

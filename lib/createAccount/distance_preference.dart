@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:love_bird/config/routes.dart';
+
 import 'package:love_bird/config/constants.dart';
+import 'package:love_bird/providers/auth_provider.dart';
 import 'package:love_bird/providers/distance_preference_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -10,7 +11,9 @@ class DistancePreferenceScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
+    final distanceProvider = Provider.of<DistanceProvider>(context);
 
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
     // Access the provider using Provider.of or Consumer
     return Scaffold(
       body: SafeArea(
@@ -127,7 +130,7 @@ class DistancePreferenceScreen extends StatelessWidget {
                     EdgeInsets.symmetric(horizontal: screenSize.width * 0.05),
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, interestsSelectionScreen);
+                    distanceProvider.updateDistance(context, authProvider);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: blue,

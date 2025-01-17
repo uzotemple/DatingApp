@@ -143,7 +143,7 @@ class _LoveBirdPlanPageState extends State<LoveBirdPlanPage> {
                     label: 'Matches',
                   ),
                   BottomNavigationBarItem(
-                    icon: Icon(Icons.home, size: screenWidth * 0.08),
+                    icon: Icon(Icons.person, size: screenWidth * 0.08),
                     label: 'Profile',
                   ),
                 ],

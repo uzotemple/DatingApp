@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:love_bird/config/routes.dart';
+
+import 'package:love_bird/providers/auth_provider.dart';
 import 'package:love_bird/providers/relationship_goal_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:love_bird/config/constants.dart';
@@ -10,6 +11,8 @@ class RelationshipGoalsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final goalProvider = Provider.of<GoalProvider>(context);
+
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
 
     return Scaffold(
       body: SafeArea(
@@ -80,9 +83,9 @@ class RelationshipGoalsScreen extends StatelessWidget {
                         description:
                             "Seeking love and meaningful connections? Choose dating for genuine relationships",
                         image: 'assets/images/icons/couple.png',
-                        selected: goalProvider.selectedGoal == 'Dating',
+                        selected: goalProvider.selectedGoal == 'DATING',
                         onTap: () {
-                          goalProvider.setGoal('Dating');
+                          goalProvider.setGoal('DATING');
                         },
                       ),
                       const SizedBox(height: 20),
@@ -91,9 +94,9 @@ class RelationshipGoalsScreen extends StatelessWidget {
                         description:
                             "Expand your social circle and make new friends. Opt for friendship today.",
                         image: 'assets/images/icons/friend.png',
-                        selected: goalProvider.selectedGoal == 'Friendship',
+                        selected: goalProvider.selectedGoal == 'FRIENDSHIP',
                         onTap: () {
-                          goalProvider.setGoal('Friendship');
+                          goalProvider.setGoal('FRIENDSHIP');
                         },
                       ),
                       const SizedBox(height: 20),
@@ -102,9 +105,9 @@ class RelationshipGoalsScreen extends StatelessWidget {
                         description:
                             "Looking for fun and relaxed encounters? Select casual for carefree connections.",
                         image: 'assets/images/icons/casual.png',
-                        selected: goalProvider.selectedGoal == 'Casual',
+                        selected: goalProvider.selectedGoal == 'CASUAL',
                         onTap: () {
-                          goalProvider.setGoal('Casual');
+                          goalProvider.setGoal('CASUAL');
                         },
                       ),
                       const SizedBox(height: 20),
@@ -114,9 +117,20 @@ class RelationshipGoalsScreen extends StatelessWidget {
                             "Ready for a commitment and a lasting partnership? Pick serious relationship.",
                         image: 'assets/images/icons/couple.png',
                         selected:
-                            goalProvider.selectedGoal == 'Serious Relationship',
+                            goalProvider.selectedGoal == 'SERIOUS_RELATIONSHIP',
                         onTap: () {
-                          goalProvider.setGoal('Serious Relationship');
+                          goalProvider.setGoal('SERIOUS_RELATIONSHIP');
+                        },
+                      ),
+                      const SizedBox(height: 20),
+                      RelationshipOption(
+                        label: "Networking",
+                        description:
+                            "Ready to netwrok with fellow professionals",
+                        image: 'assets/images/icons/couple.png',
+                        selected: goalProvider.selectedGoal == 'OPEN_TO_CHAT',
+                        onTap: () {
+                          goalProvider.setGoal('OPEN_TO_CHAT');
                         },
                       ),
                     ],
@@ -129,9 +143,24 @@ class RelationshipGoalsScreen extends StatelessWidget {
                   const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
               child: ElevatedButton(
                 onPressed: () {
-                  // You can access the selectedGoal from goalProvider if needed
-                  Navigator.pushNamed(context, distancePreferenceScreen);
+                  if (goalProvider.selectedGoal == null) {
+                    // Display SnackBar if no gender is selected
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                            'Please select a relationship goal before proceeding.'),
+                        duration: Duration(seconds: 2),
+                      ),
+                    );
+                  } else {
+                    // Navigate if gender is selected
+                    goalProvider.updateGoal(context, authProvider);
+                  }
                 },
+                // onPressed: () {
+                //   // You can access the selectedGoal from goalProvider if needed
+                //   Navigator.pushNamed(context, distancePreferenceScreen);
+                // },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: blue,
                   foregroundColor: Colors.white,

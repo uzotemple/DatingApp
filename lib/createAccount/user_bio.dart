@@ -317,10 +317,45 @@ class _UserBioState extends State<UserBio> {
                 Center(
                   child: GestureDetector(
                     onTap: () async {
+                      // if (_formKey.currentState?.validate() ?? false) {
+                      //   if (userProvider.country == null) {
+                      //     ScaffoldMessenger.of(context)
+                      //         .showSnackBar(const SnackBar(
+                      //       content: Text('Country cannot be empty'),
+                      //       duration: Duration(seconds: 2),
+                      //     ));
+                      //   }
+                      //   if (userProvider.educationLevel == null) {
+                      //     ScaffoldMessenger.of(context)
+                      //         .showSnackBar(const SnackBar(
+                      //       content: Text('Education Level cannot be empty'),
+                      //       duration: Duration(seconds: 2),
+                      //     ));
+                      //   }
+                      //   userProvider.createProfile(context, authProvider);
+                      // }
+                      // Navigator.pushNamed(context, createNickname);
                       if (_formKey.currentState?.validate() ?? false) {
+                        if (userProvider.country == null) {
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(const SnackBar(
+                            content: Text('Country cannot be empty'),
+                            duration: Duration(seconds: 2),
+                          ));
+                          return;
+                        }
+
+                        if (userProvider.educationLevel == null) {
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(const SnackBar(
+                            content: Text('Education Level cannot be empty'),
+                            duration: Duration(seconds: 2),
+                          ));
+                          return;
+                        }
+
                         userProvider.createProfile(context, authProvider);
                       }
-                      // Navigator.pushNamed(context, createNickname);
                     },
                     child: Container(
                       width: screenSize.width * 0.8,
@@ -368,7 +403,37 @@ class _UserBioState extends State<UserBio> {
             ),
           ),
           SizedBox(height: screenSize.height * 0.01),
-          TextField(
+          TextFormField(
+            validator: (value) {
+              if (label != 'Linkedln Profile link' &&
+                  (value == null || value.isEmpty)) {
+                return '$label cannot be empty';
+              }
+              if ((label == 'Height(cm)' || label == 'Weight(kg)') &&
+                  value != null) {
+                final doubleValue = double.tryParse(value);
+                if (doubleValue == null) {
+                  return '$label must be a valid number';
+                }
+
+                if (value.length > 5) {
+                  return '$label must not exceed 5 characters';
+                }
+              }
+
+              if (label != 'Height(cm)' &&
+                  label != 'Weight(kg)' &&
+                  label != 'Bio') {
+                if (value != null && value.length > 50) {
+                  return '$label must not exceed 20 characters';
+                }
+              }
+
+              if (label == 'Bio') if (value != null && value.length > 40) {
+                return '$label must not exceed 40 characters';
+              }
+              return null;
+            },
             style:
                 TextStyle(color: Theme.of(context).textTheme.bodyMedium?.color),
             onChanged: onChanged,

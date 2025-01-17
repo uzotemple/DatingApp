@@ -6,6 +6,7 @@ import 'package:love_bird/chatBot/chatbot_screen.dart';
 
 import 'package:love_bird/chatBot/chatbot_welcome.dart';
 import 'package:love_bird/chatBott/lib/main_bot.dart';
+import 'package:love_bird/createAccount/birthday.dart';
 import 'package:love_bird/createAccount/create_account1.dart';
 import 'package:love_bird/createAccount/enable_location.dart';
 import 'package:love_bird/createAccount/finding_people_nearby.dart';
@@ -29,7 +30,9 @@ import 'package:love_bird/edit%20profile%20screens/edit_low_profile_screen.dart'
 import 'package:love_bird/homeScreen/dating_tips.dart';
 import 'package:love_bird/homeScreen/homeScreen.dart';
 import 'package:love_bird/homeScreen/notification.dart';
-import 'package:love_bird/profile/users_profile.dart';
+
+import 'package:love_bird/providers/example.dart';
+
 import 'package:love_bird/report/personalized_report.dart';
 import 'package:love_bird/report/report.dart';
 import 'package:love_bird/ip.dart';
@@ -42,6 +45,7 @@ import 'package:love_bird/onboarding/slidable.dart';
 import 'package:love_bird/payment/paypal.dart';
 import 'package:love_bird/profile/profile.dart';
 import 'package:love_bird/providers/ip_address.dart';
+import 'package:love_bird/setting_screen/update_password.dart';
 import 'package:love_bird/sign/login_page.dart';
 import 'package:love_bird/sign/sign.dart';
 import 'package:love_bird/createAccount/captcha.dart';
@@ -101,7 +105,8 @@ const userProfilePage = "/userProfilePage";
 const chatBotScreen = "/chatBotScreen";
 const loginCreate = "/loginCreate";
 const editLowProfileScreen = "/editLowProfileScreen";
-
+const updatePassword = "/updatepassword";
+const imageUploadScreennn = "/imageUploadScreennn";
 // Map each route to the respective widget
 final routes = <String, Widget Function(BuildContext)>{
   createAccountRoute: (_) => const CreateAcc1(),
@@ -145,12 +150,13 @@ final routes = <String, Widget Function(BuildContext)>{
   geminiBot: (_) => const GeminiBot(),
   storyPage: (_) => const StoryPage(),
   storyExamplePage: (_) => const StoryExamplePage(),
-  userProfilePage: (_) => const UserProfilePage(),
   chatBotScreen: (_) => const ChatBotScreen(),
   photoVerificationOneAfter: (_) => const PhotoVerificationOneAfter(),
   photoScreen3After: (_) => const PhotoScreen3After(),
   imageScannerAfter: (_) => const ImageScannerAfter(),
   gestureVerificationScreenAfter: (_) => const GestureVerificationScreenAfter(),
   loginCreate: (_) => const LoginCreate(),
-  editLowProfileScreen: (_) => const EditLowProfileScreen()
+  editLowProfileScreen: (_) => const EditLowProfileScreen(),
+  updatePassword: (_) => const UpdatePassword(),
+  imageUploadScreennn: (_) => const ImageUploadScreennn()
 };

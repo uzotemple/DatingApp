@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:love_bird/config/routes.dart';
 import 'dart:async';
 import 'package:love_bird/config/constants.dart';
+
+import 'package:love_bird/providers/forgot_password_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class NewPassword extends StatefulWidget {
   const NewPassword({super.key});
@@ -11,60 +14,26 @@ class NewPassword extends StatefulWidget {
 }
 
 class _NewPasswordState extends State<NewPassword> {
-  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController2 = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  Future<String?> getSavedOtp() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('savedOtp');
+  }
 
   final _formKey = GlobalKey<FormState>();
 
   bool showPassword = false;
+  void _submitOtp() async {
+    final otp = await getSavedOtp();
 
-  void _showSubmissionDialog() {
-    showDialog(
-      barrierDismissible:
-          true, // Prevent dialog from closing by tapping outside
-      context: context,
-      builder: (BuildContext context) {
-        return Dialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min, // Wrap content
-              children: [
-                Image.asset('assets/images/password_thumbs.png'),
-                const SizedBox(height: 20),
-                const Text(
-                  'Reset Password Successful!',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: blue,
-                  ),
-                ),
-                const SizedBox(height: 10),
-                const Text(
-                  "Please wait....\nYou will be redirected to the Login page",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 12, color: Colors.black),
-                ),
-                const SizedBox(height: 20),
-                const CircularProgressIndicator(),
-              ],
-            ),
-          ),
-        );
-      },
-    );
+    final retrieveProvider =
+        Provider.of<RetrieveProvider>(context, listen: false);
 
-    // Wait for 2 seconds and then navigate to the next screen
-    Future.delayed(const Duration(seconds: 2), () {
-      Navigator.pop(context);
-      Navigator.pushNamed(context, loginPage);
-    });
+    final userId = retrieveProvider.userId;
+
+    retrieveProvider.forgotPassword(
+        context, otp, userId, passwordController.text);
   }
 
   @override
@@ -110,10 +79,10 @@ class _NewPasswordState extends State<NewPassword> {
                   Form(
                     key: _formKey,
                     child: Column(children: [
-                      _buildTextField(
-                          ' New Password', emailController, Icons.lock, true),
+                      _buildTextField(' New Password', passwordController,
+                          Icons.lock, true),
                       _buildTextField('Confirm New Password',
-                          passwordController, Icons.lock, true),
+                          passwordController2, Icons.lock, true),
                     ]),
                   ),
                 ],
@@ -125,7 +94,7 @@ class _NewPasswordState extends State<NewPassword> {
             child: GestureDetector(
               onTap: () {
                 if (_formKey.currentState!.validate()) {
-                  _showSubmissionDialog();
+                  _submitOtp();
                 }
               },
               child: Container(
@@ -173,6 +142,10 @@ class _NewPasswordState extends State<NewPassword> {
               }
 
               if (isPassword) {
+                if (label == 'Confirm New Password' &&
+                    value != passwordController.text) {
+                  return 'Passwords do not match';
+                }
                 if (value.length < 9) {
                   return 'Password must be at least 9 characters long';
                 }
@@ -198,8 +171,11 @@ class _NewPasswordState extends State<NewPassword> {
             decoration: InputDecoration(
               fillColor: const Color.fromRGBO(54, 40, 221, 0.1),
               prefixIcon: icon != null
-                  ? Icon(icon,
-                      color: Theme.of(context).iconTheme.color, size: 20)
+                  ? Icon(
+                      icon,
+                      color: Theme.of(context).iconTheme.color,
+                      size: 20,
+                    )
                   : null,
               suffixIcon: isPassword
                   ? IconButton(

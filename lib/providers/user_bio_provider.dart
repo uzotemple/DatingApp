@@ -292,7 +292,7 @@ class UserBioProvider extends ChangeNotifier {
       BuildContext context, AuthProvider authProvider) async {
     try {
       // Define API request details
-      const url = 'http://localhost:7001/profile/initial-addition';
+      const url = 'http://138.68.150.48:7001/profile/initial-addition';
       const method =
           'POST'; // Consider using a constant or enum for HTTP methods
       final headers = {'Content-Type': 'application/json'};
@@ -348,7 +348,7 @@ class UserBioProvider extends ChangeNotifier {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Error', style: TextStyle(color: Colors.black)),
-          content: Text(message, style: TextStyle(color: Colors.black)),
+          content: Text(message, style: const TextStyle(color: Colors.black)),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),

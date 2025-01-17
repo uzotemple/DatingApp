@@ -120,7 +120,7 @@ class _PhotoVerificationOneState extends State<PhotoVerificationOne> {
                               fontSize: 24, fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(width: 5),
-                        Image.asset('assets/images/verify.png', height: 40),
+                        Image.asset('assets/images/redCheck.png', height: 40),
                       ],
                     ),
                     const SizedBox(height: 15),

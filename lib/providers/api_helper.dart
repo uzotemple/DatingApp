@@ -26,6 +26,11 @@ Future<http.Response> makeApiRequest(
           Uri.parse(url),
           headers: headers,
         );
+      case 'DELETE':
+        return await http.delete(
+          Uri.parse(url),
+          headers: headers,
+        );
       default:
         throw Exception('HTTP method $method not supported.');
     }

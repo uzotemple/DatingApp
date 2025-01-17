@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:love_bird/config/routes.dart';
+
+import 'package:love_bird/providers/auth_provider.dart';
+
 import 'package:love_bird/providers/interest_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:love_bird/config/constants.dart';
@@ -141,8 +143,14 @@ class InterestsSelectionScreen extends StatelessWidget {
                   minimumSize: const Size(double.infinity, 50),
                 ),
                 onPressed: interestsProvider.selectedInterests.isNotEmpty
-                    ? () {
-                        Navigator.pushNamed(context, uploadPicturesScreen);
+                    ? () async {
+                        final interestProvider = Provider.of<InterestsProvider>(
+                            context,
+                            listen: false);
+                        final authProvider =
+                            Provider.of<AuthProvider>(context, listen: false);
+                        await interestProvider.updateInterest(
+                            context, authProvider);
                       }
                     : null,
                 child: Text(

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:love_bird/config/routes.dart';
+
 import 'package:love_bird/config/constants.dart';
+import 'package:love_bird/providers/forgot_password_provider.dart';
+import 'package:provider/provider.dart';
 
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({super.key});
@@ -20,6 +22,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
+    final retrieveProvider = Provider.of<RetrieveProvider>(context);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -84,7 +87,10 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   horizontal: screenSize.width * 0.03),
               child: GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, oTPVerificationPage);
+                  if (_formKey.currentState!.validate()) {
+                    retrieveProvider.retrieveEmail(
+                        context, emailController.text);
+                  }
                 },
                 child: Container(
                   width: screenSize.width * 0.8,
@@ -95,7 +101,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   ),
                   child: const Center(
                     child: Text(
-                      'Continue',
+                      'Continiue',
                       style: TextStyle(color: Colors.white, fontSize: 18),
                     ),
                   ),
@@ -108,8 +114,11 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     );
   }
 
-  Widget _buildTextField(String label, TextEditingController controller,
-      [IconData? icon, bool isPassword = false]) {
+  Widget _buildTextField(
+    String label,
+    TextEditingController controller, [
+    IconData? icon,
+  ]) {
     final screenSize = MediaQuery.of(context).size;
     return Padding(
       padding: EdgeInsets.only(bottom: screenSize.height * 0.023),
@@ -124,30 +133,25 @@ class _ForgotPasswordState extends State<ForgotPassword> {
             ),
           ),
           SizedBox(height: screenSize.height * 0.009),
-          TextField(
+          TextFormField(
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return '$label cannot be empty';
+              }
+              if (label.toLowerCase() == 'email' &&
+                  !RegExp(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
+                      .hasMatch(value)) {
+                return 'Enter a valid email';
+              }
+              return null;
+            },
             style:
                 TextStyle(color: Theme.of(context).textTheme.bodyMedium?.color),
             controller: controller,
-            obscureText: isPassword && !showPassword,
             decoration: InputDecoration(
               fillColor: const Color.fromRGBO(54, 40, 221, 0.1),
-              prefixIcon: icon != null
-                  ? Icon(icon,
-                      color: Theme.of(context).iconTheme.color, size: 20)
-                  : null,
-              suffixIcon: isPassword
-                  ? IconButton(
-                      icon: Icon(
-                        showPassword ? Icons.visibility : Icons.visibility_off,
-                        color: Theme.of(context).iconTheme.color,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          showPassword = !showPassword;
-                        });
-                      },
-                    )
-                  : null,
+              prefixIcon: Icon(icon,
+                  color: Theme.of(context).iconTheme.color, size: 20),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20),
                 borderSide: BorderSide.none,

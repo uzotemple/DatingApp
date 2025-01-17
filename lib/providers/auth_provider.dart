@@ -30,7 +30,7 @@ class AuthProvider with ChangeNotifier {
   }
 
   Future<void> refreshToken() async {
-    const String refreshUrl = 'http://localhost:7001/auth/refresh-token';
+    const String refreshUrl = 'http://138.68.150.48:7001/auth/refresh-token';
 
     if (_refreshToken == null) {
       developer.log('No refresh token available. User needs to log in again.');

@@ -7,7 +7,7 @@ class ResendProvider extends ChangeNotifier {
   bool isLoading = false;
 
   Future<void> resendverifyOtp(BuildContext context, String userId) async {
-    final url = Uri.parse("http://localhost:7001/auth/resend-otp")
+    final url = Uri.parse("http://138.68.150.48:7001/auth/resend-otp")
         .replace(queryParameters: {"userId": userId});
 
     isLoading = true;

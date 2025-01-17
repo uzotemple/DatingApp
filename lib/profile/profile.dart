@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:love_bird/api/profile_api.dart';
 import 'package:love_bird/config/routes.dart';
-
-import 'package:love_bird/homeScreen/homeScreen.dart';
 import 'package:love_bird/homeScreen/notification.dart';
+import 'package:love_bird/modals/extra_sheet.dart';
+import 'package:love_bird/providers/auth_provider.dart';
 import 'package:love_bird/setting_screen/setting_screen.dart';
 import 'package:love_bird/safety_privacy_screens/safety_screen.dart';
 import 'package:love_bird/subscription%20plan/standard_plan.dart';
 import 'package:love_bird/config/constants.dart';
+import 'package:provider/provider.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -27,7 +29,23 @@ class _ProfilePageState extends State<ProfilePage> {
         _currentPage = _pageController.page!.round();
       });
     });
+    // Call the verifyPayment method to load data when the page is loaded
+    final profileProvider =
+        Provider.of<ProfileProvider>(context, listen: false);
+
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+    profileProvider.retieveProfile(context, authProvider);
   }
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _pageController.addListener(() {
+  //     setState(() {
+  //       _currentPage = _pageController.page!.round();
+  //     });
+  //   });
+  // }
 
   @override
   void dispose() {
@@ -40,58 +58,9 @@ class _ProfilePageState extends State<ProfilePage> {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
     final screenSize = MediaQuery.of(context).size;
+    final paymentProvider = Provider.of<ProfileProvider>(context);
+
     return Scaffold(
-      // appBar: AppBar(
-      //   leading: Row(
-      //     children: [
-      //       IconButton(
-      //         icon: const Icon(Icons.arrow_back, color: Colors.black, size: 10),
-      //         onPressed: () {
-      //           Navigator.pop(context);
-      //         },
-      //       ),
-      //       GestureDetector(
-      //         onTap: () {
-      //           showLibbyChatbot(context); // Call the popup function
-      //         },
-      //         child: Image.asset('assets/images/robot.png', width: 0),
-      //       ),
-      //     ],
-      //   ),
-      //   title: const Text(
-      //     'Profile',
-      //     style: TextStyle(
-      //       fontWeight: FontWeight.bold,
-      //       fontSize: 20,
-      //     ),
-      //   ),
-      //   centerTitle: true,
-      //   actions: [
-      //     Padding(
-      //       padding: EdgeInsets.only(top: 5),
-      //       child: IconButton(
-      //         icon: Image.asset('assets/images/icons/verblue.png',
-      //             width: 30, height: 30),
-      //         onPressed: () {
-      //           verify(context);
-      //         },
-      //       ),
-      //     ),
-      //     const SizedBox(width: 4),
-      //     IconButton(
-      //       icon: Image.asset('assets/images/message.png', width: 30),
-      //       onPressed: () {
-      //         showExtraViewsPopup(context); // Show extra views popup
-      //       },
-      //     ),
-      //     IconButton(
-      //       icon: const Icon(Icons.more_vert, color: Colors.black, size: 30),
-      //       onPressed: () {
-      //         _showPopup(context);
-      //       },
-      //     ),
-      //   ],
-      // ),
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_outlined, size: 30),
@@ -229,53 +198,81 @@ class _ProfilePageState extends State<ProfilePage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Row(
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Daniel, 31',
+                            paymentProvider.getProfileData != null
+                                ? '  ${paymentProvider.getProfileData!['age']}'
+                                : 'Age not available', // Provide a default value or handle null
                             style: TextStyle(
                                 fontSize: 22, fontWeight: FontWeight.bold),
                           ),
+
                           Text(
                             'Bio',
                             style: TextStyle(
                                 fontSize: 22, fontWeight: FontWeight.bold),
                           ),
+
+                          // Text(
+                          //   //   '${paymentProvider.getProfileData!['nickname']},  ${paymentProvider.getProfileData!['age']}',
+                          //   '  ${paymentProvider.getProfileData!['age']}',
+                          //   style: TextStyle(
+                          //       fontSize: 22, fontWeight: FontWeight.bold),
+                          // ),
+                          // Text(
+                          //   'Bio',
+                          //   style: TextStyle(
+                          //       fontSize: 22, fontWeight: FontWeight.bold),
+                          // ),
                         ],
                       ),
 
                       SizedBox(height: screenSize.height * 0.02),
-                      const Row(children: [
-                        ProfileDetail(
-                          icon: Icons.man,
-                          title: "Man",
-                        ),
-                        Spacer(),
-                        Text('Fun and Interesting',
-                            style: TextStyle(fontSize: 16))
-                      ]),
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              ProfileDetail(icon: Icons.man, title: 'Man'
+                                  // '${paymentProvider.getProfileData!['age']}',
+                                  ),
+                              ProfileDetail(
+                                  icon: Icons.rule_sharp, title: '155kg, 11cm'
+                                  //  '${paymentProvider.getProfileData!['nickname']},  ${paymentProvider.getProfileData!['age']}',
+                                  ),
+                              ProfileDetail(
+                                icon: Icons.work,
+                                title: "Banker at Citi Bank",
+                              ),
+                              ProfileDetail(
+                                icon: Icons.school,
+                                title: "University of Leeds, UK",
+                              ),
+                              ProfileDetail(
+                                icon: Icons.home,
+                                title: "Lives in New London",
+                              ),
+                              ProfileDetail(
+                                icon: Icons.location_on,
+                                title: "25km away",
+                              ),
+                            ],
+                          ),
+                          Expanded(
+                            child: Text(
+                              'Fun and Internjdskknknknknkhuaygxydajxknjhudycjakhlkjjlkjlijijhdyhcesting',
+                              style: TextStyle(fontSize: 16),
+                              // This will ensure the text is truncated if it overflows
+                            ),
+                          ),
+                        ],
+                      ),
 
-                      const ProfileDetail(
-                        icon: Icons.rule_sharp,
-                        title: "145cm 65kg",
-                      ),
-                      const ProfileDetail(
-                        icon: Icons.work,
-                        title: "Banker at Citi Bank",
-                      ),
-                      const ProfileDetail(
-                        icon: Icons.school,
-                        title: "University of Leeds, UK",
-                      ),
-                      const ProfileDetail(
-                        icon: Icons.home,
-                        title: "Lives in New London",
-                      ),
-                      const ProfileDetail(
-                        icon: Icons.location_on,
-                        title: "25km away",
-                      ),
                       SizedBox(height: screenSize.height * 0.025),
                       // Relationship basics
                       const Text(

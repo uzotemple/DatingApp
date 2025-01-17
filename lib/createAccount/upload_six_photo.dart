@@ -1,9 +1,14 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:love_bird/config/routes.dart';
+
 import 'package:love_bird/config/constants.dart';
+import 'package:love_bird/config/routes.dart';
+
+import 'package:love_bird/providers/auth_provider.dart';
+import 'package:love_bird/providers/image_service.dart';
 import 'package:love_bird/providers/image_provider.dart';
+
 import 'package:provider/provider.dart';
 
 class UploadPicturesScreen extends StatefulWidget {
@@ -15,13 +20,22 @@ class UploadPicturesScreen extends StatefulWidget {
 
 class _UploadPicturesScreenState extends State<UploadPicturesScreen> {
   final ImagePicker _picker = ImagePicker();
-
+  //final ImageUploadService _uploadService = ImageUploadService();
   Future<void> _pickImage(int index, ImageSource source) async {
     final pickedFile = await _picker.pickImage(source: source);
     if (pickedFile != null) {
       Provider.of<ImageProviderModel>(context, listen: false)
           .addImage(index, File(pickedFile.path));
     }
+  }
+
+  void _uploadImages() async {
+    final imageProvider =
+        Provider.of<ImageProviderModel>(context, listen: false);
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+
+    final apiService = ApiService();
+    await apiService.uploadImages(context, imageProvider.images, authProvider);
   }
 
   void _showImageSourceActionSheet(int index) {
@@ -70,6 +84,7 @@ class _UploadPicturesScreenState extends State<UploadPicturesScreen> {
   @override
   Widget build(BuildContext context) {
     final imageProvider = Provider.of<ImageProviderModel>(context);
+
     final images = imageProvider.images;
     final uploadedImageCount = imageProvider.uploadedImageCount;
     final screenSize = MediaQuery.of(context).size;
@@ -189,7 +204,7 @@ class _UploadPicturesScreenState extends State<UploadPicturesScreen> {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor:
-                        uploadedImageCount == 0 ? blue : Colors.grey,
+                        uploadedImageCount == 1 ? blue : Colors.grey,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(25.0),
                     ),
@@ -198,8 +213,12 @@ class _UploadPicturesScreenState extends State<UploadPicturesScreen> {
                   onPressed: uploadedImageCount >= 1
                       ? () {
                           Navigator.pushNamed(context, photoVerificationOne);
+                          // _uploadImages(); // Add the function call
                         }
                       : null,
+
+                  //  onPressed: _uploadImages,
+
                   child: Text(
                     "Continue ($uploadedImageCount/9)",
                     style: const TextStyle(fontSize: 18, color: Colors.white),

@@ -26,7 +26,7 @@
 
 // Future<void> sendTokenToBackend(String idToken) async {
 //   final response = await http.post(
-//     Uri.parse('http://localhost:7001/auth/google-sso'),
+//     Uri.parse('http://138.68.150.48:7001/auth/google-sso'),
 //     headers: {'Content-Type': 'application/json'},
 //     body: jsonEncode({'token': idToken, 'secret': 'optional_secret'}),
 //   );

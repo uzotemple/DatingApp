@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:love_bird/config/constants.dart';
-import 'package:love_bird/config/routes.dart';
+
 import 'package:love_bird/providers/create_account_provider.dart';
 import 'dart:async';
 import 'dart:developer' as developer;
@@ -173,17 +173,11 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.07,
                     ),
-                    Align(
+                    const Align(
                       alignment: Alignment.center,
-                      child: InkWell(
-                        // Logic for resending code
-                        onTap: () {
-                          Navigator.pushNamed(context, captchaVerificationPage);
-                        },
-                        child: const Text(
-                          "Didn't receive email?",
-                          style: TextStyle(fontSize: 14),
-                        ),
+                      child: Text(
+                        "Didn't receive email?",
+                        style: TextStyle(fontSize: 14),
                       ),
                     ),
                     SizedBox(

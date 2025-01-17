@@ -1,17 +1,25 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:love_bird/config/routes.dart';
 import 'dart:developer' as developer;
 import 'package:love_bird/config/constants.dart';
+import 'package:love_bird/providers/auth_provider.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class LoginProvider with ChangeNotifier {
-  final _secureStorage = const FlutterSecureStorage();
+  final FlutterSecureStorage _secureStorage = const FlutterSecureStorage();
 
   bool _showLoading = false;
   bool _dimBackground = false;
   bool _isChecked = false;
+  String? _userId;
+  String? _userName;
+  String? _email;
+  bool check = false;
+  String? get userId => _userId;
+  String? get userName => _userName;
+  String? get email => _email;
 
   bool get showLoading => _showLoading;
   bool get dimBackground => _dimBackground;
@@ -32,12 +40,18 @@ class LoginProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> handleLogin(BuildContext context, GlobalKey<FormState> formKey,
-      String email, String password) async {
+  Future<void> handleLogin(
+      BuildContext context,
+      GlobalKey<FormState> formKey,
+      String email,
+      String password,
+      AuthProvider authProvider,
+      bool checkk) async {
     if (formKey.currentState!.validate()) {
       toggleDimBackground(true);
 
       try {
+        check = checkk;
         final response = await _loginUser(email, password);
 
         developer.log('Response status: ${response.statusCode}');
@@ -51,24 +65,41 @@ class LoginProvider with ChangeNotifier {
         if (response.statusCode == 202 ||
             response.statusCode == 201 ||
             response.statusCode == 200) {
-          _showSubmissionDialog(context);
+          // Extract access token from response body
+          final accessToken = responseBody['accessToken'];
+          // final userId = responseBody['userId'];
+
+          // Extract refresh token from cookies
+          final cookies = response.headers['set-cookie'];
+          developer.log('Set-Cookie Header: $cookies');
+
+          final refreshToken = _extractRefreshToken(response.headers);
+
+          if (accessToken != null && refreshToken != null) {
+            // Securely store tokens
+            await _storeTokens(accessToken, refreshToken);
+
+            // Notify AuthProvider of token updates
+            await authProvider.loadTokens();
+            _userId = responseBody['userId'];
+            _userName = responseBody['username'];
+            _email = responseBody['email'];
+            _showSubmissionDialog(context);
+          } else {
+            _showErrorDialog(context, "Failed to retrieve tokens");
+          }
         } else if (message == 'User Inactive') {
-          _showSubmissionDialog(context);
-          //  _showErrorDialogForOtp(context, 'Please verify your mail');
+          _showErrorDialogForOtp(context, 'Please verify your mail');
         } else if (message == 'User not found by given Email') {
-          //  _showErrorDialog(context, 'No user with this mail');
-          _showSubmissionDialog(context);
+          _showErrorDialog(context, 'No user with this mail');
         } else if (message == 'Incorrect Password') {
-          //  _showErrorDialog(context, 'Incorrect Password');
-          _showSubmissionDialog(context);
+          _showErrorDialog(context, 'Incorrect Password');
         } else {
-          // _showErrorDialog(context, "Unexpected error: $message");#
-          _showSubmissionDialog(context);
+          _showErrorDialog(context, "Error: $message");
         }
       } catch (e) {
         developer.log('Error: $e');
-        // _showErrorDialog(context, "An error occurred. Please try again.");
-        _showSubmissionDialog(context);
+        _showErrorDialog(context, "An error occurred. Please try again.");
       } finally {
         toggleLoading(false);
         toggleDimBackground(false);
@@ -77,7 +108,7 @@ class LoginProvider with ChangeNotifier {
   }
 
   Future<http.Response> _loginUser(String email, String password) async {
-    const String url = 'http://localhost:7001/auth/login';
+    const String url = 'http://138.68.150.48:7001/auth/login';
     return await http.post(
       Uri.parse(url),
       headers: {'Content-Type': 'application/json'},
@@ -88,70 +119,21 @@ class LoginProvider with ChangeNotifier {
     );
   }
 
-  Future<void> _saveTokens(String accessToken, String refreshToken) async {
+  String? _extractRefreshToken(Map<String, String> headers) {
+    final cookies = headers['set-cookie'];
+    if (cookies != null) {
+      // Update regex to match the new cookie name
+      final refreshToken =
+          RegExp(r'local.bg-refresh-mgmt=([^;]+)').firstMatch(cookies);
+      return refreshToken?.group(1);
+    }
+    return null;
+  }
+
+  Future<void> _storeTokens(String accessToken, String refreshToken) async {
+    // Store tokens securely
     await _secureStorage.write(key: 'accessToken', value: accessToken);
     await _secureStorage.write(key: 'refreshToken', value: refreshToken);
-  }
-
-  Future<String?> _getAccessToken() async {
-    return await _secureStorage.read(key: 'accessToken');
-  }
-
-  Future<String?> _getRefreshToken() async {
-    return await _secureStorage.read(key: 'refreshToken');
-  }
-
-  Future<http.Response> _refreshToken() async {
-    const String url = 'http://localhost:7001/auth/refresh-token';
-    final refreshToken = await _getRefreshToken();
-
-    if (refreshToken == null) {
-      throw Exception('No refresh token available');
-    }
-
-    final response = await http.post(
-      Uri.parse(url),
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({'refreshToken': refreshToken}),
-    );
-
-    if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      await _saveTokens(data['accessToken'], data['refreshToken']);
-    } else {
-      throw Exception('Failed to refresh token');
-    }
-
-    return response;
-  }
-
-  Future<http.Response> _makeAuthenticatedRequest(
-      String url, Map<String, dynamic> body) async {
-    String? accessToken = await _getAccessToken();
-    final response = await http.post(
-      Uri.parse(url),
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer $accessToken',
-      },
-      body: jsonEncode(body),
-    );
-
-    if (response.statusCode == 401) {
-      // Token expired, refresh and retry
-      await _refreshToken();
-      accessToken = await _getAccessToken();
-      return await http.post(
-        Uri.parse(url),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer $accessToken',
-        },
-        body: jsonEncode(body),
-      );
-    }
-
-    return response;
   }
 
   void _showSubmissionDialog(BuildContext context) {
@@ -180,7 +162,7 @@ class LoginProvider with ChangeNotifier {
                 ),
                 const SizedBox(height: 10),
                 const Text(
-                  "Please wait....\nYou will be redirected to the homepage",
+                  "Please wait....\nYou will be redirected to the next page",
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 16, color: Colors.black),
                 ),
@@ -194,8 +176,13 @@ class LoginProvider with ChangeNotifier {
     );
 
     Future.delayed(const Duration(seconds: 2), () {
-      Navigator.pop(context);
-      Navigator.pushNamed(context, homeScreen);
+      if (check == false) {
+        Navigator.pop(context);
+        Navigator.pushNamed(context, homeScreen);
+      } else {
+        Navigator.pop(context);
+        Navigator.pushNamed(context, celebrateYouScreen);
+      }
     });
   }
 
@@ -236,137 +223,3 @@ class LoginProvider with ChangeNotifier {
     );
   }
 }
-
-// recent one from chatgpt just incase the above does not work
-// import 'dart:convert';
-// import 'package:flutter/material.dart';
-// import 'package:http/http.dart' as http;
-// import 'package:flutter_secure_storage/flutter_secure_storage.dart'; // For storing tokens securely
-
-// class LoginProvider with ChangeNotifier {
-//   bool _showLoading = false;
-//   final _storage = FlutterSecureStorage(); // Secure storage for tokens
-
-//   bool get showLoading => _showLoading;
-
-//   void toggleLoading(bool value) {
-//     _showLoading = value;
-//     notifyListeners();
-//   }
-
-//   Future<void> handleLogin(BuildContext context, GlobalKey<FormState> formKey,
-//       String email, String password) async {
-//     if (formKey.currentState!.validate()) {
-//       toggleLoading(true);
-//       try {
-//         final response = await _loginUser(email, password);
-//         if (response.statusCode == 200) {
-//           // Parse and save tokens
-//           var responseBody = json.decode(response.body);
-//           await _saveTokens(responseBody['accessToken'], responseBody['refreshToken']);
-          
-//           // Redirect user after successful login
-//           Navigator.pushReplacementNamed(context, '/home'); // Home screen route
-//         } else {
-//           // Handle failure (invalid credentials, etc.)
-//           _showErrorDialog(context, "Login failed. Check your credentials.");
-//         }
-//       } catch (e) {
-//         _showErrorDialog(context, "An error occurred. Please try again.");
-//       } finally {
-//         toggleLoading(false);
-//       }
-//     }
-//   }
-
-//   Future<http.Response> _loginUser(String email, String password) async {
-//     const String url = 'http://localhost:7001/auth/login';
-//     final response = await http.post(
-//       Uri.parse(url),
-//       headers: {'Content-Type': 'application/json'},
-//       body: jsonEncode({
-//         'entrypoint': email,
-//         'password': password,
-//       }),
-//     );
-//     return response;
-//   }
-
-//   // Save tokens securely
-//   Future<void> _saveTokens(String accessToken, String refreshToken) async {
-//     await _storage.write(key: 'accessToken', value: accessToken);
-//     await _storage.write(key: 'refreshToken', value: refreshToken);
-//   }
-
-//   // Show error dialog
-//   void _showErrorDialog(BuildContext context, String message) {
-//     showDialog(
-//       context: context,
-//       builder: (BuildContext context) {
-//         return AlertDialog(
-//           title: Text('Error'),
-//           content: Text(message),
-//           actions: [
-//             TextButton(
-//               onPressed: () => Navigator.pop(context),
-//               child: Text('OK'),
-//             ),
-//           ],
-//         );
-//       },
-//     );
-//   }
-
-//   // Fetch and refresh access token when expired
-//   Future<String?> _getNewAccessToken() async {
-//     final refreshToken = await _storage.read(key: 'refreshToken');
-//     if (refreshToken == null) {
-//       return null;
-//     }
-
-//     final response = await _refreshToken(refreshToken);
-
-//     if (response.statusCode == 200) {
-//       var responseBody = json.decode(response.body);
-//       await _saveTokens(responseBody['accessToken'], responseBody['refreshToken']);
-//       return responseBody['accessToken'];
-//     }
-//     return null;
-//   }
-
-//   Future<http.Response> _refreshToken(String refreshToken) async {
-//     const String url = 'http://localhost:7001/auth/refresh-token';
-//     final response = await http.post(
-//       Uri.parse(url),
-//       headers: {'Content-Type': 'application/json'},
-//       body: jsonEncode({'refreshToken': refreshToken}),
-//     );
-//     return response;
-//   }
-
-//   // Make authenticated API request
-//   Future<http.Response> _makeAuthenticatedRequest(String url) async {
-//     String? accessToken = await _storage.read(key: 'accessToken');
-//     if (accessToken == null) {
-//       return http.Response('Unauthorized', 401);
-//     }
-
-//     final response = await http.get(
-//       Uri.parse(url),
-//       headers: {'Authorization': 'Bearer $accessToken'},
-//     );
-
-//     // If the access token expired, attempt to refresh it
-//     if (response.statusCode == 401) {
-//       accessToken = await _getNewAccessToken();
-//       if (accessToken == null) {
-//         return http.Response('Unauthorized', 401);
-//       }
-//       return await http.get(
-//         Uri.parse(url),
-//         headers: {'Authorization': 'Bearer $accessToken'},
-//       );
-//     }
-//     return response;
-//   }
-// }

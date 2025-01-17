@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:love_bird/config/constants.dart';
 import 'package:love_bird/config/routes.dart';
 import 'dart:async';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OTPVerificationPage extends StatefulWidget {
   const OTPVerificationPage({super.key});
@@ -11,7 +12,7 @@ class OTPVerificationPage extends StatefulWidget {
 }
 
 class _OTPVerificationPageState extends State<OTPVerificationPage> {
-  List<String> otpCode = ['', '', '', ''];
+  List<String> otpCode = ['', '', '', '', '', ''];
   int _resendCodeTimer = 45; // Timer for resend code
   Timer? _timer;
 
@@ -39,19 +40,30 @@ class _OTPVerificationPageState extends State<OTPVerificationPage> {
     super.dispose();
   }
 
-  void _handleOtpInput(int index, String value) {
-    setState(() {
-      otpCode[index] = value;
-      if (value.isNotEmpty && index < 3) {
-        // Move focus to the next field
-        FocusScope.of(context).nextFocus();
+  void _submitOtp() async {
+    final otp = otpCode.join(); // Combine the OTP parts into one string
+
+    if (otp.length == 6) {
+      if (!RegExp(r'^\d+$').hasMatch(otp)) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('OTP must contain only numbers')),
+        );
+        return;
       }
-    });
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('savedOtp', otp);
+      Navigator.pushNamed(context, newPassword);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please enter a valid 6-digit OTP')),
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -94,11 +106,11 @@ class _OTPVerificationPageState extends State<OTPVerificationPage> {
                     ),
                     SizedBox(height: screenSize.height * 0.046),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: List.generate(4, (index) {
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: List.generate(6, (index) {
                         return Container(
-                          width: screenSize.height * 0.07,
-                          height: screenSize.height * 0.07,
+                          width: MediaQuery.of(context).size.width * 0.109,
+                          height: MediaQuery.of(context).size.height * 0.07,
                           decoration: BoxDecoration(
                             border: Border.all(color: blue, width: 2),
                             borderRadius: BorderRadius.circular(8),
@@ -118,7 +130,12 @@ class _OTPVerificationPageState extends State<OTPVerificationPage> {
                               counterText: '',
                             ),
                             onChanged: (value) {
-                              _handleOtpInput(index, value);
+                              setState(() {
+                                otpCode[index] = value;
+                                if (value.isNotEmpty && index < 5) {
+                                  FocusScope.of(context).nextFocus();
+                                }
+                              });
                             },
                           ),
                         );
@@ -155,9 +172,7 @@ class _OTPVerificationPageState extends State<OTPVerificationPage> {
               ),
             ),
             InkWell(
-              onTap: () {
-                Navigator.pushNamed(context, newPassword);
-              },
+              onTap: _submitOtp,
               child: Container(
                 width: screenSize.width * 0.8,
                 height: screenSize.height * 0.05,

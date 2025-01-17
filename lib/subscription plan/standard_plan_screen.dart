@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:love_bird/config/routes.dart';
 import 'package:love_bird/config/constants.dart';
+import 'package:love_bird/payment/flutter_wave.dart';
+import 'package:love_bird/subscription%20plan/plan_card.dart';
 
 class StandardPlan extends StatefulWidget {
   const StandardPlan({super.key});
@@ -147,7 +149,7 @@ class _StandardPlanState extends State<StandardPlan> {
                     label: 'Matches',
                   ),
                   BottomNavigationBarItem(
-                    icon: Icon(Icons.home, size: screenWidth * 0.08),
+                    icon: Icon(Icons.person, size: screenWidth * 0.08),
                     label: 'Profile',
                   ),
                 ],
@@ -202,6 +204,7 @@ class StandardTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final paymentService = PaymentService();
     final List<Widget> containers = [
       Container(
         decoration: BoxDecoration(
@@ -822,166 +825,36 @@ class StandardTab extends StatelessWidget {
                 height: 20,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Stack(
-                    clipBehavior: Clip.none,
-                    children: [
-                      // Main container
-                      Container(
-                        width: 135,
-                        height: 130,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                            color: blue,
-                            width: 3,
-                          ),
-                        ),
-                        child: const Center(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                '\$15.00',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 23,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 5.0),
-                                child: Text(
-                                  'This plan expires in 14 days',
-                                  style: TextStyle(
-                                      color: Color(0xFF958CFA), fontSize: 9),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      // Smaller container on top border
-                      Positioned(
-                        top: -15, // Position it above the main container
-                        left: 25, // Adjust left position if needed
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.pushNamed(context, payPal);
-                          },
-                          child: Container(
-                            width: 90,
-                            height: 30,
-                            decoration: BoxDecoration(
-                              color: blue,
-                              borderRadius: BorderRadius.circular(5),
-                              border: Border.all(
-                                color: blue,
-                                width: 2,
-                              ),
-                            ),
-                            child: const Center(
-                              child: Text(
-                                '2 weeks',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 12),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(width: 20), // Space between containers
-
-                  // Second Container with another container on top
-                  Stack(
-                    clipBehavior: Clip.none,
-                    children: [
-                      // Main container
-                      InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(context, payPal);
-                        },
-                        child: Container(
-                          width: 135,
-                          height: 130,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(
-                              color: blue,
-                              width: 3,
-                            ),
-                          ),
-                          child: const Center(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  '\$24.00',
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 23),
-                                ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 5.0),
-                                  child: Text(
-                                    'This plan expires in 30 days',
-                                    style: TextStyle(
-                                        color: Color(0xFF958CFA), fontSize: 9),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      // Smaller container on top border
-                      Positioned(
-                        top: -15, // Position it above the main container
-                        left: 25, // Adjust left position if needed
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.pushNamed(context, payPal);
-                          },
-                          child: Container(
-                            width: 90,
-                            height: 30,
-                            decoration: BoxDecoration(
-                              color: blue,
-                              borderRadius: BorderRadius.circular(5),
-                              border: Border.all(
-                                color: blue,
-                                width: 2,
-                              ),
-                            ),
-                            child: const Center(
-                              child: Text(
-                                '1 month',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 12),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  )
-                ],
-              ),
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    PlanCard(
+                      price: 15.00,
+                      duration: '2 weeks',
+                      description: 'This plan expires in 14 days',
+                      borderColor: blue,
+                      backgroundColor: Colors.white,
+                      textColor: Colors.black,
+                      onTap: () {
+                        paymentService.makePayment(context, 15.0, "USD",
+                            'Purchase for zenkonnect 2 weeks plan');
+                      },
+                    ),
+                    const SizedBox(width: 20), // Space between containers
+                    PlanCard(
+                      price: 24.00,
+                      duration: '1 month',
+                      description: 'This plan expires in 30 days',
+                      borderColor: blue,
+                      backgroundColor: Colors.white,
+                      textColor: Colors.black,
+                      onTap: () {
+                        paymentService.makePayment(context, 24.0, "USD",
+                            'Purchase for Zenkonnect 1 month plan');
+                      },
+                    ),
+                    // Second Container with another container on top
+                  ]),
               const SizedBox(
                 height: 40,
               ),
@@ -989,142 +862,33 @@ class StandardTab extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Stack(
-                    clipBehavior: Clip.none,
-                    children: [
-                      // Main container
-                      Container(
-                        width: 135,
-                        height: 130,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                            color: blue,
-                            width: 3,
-                          ),
-                        ),
-                        child: const Center(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                '\$124.00',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 23,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 5.0),
-                                child: Text(
-                                  'This plan expires in 180 days',
-                                  style: TextStyle(
-                                      color: Color(0xFF958CFA), fontSize: 9),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      // Smaller container on top border
-                      Positioned(
-                        top: -15, // Position it above the main container
-                        left: 25, // Adjust left position if needed
-                        child: Container(
-                          width: 90,
-                          height: 30,
-                          decoration: BoxDecoration(
-                            color: blue,
-                            borderRadius: BorderRadius.circular(5),
-                            border: Border.all(
-                              color: blue,
-                              width: 2,
-                            ),
-                          ),
-                          child: const Center(
-                            child: Text(
-                              '6 months',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 12),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
+                  PlanCard(
+                    price: 124.00,
+                    duration: '6 month',
+                    description: 'This plan expires in 180 days',
+                    borderColor: blue,
+                    backgroundColor: Colors.white,
+                    textColor: Colors.black,
+                    onTap: () {
+                      paymentService.makePayment(context, 124.0, "USD",
+                          'Purchase for Zenkonnect 6 month plan');
+                    },
                   ),
                   const SizedBox(width: 20), // Space between containers
+                  PlanCard(
+                    price: 240.00,
+                    duration: '1 year',
+                    description: 'This plan expires in 365 days',
+                    borderColor: blue,
+                    backgroundColor: Colors.white,
+                    textColor: Colors.black,
+                    onTap: () {
+                      paymentService.makePayment(context, 240.0, "USD",
+                          'Purchase for Zenkonnect standard 1 year plan');
+                    },
+                  ),
 
                   // Second Container with another container on top
-                  Stack(
-                    clipBehavior: Clip.none,
-                    children: [
-                      // Main container
-                      Container(
-                        width: 135,
-                        height: 130,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                            color: blue,
-                            width: 3,
-                          ),
-                        ),
-                        child: const Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                '\$240.00',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 23),
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Text(
-                                'This plan expires in 365 days',
-                                style: TextStyle(
-                                    color: Color(0xFF958CFA), fontSize: 9),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      // Smaller container on top border
-                      Positioned(
-                        top: -15, // Position it above the main container
-                        left: 25, // Adjust left position if needed
-                        child: Container(
-                          width: 90,
-                          height: 30,
-                          decoration: BoxDecoration(
-                            color: blue,
-                            borderRadius: BorderRadius.circular(5),
-                            border: Border.all(
-                              color: blue,
-                              width: 2,
-                            ),
-                          ),
-                          child: const Center(
-                            child: Text(
-                              '1 year',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 12),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  )
                 ],
               ),
               const SizedBox(height: 50),

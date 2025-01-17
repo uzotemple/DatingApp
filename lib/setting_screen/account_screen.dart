@@ -1,8 +1,11 @@
 import 'package:love_bird/config/routes.dart';
+import 'package:love_bird/providers/auth_provider.dart';
+import 'package:love_bird/providers/log_out_provider.dart';
 import 'package:love_bird/setting_screen/delete_account_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+
 import 'package:love_bird/config/constants.dart';
+import 'package:provider/provider.dart';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});
@@ -16,48 +19,12 @@ class _AccountScreenState extends State<AccountScreen> {
   final TextEditingController _controller = TextEditingController();
 
   Future<void> handleLogout() async {
-    const String url = 'http://localhost:7001/auth/logout';
-    try {
-      final response = await http.post(
-        Uri.parse(url),
-        headers: {
-          'Content-Type': 'application/json',
-          // Optionally add Authorization header if required (e.g., using Bearer token)
-          // 'Authorization': 'Bearer $accessToken',
-        },
-      );
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+    final logoutProvider = Provider.of<LogOutProvider>(context, listen: false);
 
-      if (response.statusCode == 200) {
-        // On success, clear any stored tokens and navigate the user to the login screen
-        // You can use shared_preferences or secure_storage to clear the tokens
-        // For example:
-        // await SecureStorage.delete('accessToken');
-        // await SecureStorage.delete('refreshToken');
-
-        Navigator.pushReplacementNamed(context, loginPage);
-      } else {
-        _showErrorDialog(context, "Failed to log out. Please try again.");
-      }
-    } catch (e) {
-      _showErrorDialog(context, "An error occurred. Please try again.");
-    }
-  }
-
-  void _showErrorDialog(BuildContext context, String message) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Error'),
-          content: Text(message),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text('OK'),
-            ),
-          ],
-        );
-      },
+    logoutProvider.logOut(
+      context,
+      authProvider,
     );
   }
 

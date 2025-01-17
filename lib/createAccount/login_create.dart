@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:love_bird/providers/auth_provider.dart';
-import 'package:love_bird/providers/login_create.dart';
+import 'package:love_bird/providers/login_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:love_bird/config/routes.dart';
 
@@ -22,7 +22,7 @@ class _LoginCreateState extends State<LoginCreate> {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-    final loginProvider = Provider.of<LoginCreateProvider>(context);
+    final loginProvider = Provider.of<LoginProvider>(context);
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
 //final loginProvider = Provider.of<LoginProvider>(context, listen: false);
 
@@ -187,19 +187,13 @@ class _LoginCreateState extends State<LoginCreate> {
                 child: GestureDetector(
                   onTap: () {
                     if (_formKey.currentState!.validate()) {
-                      // loginProvider.handleLogin(
-                      //   context,
-                      //   _formKey,
-                      //   emailController.text,
-                      //   passwordController.text,
-                      // );
                       loginProvider.handleLogin(
                           context,
                           _formKey,
                           emailController.text,
                           passwordController.text,
-                          authProvider);
-                      // _showSubmissionDialog(context);
+                          authProvider,
+                          true);
                     }
                   },
                   child: Container(

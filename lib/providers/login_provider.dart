@@ -181,7 +181,7 @@ class LoginProvider with ChangeNotifier {
         Navigator.pushNamed(context, homeScreen);
       } else {
         Navigator.pop(context);
-        Navigator.pushNamed(context, celebrateYouScreen);
+        Navigator.pushNamed(context, userBio);
       }
     });
   }

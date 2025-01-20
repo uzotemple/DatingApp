@@ -126,7 +126,7 @@ class RelationshipGoalsScreen extends StatelessWidget {
                       RelationshipOption(
                         label: "Networking",
                         description:
-                            "Ready to netwrok with fellow professionals",
+                            "Ready to network with fellow professionals",
                         image: 'assets/images/icons/couple.png',
                         selected: goalProvider.selectedGoal == 'OPEN_TO_CHAT',
                         onTap: () {

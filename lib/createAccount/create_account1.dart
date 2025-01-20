@@ -122,9 +122,10 @@ class _CreateAcc1State extends State<CreateAcc1> {
                                 name: 'UserInput');
                             developer.log('');
 
-                            userProvider.updateEmail(_emailController.text);
                             userProvider
-                                .updatePassword(_passwordController.text);
+                                .updateEmail(_emailController.text.trim());
+                            userProvider.updatePassword(
+                                _passwordController.text.trim());
                             userProvider.saveToDatabase(context);
 
                             // Navigator.pushNamed(context, verifyEmailRoute);
@@ -228,6 +229,29 @@ class _CreateAcc1State extends State<CreateAcc1> {
               //     return 'Password must contain at least one special character';
               //   }
               // }
+              //   if (isPassword) {
+              //     if (value.length < 9) {
+              //       return 'Password must be at least 9 characters long';
+              //     }
+              //     if (!RegExp(r'[a-z]').hasMatch(value)) {
+              //       return 'Password must contain at least one lowercase letter';
+              //     }
+              //     if (!RegExp(r'[A-Z]').hasMatch(value)) {
+              //       return 'Password must contain at least one uppercase letter';
+              //     }
+              //     if (!RegExp(r'\d').hasMatch(value)) {
+              //       return 'Password must contain at least one number';
+              //     }
+              //     if (!RegExp(r'[!@#$%^&*(),.?":{}|<>]').hasMatch(value)) {
+              //       return 'Password must contain at least one special character';
+              //     }
+              //     if (value.contains(' ')) {
+              //       return 'Password must not contain spaces';
+              //     }
+              //   }
+
+              //   return null;
+              // },
               if (isPassword) {
                 if (value.length < 9) {
                   return 'Password must be at least 9 characters long';
@@ -241,11 +265,14 @@ class _CreateAcc1State extends State<CreateAcc1> {
                 if (!RegExp(r'\d').hasMatch(value)) {
                   return 'Password must contain at least one number';
                 }
-                if (!RegExp(r'[!@#$%^&*(),.?":{}|<>]').hasMatch(value)) {
+                if (!RegExp(r'[!@#$%^&*(),.":{}|<>]').hasMatch(value)) {
                   return 'Password must contain at least one special character';
                 }
                 if (value.contains(' ')) {
                   return 'Password must not contain spaces';
+                }
+                if (value.contains('?')) {
+                  return 'Password must not contain a question mark (?)';
                 }
               }
 

@@ -18,18 +18,7 @@ class UserBioProvider extends ChangeNotifier {
   String bio = '';
   bool agreeToPolicy = false;
 
-  final List<String> educationLevels = [
-    'None',
-    'Primary Education',
-    'Secondary Education',
-    'Vocational Training',
-    'A level',
-    'Undergraduate Education',
-    'Postgraduate Education',
-  ];
-
   List<String> countries = [
-    'People nearby',
     'Afghanistan',
     'Albania',
     'Algeria',
@@ -274,22 +263,28 @@ class UserBioProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Method to reset fields after form submission
-  void resetFields() {
-    profession = '';
-    weight = '';
-    height = '';
-    country = '';
-    linkdln = '';
-    city = '';
-    educationLevel = '';
-    bio = '';
-    agreeToPolicy = false;
-    notifyListeners();
+  String mapEducationLevelToBackend(String selectedLevel) {
+    switch (selectedLevel) {
+      case 'None':
+        return 'None';
+      case 'Primary Education':
+        return 'Primary Education';
+      case 'Secondary Education':
+        return 'SECONDRY_EDUCATION';
+      case 'Vocational Training':
+        return 'VOCATIONAL_TRAINING';
+      case 'Postgraduate Education':
+        return 'POSTGRADUATE_EDUCATION';
+      default:
+        return 'NONE'; // Default value, in case of an invalid selection
+    }
   }
 
   Future<void> createProfile(
       BuildContext context, AuthProvider authProvider) async {
+    // Map educationLevel to backend value
+    String mappedEducationLevel =
+        mapEducationLevelToBackend(educationLevel ?? 'None');
     try {
       // Define API request details
       const url = 'http://138.68.150.48:7001/profile/initial-addition';
@@ -305,8 +300,8 @@ class UserBioProvider extends ChangeNotifier {
         "country": country,
         "city": city,
         "bio": bio,
-        //"educationLevel": educationLevel,
-        "educationLevel": 'None'
+        "educationLevel": mappedEducationLevel
+        // "educationLevel": 'None'
       };
 
       // Send the request using makeApiRequest

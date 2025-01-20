@@ -20,7 +20,6 @@ class _UserBioState extends State<UserBio> {
     'None',
     'Primary Education',
     'Secondary Education',
-    'Higher Education',
     'Vocational Training',
     'Postgraduate Education',
   ];
@@ -404,6 +403,7 @@ class _UserBioState extends State<UserBio> {
           ),
           SizedBox(height: screenSize.height * 0.01),
           TextFormField(
+            textCapitalization: TextCapitalization.sentences,
             validator: (value) {
               if (label != 'Linkedln Profile link' &&
                   (value == null || value.isEmpty)) {

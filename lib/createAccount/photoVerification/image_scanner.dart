@@ -83,7 +83,8 @@ class PhotoVerificationState extends State<ImageScanner> {
     Future.delayed(const Duration(seconds: 2), () {
       if (mounted) {
         Navigator.pop(context);
-        Navigator.pushNamed(context, enableLocationScreen);
+        //  Navigator.pushNamed(context, enableLocationScreen);
+        Navigator.pushNamed(context, homeScreen);
       }
     });
   }

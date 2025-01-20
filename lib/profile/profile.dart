@@ -58,7 +58,33 @@ class _ProfilePageState extends State<ProfilePage> {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
     final screenSize = MediaQuery.of(context).size;
-    final paymentProvider = Provider.of<ProfileProvider>(context);
+    final profileProvider = Provider.of<ProfileProvider>(context);
+    int age = profileProvider.getProfileData?["age"] as int? ?? 0;
+
+    String name = profileProvider.getProfileData?["nickname"] ?? "Unknown";
+    String profession =
+        profileProvider.getProfileData?["profession"] ?? "Unknown";
+    double weight =
+        profileProvider.getProfileData?["weight"]?.toDouble() ?? 0.0;
+    double height =
+        profileProvider.getProfileData?["height"]?.toDouble() ?? 0.0;
+    String country = profileProvider.getProfileData?["country"] ?? "Unknown";
+    String city = profileProvider.getProfileData?["city"] ?? "Unknown";
+    String bio = profileProvider.getProfileData?["bio"] ?? "Unknown";
+    String educationLevel =
+        profileProvider.getProfileData?["educationLevel"] ?? "Unknown";
+
+    String gender = profileProvider.getProfileData?["gender"] ?? "Unknown";
+    String goal =
+        profileProvider.getProfileData?["relationshipGoals"] ?? "Unknown";
+    String location = profileProvider.getProfileData?["location"] ?? "Unknown";
+    String interest = profileProvider.getProfileData?["interest"] ?? "Unknown";
+    bool isPicsVerified =
+        profileProvider.getProfileData?['isPicsVerified'] ?? false;
+
+    String imagePath = isPicsVerified
+        ? 'assets/images/icons/verblue.png'
+        : 'assets/images/redCheck.png';
 
     return Scaffold(
       appBar: AppBar(
@@ -105,12 +131,12 @@ class _ProfilePageState extends State<ProfilePage> {
           //   },
           // ),
           IconButton(
-            icon: Image.asset('assets/images/redCheck.png',
-                width: 30, height: 30),
-            onPressed: () {
-              Navigator.pushNamed(context, photoVerificationOneAfter);
-            },
-          ),
+              icon: Image.asset(imagePath, width: 30, height: 30),
+              onPressed: isPicsVerified
+                  ? () => verifyy(context)
+                  : () =>
+                      Navigator.pushNamed(context, photoVerificationOneAfter)),
+
           IconButton(
             icon: const Icon(Icons.monetization_on, size: 30),
             onPressed: () {
@@ -202,35 +228,24 @@ class _ProfilePageState extends State<ProfilePage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            paymentProvider.getProfileData != null
-                                ? '  ${paymentProvider.getProfileData!['age']}'
-                                : 'Age not available', // Provide a default value or handle null
-                            style: TextStyle(
+                            '$name, $age',
+                            style: const TextStyle(
                                 fontSize: 22, fontWeight: FontWeight.bold),
                           ),
 
-                          Text(
+                          const Text(
                             'Bio',
                             style: TextStyle(
                                 fontSize: 22, fontWeight: FontWeight.bold),
                           ),
+                          SizedBox(width: screenWidth * 0.00),
 
-                          // Text(
-                          //   //   '${paymentProvider.getProfileData!['nickname']},  ${paymentProvider.getProfileData!['age']}',
-                          //   '  ${paymentProvider.getProfileData!['age']}',
-                          //   style: TextStyle(
-                          //       fontSize: 22, fontWeight: FontWeight.bold),
-                          // ),
-                          // Text(
-                          //   'Bio',
-                          //   style: TextStyle(
-                          //       fontSize: 22, fontWeight: FontWeight.bold),
                           // ),
                         ],
                       ),
 
                       SizedBox(height: screenSize.height * 0.02),
-                      const Row(
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -238,35 +253,38 @@ class _ProfilePageState extends State<ProfilePage> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              ProfileDetail(icon: Icons.man, title: 'Man'
-                                  // '${paymentProvider.getProfileData!['age']}',
-                                  ),
                               ProfileDetail(
-                                  icon: Icons.rule_sharp, title: '155kg, 11cm'
+                                icon: Icons.man,
+                                title: gender,
+                              ),
+                              ProfileDetail(
+                                  icon: Icons.rule_sharp,
+                                  title: '$weight kg, $height cm'
                                   //  '${paymentProvider.getProfileData!['nickname']},  ${paymentProvider.getProfileData!['age']}',
                                   ),
                               ProfileDetail(
                                 icon: Icons.work,
-                                title: "Banker at Citi Bank",
+                                title: profession,
                               ),
                               ProfileDetail(
                                 icon: Icons.school,
-                                title: "University of Leeds, UK",
+                                title: educationLevel,
                               ),
                               ProfileDetail(
                                 icon: Icons.home,
-                                title: "Lives in New London",
+                                title: "Lives $country",
                               ),
                               ProfileDetail(
                                 icon: Icons.location_on,
-                                title: "25km away",
+                                title: "$location km away",
                               ),
                             ],
                           ),
+                          SizedBox(width: screenWidth * 0.09),
                           Expanded(
                             child: Text(
-                              'Fun and Internjdskknknknknkhuaygxydajxknjhudycjakhlkjjlkjlijijhdyhcesting',
-                              style: TextStyle(fontSize: 16),
+                              bio, style: TextStyle(fontSize: 16),
+                              textAlign: TextAlign.center,
                               // This will ensure the text is truncated if it overflows
                             ),
                           ),
@@ -281,8 +299,8 @@ class _ProfilePageState extends State<ProfilePage> {
                             fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(height: screenSize.height * 0.015),
-                      const RelationshipOption(
-                        title: 'Friendship',
+                      RelationshipOption(
+                        title: goal,
                         icon: Icons.people,
                         color: Colors.pinkAccent,
                       ),
@@ -294,19 +312,18 @@ class _ProfilePageState extends State<ProfilePage> {
                             fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(height: screenSize.height * 0.015),
-                      const Wrap(
+                      Wrap(
                         spacing: 10,
                         children: [
                           InterestOption(
-                            title: 'Cooking',
-                            icon: Icons.restaurant_menu,
+                            title: interest,
                             color: Colors.orange,
                           ),
-                          InterestOption(
-                            title: 'Hiking',
-                            icon: Icons.hiking,
-                            color: Colors.green,
-                          ),
+                          // InterestOption(
+                          //   title: 'Hiking',
+                          //   icon: Icons.hiking,
+                          //   color: Colors.green,
+                          // ),
                         ],
                       ),
                       SizedBox(height: screenSize.height * 0.023),
@@ -315,8 +332,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold),
                       ),
-                      const Text(
-                        'London,Uk',
+                      Text(
+                        '$city ,$country',
                         style: TextStyle(
                           fontSize: 14,
                         ),
@@ -413,6 +430,64 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
     );
   }
+
+  void verifyy(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
+    final profileProvider =
+        Provider.of<ProfileProvider>(context, listen: false);
+
+    String name = profileProvider.getProfileData?["nickname"] ?? "Unknown";
+    showGeneralDialog(
+      context: context,
+      barrierDismissible: true, // Dismiss when tapped outside
+      barrierLabel: 'Dismiss',
+      barrierColor: Colors.transparent,
+      transitionDuration: const Duration(milliseconds: 300),
+      pageBuilder: (context, animation1, animation2) {
+        return Align(
+          alignment: Alignment.topRight,
+          child: Material(
+            color: Colors.transparent,
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                vertical: MediaQuery.of(context).size.height * 0.13,
+                horizontal: MediaQuery.of(context).size.width * 0.03,
+              ),
+              child: Container(
+                  width: screenWidth * 0.6,
+                  height: screenHeight * 0.1,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  padding: const EdgeInsets.all(16),
+                  child: Row(
+                    children: [
+                      Image.asset('assets/images/icons/verblue.png',
+                          width: 30, height: 30),
+                      Text('$name is Photo Verified',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: screenWidth * 0.03,
+                              color: Colors.black))
+                    ],
+                  )),
+            ),
+          ),
+        );
+      },
+      transitionBuilder: (context, animation1, animation2, child) {
+        return SlideTransition(
+          position: Tween<Offset>(
+            begin: const Offset(1, 0), // Slide in from the right
+            end: const Offset(0, 0),
+          ).animate(animation1),
+          child: child,
+        );
+      },
+    );
+  }
 }
 
 class ProfileDetail extends StatelessWidget {
@@ -478,13 +553,13 @@ class RelationshipOption extends StatelessWidget {
 
 class InterestOption extends StatelessWidget {
   final String title;
-  final IconData icon;
+  // final IconData icon;
   final Color color;
 
   const InterestOption({
     super.key,
     required this.title,
-    required this.icon,
+    //  required this.icon,
     required this.color,
   });
 
@@ -503,7 +578,7 @@ class InterestOption extends StatelessWidget {
             title,
             style: const TextStyle(fontSize: 16),
           ),
-          Icon(icon, color: color),
+          //  Icon(icon, color: color),
           const SizedBox(width: 10),
         ],
       ),

@@ -611,6 +611,7 @@
 //   }
 // }
 import 'package:flutter/material.dart';
+import 'package:love_bird/api/profile_api.dart';
 import 'package:love_bird/chat/chat_screen.dart';
 import 'package:love_bird/config/constants.dart';
 import 'package:love_bird/config/routes.dart';
@@ -618,6 +619,7 @@ import 'package:love_bird/config/routes.dart';
 import 'package:love_bird/homeScreen/notification.dart';
 import 'package:love_bird/modals/extra_sheet.dart';
 import 'package:love_bird/model/profile_model.dart';
+import 'package:provider/provider.dart';
 
 class UserProfilePage extends StatefulWidget {
   final Profile profile; // Add this line to accept Profile data
@@ -666,6 +668,12 @@ class _UserProfilePageState extends State<UserProfilePage> {
     String educationLevel = widget.profile.educationLevel ?? "Unknown";
     String interest = widget.profile.interest ?? "Unknown";
     String relationshipGoals = widget.profile.relationshipGoals ?? "Unknown";
+    bool isPicsVerified = widget.profile.pics ?? false;
+    // profileProvider.getProfileData?['isPicsVerified'] ?? false;
+
+    String imagePath = isPicsVerified
+        ? 'assets/images/icons/verblue.png'
+        : 'assets/images/redCheck.png';
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -704,8 +712,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
         centerTitle: true,
         actions: [
           IconButton(
-            icon: Image.asset('assets/images/icons/verblue.png',
-                width: 30, height: 30),
+            icon: Image.asset(imagePath, width: 30, height: 30),
             onPressed: () {
               verify(context);
             },
@@ -844,18 +851,13 @@ class _UserProfilePageState extends State<UserProfilePage> {
             Expanded(
               child: SingleChildScrollView(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          // Text(
-                          //   'Daniel, 31',
-                          //   style: TextStyle(
-                          //       fontSize: 22, fontWeight: FontWeight.bold),
-                          // ),
                           Text(
                             '$name, $age',
                             style: const TextStyle(
@@ -866,54 +868,68 @@ class _UserProfilePageState extends State<UserProfilePage> {
                             style: TextStyle(
                                 fontSize: 22, fontWeight: FontWeight.bold),
                           ),
+                          SizedBox(width: screenWidth * 0.00),
                         ],
                       ),
 
-                      SizedBox(height: 16.0),
-                      Row(children: [
-                        ProfileDetail(
-                          icon: Icons.man,
-                          title: gender,
-                        ),
-                        Spacer(),
-                        Text(bio, style: TextStyle(fontSize: 16))
-                      ]),
-
-                      ProfileDetail(
-                        icon: Icons.rule_sharp,
-                        title: "$height cm, $weight kg",
+                      const SizedBox(height: 16.0),
+                      Row(
+                        children: [
+                          Column(
+                            children: [
+                              ProfileDetail(
+                                icon: Icons.man,
+                                title: gender,
+                              ),
+                              ProfileDetail(
+                                icon: Icons.rule_sharp,
+                                title: "$height cm, $weight kg",
+                              ),
+                              ProfileDetail(
+                                  icon: Icons.work, title: profession),
+                              ProfileDetail(
+                                  icon: Icons.school, title: educationLevel),
+                              ProfileDetail(
+                                icon: Icons.home,
+                                title: "Lives in  $country",
+                              ),
+                              const ProfileDetail(
+                                icon: Icons.location_on,
+                                title: "25km away",
+                              ),
+                            ],
+                          ),
+                          SizedBox(width: screenWidth * 0.09),
+                          Expanded(
+                            child: Text(
+                              bio, style: TextStyle(fontSize: 16),
+                              textAlign: TextAlign.center,
+                              // This will ensure the text is truncated if it overflows
+                            ),
+                          ),
+                        ],
                       ),
-                      ProfileDetail(icon: Icons.work, title: profession),
-                      ProfileDetail(icon: Icons.school, title: educationLevel),
-                      ProfileDetail(
-                        icon: Icons.home,
-                        title: "Lives in New $country",
-                      ),
-                      const ProfileDetail(
-                        icon: Icons.location_on,
-                        title: "25km away",
-                      ),
-                      SizedBox(height: 20.0),
+                      const SizedBox(height: 20.0),
                       // Relationship basics
                       const Text(
                         'My relationship Basics',
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       RelationshipOption(
                         title: relationshipGoals,
                         icon: Icons.people,
                         color: Colors.pinkAccent,
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       // Interests
                       const Text(
                         'Interests',
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Wrap(
                         spacing: 10,
                         children: [
@@ -922,14 +938,14 @@ class _UserProfilePageState extends State<UserProfilePage> {
                             icon: Icons.restaurant_menu,
                             color: Colors.orange,
                           ),
-                          InterestOption(
+                          const InterestOption(
                             title: 'Hiking',
                             icon: Icons.hiking,
                             color: Colors.green,
                           ),
                         ],
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       const Text(
                         'Location',
                         style: TextStyle(
@@ -1031,6 +1047,76 @@ class _UserProfilePageState extends State<UserProfilePage> {
           ),
         ),
       ),
+    );
+  }
+
+  void verify(BuildContext context) {
+    final profileProvider =
+        Provider.of<ProfileProvider>(context, listen: false);
+
+    String name = profileProvider.getProfileData?["nickname"] ?? "Unknown";
+    bool isPicsVerified = widget.profile.pics ?? false;
+    showGeneralDialog(
+      context: context,
+      barrierDismissible: true, // Dismiss when tapped outside
+      barrierLabel: 'Dismiss',
+      barrierColor: Colors.transparent,
+      transitionDuration: const Duration(milliseconds: 300),
+      pageBuilder: (context, animation1, animation2) {
+        return Align(
+          alignment: Alignment.topRight,
+          child: Material(
+            color: Colors.transparent,
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                vertical: MediaQuery.of(context).size.height * 0.13,
+                horizontal: MediaQuery.of(context).size.width * 0.03,
+              ),
+              child: Container(
+                width: 250,
+                height: 50,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                padding: const EdgeInsets.all(16),
+                child: isPicsVerified
+                    ? Row(
+                        children: [
+                          Image.asset('assets/images/icons/verblue.png',
+                              width: 30, height: 30),
+                          Text('$name is Photo Verified',
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
+                                  color: Colors.black))
+                        ],
+                      )
+                    : Row(
+                        children: [
+                          Image.asset('assets/images/redCheck.png',
+                              width: 30, height: 30),
+                          Text('$name is not Photo Verified',
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
+                                  color: Colors.black))
+                        ],
+                      ),
+              ),
+            ),
+          ),
+        );
+      },
+      transitionBuilder: (context, animation1, animation2, child) {
+        return SlideTransition(
+          position: Tween<Offset>(
+            begin: const Offset(1, 0), // Slide in from the right
+            end: const Offset(0, 0),
+          ).animate(animation1),
+          child: child,
+        );
+      },
     );
   }
 }

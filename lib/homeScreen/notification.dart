@@ -647,58 +647,6 @@ Widget _buildSocialMediaIcon(String social) {
       ));
 }
 
-void verify(BuildContext context) {
-  showGeneralDialog(
-    context: context,
-    barrierDismissible: true, // Dismiss when tapped outside
-    barrierLabel: 'Dismiss',
-    barrierColor: Colors.transparent,
-    transitionDuration: const Duration(milliseconds: 300),
-    pageBuilder: (context, animation1, animation2) {
-      return Align(
-        alignment: Alignment.topRight,
-        child: Material(
-          color: Colors.transparent,
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              vertical: MediaQuery.of(context).size.height * 0.13,
-              horizontal: MediaQuery.of(context).size.width * 0.03,
-            ),
-            child: Container(
-                width: 250,
-                height: 50,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                padding: const EdgeInsets.all(16),
-                child: Row(
-                  children: [
-                    Image.asset('assets/images/icons/verblue.png',
-                        width: 30, height: 30),
-                    const Text('Daniel is Photo Verified',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15,
-                            color: Colors.black))
-                  ],
-                )),
-          ),
-        ),
-      );
-    },
-    transitionBuilder: (context, animation1, animation2, child) {
-      return SlideTransition(
-        position: Tween<Offset>(
-          begin: const Offset(1, 0), // Slide in from the right
-          end: const Offset(0, 0),
-        ).animate(animation1),
-        child: child,
-      );
-    },
-  );
-}
-
 void showBlockPopup(BuildContext context) {
   showGeneralDialog(
     context: context,

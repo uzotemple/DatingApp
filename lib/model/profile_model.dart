@@ -14,6 +14,7 @@ class Profile {
   final String? interest;
   final String? educationLevel;
   final String? profession;
+  final bool? pics;
   Profile(
       {this.profileId,
       this.nickname,
@@ -29,7 +30,8 @@ class Profile {
       this.bio,
       this.interest,
       this.educationLevel,
-      this.profession});
+      this.profession,
+      this.pics});
 
   factory Profile.fromJson(Map<String, dynamic> json) {
     return Profile(
@@ -52,6 +54,7 @@ class Profile {
       //     ? json["imageLinks"][0]["link"]
       //     : "https://images.app.goo.gl/8uuuE3yai5khHPjZA",
       imageUrl: "https://images.app.goo.gl/8uuuE3yai5khHPjZA",
+      pics: json['isPicsVerified'] ?? false,
     );
   }
 }

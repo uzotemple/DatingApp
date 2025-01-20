@@ -190,8 +190,8 @@ class _LoginCreateState extends State<LoginCreate> {
                       loginProvider.handleLogin(
                           context,
                           _formKey,
-                          emailController.text,
-                          passwordController.text,
+                          emailController.text.trim(),
+                          passwordController.text.trim(),
                           authProvider,
                           true);
                     }

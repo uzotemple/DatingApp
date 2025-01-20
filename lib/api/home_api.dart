@@ -76,7 +76,7 @@ class ProfileService {
     };
 
     // API Endpoint
-    String url = baseurl + '/profile/list'; // Replace with your actual URL
+    String url = '$baseurl/profile/list'; // Replace with your actual URL
 
     try {
       // Make the API call using your helper method

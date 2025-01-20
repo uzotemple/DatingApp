@@ -204,7 +204,7 @@ class _UploadPicturesScreenState extends State<UploadPicturesScreen> {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor:
-                        uploadedImageCount == 1 ? blue : Colors.grey,
+                        uploadedImageCount >= 1 ? blue : Colors.grey,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(25.0),
                     ),

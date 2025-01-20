@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:love_bird/api/profile_api.dart';
 import 'package:love_bird/config/routes.dart';
+import 'package:provider/provider.dart';
 
 import 'api_helper.dart';
 import 'auth_provider.dart';
@@ -18,20 +20,64 @@ class NicknameProvider with ChangeNotifier {
   }
 
   Future<void> updateName(
-      BuildContext context, AuthProvider authProvider) async {
+      BuildContext context, AuthProvider authProvider, String name) async {
+    final profileProvider =
+        Provider.of<ProfileProvider>(context, listen: false);
+
     try {
-      // Define API request details
+      await profileProvider.retieveProfile(context, authProvider);
+
+      if (profileProvider.getProfileData == null) {
+        developer.log('Profile data retrieval failed.');
+        _showErrorDialog(context, "Failed to retrieve profile data.");
+        return;
+      }
+
+      Map<String, dynamic>? profileData = profileProvider.getProfileData;
+      developer.log('Retrieved profile data: $profileData');
+
+      String profession = profileData?["profession"] ?? "Unknown";
+      double weight = profileData?["weight"]?.toDouble() ?? 0.0;
+      double height = profileData?["height"]?.toDouble() ?? 0.0;
+      String country = profileData?["country"] ?? "Unknown";
+      String city = profileData?["city"] ?? "Unknown";
+      String bio = profileData?["bio"] ?? "Unknown";
+      String educationLevel = profileData?["educationLevel"] ?? "Unknown";
+
       const url = 'http://138.68.150.48:7001/profile/profile-detailed';
-      const method =
-          'POST'; // Consider using a constant or enum for HTTP methods
+      const method = 'POST';
       final headers = {'Content-Type': 'application/json'};
 
-      // API request body
       final body = {
-        "nickname": nickname,
+        "nickname": name,
+        "dob": "2025-01-20T10:00:48.484Z",
+        "age": 0,
+        "gender": "MALE",
+        "relationshipGoals": "DATING",
+        "latitude": 0,
+        "longitude": 0,
+        "profession": profession,
+        "weight": weight,
+        "height": height,
+        "country": country,
+        "city": city,
+        "bio": bio,
+        "educationLevel": educationLevel,
+        "interest": "string",
+        "isPicsVerified": true,
+        "location": "string",
+        "children": "string",
+        "pet": "string",
+        "religion": "string",
+        "personality": "string",
+        "sexuality": "string",
+        "smoking": "string",
+        "relationshipStatus": "string",
+        "drinkings": "string",
+        "starSign": "string",
+        "language": "string"
       };
 
-      // Send the request using makeApiRequest
       final response = await makeApiRequest(
         url,
         method,
@@ -40,7 +86,6 @@ class NicknameProvider with ChangeNotifier {
         body: body,
       );
 
-      // Check for successful response
       if (response.statusCode == 200 || response.statusCode == 201) {
         developer.log('Profile updated successfully: ${response.body}');
         Navigator.pushNamed(context, celebrateYouScreen);
@@ -48,15 +93,12 @@ class NicknameProvider with ChangeNotifier {
         final Map<String, dynamic> responseBody = jsonDecode(response.body);
         final errorMessage = responseBody['message'] ?? 'Unknown error';
 
-        //  Print and log the error
         developer.log(
             'Failed to create profile. Status code: ${response.statusCode}, Error: $errorMessage');
 
         _showErrorDialog(context, "Error: $errorMessage");
         throw Exception(
             'Failed to create profile. Status code: ${response.statusCode}, Response: ${response.body}');
-
-        //  return;
       }
     } catch (e) {
       developer.log('Error creating profile: $e');

@@ -372,6 +372,8 @@ import 'package:provider/provider.dart';
 import 'package:love_bird/providers/auth_provider.dart';
 
 class ProfileInfo extends StatefulWidget {
+  const ProfileInfo({super.key});
+
   @override
   _ProfileInfoState createState() => _ProfileInfoState();
 }
@@ -467,7 +469,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
     final screenHeight = MediaQuery.of(context).size.height;
 
     if (isLoading) {
-      return Center(child: CircularProgressIndicator());
+      return const Center(child: CircularProgressIndicator());
     }
 
     return SizedBox(
@@ -493,7 +495,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                   width: double.infinity,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    image: DecorationImage(
+                    image: const DecorationImage(
                       image: AssetImage('assets/images/homeImage.png'),
                       //                image: AssetImage(profile.imageUrl!),
                       fit: BoxFit.cover,
@@ -613,7 +615,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                         height: MediaQuery.of(context).size.height * 0.4,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          image: DecorationImage(
+                          image: const DecorationImage(
                             image: AssetImage('assets/images/homeImage.png'),
                             fit: BoxFit.cover,
                           ),
@@ -644,7 +646,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                         height: MediaQuery.of(context).size.height * 0.74,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          image: DecorationImage(
+                          image: const DecorationImage(
                             image: AssetImage('assets/images/homeImage.png'),
                             fit: BoxFit.cover,
                           ),
@@ -679,7 +681,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                             0.4, // Small image height
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          image: DecorationImage(
+                          image: const DecorationImage(
                             image: AssetImage('assets/images/homeImage.png'),
                             fit: BoxFit.cover,
                           ),

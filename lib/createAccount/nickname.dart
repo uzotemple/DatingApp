@@ -107,6 +107,7 @@ class _CreateNicknameState extends State<CreateNickname> {
                             ),
                             child: Center(
                               child: TextFormField(
+                                controller: nicknameController,
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'Nickname cannot be empty';
@@ -148,10 +149,9 @@ class _CreateNicknameState extends State<CreateNickname> {
               ),
               InkWell(
                 onTap: () {
-                  //  Navigator.pushNamed(context, gender);
                   if (formKey.currentState!.validate()) {
-                    nicknameProvider.setNickname(nicknameController.text);
-                    nicknameProvider.updateName(context, authProvider);
+                    nicknameProvider.updateName(
+                        context, authProvider, nicknameController.text);
                   }
                 },
                 child: Container(

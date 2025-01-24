@@ -5,9 +5,11 @@ import 'package:love_bird/chatBot/font_size_provider.dart';
 import 'package:love_bird/config/routes.dart';
 import 'package:love_bird/providers/auth_provider.dart';
 import 'package:love_bird/providers/birthday_provider.dart';
+import 'package:love_bird/providers/likes_provider.dart';
 
 import 'package:love_bird/providers/log_out_provider.dart';
 import 'package:love_bird/providers/paymentProvider.dart';
+import 'package:love_bird/providers/profile_data_provider.dart';
 import 'package:love_bird/providers/update_password_provider.dart';
 import 'package:love_bird/providers/chat_provider.dart';
 import 'package:love_bird/providers/create_account_provider.dart';
@@ -25,6 +27,7 @@ import 'package:love_bird/providers/relationship_goal_provider.dart';
 import 'package:love_bird/providers/resend_provider.dart';
 import 'package:love_bird/providers/theme_provider.dart';
 import 'package:love_bird/providers/user_bio_provider.dart';
+import 'package:love_bird/providers/visit_provider.dart';
 
 import 'package:provider/provider.dart';
 
@@ -55,6 +58,9 @@ void main() {
         ChangeNotifierProvider(create: (_) => LogOutProvider()),
         ChangeNotifierProvider(create: (_) => PaymentProvider()),
         ChangeNotifierProvider(create: (_) => ProfileProvider()),
+        ChangeNotifierProvider(create: (_) => VisitProvider()),
+        ChangeNotifierProvider(create: (_) => ProfileDataProvider()),
+        ChangeNotifierProvider(create: (_) => LikesProvider()),
       ],
       child: const MyApp(),
     ),
@@ -75,7 +81,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Zenkonect',
-      initialRoute: loginPage,
+      initialRoute: likes,
       routes: routes,
       theme: lightTheme,
       darkTheme: darkTheme,
@@ -83,4 +89,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-//remove trailing spaces from login 

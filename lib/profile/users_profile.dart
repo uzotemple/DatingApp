@@ -902,7 +902,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                           SizedBox(width: screenWidth * 0.09),
                           Expanded(
                             child: Text(
-                              bio, style: TextStyle(fontSize: 16),
+                              bio, style: const TextStyle(fontSize: 16),
                               textAlign: TextAlign.center,
                               // This will ensure the text is truncated if it overflows
                             ),

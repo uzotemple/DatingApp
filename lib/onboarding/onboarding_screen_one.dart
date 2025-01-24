@@ -271,7 +271,8 @@ class _OnboardingScreenOneState extends State<OnboardingScreenOne> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             SizedBox(
-                              width: screenSize.width * 0.35,
+                              width: screenSize.width *
+                                  0.35, // Adjust width based on screen size
                               child: ElevatedButton(
                                 onPressed: () {
                                   Navigator.push(
@@ -281,48 +282,58 @@ class _OnboardingScreenOneState extends State<OnboardingScreenOne> {
                                           const SignUpScreen(),
                                     ),
                                   );
-
-                                  // Action when button is pressed
                                 },
                                 style: ElevatedButton.styleFrom(
+                                  padding: EdgeInsets.symmetric(
+                                    vertical: screenSize.height *
+                                        0.02, // Responsive vertical padding
+                                  ),
                                   foregroundColor: Colors.black,
-                                  backgroundColor:
-                                      const Color(0xFFD2CFFB), // Text color
+                                  backgroundColor: const Color(
+                                      0xFFD2CFFB), // Background color
                                   elevation: 3,
                                 ),
-                                child: const Text(
+                                child: Text(
                                   'Skip',
                                   style: TextStyle(
-                                    fontSize: 20,
+                                    fontSize: screenSize.width *
+                                        0.045, // Responsive font size
                                     fontWeight: FontWeight.w400,
                                   ),
                                 ),
                               ),
                             ),
                             SizedBox(
-                              width: screenSize.width * 0.35,
+                              width: screenSize.width *
+                                  0.35, // Adjust width based on screen size
                               child: ElevatedButton(
                                 onPressed: () {
-                                  // Action when button is pressed
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            const OnboardingScreenTwo()),
+                                      builder: (context) =>
+                                          const OnboardingScreenTwo(),
+                                    ),
                                   );
                                 },
                                 style: ElevatedButton.styleFrom(
+                                  padding: EdgeInsets.symmetric(
+                                    vertical: screenSize.height *
+                                        0.02, // Responsive vertical padding
+                                  ),
                                   foregroundColor: Colors.black,
-                                  backgroundColor:
-                                      const Color(0xFFFFFFFF), // Text color
+                                  backgroundColor: const Color(
+                                      0xFFFFFFFF), // Background color
                                   elevation: 3,
                                 ),
-                                child: const Text(
+                                child: Text(
                                   'Continue',
                                   style: TextStyle(
-                                    fontSize: 20,
+                                    fontSize: screenSize.width *
+                                        0.045, // Responsive font size
                                     fontWeight: FontWeight.w400,
-                                    color: blue,
+                                    color: Colors
+                                        .blue, // Replace `blue` with your variable if defined
                                   ),
                                 ),
                               ),

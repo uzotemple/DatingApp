@@ -16,24 +16,36 @@ class CreateNickname extends StatefulWidget {
 final formKey = GlobalKey<FormState>();
 
 class _CreateNicknameState extends State<CreateNickname> {
+  TextEditingController nicknameController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    nicknameController = TextEditingController(); // Initialize the controller
+  }
+
+  @override
+  void dispose() {
+    nicknameController.dispose(); // Dispose of the controller
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     final nicknameProvider =
         Provider.of<NicknameProvider>(context, listen: false);
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
-    final TextEditingController nicknameController = TextEditingController();
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.only(
-            right: MediaQuery.of(context).size.width * 0.05,
-            left:
-                MediaQuery.of(context).size.width * 0.05, // 5% of screen width
-            top: MediaQuery.of(context).size.height * 0.03,
-            bottom: MediaQuery.of(context).size.height *
-                0.05, // 5% of screen height
+            right: screenSize.width * 0.05,
+            left: screenSize.width * 0.05, // 5% of screen width
+            top: screenSize.height * 0.03,
+            bottom: screenSize.height * 0.05, // 5% of screen height
           ),
           child: Column(
             children: [
@@ -43,33 +55,23 @@ class _CreateNicknameState extends State<CreateNickname> {
                     children: [
                       // Progress bar at the top
                       SizedBox(
-                        width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height * 0.02,
+                        width: screenSize.width,
+                        height: screenSize.height * 0.02,
                         child: Stack(
                           children: [
                             ClipRRect(
-                              borderRadius: BorderRadius.circular(
-                                  10.0), // Outer rounded corners
-                              child: Container(
-                                color:
-                                    blue.withOpacity(0.19), // Background color
-                              ),
+                              borderRadius: BorderRadius.circular(10.0),
+                              child: Container(color: blue.withOpacity(0.19)),
                             ),
-                            // Inner progress bar
                             ClipRRect(
-                              borderRadius: BorderRadius.circular(
-                                  10.0), // Inner rounded corners
+                              borderRadius: BorderRadius.circular(10.0),
                               child: Container(
-                                  width: MediaQuery.of(context).size.width *
-                                      0.2, // Set width to represent progress
-                                  color: blue // Progress color
-                                  ),
+                                  width: screenSize.width * 0.2, color: blue),
                             ),
                           ],
                         ),
                       ),
                       const SizedBox(height: 40),
-                      // Title
                       Row(children: [
                         const Text(
                           'Your Zenkonect Identity',
@@ -82,17 +84,11 @@ class _CreateNicknameState extends State<CreateNickname> {
                         Image.asset('assets/images/icons/smile.png', width: 30),
                       ]),
                       const SizedBox(height: 10),
-                      // Subtitle
                       const Text(
                         'Create a unique nickname that represents you, it’s how others will know and remember you.',
-                        style: TextStyle(
-                          fontSize: 16,
-                        ),
+                        style: TextStyle(fontSize: 16),
                       ),
-                      SizedBox(
-                        height: screenSize.height * 0.045,
-                      ),
-                      // Nickname Text Field
+                      SizedBox(height: screenSize.height * 0.045),
                       Form(
                           key: formKey,
                           child: Container(
@@ -151,7 +147,11 @@ class _CreateNicknameState extends State<CreateNickname> {
                 onTap: () {
                   if (formKey.currentState!.validate()) {
                     nicknameProvider.updateName(
-                        context, authProvider, nicknameController.text);
+                        context,
+                        authProvider,
+                        nicknameController
+                            .text // Make sure this value is passed
+                        );
                   }
                 },
                 child: Container(

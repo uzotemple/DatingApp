@@ -77,7 +77,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:love_bird/providers/auth_provider.dart';
 import 'package:love_bird/providers/login_provider.dart';
-import 'package:love_bird/providers/paymentProvider.dart';
+import 'package:love_bird/providers/payment_provider.dart';
 import 'package:provider/provider.dart';
 import 'dart:convert';
 import 'package:url_launcher/url_launcher.dart';

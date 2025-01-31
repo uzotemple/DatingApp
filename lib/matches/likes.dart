@@ -1,33 +1,29 @@
-// import 'package:flutter/material.dart';
-// import 'package:love_bird/config/constants.dart';
-
-// import 'package:love_bird/config/routes.dart';
-
-// import 'package:love_bird/matches/super_likes.dart';
-
 // import 'dart:ui';
 
-// import 'package:love_bird/renewal/renewal.dart'; // For image blurring
+// import 'package:flutter/material.dart';
+// import 'package:love_bird/config/constants.dart';
+// import 'package:love_bird/config/routes.dart';
+// import 'package:love_bird/matches/super_likes.dart';
+// import 'package:love_bird/renewal/renewal.dart';
 
 // class Likes extends StatefulWidget {
 //   const Likes({super.key});
 
 //   @override
+//   // ignore: library_private_types_in_public_api
 //   _LikesState createState() => _LikesState();
 // }
 
 // class _LikesState extends State<Likes> {
-
 //   bool premuimPackage = false;
-//   bool showSearchBox = false; // To toggle the search box visibility
+//   bool showSearchBox = false;
 //   String searchQuery = '';
 //   int _currentIndex = 3;
+
 //   @override
 //   Widget build(BuildContext context) {
 //     final screenSize = MediaQuery.of(context).size;
 
-//     final screenWidth = MediaQuery.of(context).size.width;
-//     final screenHeight = MediaQuery.of(context).size.height;
 //     return Scaffold(
 //       appBar: AppBar(
 //         leading: IconButton(
@@ -70,9 +66,9 @@
 //             onPressed: () {
 //               setState(() {
 //                 if (showSearchBox) {
-//                   searchQuery = ''; // Reset the search query
+//                   searchQuery = '';
 //                 }
-//                 showSearchBox = !showSearchBox; // Toggle visibility
+//                 showSearchBox = !showSearchBox;
 //               });
 //             },
 //           ),
@@ -82,8 +78,6 @@
 //               showLikeSort(context);
 //             },
 //           ),
-
-//           //    SizedBox(width: screenSize.height * 0.025),
 //           SizedBox(width: screenSize.width * 0.05),
 //         ],
 //       ),
@@ -91,37 +85,23 @@
 //         children: [
 //           if (showSearchBox)
 //             Padding(
-//               padding:
-//                   EdgeInsets.symmetric(horizontal: screenSize.width * 0.08),
+//               padding: EdgeInsets.symmetric(horizontal: screenSize.width * 0.08),
 //               child: SizedBox(
 //                 height: 40,
 //                 child: TextField(
-//                   style: TextStyle(
-//                       color: Theme.of(context).textTheme.bodyMedium?.color),
+//                   style: TextStyle(color: Theme.of(context).textTheme.bodyMedium?.color),
 //                   decoration: InputDecoration(
 //                     hintText: 'Search by name...',
-//                     hintStyle: TextStyle(
-//                       color: Theme.of(context).hintColor,
-//                     ),
-//                     contentPadding:
-//                         EdgeInsets.only(top: screenSize.height * 0.02),
-//                     prefixIcon: Icon(
-//                       Icons.search,
-//                       color: Theme.of(context).iconTheme.color,
-//                     ),
+//                     hintStyle: TextStyle(color: Theme.of(context).hintColor),
+//                     contentPadding: EdgeInsets.only(top: screenSize.height * 0.02),
+//                     prefixIcon: Icon(Icons.search, color: Theme.of(context).iconTheme.color),
 //                     border: OutlineInputBorder(
 //                       borderRadius: BorderRadius.circular(20),
-//                       borderSide: const BorderSide(
-//                         color: blue,
-//                         width: 1.5,
-//                       ),
+//                       borderSide: const BorderSide(color: blue, width: 1.5),
 //                     ),
 //                     focusedBorder: OutlineInputBorder(
 //                       borderRadius: BorderRadius.circular(20),
-//                       borderSide: const BorderSide(
-//                         color: blue,
-//                         width: 1.5,
-//                       ),
+//                       borderSide: const BorderSide(color: blue, width: 1.5),
 //                     ),
 //                   ),
 //                   onChanged: (value) {
@@ -145,7 +125,7 @@
 //                 ),
 //                 child: const Center(
 //                   child: Text(
-//                     'Likes(4)', // dynamic number
+//                     'Likes(4)',
 //                     style: TextStyle(color: Colors.white, fontSize: 18),
 //                   ),
 //                 ),
@@ -164,7 +144,7 @@
 //                 ),
 //                 child: const Center(
 //                   child: Text(
-//                     'SuperLikes(4)', //dynamic number
+//                     'SuperLikes(4)',
 //                     style: TextStyle(color: Colors.white, fontSize: 18),
 //                   ),
 //                 ),
@@ -172,15 +152,11 @@
 //             ),
 //           ]),
 //           SizedBox(height: screenSize.height * 0.025),
-//           Expanded(
-//             child: PeopleNearbyGrid(
-//               premuimPackage: premuimPackage,
-//               searchQuery: searchQuery, // Pass the search query
-//             ),
+//           const Expanded(
+//             child: Center(child: CircularProgressIndicator()),
 //           ),
-//           // Expanded(child: PeopleNearbyGrid(premuimPackage: premuimPackage)),
 //           const SizedBox(height: 7),
-//           if (premuimPackage == false)
+//           if (!premuimPackage)
 //             SizedBox(
 //               width: screenSize.width * 0.7,
 //               height: screenSize.height * 0.06,
@@ -188,8 +164,7 @@
 //                 onPressed: () {
 //                   Navigator.push(
 //                     context,
-//                     MaterialPageRoute(
-//                         builder: (context) => const UpgradePremium()),
+//                     MaterialPageRoute(builder: (context) => const UpgradePremium()),
 //                   );
 //                 },
 //                 style: ElevatedButton.styleFrom(
@@ -212,96 +187,96 @@
 //         ],
 //       ),
 //       bottomNavigationBar: Padding(
-//         padding: EdgeInsets.only(
-//           left: screenWidth * 0.03, // 3% of screen width
-//           right: screenWidth * 0.03,
-//           top: screenHeight * 0.01, // 1% of screen height
-//           bottom: screenHeight * 0.03, // 3% of screen height
-//         ),
-//         child: Container(
-//           decoration: BoxDecoration(
-//             color: const Color.fromRGBO(97, 86, 234, 0.19),
-//             borderRadius: BorderRadius.circular(50),
+//   padding: EdgeInsets.only(
+//     left: screenSize.width * 0.03,
+//     right: screenSize.width * 0.03,
+//     top: screenSize.height * 0.01,
+//     bottom: screenSize.height * 0.03,
+//   ),
+//   child: Container(
+//     decoration: BoxDecoration(
+//       color: const Color.fromRGBO(97, 86, 234, 0.19),
+//       borderRadius: BorderRadius.circular(50),
+//     ),
+//     child: ClipRRect(
+//       borderRadius: BorderRadius.circular(50),
+//       child: BottomNavigationBar(
+//         type: BottomNavigationBarType.fixed,
+//         backgroundColor: Colors.transparent,
+//         elevation: 0,
+//         currentIndex: _currentIndex,
+//         items: [
+//           BottomNavigationBarItem(
+//             icon: Icon(Icons.home, size: screenSize.width * 0.08),
+//             label: 'Home',
 //           ),
-//           child: ClipRRect(
-//             borderRadius: BorderRadius.circular(50),
-//             child: BottomNavigationBar(
-//               type: BottomNavigationBarType.fixed,
-//               backgroundColor: Colors.transparent,
-//               elevation: 0,
-//               currentIndex: _currentIndex,
-//               items: [
-//                 BottomNavigationBarItem(
-//                   icon: Icon(Icons.home, size: screenWidth * 0.08),
-//                   label: 'Home',
-//                 ),
-//                 BottomNavigationBarItem(
-//                   icon: Icon(Icons.location_on, size: screenWidth * 0.08),
-//                   label: 'People Nearby',
-//                 ),
-//                 BottomNavigationBarItem(
-//                   icon: Icon(Icons.chat, size: screenWidth * 0.08),
-//                   label: 'Chats',
-//                 ),
-//                 BottomNavigationBarItem(
-//                   icon: Icon(Icons.favorite, size: screenWidth * 0.08),
-//                   label: 'Matches',
-//                 ),
-//                 BottomNavigationBarItem(
-//                   icon: Icon(Icons.person, size: screenWidth * 0.08),
-//                   label: 'Profile',
-//                 ),
-//               ],
-//               selectedLabelStyle: TextStyle(
-//                 color: Colors.black, // Ensure selected text is black
-//                 fontSize: MediaQuery.of(context).size.width * 0.03,
-//               ),
-//               unselectedLabelStyle: TextStyle(
-//                 color: Colors.black, // Ensure unselected text is black
-//                 fontSize: MediaQuery.of(context).size.width * 0.03,
-//               ),
-//               selectedItemColor:
-//                   blue, // Make selected item icon and label black
-//               unselectedItemColor:
-//                   Theme.of(context).brightness == Brightness.dark
-//                       ? Colors.white // Dark mode, use white
-//                       : Colors.black, // Make unselected item icon black
-//               onTap: (index) {
-//                 setState(() {
-//                   _currentIndex = index; // Update the current index.
-//                 });
-//                 switch (index) {
-//                   case 0:
-//                     Navigator.pushNamed(context, homeScreen);
-
-//                     break;
-//                   case 1:
-//                     Navigator.pushNamed(context, peopleNearbyPage);
-//                     break;
-//                   case 2:
-//                     Navigator.pushNamed(context, mainchat);
-//                     break;
-//                   case 3:
-//                     Navigator.pushNamed(context, likes);
-//                     break;
-//                   case 4:
-//                     Navigator.pushNamed(context, profile);
-//                     break;
-//                 }
-//               },
-//             ),
+//           BottomNavigationBarItem(
+//             icon: Icon(Icons.location_on, size: screenSize.width * 0.08),
+//             label: 'People Nearby',
 //           ),
+//           BottomNavigationBarItem(
+//             icon: Icon(Icons.chat, size: screenSize.width * 0.08),
+//             label: 'Chats',
+//           ),
+//           BottomNavigationBarItem(
+//             icon: Icon(Icons.favorite, size: screenSize.width * 0.08),
+//             label: 'Matches',
+//           ),
+//           BottomNavigationBarItem(
+//             icon: Icon(Icons.person, size: screenSize.width * 0.08),
+//             label: 'Profile',
+//           ),
+//         ],
+//         selectedLabelStyle: TextStyle(
+//           color: Colors.black,
+//           fontSize: MediaQuery.of(context).size.width * 0.03,
 //         ),
+//         unselectedLabelStyle: TextStyle(
+//           color: Colors.black,
+//           fontSize: MediaQuery.of(context).size.width * 0.03,
+//         ),
+//         selectedItemColor: blue,
+//         unselectedItemColor: Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black,
+//         onTap: (index) {
+//           setState(() {
+//             _currentIndex = index;
+//           });
+//           switch (index) {
+//             case 0:
+//               Navigator.pushNamed(context, homeScreen);
+//               break;
+//             case 1:
+//               Navigator.pushNamed(context, peopleNearbyPage);
+//               break;
+//             case 2:
+//               Navigator.pushNamed(context, mainchat);
+//               break;
+//             case 3:
+//               Navigator.pushNamed(context, likes);
+//               break;
+//             case 4:
+//               Navigator.pushNamed(context, profile);
+//               break;
+//           }
+//         },
 //       ),
+//     ),
+//   ),
+// ),
+
 //     );
 //   }
-// }
+// }    
+
 // class PeopleNearbyGrid extends StatelessWidget {
 //   final bool premuimPackage;
 //   final String searchQuery;
+  
 
 //   PeopleNearbyGrid(
-//       {super.key, required this.premuimPackage, required this.searchQuery});
+//       {super.key, required this.premuimPackage, 
+//       required this.searchQuery,
+//       });
 
 //   final List<User> users = [
 //     User(imageUrl: 'assets/images/homeImage.png', name: 'David', age: 31),
@@ -419,194 +394,49 @@
 //   }
 // }
 
-
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart'; 
-import 'dart:ui';
+import 'package:love_bird/providers/likes_provider.dart';
+import 'package:provider/provider.dart';
 
 class Likes extends StatefulWidget {
   const Likes({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _LikesState createState() => _LikesState();
 }
 
 class _LikesState extends State<Likes> {
-  final _storage = const FlutterSecureStorage(); // Secure storage instance
-  String? userId;
-  String? authToken;
-  bool premiumPackage = false;
-  bool showSearchBox = false;
-  String searchQuery = '';
-  int _currentIndex = 3;
-
   @override
-  void initState() {
-    super.initState();
-    _fetchUserData(); // Fetch user data on initialization
-  }
+void initState() {
+  super.initState();
 
-  Future<void> _fetchUserData() async {
-    // Retrieve userId and authToken from secure storage
-    String? storedUserId = await _storage.read(key: 'userId');
-    String? storedAuthToken = await _storage.read(key: 'authToken');
-
-    setState(() {
-      userId = storedUserId;
-      authToken = storedAuthToken;
-    });
-
-    // For testing/debugging purposes, print the retrieved values
-    debugPrint('UserID: $userId');
-    debugPrint('AuthToken: $authToken');
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
-
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_outlined, size: 30),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        title: const Center(
-          child: Text(
-            'Matches',
-            style: TextStyle(
-              fontWeight: FontWeight.w700,
-              fontSize: 20,
-            ),
-          ),
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.search, size: 30),
-            onPressed: () {
-              setState(() {
-                if (showSearchBox) {
-                  searchQuery = '';
-                }
-                showSearchBox = !showSearchBox;
-              });
-            },
-          ),
-        ],
-      ),
-      body: userId == null || authToken == null
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
-          : Column(
-              children: [
-                if (showSearchBox)
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: screenSize.width * 0.08),
-                    child: SizedBox(
-                      height: 40,
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Search by name...',
-                          prefixIcon: const Icon(Icons.search),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                        ),
-                        onChanged: (value) {
-                          setState(() {
-                            searchQuery = value;
-                          });
-                        },
-                      ),
-                    ),
-                  ),
-                SizedBox(height: screenSize.height * 0.025),
-                Expanded(
-                  child: PeopleNearbyGrid(
-                    premiumPackage: premiumPackage,
-                    searchQuery: searchQuery,
-                  ),
-                ),
-                if (!premiumPackage)
-                  SizedBox(
-                    width: screenSize.width * 0.7,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/upgradePremium');
-                      },
-                      child: const Text('Upgrade to Premium'),
-                    ),
-                  ),
-              ],
-            ),
-    );
-  }
-}
-
-class PeopleNearbyGrid extends StatelessWidget {
-  final bool premiumPackage;
-  final String searchQuery;
-
-  const PeopleNearbyGrid({
-    super.key,
-    required this.premiumPackage,
-    required this.searchQuery,
+  // Use addPostFrameCallback to ensure fetchLikes is called after the build process
+  WidgetsBinding.instance.addPostFrameCallback((_) {
+    final likeProvider = Provider.of<LikeProvider>(context, listen: false);
+    likeProvider.fetchLikes(); // Fetch likes after the build
   });
+}
+
 
   @override
   Widget build(BuildContext context) {
-    // Simulated user data
-    final List<User> users = [
-      User(imageUrl: 'assets/images/homeImage.png', name: 'David', age: 31),
-      User(imageUrl: 'assets/images/homeImage.png', name: 'James', age: 29),
-    ];
+    return Consumer<LikeProvider>(
+      builder: (context, likeProvider, child) {
+        if (likeProvider.isLoading) {
+          return const Center(child: CircularProgressIndicator());
+        }
 
-    final filteredUsers = searchQuery.isEmpty
-        ? users
-        : users.where((user) => user.name.contains(searchQuery)).toList();
-
-    return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        crossAxisSpacing: 8.0,
-        mainAxisSpacing: 8.0,
-      ),
-      itemCount: filteredUsers.length,
-      itemBuilder: (context, index) {
-        final user = filteredUsers[index];
-        return UserCard(user: user);
+        return ListView.builder(
+          itemCount: likeProvider.likes.length,
+          itemBuilder: (context, index) {
+            final like = likeProvider.likes[index];
+            return ListTile(
+              title: Text('User ID: ${like.userId}, Profile ID: ${like.profileId}'),
+            );
+          },
+        );
       },
-    );
-  }
-}
-
-class User {
-  final String imageUrl;
-  final String name;
-  final int age;
-
-  User({required this.imageUrl, required this.name, required this.age});
-}
-
-class UserCard extends StatelessWidget {
-  final User user;
-
-  const UserCard({required this.user, super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      child: Column(
-        children: [
-          Image.asset(user.imageUrl, fit: BoxFit.cover),
-          Text(user.name),
-          Text('${user.age} years old'),
-        ],
-      ),
     );
   }
 }

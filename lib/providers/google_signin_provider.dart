@@ -81,7 +81,7 @@ Future<void> sendTokenToBackend(String idToken) async {
   try {
     // Replace with your backend's actual URL
     final response = await http.post(
-      Uri.parse('https://localhost/auth/google-sso'),
+      Uri.parse('http://138.68.150.48:7001/auth/google-sso'),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({'token': idToken}),
     );
@@ -98,9 +98,3 @@ Future<void> sendTokenToBackend(String idToken) async {
         name: 'UserAction');
   }
 }
-
-// class GoogleSignInApi {
-//   static final _googleSignIn = GoogleSignIn();
-
-//   static Future<GoogleSignInAccount?> login() => _googleSignIn.signIn();
-// }

@@ -10,10 +10,22 @@ class VisitProvider with ChangeNotifier {
   String? get message => _message;
 
   Future<void> addVisit({
-    required String? visitorId,  // ID of the visitor the action is performed on
+    required String? visitorId, // ID of the visitor the action is performed on
     required String action,     // Action ('LIKE', 'SUPERLIKE', or 'DISLIKE')
     required String authToken,  // Authentication token
   }) async {
+    // Validate visitorId before proceeding
+    if (visitorId == null || visitorId.isEmpty) {
+      _setMessage('Invalid visitor ID. Cannot perform action.');
+      return;
+    }
+
+    // Validate action before sending it to backend
+    if (!['LIKE', 'SUPERLIKE', 'DISLIKE'].contains(action.toUpperCase())) {
+      _setMessage('Invalid action type. Supported actions: LIKE, SUPERLIKE, DISLIKE.');
+      return;
+    }
+
     final url = Uri.parse('http://138.68.150.48:7001/visit');
     final headers = {
       'Content-Type': 'application/json',
@@ -21,40 +33,50 @@ class VisitProvider with ChangeNotifier {
     };
 
     final body = jsonEncode({
-      'visitorId': visitorId,  // Visitor ID (the profile the user is interacting with)
-      'action': action,        // Action ('LIKE', 'SUPERLIKE', 'DISLIKE')
+      'visitorId': visitorId,
+      'action': action,
     });
 
-    print('Sending POST request to $url');
-    print('Headers: $headers');
-    print('Body: $body');
-
-    _isLoading = true;
-    notifyListeners();
+    _setLoadingState(true);
 
     try {
       final response = await http.post(url, headers: headers, body: body);
-
-      print('Response status code: ${response.statusCode}');
-      print('Response body: ${response.body}');
-
-      if (response.statusCode == 200) {
-        final responseData = jsonDecode(response.body);
-        print('Success response data: $responseData');
-
-        _message = responseData['message'] ?? 'Action performed successfully!';
-      } else {
-        final errorData = jsonDecode(response.body);
-        print('Error response data: $errorData');
-
-        _message = errorData['error'] ?? 'An error occurred.';
-      }
+      _handleResponse(response);
     } catch (error) {
       print('Exception occurred: $error');
-      _message = 'Failed to connect to the server.';
+      _setMessage('Failed to connect to the server.');
     } finally {
-      _isLoading = false;
-      notifyListeners();
+      _setLoadingState(false);
+    }
+  }
+
+  // Method to set loading state and notify listeners
+  void _setLoadingState(bool isLoading) {
+    _isLoading = isLoading;
+    notifyListeners();
+  }
+
+  // Method to set message and notify listeners
+  void _setMessage(String message) {
+    _message = message;
+    notifyListeners();
+  }
+
+  // Handle the response from the API
+  void _handleResponse(http.Response response) {
+    print('Response status code: ${response.statusCode}');
+    print('Response body: ${response.body}');
+
+    if (response.statusCode == 200) {
+      if (response.body.isNotEmpty) {
+        final responseData = jsonDecode(response.body);
+        _message = responseData['message']?.toString() ?? 'Action performed successfully!';
+      } else {
+        _message = 'Response body is empty.';
+      }
+    } else {
+      final errorData = response.body.isNotEmpty ? jsonDecode(response.body) : {};
+      _message = errorData['error']?.toString() ?? 'An error occurred: ${response.statusCode}';
     }
   }
 }

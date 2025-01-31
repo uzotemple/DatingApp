@@ -212,10 +212,10 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
               color: Colors.transparent,
               child: Container(
                 padding: EdgeInsets.symmetric(
-                    horizontal: screenSize.width * 0.07,
+                    horizontal: screenSize.width * 0.01,
                     vertical: screenSize.height * 0.02),
-                width: screenSize.width * 0.8,
-                height: screenSize.height * 0.13,
+                width: screenSize.width * 0.7,
+                height: screenSize.height * 0.12,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(20),
@@ -727,12 +727,12 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
   Widget _buildMessageInputField() {
     final screenSize = MediaQuery.of(context).size;
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 8),
       child: Row(
         children: [
           Expanded(
             child: TextFormField(
-              maxLines: 2,
+              maxLines: 1,
               controller: _messageController,
               textCapitalization: TextCapitalization.sentences,
               decoration: InputDecoration(
@@ -740,7 +740,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                 filled: true,
                 fillColor: Colors.white,
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30),
+                  borderRadius: BorderRadius.circular(15),
                   borderSide: const BorderSide(
                     color: blue,
                     width: 2,
@@ -833,7 +833,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
               ),
             ),
           ),
-          const SizedBox(width: 8),
+          // const SizedBox(width: 5),
 
           IconButton(
             icon: const Icon(Icons.send, color: blue),

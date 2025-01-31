@@ -18,8 +18,9 @@ class Mainchat extends StatefulWidget {
 }
 
 class _MainchatState extends State<Mainchat> {
-  List<List<Map<String, String>>> stories = [[]];
   int _currentIndex = 2;
+  List<List<Map<String, String>>> stories = [[]];
+
   List<Map<String, dynamic>> chatItems = [
     {
       "name": "Lil Mama",
@@ -117,8 +118,6 @@ class _MainchatState extends State<Mainchat> {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: _buildAppBar(),
       body: Stack(
@@ -243,12 +242,113 @@ class _MainchatState extends State<Mainchat> {
                   child: Image.asset('assets/images/robot.png'))),
         ],
       ),
+      // bottomNavigationBar: Padding(
+      //   padding: EdgeInsets.only(
+      //     left: MediaQuery.of(context).size.width * 0.03, // 3% of screen width
+      //     right: MediaQuery.of(context).size.width * 0.03,
+      //     top: MediaQuery.of(context).size.height * 0.01, // 1% of screen height
+      //     bottom:
+      //         MediaQuery.of(context).size.height * 0.03, // 3% of screen height
+      //   ),
+      //   child: Container(
+      //     decoration: BoxDecoration(
+      //       color: const Color.fromRGBO(97, 86, 234, 0.19),
+      //       borderRadius: BorderRadius.circular(50),
+      //     ),
+      //     child: ClipRRect(
+      //       borderRadius: BorderRadius.circular(50),
+      //       child: BottomNavigationBar(
+      //         type: BottomNavigationBarType.fixed,
+      //         backgroundColor: Colors.transparent,
+      //         elevation: 0,
+      //         items: [
+      //           BottomNavigationBarItem(
+      //             icon: Image.asset(
+      //               'assets/images/icons/homeBlack.png',
+      //               width: MediaQuery.of(context).size.width * 0.08,
+      //               height: MediaQuery.of(context).size.width * 0.08,
+      //             ),
+      //             label: 'Home',
+      //           ),
+      //           BottomNavigationBarItem(
+      //             icon: Image.asset(
+      //               'assets/images/icons/localcon.png',
+      //               width: MediaQuery.of(context).size.width * 0.08,
+      //               height: MediaQuery.of(context).size.width * 0.08,
+      //             ),
+      //             label: 'People Nearby',
+      //           ),
+      //           BottomNavigationBarItem(
+      //             icon: Image.asset(
+      //               'assets/images/icons/blueChat.png',
+      //               width: MediaQuery.of(context).size.width * 0.08,
+      //               height: MediaQuery.of(context).size.width * 0.08,
+      //             ),
+      //             label: 'Chats',
+      //           ),
+      //           BottomNavigationBarItem(
+      //             icon: Image.asset(
+      //               'assets/images/icons/matches.png',
+      //               width: MediaQuery.of(context).size.width * 0.08,
+      //               height: MediaQuery.of(context).size.width * 0.08,
+      //             ),
+      //             label: 'Matches',
+      //           ),
+      //           BottomNavigationBarItem(
+      //             icon: Image.asset(
+      //               'assets/images/icons/personIcon.png',
+      //               width: MediaQuery.of(context).size.width * 0.07,
+      //               height: MediaQuery.of(context).size.width * 0.07,
+      //             ),
+      //             label: 'Profile',
+      //           ),
+      //         ],
+      //         selectedLabelStyle: TextStyle(
+      //           color: Colors.black, // Ensure selected text is black
+      //           fontSize: MediaQuery.of(context).size.width * 0.03,
+      //         ),
+      //         unselectedLabelStyle: TextStyle(
+      //           color: Colors.black, // Ensure unselected text is black
+      //           fontSize: MediaQuery.of(context).size.width * 0.03,
+      //         ),
+      //         selectedItemColor:
+      //             Colors.black, // Make selected item icon and label black
+      //         unselectedItemColor:
+      //             Colors.black, // Make unselected item icon black
+      //         // selectedItemColor: Colors.blue, // Set the selected label color
+      //         // unselectedItemColor:
+      //         //      Colors.black, // Set the unselected label color
+      //         onTap: (index) {
+      //           // Handle navigation based on the index
+      //           switch (index) {
+      //             case 0:
+      //               Navigator.pushNamed(context, homeScreen);
+      //               break;
+      //             case 1:
+      //               Navigator.pushNamed(context, peopleNearbyPage);
+      //               break;
+      //             case 2:
+      //               Navigator.pushNamed(context, mainchat);
+      //               break;
+      //             case 3:
+      //               Navigator.pushNamed(context, likes);
+      //               break;
+      //             case 4:
+      //               Navigator.pushNamed(context, profile);
+      //               break;
+      //           }
+      //         },
+      //       ),
+      //     ),
+      //   ),
+      // ),
       bottomNavigationBar: Padding(
         padding: EdgeInsets.only(
-          left: screenWidth * 0.03, // 3% of screen width
-          right: screenWidth * 0.03,
-          top: screenHeight * 0.01, // 1% of screen height
-          bottom: screenHeight * 0.03, // 3% of screen height
+          left: MediaQuery.of(context).size.width * 0.03, // 3% of screen width
+          right: MediaQuery.of(context).size.width * 0.03,
+          top: MediaQuery.of(context).size.height * 0.01, // 1% of screen height
+          bottom:
+              MediaQuery.of(context).size.height * 0.03, // 3% of screen height
         ),
         child: Container(
           decoration: BoxDecoration(
@@ -262,25 +362,25 @@ class _MainchatState extends State<Mainchat> {
               backgroundColor: Colors.transparent,
               elevation: 0,
               currentIndex: _currentIndex,
-              items: [
+              items: const [
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.home, size: screenWidth * 0.08),
+                  icon: Icon(Icons.home, size: 28), // Home icon
                   label: 'Home',
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.location_on, size: screenWidth * 0.08),
+                  icon: Icon(Icons.location_on, size: 28), // Location icon
                   label: 'People Nearby',
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.chat, size: screenWidth * 0.08),
+                  icon: Icon(Icons.chat, size: 28), // Chat icon
                   label: 'Chats',
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.favorite, size: screenWidth * 0.08),
+                  icon: Icon(Icons.favorite, size: 28), // Matches icon
                   label: 'Matches',
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.person, size: screenWidth * 0.08),
+                  icon: Icon(Icons.person, size: 28), // Profile icon
                   label: 'Profile',
                 ),
               ],
@@ -297,15 +397,12 @@ class _MainchatState extends State<Mainchat> {
               unselectedItemColor:
                   Theme.of(context).brightness == Brightness.dark
                       ? Colors.white // Dark mode, use white
-                      : Colors.black, // Make unselected item icon black
+                      : Colors.black,
               onTap: (index) {
-                setState(() {
-                  _currentIndex = index; // Update the current index.
-                });
+                // Handle navigation based on the index
                 switch (index) {
                   case 0:
                     Navigator.pushNamed(context, homeScreen);
-
                     break;
                   case 1:
                     Navigator.pushNamed(context, peopleNearbyPage);

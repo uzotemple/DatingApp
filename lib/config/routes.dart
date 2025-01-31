@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:love_bird/chat/chat_screen.dart';
 import 'package:love_bird/chat/main_chat.dart';
 import 'package:love_bird/chat/story_viewer.dart';
 import 'package:love_bird/chat/story_viewer2.dart';
@@ -107,6 +108,7 @@ const loginCreate = "/loginCreate";
 const editLowProfileScreen = "/editLowProfileScreen";
 const updatePassword = "/updatepassword";
 const imageUploadScreennn = "/imageUploadScreennn";
+const chatDetailScreen = "/chatdetailscreen";
 // Map each route to the respective widget
 final routes = <String, Widget Function(BuildContext)>{
   createAccountRoute: (_) => const CreateAcc1(),
@@ -158,5 +160,6 @@ final routes = <String, Widget Function(BuildContext)>{
   loginCreate: (_) => const LoginCreate(),
   editLowProfileScreen: (_) => const EditLowProfileScreen(),
   updatePassword: (_) => const UpdatePassword(),
-  imageUploadScreennn: (_) => const ImageUploadScreennn()
+  imageUploadScreennn: (_) => const ImageUploadScreennn(),
+  chatDetailScreen: (_) => const ChatDetailScreen(name: '', profileImage: '', lastMessage: '',)
 };

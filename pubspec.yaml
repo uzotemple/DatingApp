@@ -103,6 +103,7 @@ flutter:
     - assets/images/icons/interest/
     - images/
     - assets/webpages/index.html
+    - assets/images/homeImage.png
     
 
   # An image asset can refer to one or more resolution-specific "variants", see

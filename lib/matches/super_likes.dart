@@ -3,8 +3,6 @@ import 'package:love_bird/config/constants.dart';
 
 import 'package:love_bird/config/routes.dart';
 
-import 'package:love_bird/matches/Likes.dart';
-
 import 'dart:ui';
 
 import 'package:love_bird/renewal/renewal.dart'; // For image blurring
@@ -13,6 +11,7 @@ class SuperLikes extends StatefulWidget {
   const SuperLikes({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _SuperLikesState createState() => _SuperLikesState();
 }
 
@@ -134,10 +133,7 @@ class _SuperLikesState extends State<SuperLikes> {
           Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
             InkWell(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Likes()),
-                );
+                Navigator.pushNamed(context, '/likes');
               },
               child: Container(
                 width: screenSize.width * 0.4,
@@ -307,7 +303,7 @@ class PeopleNearbyGrid extends StatelessWidget {
   final String searchQuery;
 
   PeopleNearbyGrid(
-      {super.key, required this.premuimPackage, required this.searchQuery});
+      {super.key, required this.premuimPackage, required this.searchQuery,});
 
   final List<User> users = [
     User(imageUrl: 'assets/images/homeImage.png', name: 'David', age: 31),

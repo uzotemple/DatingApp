@@ -1411,7 +1411,6 @@
 //   }
 // }
 
-
 import 'package:flutter/material.dart';
 import 'package:love_bird/api/home_api.dart';
 import 'package:love_bird/chat/chat_screen.dart';
@@ -1426,6 +1425,7 @@ class ProfileInfo extends StatefulWidget {
   const ProfileInfo({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _ProfileInfoState createState() => _ProfileInfoState();
 }
 
@@ -1484,6 +1484,12 @@ class _ProfileInfoState extends State<ProfileInfo> {
     // Trigger the action (LIKE, SUPERLIKE, or DISLIKE)
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
     final authToken = authProvider.accessToken;
+
+    if (visitorId == null || visitorId.isEmpty) {
+      print("Error: visitorId is missing");
+      return;
+    }
+
     if (authToken != null && authToken.isNotEmpty) {
       Provider.of<VisitProvider>(context, listen: false).addVisit(
         visitorId: visitorId,
@@ -1501,7 +1507,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
       if (mounted) {
         setState(() {
           setFlag();
-          _rotationAngle = 0.0;
+          _rotationAngle;
         });
       }
     });
@@ -1525,10 +1531,16 @@ class _ProfileInfoState extends State<ProfileInfo> {
           final profile = profiles[index];
           final name = profile.nickname ?? "Unknown";
           final age = profile.age ?? "N/A";
-          final visitorId = profile.profileId; 
-          final imageUrl = profile.imageUrl != null
-              ? NetworkImage(profile.imageUrl!)
-              : Image.asset('images/homeImage.png');
+          final visitorId = profile.profileId;
+
+          // Commenting out the network image to use only the asset image
+          // final ImageProvider<Object> imageUrl =
+          //     (profile.imageUrl != null && profile.imageUrl!.isNotEmpty)
+          //         ? NetworkImage(profile.imageUrl!)
+          //         : const AssetImage('assets/images/homeImage.png');
+
+          const ImageProvider<Object> imageUrl =
+              AssetImage('assets/images/homeImage.png');
 
           return GestureDetector(
             onTap: () {
@@ -1546,8 +1558,8 @@ class _ProfileInfoState extends State<ProfileInfo> {
                   width: double.infinity,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    image: DecorationImage(
-                      image: imageUrl as ImageProvider,
+                    image: const DecorationImage(
+                      image: imageUrl,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -1596,7 +1608,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                                 onTap: () => _triggerAction(
                                   setFlag: () => _showNo = !_showNo,
                                   action: 'DISLIKE',
-                                  visitorId: profile.profileId,
+                                  visitorId: visitorId,
                                   rotationAngle: -0.3,
                                 ),
                                 child: Image.asset('assets/images/left.png'),
@@ -1614,7 +1626,8 @@ class _ProfileInfoState extends State<ProfileInfo> {
                               const Spacer(),
                               GestureDetector(
                                 onTap: () => _triggerAction(
-                                  setFlag: () => _showSuperLike = !_showSuperLike,
+                                  setFlag: () =>
+                                      _showSuperLike = !_showSuperLike,
                                   action: 'SUPERLIKE',
                                   visitorId: visitorId,
                                   rotationAngle: -0.2,
@@ -1683,6 +1696,183 @@ class _ProfileInfoState extends State<ProfileInfo> {
         },
       ),
     );
+
+    // return SizedBox(
+    //   height: screenHeight * 0.7,
+    //   width: screenWidth * 0.9,
+    //   child: PageView.builder(
+    //     itemCount: profiles.length,
+    //     itemBuilder: (context, index) {
+    //       final profile = profiles[index];
+    //       final name = profile.nickname ?? "Unknown";
+    //       final age = profile.age ?? "N/A";
+    //       final visitorId = profile.profileId;
+    //       // final imageUrl = profile.imageUrl != null
+    //       //     ? NetworkImage(profile.imageUrl!)
+    //       //     : const AssetImage('assets/images/homeImage.png') as ImageProvider;
+
+    //       final ImageProvider<Object> imageUrl =
+    //           (profile.imageUrl != null && profile.imageUrl!.isNotEmpty)
+    //               ? NetworkImage(profile.imageUrl!)
+    //               : const AssetImage('assets/images/homeImage.png');
+
+    //               print("Profile Image URL: ${profile.imageUrl}, Using Image: $imageUrl");
+
+    //       return GestureDetector(
+    //         onTap: () {
+    //           Navigator.push(
+    //             context,
+    //             MaterialPageRoute(
+    //               builder: (context) => UserProfilePage(profile: profile),
+    //             ),
+    //           );
+    //         },
+    //         child: Stack(
+    //           children: [
+    //             Container(
+    //               height: double.infinity,
+    //               width: double.infinity,
+    //               decoration: BoxDecoration(
+    //                 borderRadius: BorderRadius.circular(10),
+    //                 image: DecorationImage(
+    //                   // image: imageUrl as ImageProvider,
+    //                   image: imageUrl,
+    //                   fit: BoxFit.cover,
+    //                 ),
+    //               ),
+    //             ),
+    //             Positioned(
+    //               bottom: 0,
+    //               child: Container(
+    //                 width: screenWidth * 0.9,
+    //                 padding:
+    //                     EdgeInsets.symmetric(vertical: screenHeight * 0.01),
+    //                 color: Colors.black.withOpacity(0.5),
+    //                 child: Column(
+    //                   crossAxisAlignment: CrossAxisAlignment.start,
+    //                   children: [
+    //                     Padding(
+    //                       padding: EdgeInsets.all(screenWidth * 0.02),
+    //                       child: Column(
+    //                         crossAxisAlignment: CrossAxisAlignment.start,
+    //                         children: [
+    //                           Text(
+    //                             '$name, $age',
+    //                             style: TextStyle(
+    //                               color: Colors.white,
+    //                               fontSize: screenWidth * 0.04,
+    //                               fontWeight: FontWeight.bold,
+    //                             ),
+    //                           ),
+    //                           SizedBox(height: screenHeight * 0.005),
+    //                           Text(
+    //                             '20 km away',
+    //                             style: TextStyle(
+    //                               color: Colors.white,
+    //                               fontSize: screenWidth * 0.03,
+    //                             ),
+    //                           ),
+    //                         ],
+    //                       ),
+    //                     ),
+    //                     Padding(
+    //                       padding: EdgeInsets.symmetric(
+    //                           horizontal: screenWidth * 0.02),
+    //                       child: Row(
+    //                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    //                         children: [
+    //                           GestureDetector(
+    //                             onTap: () => _triggerAction(
+    //                               setFlag: () => _showNo = !_showNo,
+    //                               action: 'DISLIKE',
+    //                               visitorId: visitorId,
+    //                               rotationAngle: -0.3,
+    //                             ),
+    //                             child: Image.asset('assets/images/left.png'),
+    //                           ),
+    //                           const Spacer(),
+    //                           GestureDetector(
+    //                             onTap: () => _triggerAction(
+    //                               setFlag: () => _showLike = !_showLike,
+    //                               action: 'LIKE',
+    //                               visitorId: visitorId,
+    //                               rotationAngle: 0.3,
+    //                             ),
+    //                             child: Image.asset('assets/images/love2.png'),
+    //                           ),
+    //                           const Spacer(),
+    //                           GestureDetector(
+    //                             onTap: () => _triggerAction(
+    //                               setFlag: () =>
+    //                                   _showSuperLike = !_showSuperLike,
+    //                               action: 'SUPERLIKE',
+    //                               visitorId: visitorId,
+    //                               rotationAngle: -0.2,
+    //                             ),
+    //                             child: Image.asset('assets/images/star2.png'),
+    //                           ),
+    //                           const Spacer(),
+    //                           GestureDetector(
+    //                             onTap: () => _triggerAction(
+    //                               setFlag: () => _showNo = !_showNo,
+    //                               action: 'DISLIKE',
+    //                               visitorId: visitorId,
+    //                               rotationAngle: -0.3,
+    //                             ),
+    //                             child: Image.asset('assets/images/cancel.png'),
+    //                           ),
+    //                         ],
+    //                       ),
+    //                     ),
+    //                   ],
+    //                 ),
+    //               ),
+    //             ),
+    //             if (_showNo)
+    //               _buildActionOverlay(
+    //                   screenWidth, screenHeight, 'DISLIKE', -0.3),
+    //             if (_showLike)
+    //               _buildActionOverlay(screenWidth, screenHeight, 'LIKE', 0.3),
+    //             if (_showSuperLike)
+    //               _buildActionOverlay(
+    //                   screenWidth, screenHeight, 'SUPERLIKE', -0.2),
+    //             Positioned(
+    //               top: 10,
+    //               right: 10,
+    //               child: IconButton(
+    //                 icon: const Icon(Icons.more_horiz,
+    //                     color: Colors.white, size: 30),
+    //                 onPressed: () {
+    //                   showSmallPopup(context);
+    //                 },
+    //               ),
+    //             ),
+    //             Positioned(
+    //               bottom: screenHeight * 0.2,
+    //               right: 10,
+    //               child: InkWell(
+    //                 onTap: () {
+    //                   Navigator.push(
+    //                     context,
+    //                     MaterialPageRoute(
+    //                       builder: (context) => const ChatDetailScreen(
+    //                         name: 'Daniel',
+    //                         profileImage: 'assets/images/homeImage.png',
+    //                         isOnline: true,
+    //                         lastMessage: 'Hello',
+    //                       ),
+    //                     ),
+    //                   );
+    //                 },
+    //                 child: Image.asset('assets/images/icons/messageicon.png'),
+    //               ),
+    //             ),
+    //           ],
+    //         ),
+    //       );
+    //     },
+    //   ),
+    // );
   }
 
   Widget _buildActionOverlay(
@@ -1704,3 +1894,435 @@ class _ProfileInfoState extends State<ProfileInfo> {
     );
   }
 }
+
+// import 'package:flutter/material.dart';
+// import 'package:love_bird/api/home_api.dart';
+// import 'package:love_bird/model/profile_model.dart';
+// import 'package:love_bird/providers/visit_provider.dart';
+// import 'package:provider/provider.dart';
+// import 'package:love_bird/providers/auth_provider.dart';
+
+// class ProfileInfo extends StatefulWidget {
+//   const ProfileInfo({super.key});
+
+//   @override
+//   _ProfileInfoState createState() => _ProfileInfoState();
+// }
+
+// class _ProfileInfoState extends State<ProfileInfo> {
+//   List<Profile> profiles = [];
+//   bool isLoading = true;
+//   bool _isDisposed = false;
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     final authProvider = Provider.of<AuthProvider>(context, listen: false);
+//     fetchProfileData(authProvider);
+//   }
+
+//   @override
+//   void dispose() {
+//     _isDisposed = true;
+//     super.dispose();
+//   }
+
+//   void fetchProfileData(AuthProvider authProvider) async {
+//     try {
+//       List<Profile> fetchedProfiles =
+//           await ProfileService.fetchProfiles(authProvider);
+//       if (!_isDisposed) {
+//         setState(() {
+//           profiles = fetchedProfiles;
+//           isLoading = false;
+//         });
+//       }
+//     } catch (error) {
+//       if (!_isDisposed) {
+//         setState(() => isLoading = false);
+//       }
+//       print("Error fetching profiles: $error");
+//     }
+//   }
+
+//   void _triggerAction({
+//     required String action,
+//     required String? visitorId,
+//   }) {
+//     final authProvider = Provider.of<AuthProvider>(context, listen: false);
+//     final authToken = authProvider.accessToken;
+
+//     if (visitorId == null || visitorId.isEmpty) {
+//       print("Error: visitorId is missing");
+//       return;
+//     }
+
+//     if (authToken != null && authToken.isNotEmpty) {
+//       Provider.of<VisitProvider>(context, listen: false).addVisit(
+//         visitorId: visitorId,
+//         action: action,
+//         authToken: authToken,
+//       );
+//     } else {
+//       ScaffoldMessenger.of(context).showSnackBar(
+//         const SnackBar(content: Text('Please login first!')),
+//       );
+//     }
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     if (isLoading) {
+//       return const Center(child: CircularProgressIndicator());
+//     }
+
+//     return ListView.builder(
+//       itemCount: profiles.length,
+//       itemBuilder: (context, index) {
+//         final profile = profiles[index];
+//         final visitorId = profile.profileId; 
+//         final name = profile.nickname ?? "Unknown";
+//         final age = profile.age ?? "N/A";
+//         final imageUrl = profile.imageUrl != null
+//             ? NetworkImage(profile.imageUrl!)
+//             : const AssetImage('assets/images/homeImage.png') as ImageProvider;
+
+//         return Card(
+//           child: ListTile(
+//             leading: CircleAvatar(backgroundImage: imageUrl),
+//             title: Text('$name, $age'),
+//             subtitle: const Text('20 km away'),
+//             trailing: Row(
+//               mainAxisSize: MainAxisSize.min,
+//               children: [
+//                 IconButton(
+//                   icon: const Icon(Icons.close, color: Colors.red),
+//                   onPressed: () => _triggerAction(action: 'DISLIKE', visitorId: visitorId),
+//                 ),
+//                 IconButton(
+//                   icon: const Icon(Icons.favorite, color: Colors.green),
+//                   onPressed: () => _triggerAction(action: 'LIKE', visitorId: visitorId),
+//                 ),
+//                 IconButton(
+//                   icon: const Icon(Icons.star, color: Colors.blue),
+//                   onPressed: () => _triggerAction(action: 'SUPERLIKE', visitorId: visitorId),
+//                 ),
+//               ],
+//             ),
+//           ),
+//         );
+//       },
+//     );
+//   }
+// }
+
+
+// import 'package:flutter/material.dart';
+// import 'package:love_bird/api/home_api.dart';
+// import 'package:love_bird/chat/chat_screen.dart';
+// import 'package:love_bird/modals/block_and_report_modal.dart';
+// import 'package:love_bird/model/profile_model.dart';
+// import 'package:love_bird/profile/users_profile.dart';
+// import 'package:love_bird/providers/visit_provider.dart';
+// import 'package:provider/provider.dart';
+// import 'package:love_bird/providers/auth_provider.dart';
+
+// class ProfileInfo extends StatefulWidget {
+//   const ProfileInfo({super.key});
+
+//   @override
+//   _ProfileInfoState createState() => _ProfileInfoState();
+// }
+
+// class _ProfileInfoState extends State<ProfileInfo> {
+//   List<Profile> profiles = [];
+//   bool isLoading = true;
+//   bool _isDisposed = false;
+
+//   bool _showSuperLike = false;
+//   bool _showLike = false;
+//   bool _showNo = false;
+//   double _rotationAngle = 0.0;
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     final authProvider = Provider.of<AuthProvider>(context, listen: false);
+//     fetchProfileData(authProvider); // Fetch profiles on initialization
+//   }
+
+//   @override
+//   void dispose() {
+//     _isDisposed = true;
+//     super.dispose();
+//   }
+
+//   void fetchProfileData(AuthProvider authProvider) async {
+//     try {
+//       List<Profile> fetchedProfiles = await ProfileService.fetchProfiles(authProvider);
+//       if (!_isDisposed) {
+//         setState(() {
+//           profiles = fetchedProfiles;
+//           isLoading = false;
+//         });
+//       }
+//     } catch (error) {
+//       if (!_isDisposed) {
+//         setState(() => isLoading = false);
+//       }
+//       print("Error fetching profiles: $error");
+//     }
+//   }
+
+//   void _triggerAction({
+//     required void Function() setFlag,
+//     required String action,
+//     required String? visitorId,
+//     double rotationAngle = 0.0,
+//   }) {
+//     setState(() {
+//       setFlag();
+//       _rotationAngle = rotationAngle;
+//     });
+
+//     // Trigger the action (LIKE, SUPERLIKE, or DISLIKE)
+//     final authProvider = Provider.of<AuthProvider>(context, listen: false);
+//     final authToken = authProvider.accessToken;
+
+//     if (visitorId == null || visitorId.isEmpty) {
+//       print("Error: visitorId is missing");
+//       return;
+//     }
+
+//     if (authToken != null && authToken.isNotEmpty) {
+//       Provider.of<VisitProvider>(context, listen: false).addVisit(
+//         visitorId: visitorId,
+//         action: action,
+//         authToken: authToken,
+//       );
+//     } else {
+//       ScaffoldMessenger.of(context).showSnackBar(
+//         const SnackBar(content: Text('Please login first!')),
+//       );
+//     }
+
+//     // Reset the UI effect after a delay
+//     Future.delayed(const Duration(seconds: 1), () {
+//       if (mounted) {
+//         setState(() {
+//           setFlag();
+//         });
+//       }
+//     });
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     final screenWidth = MediaQuery.of(context).size.width;
+//     final screenHeight = MediaQuery.of(context).size.height;
+
+//     if (isLoading) {
+//       return const Center(child: CircularProgressIndicator());
+//     }
+
+//     return SizedBox(
+//       height: screenHeight * 0.7,
+//       width: screenWidth * 0.9,
+//       child: PageView.builder(
+//         itemCount: profiles.length,
+//         itemBuilder: (context, index) {
+//           final profile = profiles[index];
+//           final name = profile.nickname ?? "Unknown";
+//           final age = profile.age ?? "N/A";
+//           final visitorId = profile.profileId;
+//           final imageUrl = _getProfileImage(profile);
+
+//           return GestureDetector(
+//             onTap: () => _navigateToUserProfile(context, profile),
+//             child: Stack(
+//               children: [
+//                 _buildProfileImage(imageUrl),
+//                 _buildUserInfo(name, age),
+//                 _buildActionButtons(visitorId, screenWidth, screenHeight), // Removed Flexible from here
+//                 if (_showNo) _buildActionOverlay(screenWidth, screenHeight, 'DISLIKE', -0.3),
+//                 if (_showLike) _buildActionOverlay(screenWidth, screenHeight, 'LIKE', 0.3),
+//                 if (_showSuperLike) _buildActionOverlay(screenWidth, screenHeight, 'SUPERLIKE', -0.2),
+//                 _buildMoreOptionsButton(context),
+//                 _buildMessageButton(),
+//               ],
+//             ),
+//           );
+//         },
+//       ),
+//     );
+//   }
+
+//   // Helper function to determine profile image
+//   ImageProvider<Object> _getProfileImage(profile) {
+//     return (profile.imageUrl != null && profile.imageUrl!.isNotEmpty)
+//         ? NetworkImage(profile.imageUrl!)
+//         : const AssetImage('assets/images/homeImage.png');
+//   }
+
+//   // Navigation to user profile page
+//   void _navigateToUserProfile(BuildContext context, profile) {
+//     Navigator.push(
+//       context,
+//       MaterialPageRoute(
+//         builder: (context) => UserProfilePage(profile: profile),
+//       ),
+//     );
+//   }
+
+//   // Build the profile image widget
+//   Widget _buildProfileImage(ImageProvider<Object> imageUrl) {
+//     return Container(
+//       height: double.infinity,
+//       width: double.infinity,
+//       decoration: BoxDecoration(
+//         borderRadius: BorderRadius.circular(10),
+//         image: DecorationImage(
+//           image: imageUrl,
+//           fit: BoxFit.cover,
+//         ),
+//       ),
+//     );
+//   }
+
+//   // Build the user info section (name, age, distance)
+//   Widget _buildUserInfo(String name, String age) {
+//     final screenWidth = MediaQuery.of(context).size.width;
+//     final screenHeight = MediaQuery.of(context).size.height;
+//     return Positioned(
+//       bottom: 0,
+//       child: Container(
+//         width: screenWidth * 0.9,
+//         padding: EdgeInsets.symmetric(vertical: screenHeight * 0.01),
+//         color: Colors.black.withOpacity(0.5),
+//         child: Padding(
+//           padding: EdgeInsets.all(screenWidth * 0.02),
+//           child: Column(
+//             crossAxisAlignment: CrossAxisAlignment.start,
+//             children: [
+//               Text(
+//                 '$name, $age',
+//                 style: TextStyle(
+//                   color: Colors.white,
+//                   fontSize: screenWidth * 0.04,
+//                   fontWeight: FontWeight.bold,
+//                 ),
+//               ),
+//               SizedBox(height: screenHeight * 0.005),
+//               Text(
+//                 '20 km away',
+//                 style: TextStyle(
+//                   color: Colors.white,
+//                   fontSize: screenWidth * 0.03,
+//                 ),
+//               ),
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+
+//   // Build the action buttons (Like, Dislike, Superlike, etc.)
+//   Widget _buildActionButtons(visitorId, screenWidth, screenHeight) {
+//     return Positioned(
+//       bottom: screenHeight * 0.1,
+//       child: Padding(
+//         padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.02),
+//         child: Row(
+//           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//           children: [
+//             _buildActionButton('assets/images/left.png', 'DISLIKE', visitorId, -0.3, () => _toggleActionFlag('DISLIKE')),
+//             _buildActionButton('assets/images/love2.png', 'LIKE', visitorId, 0.3, () => _toggleActionFlag('LIKE')),
+//             _buildActionButton('assets/images/star2.png', 'SUPERLIKE', visitorId, -0.2, () => _toggleActionFlag('SUPERLIKE')),
+//             _buildActionButton('assets/images/cancel.png', 'DISLIKE', visitorId, -0.3, () => _toggleActionFlag('DISLIKE')),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+
+//   // Helper function for action button widget
+//   Widget _buildActionButton(String asset, String action, String visitorId, double rotationAngle, VoidCallback onTap) {
+//     return GestureDetector(
+//       onTap: onTap,
+//       child: Image.asset(asset),
+//     );
+//   }
+
+//   // Toggle action flags based on the action type
+//   void _toggleActionFlag(String action) {
+//     setState(() {
+//       if (action == 'DISLIKE') {
+//         _showNo = !_showNo;
+//       } else if (action == 'LIKE') {
+//         _showLike = !_showLike;
+//       } else if (action == 'SUPERLIKE') {
+//         _showSuperLike = !_showSuperLike;
+//       }
+//     });
+//   }
+
+//   // Build the action overlay widget
+//   Widget _buildActionOverlay(double screenWidth, double screenHeight, String label, double rotationAngle) {
+//     return Positioned.fill(
+//       child: Transform.rotate(
+//         angle: rotationAngle,
+//         child: Center(
+//           child: Text(
+//             label,
+//             style: TextStyle(
+//               fontSize: screenWidth * 0.06,
+//               color: Colors.white,
+//               fontWeight: FontWeight.bold,
+//             ),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+
+//   // Build the more options button (3 dots)
+//   Widget _buildMoreOptionsButton(BuildContext context) {
+//     return Positioned(
+//       top: 10,
+//       right: 10,
+//       child: IconButton(
+//         icon: const Icon(Icons.more_horiz, color: Colors.white, size: 30),
+//         onPressed: () => showSmallPopup(context),
+//       ),
+//     );
+//   }
+
+//   // Build the message icon button
+//   Widget _buildMessageButton() {
+//     final screenHeight = MediaQuery.of(context).size.height;
+//     return Positioned(
+//       bottom: screenHeight * 0.2,
+//       right: 10,
+//       child: InkWell(
+//         onTap: () => _navigateToChatDetail(context),
+//         child: Image.asset('assets/images/icons/messageicon.png'),
+//       ),
+//     );
+//   }
+
+//   // Navigate to ChatDetailScreen
+//   void _navigateToChatDetail(BuildContext context) {
+//     Navigator.push(
+//       context,
+//       MaterialPageRoute(
+//         builder: (context) => const ChatDetailScreen(
+//           name: 'Daniel',
+//           profileImage: 'assets/images/homeImage.png',
+//           isOnline: true,
+//           lastMessage: 'Hello',
+//         ),
+//       ),
+//     );
+//   }
+// }

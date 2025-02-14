@@ -161,5 +161,5 @@ final routes = <String, Widget Function(BuildContext)>{
   editLowProfileScreen: (_) => const EditLowProfileScreen(),
   updatePassword: (_) => const UpdatePassword(),
   imageUploadScreennn: (_) => const ImageUploadScreennn(),
-  chatDetailScreen: (_) => const ChatDetailScreen(name: '', profileImage: '', lastMessage: '',)
+  chatDetailScreen: (_) => const ChatDetailScreen(name: '', profileImage: '', lastMessage: '',),
 };

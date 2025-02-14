@@ -323,7 +323,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // Start the timer to show popup every 2 minutes
   void startPopupTimer() {
-    popupTimer = Timer.periodic(const Duration(minutes: 2), (timer) {
+    popupTimer = Timer.periodic(const Duration(minutes: 10), (timer) {
       showPopup();
     });
   }

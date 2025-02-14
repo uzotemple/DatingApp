@@ -1,11 +1,14 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:love_bird/chat/chat_screen.dart';
+// import 'package:love_bird/chat/chat_screen.dart';
 
 import 'package:love_bird/chat/liveChat.dart';
 import 'package:love_bird/config/constants.dart';
 import 'package:love_bird/config/routes.dart';
+import 'package:love_bird/providers/auth_provider.dart';
+import 'package:love_bird/providers/story_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 
 import 'dart:math';
@@ -18,6 +21,45 @@ class Mainchat extends StatefulWidget {
 }
 
 class _MainchatState extends State<Mainchat> {
+  @override
+  void initState() {
+    super.initState();
+    filteredChatItems = chatItems;
+    searchController.addListener(_filterChatItems);
+    Future.delayed(Duration.zero, () {
+      final authProvider = Provider.of<AuthProvider>(context, listen: false);
+      final token = authProvider.accessToken;
+      if (token != null) {
+        Provider.of<StoryProvider>(context, listen: false).loadStories(token);
+      }
+    });
+  }
+
+  Future<void> _addStory(File file) async {
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+    final token = authProvider.accessToken;
+
+    if (token == null) {
+      // Handle the case where the user is not authenticated
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('You must be logged in to add a story')),
+      );
+      return;
+    }
+
+    try {
+      await Provider.of<StoryProvider>(context, listen: false)
+          .addStory(token, file);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Story added successfully!')),
+      );
+    } catch (error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to add story: $error')),
+      );
+    }
+  }
+
   int _currentIndex = 2;
   List<List<Map<String, String>>> stories = [[]];
 
@@ -41,12 +83,12 @@ class _MainchatState extends State<Mainchat> {
   List<Map<String, dynamic>> filteredChatItems = [];
   TextEditingController searchController = TextEditingController();
 
-  @override
-  void initState() {
-    super.initState();
-    filteredChatItems = chatItems;
-    searchController.addListener(_filterChatItems);
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   filteredChatItems = chatItems;
+  //   searchController.addListener(_filterChatItems);
+  // }
 
   void _filterChatItems() {
     final query = searchController.text.toLowerCase();
@@ -175,43 +217,125 @@ class _MainchatState extends State<Mainchat> {
                   ),
                 ),
                 const SizedBox(height: 5),
-                SizedBox(
-                  height: 100,
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    children: [
-                      if (stories.isEmpty ||
-                          (stories.isNotEmpty && stories[0].isEmpty))
-                        profileAvatarMain(
-                            "Add Story", "assets/images/homeImage.png")
-                      else
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => StoryViewerScreen(
-                                  storyPaths: stories.isNotEmpty &&
-                                          stories[0].isNotEmpty
-                                      ? stories[0]
-                                      : [],
-                                ),
-                              ),
-                            );
-                          },
-                          child: profileAvatarMainStory(
-                              "Your Story", "assets/images/homeImage.png"),
-                        ),
-                      profileAvatar("Lil Mama", "assets/images/homeImage.png",
-                          false, true),
-                      profileAvatar("John Cena", "assets/images/homeImage.png",
-                          false, false),
-                      profileAvatar("Katy Butch", "assets/images/homeImage.png",
-                          true, true),
-                    ],
+                // Consumer<StoryProvider>(
+                //   builder: (context, storyProvider, child) {
+                //     return SizedBox(
+                //       height: 100,
+                //       child: ListView(
+                //         scrollDirection: Axis.horizontal,
+                //         children: [
+                //           // Add Story Button
+                //           GestureDetector(
+                //             onTap: () => _showAddStatusOptions(context),
+                //             child: profileAvatarMain(
+                //                 "Add Story", "assets/images/homeImage.png"),
+                //           ),
+
+                //           // Show loading indicator if loading
+                //           if (storyProvider.isLoading)
+                //             const Center(child: CircularProgressIndicator())
+
+                //           // Show stories if available
+                //           else if (storyProvider.stories.isNotEmpty)
+                //             ...storyProvider.stories.map((story) {
+                //               return GestureDetector(
+                //                 onTap: () {
+                //                   Navigator.push(
+                //                     context,
+                //                     MaterialPageRoute(
+                //                       builder: (context) => StoryViewerScreen(
+                //                         storyPaths: story[
+                //                             'media'], // Pass media list to StoryViewerScreen
+                //                       ),
+                //                     ),
+                //                   );
+                //                 },
+                //                 child: profileAvatarMainStory(
+                //                   "Your Story",
+                //                   story['media'][
+                //                       0], // Assuming 'media' contains URLs or paths to images
+                //                 ),
+                //               );
+                //             }).toList(),
+                //         ],
+                //       ),
+                //     );
+                //   },
+                // ),
+
+              Consumer<StoryProvider>(
+                  builder: (context, storyProvider, child) {
+                    return SizedBox(
+                      height: 100,
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        children: [
+                          // Show "Add Story" if no stories exist
+                          if (storyProvider.stories.isEmpty)
+                            GestureDetector(
+                              onTap: () => _showAddStatusOptions(context),
+                              child: profileAvatarMain(
+                                  "Add Story", "assets/images/homeImage.png"),
+                            )
+                          else
+                            // Show stories if available
+                            ...storyProvider.stories.map((story) {
+                              return GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => StoryViewerScreen(
+                                          storyPaths: story[
+                                              'media'], // Pass media list to StoryViewerScreen
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  child:
+
+                                      // profileAvatarMainStory(
+                                      //   "Your Story",
+                                      //   story['media'][0], true, // Assuming 'media' contains URLs or paths to images
+                                      // ),
+
+                                      profileAvatarMainStory(
+                                    "Your Story",
+                                    story['media'][0],
+                                    storyProvider.stories
+                                        .isNotEmpty, // Ensuring this updates correctly
+                                  ));
+                            }).toList(),
+
+                          // Show loading indicator if loading
+                          if (storyProvider.isLoading)
+                            const Center(child: CircularProgressIndicator()),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+
+                const Divider(
+                  thickness: 1,
+                  color: Color(0xFF3628DD),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Messages",
+                      style: TextStyle(
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? Colors.white
+                            : Colors.black,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
                   ),
                 ),
-                const Divider(),
                 loveChatItem("Zenkonect", "You have 3 new messages!", true),
                 Expanded(
                   child: ListView.builder(
@@ -242,106 +366,6 @@ class _MainchatState extends State<Mainchat> {
                   child: Image.asset('assets/images/robot.png'))),
         ],
       ),
-      // bottomNavigationBar: Padding(
-      //   padding: EdgeInsets.only(
-      //     left: MediaQuery.of(context).size.width * 0.03, // 3% of screen width
-      //     right: MediaQuery.of(context).size.width * 0.03,
-      //     top: MediaQuery.of(context).size.height * 0.01, // 1% of screen height
-      //     bottom:
-      //         MediaQuery.of(context).size.height * 0.03, // 3% of screen height
-      //   ),
-      //   child: Container(
-      //     decoration: BoxDecoration(
-      //       color: const Color.fromRGBO(97, 86, 234, 0.19),
-      //       borderRadius: BorderRadius.circular(50),
-      //     ),
-      //     child: ClipRRect(
-      //       borderRadius: BorderRadius.circular(50),
-      //       child: BottomNavigationBar(
-      //         type: BottomNavigationBarType.fixed,
-      //         backgroundColor: Colors.transparent,
-      //         elevation: 0,
-      //         items: [
-      //           BottomNavigationBarItem(
-      //             icon: Image.asset(
-      //               'assets/images/icons/homeBlack.png',
-      //               width: MediaQuery.of(context).size.width * 0.08,
-      //               height: MediaQuery.of(context).size.width * 0.08,
-      //             ),
-      //             label: 'Home',
-      //           ),
-      //           BottomNavigationBarItem(
-      //             icon: Image.asset(
-      //               'assets/images/icons/localcon.png',
-      //               width: MediaQuery.of(context).size.width * 0.08,
-      //               height: MediaQuery.of(context).size.width * 0.08,
-      //             ),
-      //             label: 'People Nearby',
-      //           ),
-      //           BottomNavigationBarItem(
-      //             icon: Image.asset(
-      //               'assets/images/icons/blueChat.png',
-      //               width: MediaQuery.of(context).size.width * 0.08,
-      //               height: MediaQuery.of(context).size.width * 0.08,
-      //             ),
-      //             label: 'Chats',
-      //           ),
-      //           BottomNavigationBarItem(
-      //             icon: Image.asset(
-      //               'assets/images/icons/matches.png',
-      //               width: MediaQuery.of(context).size.width * 0.08,
-      //               height: MediaQuery.of(context).size.width * 0.08,
-      //             ),
-      //             label: 'Matches',
-      //           ),
-      //           BottomNavigationBarItem(
-      //             icon: Image.asset(
-      //               'assets/images/icons/personIcon.png',
-      //               width: MediaQuery.of(context).size.width * 0.07,
-      //               height: MediaQuery.of(context).size.width * 0.07,
-      //             ),
-      //             label: 'Profile',
-      //           ),
-      //         ],
-      //         selectedLabelStyle: TextStyle(
-      //           color: Colors.black, // Ensure selected text is black
-      //           fontSize: MediaQuery.of(context).size.width * 0.03,
-      //         ),
-      //         unselectedLabelStyle: TextStyle(
-      //           color: Colors.black, // Ensure unselected text is black
-      //           fontSize: MediaQuery.of(context).size.width * 0.03,
-      //         ),
-      //         selectedItemColor:
-      //             Colors.black, // Make selected item icon and label black
-      //         unselectedItemColor:
-      //             Colors.black, // Make unselected item icon black
-      //         // selectedItemColor: Colors.blue, // Set the selected label color
-      //         // unselectedItemColor:
-      //         //      Colors.black, // Set the unselected label color
-      //         onTap: (index) {
-      //           // Handle navigation based on the index
-      //           switch (index) {
-      //             case 0:
-      //               Navigator.pushNamed(context, homeScreen);
-      //               break;
-      //             case 1:
-      //               Navigator.pushNamed(context, peopleNearbyPage);
-      //               break;
-      //             case 2:
-      //               Navigator.pushNamed(context, mainchat);
-      //               break;
-      //             case 3:
-      //               Navigator.pushNamed(context, likes);
-      //               break;
-      //             case 4:
-      //               Navigator.pushNamed(context, profile);
-      //               break;
-      //           }
-      //         },
-      //       ),
-      //     ),
-      //   ),
-      // ),
       bottomNavigationBar: Padding(
         padding: EdgeInsets.only(
           left: MediaQuery.of(context).size.width * 0.03, // 3% of screen width
@@ -628,16 +652,16 @@ class _MainchatState extends State<Mainchat> {
           ),
           onTap: () {
             if (selectedChatIndexes.isEmpty) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ChatDetailScreen(
-                    name: name,
-                    profileImage: imagePath,
-                    lastMessage: message,
-                  ),
-                ),
-              );
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) => ChatDetailScreen(
+              //       name: name,
+              //       profileImage: imagePath,
+              //       lastMessage: message,
+              //     ),
+              //   ),
+              // );
             } else {
               setState(() {
                 if (selectedChatIndexes.contains(index)) {
@@ -697,7 +721,68 @@ class _MainchatState extends State<Mainchat> {
     );
   }
 
-  Widget profileAvatarMainStory(String name, String imagePath) {
+  // Widget profileAvatarMainStory(String name, String imagePath) {
+  //   return Padding(
+  //     padding: const EdgeInsets.only(left: 8, right: 8),
+  //     child: Column(
+  //       children: [
+  //         Stack(
+  //           children: [
+  //             // Container to add a red circular border
+
+  //             Container(
+  //               decoration: BoxDecoration(
+  //                 color: Colors.red,
+  //                 borderRadius: BorderRadius.circular(35),
+  //               ),
+  //               padding: const EdgeInsets.all(1.5),
+  //               child: Container(
+  //                 padding: const EdgeInsets.all(4),
+  //                 decoration: const BoxDecoration(
+  //                   color: Colors.white,
+  //                   shape: BoxShape.circle,
+  //                 ),
+  //                 child: CircleAvatar(
+  //                   radius:
+  //                       30, // Half of container's height/width for centering
+  //                   backgroundImage: AssetImage(imagePath),
+  //                 ),
+  //               ),
+  //             ),
+  //             Positioned(
+  //               right: 6,
+  //               bottom: 0,
+  //               child: GestureDetector(
+  //                 onTap: () {
+  //                   _showAddStatusOptions(context);
+  //                 },
+  //                 child: Container(
+  //                   height: 20,
+  //                   width: 20,
+  //                   decoration: const BoxDecoration(
+  //                     color: blue,
+  //                     shape: BoxShape.circle,
+  //                   ),
+  //                   child: const Center(
+  //                     child: Icon(
+  //                       Icons.add,
+  //                       color: Colors.white,
+  //                       size: 15,
+  //                     ),
+  //                   ),
+  //                 ),
+  //               ),
+  //             ),
+  //           ],
+  //         ),
+  //         const SizedBox(height: 4),
+  //         Text(name, style: const TextStyle(fontSize: 12)),
+  //       ],
+  //     ),
+  //   );
+  // }
+
+  Widget profileAvatarMainStory(String name, String imagePath, bool hasStory) {
     return Padding(
       padding: const EdgeInsets.only(left: 8, right: 8),
       child: Column(
@@ -705,7 +790,6 @@ class _MainchatState extends State<Mainchat> {
           Stack(
             children: [
               // Container to add a red circular border
-
               Container(
                 decoration: BoxDecoration(
                   color: Colors.red,
@@ -725,30 +809,33 @@ class _MainchatState extends State<Mainchat> {
                   ),
                 ),
               ),
-              Positioned(
-                right: 6,
-                bottom: 0,
-                child: GestureDetector(
-                  onTap: () {
-                    _showAddStatusOptions(context);
-                  },
-                  child: Container(
-                    height: 20,
-                    width: 20,
-                    decoration: const BoxDecoration(
-                      color: blue,
-                      shape: BoxShape.circle,
-                    ),
-                    child: const Center(
-                      child: Icon(
-                        Icons.add,
-                        color: Colors.white,
-                        size: 15,
+
+              // Show "Add" button only if the user has no story
+              if (!hasStory)
+                Positioned(
+                  right: 6,
+                  bottom: 0,
+                  child: GestureDetector(
+                    onTap: () {
+                      _showAddStatusOptions(context);
+                    },
+                    child: Container(
+                      height: 20,
+                      width: 20,
+                      decoration: const BoxDecoration(
+                        color: blue,
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Center(
+                        child: Icon(
+                          Icons.add,
+                          color: Colors.white,
+                          size: 15,
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
             ],
           ),
           const SizedBox(height: 4),
@@ -760,58 +847,55 @@ class _MainchatState extends State<Mainchat> {
 
   void _showAddStatusOptions(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    // final storyProvider = Provider.of<StoryProvider>(context, listen: false);
+    // final authProvider = Provider.of<AuthProvider>(context,
+    // listen: false); // Assuming AuthProvider stores token
+    // String token = authProvider.accessToken ?? '';
+
     showModalBottomSheet(
       context: context,
+      backgroundColor: isDarkMode ? Colors.grey[900] : Colors.white,
       builder: (context) {
         return SizedBox(
           height: screenSize.height * 0.35,
           child: Column(
             children: [
               ListTile(
-                leading: const Icon(Icons.camera_alt),
-                title: const Text('Take a photo'),
+                leading: Icon(Icons.camera_alt,color: isDarkMode ? Colors.white : Colors.black),
+                title: Text('Take a photo', style: TextStyle(color: isDarkMode ? Colors.white : Colors.black),),
                 onTap: () async {
                   final pickedFile =
                       await ImagePicker().pickImage(source: ImageSource.camera);
                   if (pickedFile != null) {
-                    setState(() {
-                      if (stories.isEmpty) {
-                        stories.add([
-                          {'type': 'image', 'path': pickedFile.path}
-                        ]);
-                      } else {
-                        stories[0]
-                            .add({'type': 'image', 'path': pickedFile.path});
-                      }
-                    });
+                    File imageFile = File(pickedFile.path);
+                    await _addStory(
+                        imageFile); // Use _addStory instead of storyProvider.addStory
                   }
+                  // if (pickedFile != null) {
+                  //   File imageFile = File(pickedFile.path);
+                  //   await storyProvider.addStory(
+                  //       token, imageFile); // Pass the single image here
+                  // }
                   Navigator.pop(context);
                 },
               ),
               ListTile(
-                leading: const Icon(Icons.image),
-                title: const Text('Choose from gallery'),
+                leading: Icon(Icons.image, color: isDarkMode ? Colors.white : Colors.black),
+                title: Text('Choose from gallery', style: TextStyle(color: isDarkMode ? Colors.white : Colors.black),),
                 onTap: () async {
                   final pickedFile = await ImagePicker()
                       .pickImage(source: ImageSource.gallery);
                   if (pickedFile != null) {
-                    setState(() {
-                      if (stories.isEmpty) {
-                        stories.add([
-                          {'type': 'image', 'path': pickedFile.path}
-                        ]);
-                      } else {
-                        stories[0]
-                            .add({'type': 'image', 'path': pickedFile.path});
-                      }
-                    });
+                    File imageFile = File(pickedFile.path);
+                    await _addStory(imageFile); // Pass the single image here
                   }
                   Navigator.pop(context);
                 },
               ),
               ListTile(
-                leading: const Icon(Icons.video_library),
-                title: const Text('Choose a video'),
+                leading: Icon(Icons.video_library, color: isDarkMode ? Colors.white : Colors.black),
+                title: Text('Choose a video', style: TextStyle(color: isDarkMode ? Colors.white : Colors.black),),
                 onTap: () async {
                   final pickedFile = await ImagePicker()
                       .pickVideo(source: ImageSource.gallery);
@@ -831,8 +915,8 @@ class _MainchatState extends State<Mainchat> {
                 },
               ),
               ListTile(
-                leading: const Icon(Icons.cancel),
-                title: const Text('Cancel'),
+                leading: Icon(Icons.cancel, color: isDarkMode ? Colors.white : Colors.black),
+                title: Text('Cancel', style: TextStyle(color: isDarkMode ? Colors.white : Colors.black),),
                 onTap: () {
                   Navigator.pop(context);
                 },
@@ -854,6 +938,7 @@ class StoryViewerScreen extends StatefulWidget {
   });
 
   @override
+  // ignore: library_private_types_in_public_api
   _StoryViewerScreenState createState() => _StoryViewerScreenState();
 }
 
@@ -992,6 +1077,7 @@ class VideoPlayerWidget extends StatefulWidget {
   const VideoPlayerWidget({super.key, required this.videoPath});
 
   @override
+  // ignore: library_private_types_in_public_api
   _VideoPlayerWidgetState createState() => _VideoPlayerWidgetState();
 }
 
@@ -1026,108 +1112,6 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   }
 }
 
-// class VideoPlayerWidget extends StatefulWidget {
-//   final String videoPath;
-
-//   const VideoPlayerWidget({Key? key, required this.videoPath})
-//       : super(key: key);
-
-//   @override
-//   _VideoPlayerWidgetState createState() => _VideoPlayerWidgetState();
-// }
-
-// class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
-//   late VideoPlayerController _controller;
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     _controller = VideoPlayerController.file(File(widget.videoPath))
-//       ..initialize().then((_) {
-//         setState(() {}); // Update the UI after initialization
-//         _controller.play();
-//         _controller.setLooping(true);
-//       });
-//   }
-
-//   @override
-//   void dispose() {
-//     _controller.dispose();
-//     super.dispose();
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return _controller.value.isInitialized
-//         ? Stack(
-//             children: [
-//               AspectRatio(
-//                 aspectRatio: _controller.value.aspectRatio,
-//                 child: VideoPlayer(_controller),
-//               ),
-//               Positioned(
-//                 top: 10.0,
-//                 left: 10.0,
-//                 right: 10.0,
-//                 child: Column(
-//                   children: [
-//                     // Progress Indicator and Time Labels
-//                     Row(
-//                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                       children: [
-//                         ValueListenableBuilder(
-//                           valueListenable: _controller,
-//                           builder: (context, VideoPlayerValue value, child) {
-//                             final currentTime = value.position;
-//                             final duration = value.duration;
-//                             return Text(
-//                               _formatDuration(currentTime),
-//                               style: const TextStyle(color: Colors.white),
-//                             );
-//                           },
-//                         ),
-//                         ValueListenableBuilder(
-//                           valueListenable: _controller,
-//                           builder: (context, VideoPlayerValue value, child) {
-//                             final duration = value.duration;
-//                             return Text(
-//                               _formatDuration(duration),
-//                               style: const TextStyle(color: Colors.white),
-//                             );
-//                           },
-//                         ),
-//                       ],
-//                     ),
-//                     // Linear Progress Bar
-//                     ValueListenableBuilder(
-//                       valueListenable: _controller,
-//                       builder: (context, VideoPlayerValue value, child) {
-//                         final progress = value.position.inMilliseconds /
-//                             value.duration.inMilliseconds;
-//                         return LinearProgressIndicator(
-//                           value: progress.isNaN ? 0 : progress,
-//                           color: Colors.blue,
-//                           backgroundColor: Colors.grey[300],
-//                         );
-//                       },
-//                     ),
-//                   ],
-//                 ),
-//               ),
-//             ],
-//           )
-//         : const Center(child: CircularProgressIndicator());
-//   }
-
-//   // Helper function to format the duration
-//   String _formatDuration(Duration duration) {
-//     String twoDigits(int n) => n.toString().padLeft(2, '0');
-//     final minutes = twoDigits(duration.inMinutes.remainder(60));
-//     final seconds = twoDigits(duration.inSeconds.remainder(60));
-//     return "$minutes:$seconds";
-//   }
-// }
-
 void showViewsPopup(BuildContext context) {
   // const Color blue = Color.fromRGBO(54, 40, 221, 1.0);
 
@@ -1156,6 +1140,7 @@ class HeartAnimationScreen extends StatefulWidget {
   const HeartAnimationScreen({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _HeartAnimationScreenState createState() => _HeartAnimationScreenState();
 }
 
@@ -1239,6 +1224,7 @@ class AnimatedHeart extends StatefulWidget {
   });
 
   @override
+  // ignore: library_private_types_in_public_api
   _AnimatedHeartState createState() => _AnimatedHeartState();
 }
 

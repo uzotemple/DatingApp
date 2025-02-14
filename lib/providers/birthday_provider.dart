@@ -7,40 +7,6 @@ import 'dart:developer' as developer;
 import 'dart:convert';
 
 import 'package:provider/provider.dart';
-// class CelebrateYouProvider with ChangeNotifier {
-//   String _month = '';
-//   String _day = '';
-//   String _year = '';
-//   String _dob = '';
-//   DateTime now = DateTime.now().toUtc();
-//   String get month => _month;
-//   String get day => _day;
-//   String get year => _year;
-//   String get dob => _dob;
-//   void setMonth(String value) {
-//     _month = value;
-//     notifyListeners();
-//   }
-
-//   void setDay(String value) {
-//     _day = value;
-//     notifyListeners();
-//   }
-
-//   void setYear(String value) {
-//     _year = value;
-//     notifyListeners();
-//   }
-
-//   String get dobBirth {
-//     if (_year.isNotEmpty && _month.isNotEmpty && _day.isNotEmpty) {
-//       _dob =
-//           '${_year}-${_month}-${_day}T${now.hour}:${now.minute}:${now.second}.000Z';
-//     }
-//     return _dob;
-//   }
-// }
-
 class CelebrateYouProvider with ChangeNotifier {
   String _month = '';
   String _day = '';
@@ -191,10 +157,10 @@ class CelebrateYouProvider with ChangeNotifier {
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        developer.log('Profile updated successfully: ${response.body}');
+        developer.log('Profile updated successfully: ${response.data}');
         Navigator.pushNamed(context, gender);
       } else {
-        final Map<String, dynamic> responseBody = jsonDecode(response.body);
+        final Map<String, dynamic> responseBody = jsonDecode(response.data);
         final errorMessage = responseBody['message'] ?? 'Unknown error';
 
         developer.log(
@@ -202,7 +168,7 @@ class CelebrateYouProvider with ChangeNotifier {
 
         _showErrorDialog(context, "Error: $errorMessage");
         throw Exception(
-            'Failed to create profile. Status code: ${response.statusCode}, Response: ${response.body}');
+            'Failed to create profile. Status code: ${response.statusCode}, Response: ${response.data}');
       }
     } catch (e) {
       developer.log('Error creating profile: $e');

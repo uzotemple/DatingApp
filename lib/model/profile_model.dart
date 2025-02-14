@@ -15,6 +15,16 @@ class Profile {
   final String? educationLevel;
   final String? profession;
   final bool? pics;
+  final String? religion;
+  final String? sexuality;
+  final String? smoking;
+  final String? drinking;
+  final String? pets;
+  final String? children;
+  final String? personality;
+  final String? relationshipStatus;
+  final String? starSign;
+  final String? language;
   Profile(
       {this.profileId,
       this.nickname,
@@ -31,7 +41,18 @@ class Profile {
       this.interest,
       this.educationLevel,
       this.profession,
-      this.pics});
+      this.pics,
+      this.drinking,
+      this.pets,
+      this.religion,
+      this.sexuality,
+      this.smoking,
+      this.children,
+      this.language,
+      this.personality,
+      this.relationshipStatus,
+      this.starSign
+      });
 
   factory Profile.fromJson(Map<String, dynamic> json) {
     return Profile(
@@ -49,6 +70,16 @@ class Profile {
       bio: json["bio"] ?? "Unknown",
       interest: json["interest"] ?? "Unknown",
       educationLevel: json["educationLevel"] ?? "Unknown",
+      religion: json['religion'] ?? "",
+      sexuality: json['sexuality'] ?? "",
+      smoking: json['smoking'] ?? "",
+      drinking: json['drinking'] ?? "",
+      pets: json['pets'] ?? "",
+      children: json['children'] ?? "",
+      personality: json['personality'] ?? "",
+      relationshipStatus: json['relationshipStatus'] ?? "",
+      starSign: json['starSign'] ?? "",
+      language: json['language'] ?? "",
 
       // imageUrl: json["imageLinks"] != null && json["imageLinks"].isNotEmpty
       //     ? json["imageLinks"][0]["link"]

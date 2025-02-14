@@ -38,10 +38,10 @@ class PaymentProvider extends ChangeNotifier {
 
       // Check for successful response
       if (response.statusCode == 200 || response.statusCode == 201) {
-        developer.log('Money recieved: ${response.body}');
+        developer.log('Money recieved: ${response.data}');
         Navigator.pushNamed(context, homeScreen);
       } else {
-        final Map<String, dynamic> responseBody = jsonDecode(response.body);
+        final Map<String, dynamic> responseBody = jsonDecode(response.data);
         final errorMessage = responseBody['message'] ?? 'Unknown error';
 
         //  Print and log the error
@@ -50,7 +50,7 @@ class PaymentProvider extends ChangeNotifier {
 
         _showErrorDialog(context, "Error: $errorMessage");
         throw Exception(
-            'Failed to verify transaction. Status code: ${response.statusCode}, Response: ${response.body}');
+            'Failed to verify transaction. Status code: ${response.statusCode}, Response: ${response.data}');
 
         //  return;
       }

@@ -35,14 +35,14 @@ class UpdatePasswordProvider extends ChangeNotifier {
           ),
         );
       } else {
-        final Map<String, dynamic> responseBody = jsonDecode(response.body);
+        final Map<String, dynamic> responseBody = jsonDecode(response.data);
         final errorMessage = responseBody['message'] ?? 'Unknown error';
         developer.log(
           'Password update failed. Status code: ${response.statusCode}, Error: $errorMessage',
         );
         _showErrorDialog(context, "Error: $errorMessage");
         throw Exception(
-            'Failed to create profile. Status code: ${response.statusCode}, Response: ${response.body}');
+            'Failed to create profile. Status code: ${response.statusCode}, Response: ${response.data}');
 
         //  return;
       }

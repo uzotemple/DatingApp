@@ -96,10 +96,10 @@ class DistanceProvider extends ChangeNotifier {
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        developer.log('Profile updated successfully: ${response.body}');
+        developer.log('Profile updated successfully: ${response.data}');
         Navigator.pushNamed(context, interestsSelectionScreen);
       } else {
-        final Map<String, dynamic> responseBody = jsonDecode(response.body);
+        final Map<String, dynamic> responseBody = jsonDecode(response.data);
         final errorMessage = responseBody['message'] ?? 'Unknown error';
 
         developer.log(
@@ -107,7 +107,7 @@ class DistanceProvider extends ChangeNotifier {
 
         _showErrorDialog(context, "Error: $errorMessage");
         throw Exception(
-            'Failed to create profile. Status code: ${response.statusCode}, Response: ${response.body}');
+            'Failed to create profile. Status code: ${response.statusCode}, Response: ${response.data}');
       }
     } catch (e) {
       developer.log('Error creating profile: $e');

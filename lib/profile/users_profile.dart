@@ -848,6 +848,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
 
             const SizedBox(height: 20.0),
             // Wrap the following content in a SingleChildScrollView
+
             Expanded(
               child: SingleChildScrollView(
                 child: Padding(
@@ -868,14 +869,14 @@ class _UserProfilePageState extends State<UserProfilePage> {
                             style: TextStyle(
                                 fontSize: 22, fontWeight: FontWeight.bold),
                           ),
-                          SizedBox(width: screenWidth * 0.00),
+                          SizedBox(width: screenWidth * 0.0),
                         ],
                       ),
-
                       const SizedBox(height: 16.0),
                       Row(
                         children: [
                           Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               ProfileDetail(
                                 icon: Icons.man,
@@ -886,9 +887,13 @@ class _UserProfilePageState extends State<UserProfilePage> {
                                 title: "$height cm, $weight kg",
                               ),
                               ProfileDetail(
-                                  icon: Icons.work, title: profession),
+                                icon: Icons.work,
+                                title: profession,
+                              ),
                               ProfileDetail(
-                                  icon: Icons.school, title: educationLevel),
+                                icon: Icons.school,
+                                title: educationLevel,
+                              ),
                               ProfileDetail(
                                 icon: Icons.home,
                                 title: "Lives in  $country",
@@ -902,15 +907,15 @@ class _UserProfilePageState extends State<UserProfilePage> {
                           SizedBox(width: screenWidth * 0.09),
                           Expanded(
                             child: Text(
-                              bio, style: const TextStyle(fontSize: 16),
-                              textAlign: TextAlign.center,
-                              // This will ensure the text is truncated if it overflows
+                              bio,
+                              style: const TextStyle(fontSize: 16),
+                              textAlign: TextAlign
+                                  .start, // Align text to the left (start)
                             ),
                           ),
                         ],
                       ),
-                      const SizedBox(height: 20.0),
-                      // Relationship basics
+                      SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                       const Text(
                         'My relationship Basics',
                         style: TextStyle(
@@ -923,7 +928,6 @@ class _UserProfilePageState extends State<UserProfilePage> {
                         color: Colors.pinkAccent,
                       ),
                       const SizedBox(height: 20),
-                      // Interests
                       const Text(
                         'Interests',
                         style: TextStyle(
@@ -961,7 +965,122 @@ class _UserProfilePageState extends State<UserProfilePage> {
                   ),
                 ),
               ),
-            ),
+            )
+
+            // Expanded(
+            //   child: SingleChildScrollView(
+            //     child: Padding(
+            //       padding: const EdgeInsets.symmetric(horizontal: 20),
+            //       child: Column(
+            //         crossAxisAlignment: CrossAxisAlignment.start,
+            //         children: [
+            //           Row(
+            //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //             children: [
+            //               Text(
+            //                 '$name, $age',
+            //                 style: const TextStyle(
+            //                     fontSize: 22, fontWeight: FontWeight.bold),
+            //               ),
+            //               const Text(
+            //                 'Bio',
+            //                 style: TextStyle(
+            //                     fontSize: 22, fontWeight: FontWeight.bold),
+            //               ),
+            //               SizedBox(width: screenWidth * 0.0),
+            //             ],
+            //           ),
+
+            //           const SizedBox(height: 15.0),
+            //           Row(
+            //             children: [
+            //               Column(
+            //                 children: [
+            //                   ProfileDetail(
+            //                     icon: Icons.man,
+            //                     title: gender,
+            //                   ),
+            //                   ProfileDetail(
+            //                     icon: Icons.rule_sharp,
+            //                     title: "$height cm, $weight kg",
+            //                   ),
+            //                   ProfileDetail(
+            //                       icon: Icons.work, title: profession),
+            //                   ProfileDetail(
+            //                       icon: Icons.school, title: educationLevel),
+            //                   ProfileDetail(
+            //                     icon: Icons.home,
+            //                     title: "Lives in  $country",
+            //                   ),
+            //                   const ProfileDetail(
+            //                     icon: Icons.location_on,
+            //                     title: "25km away",
+            //                   ),
+            //                 ],
+            //               ),
+            //               SizedBox(width: screenWidth * 0.09),
+            //               Expanded(
+            //                 child: Text(
+            //                   bio, style: const TextStyle(fontSize: 16),
+            //                   textAlign: TextAlign.center,
+            //                   // This will ensure the text is truncated if it overflows
+            //                 ),
+            //               ),
+            //             ],
+            //           ),
+            //           const SizedBox(height: 20.0),
+            //           // Relationship basics
+            //           const Text(
+            //             'My relationship Basics',
+            //             style: TextStyle(
+            //                 fontSize: 18, fontWeight: FontWeight.bold),
+            //           ),
+            //           const SizedBox(height: 10),
+            //           RelationshipOption(
+            //             title: relationshipGoals,
+            //             icon: Icons.people,
+            //             color: Colors.pinkAccent,
+            //           ),
+            //           const SizedBox(height: 20),
+            //           // Interests
+            //           const Text(
+            //             'Interests',
+            //             style: TextStyle(
+            //                 fontSize: 18, fontWeight: FontWeight.bold),
+            //           ),
+            //           const SizedBox(height: 10),
+            //           Wrap(
+            //             spacing: 10,
+            //             children: [
+            //               InterestOption(
+            //                 title: interest,
+            //                 icon: Icons.restaurant_menu,
+            //                 color: Colors.orange,
+            //               ),
+            //               const InterestOption(
+            //                 title: 'Hiking',
+            //                 icon: Icons.hiking,
+            //                 color: Colors.green,
+            //               ),
+            //             ],
+            //           ),
+            //           const SizedBox(height: 20),
+            //           const Text(
+            //             'Location',
+            //             style: TextStyle(
+            //                 fontSize: 18, fontWeight: FontWeight.bold),
+            //           ),
+            //           Text(
+            //             '$country , $city',
+            //             style: const TextStyle(
+            //               fontSize: 14,
+            //             ),
+            //           ),
+            //         ],
+            //       ),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),

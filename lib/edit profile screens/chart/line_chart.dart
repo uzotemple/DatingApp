@@ -109,16 +109,22 @@ class _LineChartWithLegendState extends State<LineChartWithLegend> {
                         final startDate = DateTime(
                             DateTime.now().year, DateTime.now().month, 17);
                         final currentDate = DateTime.now();
-                        final dateDifference =
+                        int dateDifference =
                             currentDate.difference(startDate).inDays;
+
+                        // Ensure dateDifference is non-negative
+                        if (dateDifference < 0) {
+                          dateDifference = 0;
+                        }
 
                         final days = List.generate(dateDifference + 1, (index) {
                           final day = startDate.add(Duration(days: index));
-                          return "${day.day}"; // Format as month/day
+                          return "${day.day}"; // Format as day only
                         });
 
+                        // Ensure value is within the valid range
                         if (value < 0 || value >= days.length) {
-                          return Container();
+                          return Container(); // Avoid out-of-range errors
                         }
 
                         return Padding(

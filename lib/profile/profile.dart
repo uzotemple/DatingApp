@@ -21,20 +21,39 @@ class _ProfilePageState extends State<ProfilePage> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
   int _currentIndex = 4;
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _pageController.addListener(() {
+  //     setState(() {
+  //       _currentPage = _pageController.page!.round();
+  //     });
+  //   });
+  //   // Call the verifyPayment method to load data when the page is loaded
+  //   final profileProvider =
+  //       Provider.of<ProfileProvider>(context, listen: false);
+
+  //   final authProvider = Provider.of<AuthProvider>(context, listen: false);
+  //   profileProvider.retieveProfile(context, authProvider);
+  // }
+
   @override
   void initState() {
     super.initState();
+
+    // Add a small delay to ensure ProfileProvider is ready
+    Future.delayed(Duration.zero, () {
+      final profileProvider =
+          Provider.of<ProfileProvider>(context, listen: false);
+      final authProvider = Provider.of<AuthProvider>(context, listen: false);
+      profileProvider.retieveProfile(context, authProvider);
+    });
+
     _pageController.addListener(() {
       setState(() {
         _currentPage = _pageController.page!.round();
       });
     });
-    // Call the verifyPayment method to load data when the page is loaded
-    final profileProvider =
-        Provider.of<ProfileProvider>(context, listen: false);
-
-    final authProvider = Provider.of<AuthProvider>(context, listen: false);
-    profileProvider.retieveProfile(context, authProvider);
   }
 
   // @override
@@ -244,7 +263,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         ],
                       ),
 
-                      SizedBox(height: screenSize.height * 0.02),
+                      SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.01),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -283,8 +303,8 @@ class _ProfilePageState extends State<ProfilePage> {
                           SizedBox(width: screenWidth * 0.09),
                           Expanded(
                             child: Text(
-                              bio, style: TextStyle(fontSize: 16),
-                              textAlign: TextAlign.center,
+                              bio, style: const TextStyle(fontSize: 16),
+                              textAlign: TextAlign.start,
                               // This will ensure the text is truncated if it overflows
                             ),
                           ),
@@ -334,7 +354,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                       Text(
                         '$city ,$country',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 14,
                         ),
                       ),

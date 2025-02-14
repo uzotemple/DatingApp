@@ -3,7 +3,6 @@ import 'package:love_bird/config/routes.dart';
 import 'api_helper.dart';
 import 'auth_provider.dart';
 import 'dart:developer' as developer;
-import 'dart:convert';
 
 class UserBioProvider extends ChangeNotifier {
   // Fields for user information
@@ -315,17 +314,17 @@ class UserBioProvider extends ChangeNotifier {
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        developer.log('Profile created successfully: ${response.body}');
+        developer.log('Profile created successfully: ${response.data}');
         Navigator.pushNamed(context, createNickname);
       } else {
-        final Map<String, dynamic> responseBody = jsonDecode(response.body);
+        final Map<String, dynamic> responseBody = (response.data);
         final errorMessage = responseBody['message'] ?? 'Unknown error';
 
         developer.log(
             'Failed to create profile. Status code: ${response.statusCode}, Error: $errorMessage');
         _showErrorDialog(context, "Error: $errorMessage");
         throw Exception(
-            'Failed to create profile. Status code: ${response.statusCode}, Response: ${response.body}');
+            'Failed to create profile. Status code: ${response.statusCode}, Response: ${response.data}');
       }
     } catch (e) {
       developer.log('Error creating profile: $e');

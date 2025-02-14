@@ -33,7 +33,7 @@ class LogOutProvider extends ChangeNotifier {
         await authProvider.logout();
         Navigator.pushReplacementNamed(context, loginPage);
       } else {
-        final Map<String, dynamic> responseBody = jsonDecode(response.body);
+        final Map<String, dynamic> responseBody = jsonDecode(response.data);
         final errorMessage = responseBody['message'] ?? 'Unknown error';
 
         //  Print and log the error
@@ -42,7 +42,7 @@ class LogOutProvider extends ChangeNotifier {
 
         _showErrorDialog(context, "Error: $errorMessage");
         throw Exception(
-            'Failed to logout. Status code: ${response.statusCode}, Response: ${response.body}');
+            'Failed to logout. Status code: ${response.statusCode}, Response: ${response.data}');
 
         //  return;
       }
